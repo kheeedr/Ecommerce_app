@@ -1,5 +1,6 @@
 package com.khedr.ecommerce.ui;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Paint;
@@ -19,23 +20,28 @@ import com.khedr.ecommerce.databinding.ActivityProductDetailsBinding;
 import com.khedr.ecommerce.model.product.Product;
 import com.khedr.ecommerce.ui.adapters.ProductImagesAdapter;
 import com.khedr.ecommerce.ui.operations.ProductOperations;
+import com.khedr.ecommerce.ui.operations.UserOperations;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.Objects;
+
+import retrofit2.http.POST;
 
 public class ProductDetailsActivity extends AppCompatActivity implements View.OnClickListener {
     public ActivityProductDetailsBinding b;
-    private static final String TAG = "ProductDetailsActivity";
+//    private static final String TAG = "ProductDetailsActivity";
 
     SharedPreferences pref;
-    boolean is_favourite;
+    boolean[] is_favourite ={false};
 
     ProductImagesAdapter adapter;
     SnapHelper helper = new LinearSnapHelper();
     ArrayList<String> imagesList;
     Product product;
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,11 +66,12 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
             public void onScrollStateChanged(@NonNull @NotNull RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
                 if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-                    int position = ((LinearLayoutManager) b.rvProductDetails.getLayoutManager()).findFirstVisibleItemPosition();
+                    int position = ((LinearLayoutManager) Objects.requireNonNull(b.rvProductDetails.getLayoutManager())).findFirstVisibleItemPosition();
                     b.tvProductDetailsImageNum.setText((position + 1) + " / " + imagesList.size());
                 }
             }
         });
+
 
     }
 
@@ -80,13 +87,15 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
         if (v == b.btProductDetailsBack) {
             onBackPressed();
         } else if (v == b.ivProductDetailsInFavourite) {
-            if (is_favourite) {
+
+            if (is_favourite[0]) {
                 b.ivProductDetailsInFavourite.setImageResource(R.drawable.ic_outlined_heart);
-                is_favourite = false;
+
             } else {
                 b.ivProductDetailsInFavourite.setImageResource(R.drawable.ic_red_heart);
-                is_favourite = true;
+
             }
+            ProductOperations.addProductToFavorite(this,product.getId(),b.ivProductDetailsInFavourite,is_favourite);
         } else if (v == b.ivProductDetailsInCart) {
             startActivity(new Intent(ProductDetailsActivity.this, CartActivity.class));
         } else if (v == b.layoutProductDetailsPlus) {
@@ -111,16 +120,17 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
         }
     }
 
+    @SuppressLint("SetTextI18n")
     public void refreshView() {
 
         b.tvProductDetailsName.setText(product.getName());
         b.tvProductDetailsDescription.setText(product.getDescription());
         if (product.isIn_favorites()) {
             b.ivProductDetailsInFavourite.setImageResource(R.drawable.ic_red_heart);
-            is_favourite = true;
+            is_favourite[0] = true;
         } else {
             b.ivProductDetailsInFavourite.setImageResource(R.drawable.ic_outlined_heart);
-            is_favourite = false;
+            is_favourite[0] = false;
         }
         if (product.isIn_cart()) {
             b.ivProductDetailsInCart.setImageResource(R.drawable.iv_shopping_cart);
@@ -128,14 +138,14 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
             b.ivProductDetailsInCart.setImageResource(R.drawable.iv_empty_shopping_cart);
 
         }
-        b.tvProductDetailsPrice.setText(String.valueOf(product.getPrice()) + " EGP");//intent.getDoubleExtra("product_price", 0)
+        b.tvProductDetailsPrice.setText(product.getPrice() + " EGP");
 
         if ( product.getDiscount()> 0) {
             //old price
             b.tvProductDetailsOldPrice.setPaintFlags(b.tvProductDetailsOldPrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
             b.tvProductDetailsOldPrice.setText(String.valueOf(product.getOld_price()));
             b.tvProductDetailsDiscount.setVisibility(View.VISIBLE);
-            b.tvProductDetailsDiscount.setText(String.valueOf((int) Math.ceil(product.getDiscount())) + "%");
+            b.tvProductDetailsDiscount.setText((int) Math.ceil(product.getDiscount()) + "%");
 
         } else {
             b.tvProductDetailsDiscount.setVisibility(View.GONE);

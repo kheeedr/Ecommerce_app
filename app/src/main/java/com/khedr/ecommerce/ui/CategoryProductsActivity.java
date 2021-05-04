@@ -21,6 +21,8 @@ import com.khedr.ecommerce.ui.adapters.ProductsAdapter;
 import com.khedr.ecommerce.ui.operations.UiOperations;
 import com.khedr.ecommerce.ui.operations.UserOperations;
 
+import org.jetbrains.annotations.NotNull;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -60,18 +62,22 @@ public class CategoryProductsActivity extends AppCompatActivity implements View.
         Call<GetCategoryItemsResponse> call= RetrofitInstance.getRetrofitInstance().create(ApiInterface.class).getCategoryItems(token,id);
         call.enqueue(new Callback<GetCategoryItemsResponse>() {
             @Override
-            public void onResponse(@NonNull Call<GetCategoryItemsResponse> call, Response<GetCategoryItemsResponse> response) {
+            public void onResponse(@NonNull Call<GetCategoryItemsResponse> call, @NotNull Response<GetCategoryItemsResponse> response) {
                 UiOperations.AnimCenterToEnd(CategoryProductsActivity.this,b.progressItemCategory);
-                if (response.body().isStatus()){
-                    productsAdapter.setProductsList(response.body().getData().getData());
-                }
-                else {
-                    Toast.makeText(CategoryProductsActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                if (response.body() != null) {
+                    if (response.body().isStatus()){
+                        productsAdapter.setProductsList(response.body().getData().getData());
+                    }
+                    else {
+                        Toast.makeText(CategoryProductsActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                }else {
+                    Toast.makeText(CategoryProductsActivity.this, "Sorry, connection error", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
-            public void onFailure(Call<GetCategoryItemsResponse> call, Throwable t) {
+            public void onFailure(@NonNull Call<GetCategoryItemsResponse> call,@NonNull  Throwable t) {
                 UiOperations.AnimCenterToEnd(CategoryProductsActivity.this,b.progressItemCategory);
                 Toast.makeText(CategoryProductsActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
 

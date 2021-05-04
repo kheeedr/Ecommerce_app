@@ -1,5 +1,6 @@
 package com.khedr.ecommerce.ui.adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Paint;
@@ -10,34 +11,22 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.khedr.ecommerce.R;
-import com.khedr.ecommerce.model.product.ProductId;
 import com.khedr.ecommerce.model.product.favorites.get.InnerData;
-import com.khedr.ecommerce.model.product.favorites.post.PostFavoriteResponse;
-import com.khedr.ecommerce.network.ApiInterface;
-import com.khedr.ecommerce.network.RetrofitInstance;
-
 import org.jetbrains.annotations.NotNull;
-
 import java.util.ArrayList;
 import java.util.List;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.FavoritesViewHolder> {
 
@@ -55,7 +44,6 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
         notifyDataSetChanged();
     }
 
-
     @NonNull
     @NotNull
     @Override
@@ -64,7 +52,7 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
                 .inflate(R.layout.item_product, parent, false));
     }
 
-
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull @NotNull FavoritesViewHolder holder, int position) {
         pref = context.getSharedPreferences("logined", 0);
@@ -90,23 +78,20 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
                 }).into(holder.iv);
 
         //set product name and price;
-        holder.tvProductPrice.setText("EGP " + String.valueOf(favoritesList.get(position).getProduct().getPrice()));
+        holder.tvProductPrice.setText("EGP " + favoritesList.get(position).getProduct().getPrice());
         holder.tvProductName.setText(favoritesList.get(position).getProduct().getName());
 
-        holder.btToCart.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                if (v.getId() == R.id.layout_product_to_cart) {
-                    addProductToFavorite(position);
-                }
-                return false;
-            }
-        });
+//        holder.btToCart.setOnLongClickListener(v -> {
+//            if (v.getId() == R.id.layout_product_to_cart) {
+//                addProductToFavorite(position);
+//            }
+//            return false;
+//        });
 
         if (favoritesList.get(position).getProduct().getDiscount() > 0) {
-            holder.tvOldPrice.setPaintFlags(holder.tvOldPrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
 
-            holder.tvDiscount.setText(String.valueOf((int) favoritesList.get(position).getProduct().getDiscount()) + "%");
+            holder.tvOldPrice.setPaintFlags(holder.tvOldPrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+            holder.tvDiscount.setText((int) favoritesList.get(position).getProduct().getDiscount() + "%");
             holder.tvDiscount.setVisibility(View.VISIBLE);
             holder.tvOldPrice.setText(String.valueOf(favoritesList.get(position).getProduct().getOld_price()));
 
@@ -123,44 +108,12 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
     }
 
 
-    public void addProductToFavorite(int position) {
-
-        if (isSignedIn()) {
-            int id = favoritesList.get(position).getProduct().getId();
-            ProductId productId = new ProductId(id);
-            String token = pref.getString(context.getString(R.string.pref_user_token), "");
-            Call<PostFavoriteResponse> call = RetrofitInstance.getRetrofitInstance().create(ApiInterface.class).addToFavorite(token, productId);
-            call.enqueue(new Callback<PostFavoriteResponse>() {
-                @Override
-                public void onResponse(Call<PostFavoriteResponse> call, Response<PostFavoriteResponse> response) {
-                    if (response.body().isStatus()) {
-                        favoritesList.remove(position);
-                        notifyDataSetChanged();
-                    }
-                    Toast.makeText(context, response.body().getMessage(), Toast.LENGTH_LONG).show();
-                }
-
-                @Override
-                public void onFailure(Call<PostFavoriteResponse> call, Throwable t) {
-                    Toast.makeText(context, t.getMessage(), Toast.LENGTH_LONG).show();
-                }
-            });
-        } else {
-
-            Toast.makeText(context, "you should login first", Toast.LENGTH_LONG).show();
-        }
-    }
-
-    public boolean isSignedIn() {
-        return pref.getBoolean(context.getString(R.string.pref_status), false);
-    }
-
     static class FavoritesViewHolder extends RecyclerView.ViewHolder {
 
         ImageView iv;
         LinearLayout btToCart;
         TextView tvProductPrice, tvProductName, tvOldPrice, tvDiscount;
-        ProgressBar progressBar;
+        ImageView progressBar;
 
         public FavoritesViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);

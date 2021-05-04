@@ -7,6 +7,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+
 import com.khedr.ecommerce.R;
 import com.khedr.ecommerce.model.product.ProductId;
 import com.khedr.ecommerce.model.product.cart.get.GetCartItems;
@@ -14,6 +16,7 @@ import com.khedr.ecommerce.model.product.cart.get.GetCartResponse;
 import com.khedr.ecommerce.model.product.cart.post.PostCartResponse;
 import com.khedr.ecommerce.model.product.cart.update.Quantity;
 import com.khedr.ecommerce.model.product.cart.update.UpdateQuantityResponse;
+import com.khedr.ecommerce.model.product.favorites.post.PostFavoriteResponse;
 import com.khedr.ecommerce.network.ApiInterface;
 import com.khedr.ecommerce.network.RetrofitInstance;
 
@@ -66,8 +69,9 @@ public abstract class ProductOperations {
             btToCart.setVisibility(View.VISIBLE);
         }
     }
+
     // from product
-    public static void updateQuantity(Context context, int newValue, int productId,View btToCart, ImageView progressBar) {
+    public static void updateQuantity(Context context, int newValue, int productId, View btToCart, ImageView progressBar) {
         btToCart.setVisibility(View.GONE);
         UiOperations.AnimJumpAndFade(context, progressBar);
 
@@ -84,7 +88,7 @@ public abstract class ProductOperations {
                     } else {
                         Toast.makeText(context, "Sorry, " + response.body().getMessage(), Toast.LENGTH_SHORT).show();
                     }
-                }else {
+                } else {
                     Toast.makeText(context, "Sorry, connection error", Toast.LENGTH_SHORT).show();
                 }
                 progressBar.clearAnimation();
@@ -102,6 +106,7 @@ public abstract class ProductOperations {
         });
 
     }
+
     //from cart
     public static void onClickUpdateQuantity(Context context, int newValue, int oldValue, int productId, TextView tvQuantity, String TAG, TextView cartTotal) {
         String token = UserOperations.getPref(context).getString(context.getString(R.string.pref_user_token), "");
@@ -123,7 +128,7 @@ public abstract class ProductOperations {
                         tvQuantity.setText(String.valueOf(oldValue));
                         Toast.makeText(context, "Sorry, " + response.body().getMessage(), Toast.LENGTH_SHORT).show();
                     }
-                }else {
+                } else {
                     Toast.makeText(context, "Sorry, connection error", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -135,7 +140,8 @@ public abstract class ProductOperations {
             }
         });
     }
-    public static void getCartIdAndUpdateQuantity(Context context, int newValue, int productId,View btToCart, ImageView progressBar) {
+
+    public static void getCartIdAndUpdateQuantity(Context context, int newValue, int productId, View btToCart, ImageView progressBar) {
 
         if (UserOperations.isSignedIn(context)) {
             String token = UserOperations.getPref(context).getString(context.getString(R.string.pref_user_token), "");
@@ -147,20 +153,20 @@ public abstract class ProductOperations {
                     if (response.body() != null) {
                         if (response.body().isStatus()) {
                             ArrayList<GetCartItems> cartItems = response.body().getData().getCart_items();
-                            for ( GetCartItems item:cartItems){
-                                    if (item.getProduct().getId()==productId){
-                                        int cartId=item.getId();
-                                        int oldValue=item.getQuantity();
-                                        int quantity=newValue+oldValue;
-                                        updateQuantity(context,quantity,cartId,btToCart,progressBar);
-                                        break;
-                                    }
+                            for (GetCartItems item : cartItems) {
+                                if (item.getProduct().getId() == productId) {
+                                    int cartId = item.getId();
+                                    int oldValue = item.getQuantity();
+                                    int quantity = newValue + oldValue;
+                                    updateQuantity(context, quantity, cartId, btToCart, progressBar);
+                                    break;
+                                }
                             }
 
                         } else {
                             Toast.makeText(context, response.body().getMessage(), Toast.LENGTH_LONG).show();
                         }
-                    }else {
+                    } else {
                         Toast.makeText(context, "Sorry, connection error", Toast.LENGTH_SHORT).show();
                     }
 
@@ -178,5 +184,43 @@ public abstract class ProductOperations {
     }
 
 
+    public static void addProductToFavorite(Context context, int productId, ImageView statusIcon, boolean[] is_favourite) {
 
+        if (UserOperations.isSignedIn(context)) {
+
+            ProductId id = new ProductId(productId);
+            String token = UserOperations.getPref(context).getString(context.getString(R.string.pref_user_token), "");
+            Call<PostFavoriteResponse> call = RetrofitInstance.getRetrofitInstance().create(ApiInterface.class).addToFavorite(token, id);
+            call.enqueue(new Callback<PostFavoriteResponse>() {
+                @Override
+                public void onResponse(@NonNull Call<PostFavoriteResponse> call, @NonNull Response<PostFavoriteResponse> response) {
+
+                    if (response.body() != null){
+                        if (response.body().isStatus()) {
+                            is_favourite[0] = !is_favourite[0];
+                        } else {
+                            if (is_favourite[0]) {
+                                statusIcon.setImageResource(R.drawable.ic_red_heart);
+
+                            } else {
+                                statusIcon.setImageResource(R.drawable.ic_outlined_heart);
+                            }
+                            Toast.makeText(context, "Sorry, connection error", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                    else {
+                        Toast.makeText(context, "Sorry, connection error", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                @Override
+                public void onFailure
+                        (@NonNull Call<PostFavoriteResponse> call, @NonNull Throwable t) {
+                    Toast.makeText(context, t.getMessage(), Toast.LENGTH_LONG).show();
+                }
+            });
+        } else {
+            Toast.makeText(context, "you should login first", Toast.LENGTH_LONG).show();
+        }
+    }
 }
