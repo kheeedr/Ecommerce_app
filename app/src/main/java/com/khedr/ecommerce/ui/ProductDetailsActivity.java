@@ -43,7 +43,6 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
         pref = getSharedPreferences("logined", 0);
 
         product= (Product) getIntent().getSerializableExtra("product");
-        //imagesList = intent.getStringArrayListExtra("images_list");
         imagesList = product.getImages();
         adapter = new ProductImagesAdapter(this, imagesList);
         b.rvProductDetails.setAdapter(adapter);
@@ -102,14 +101,12 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
             }
         } else if (v == b.btProductDetailsToCart) {
             boolean inCart = product.isIn_cart();
-//            boolean inCart = intent.getBooleanExtra("product_is_cart", false);
             int productId = product.getId();
-//            int productId = intent.getIntExtra("product_id", 0);
             if (!inCart) {
                 ProductOperations.addProductToCart(this, productId, b.btProductDetailsToCart, b.progressProductDetailsToCart);
             } else {
                 int newQuantity = Integer.parseInt(b.tvProductDetailsEditableQuantity.getText().toString());
-                ProductOperations.updateQuantity(this, newQuantity, productId, b.btProductDetailsToCart, b.progressProductDetailsToCart);
+                ProductOperations.getCartIdAndUpdateQuantity(this, newQuantity, productId, b.btProductDetailsToCart, b.progressProductDetailsToCart);
             }
         }
     }
@@ -117,17 +114,15 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
     public void refreshView() {
 
         b.tvProductDetailsName.setText(product.getName());
-//        b.tvProductDetailsName.setText(intent.getStringExtra("product_name"));
         b.tvProductDetailsDescription.setText(product.getDescription());
-//        b.tvProductDetailsDescription.setText(intent.getStringExtra("product_description"));
-        if (product.isIn_favorites()) {//intent.getBooleanExtra("product_is_favourite", false)
+        if (product.isIn_favorites()) {
             b.ivProductDetailsInFavourite.setImageResource(R.drawable.ic_red_heart);
             is_favourite = true;
         } else {
             b.ivProductDetailsInFavourite.setImageResource(R.drawable.ic_outlined_heart);
             is_favourite = false;
         }
-        if (product.isIn_cart()) {//intent.getBooleanExtra("product_is_cart", false)
+        if (product.isIn_cart()) {
             b.ivProductDetailsInCart.setImageResource(R.drawable.iv_shopping_cart);
         } else {
             b.ivProductDetailsInCart.setImageResource(R.drawable.iv_empty_shopping_cart);
@@ -135,12 +130,12 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
         }
         b.tvProductDetailsPrice.setText(String.valueOf(product.getPrice()) + " EGP");//intent.getDoubleExtra("product_price", 0)
 
-        if ( product.getDiscount()> 0) {//intent.getDoubleExtra("product_discount", 0)
+        if ( product.getDiscount()> 0) {
             //old price
             b.tvProductDetailsOldPrice.setPaintFlags(b.tvProductDetailsOldPrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-            b.tvProductDetailsOldPrice.setText(String.valueOf(product.getOld_price()));//intent.getDoubleExtra("product_old_price", 0)
+            b.tvProductDetailsOldPrice.setText(String.valueOf(product.getOld_price()));
             b.tvProductDetailsDiscount.setVisibility(View.VISIBLE);
-            b.tvProductDetailsDiscount.setText(String.valueOf((int) Math.ceil(product.getDiscount())) + "%");//intent.getDoubleExtra("product_discount", 0)
+            b.tvProductDetailsDiscount.setText(String.valueOf((int) Math.ceil(product.getDiscount())) + "%");
 
         } else {
             b.tvProductDetailsDiscount.setVisibility(View.GONE);

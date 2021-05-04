@@ -205,7 +205,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/_10sdp"
                 android:orientation="horizontal"
-                app:layout_constraintBottom_toTopOf="@+id/bt_productDetails_to_cart"
+                app:layout_constraintBottom_toTopOf="@id/layout_productDetails_bt_and_progress"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
@@ -291,31 +291,43 @@
 
                 />
 
-            <Button
-                android:id="@+id/bt_productDetails_to_cart"
-                style="@style/Widget.MaterialComponents.Button"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layout_productDetails_bt_and_progress"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bt_back_filled"
-                android:fontFamily="@font/montserrat_medium"
-                android:paddingVertical="@dimen/_2sdp"
-                android:text="add to cart"
-                android:textAllCaps="false"
-                android:textColor="@color/white"
-                android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/layout_productDetails_change_quantity">
 
-            <ImageView
-                android:id="@+id/progress_productDetails_to_cart"
-                android:layout_width="@dimen/_40sdp"
-                android:layout_height="@dimen/_40sdp"
-                android:src="@drawable/ic_primary_hexa_shape"
-                android:visibility="invisible"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                <Button
+
+                    android:id="@+id/bt_productDetails_to_cart"
+                    style="@style/Widget.MaterialComponents.Button"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bt_back_filled"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:paddingVertical="@dimen/_2sdp"
+                    android:text="add to cart"
+
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <ImageView
+                    android:id="@+id/progress_productDetails_to_cart"
+                    android:layout_width="@dimen/_40sdp"
+                    android:layout_height="@dimen/_40sdp"
+                    android:src="@drawable/ic_primary_hexa_shape"
+                    android:visibility="invisible"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

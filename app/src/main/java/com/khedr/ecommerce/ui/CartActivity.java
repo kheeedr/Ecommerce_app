@@ -73,7 +73,7 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
 
     public void getCartProducts() {
 
-        if (isSignedIn()) {
+        if (UserOperations.isSignedIn(this)) {
             String token = pref.getString(getString(R.string.pref_user_token), "");
 
             Call<GetCartResponse> call = RetrofitInstance.getRetrofitInstance().create(ApiInterface.class).getCart(token);
@@ -112,7 +112,4 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    public boolean isSignedIn() {
-        return pref.getBoolean(getString(R.string.pref_status), false);
-    }
 }
