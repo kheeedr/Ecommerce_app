@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_controller"
+    app:startDestination="@id/home_option">
+
+    <fragment
+        android:id="@+id/home_option"
+        android:name="com.khedr.ecommerce.ui.fragments.HomeFragment"
+        android:label="fragment_home2"
+        tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/notifications_option"
+        android:name="com.khedr.ecommerce.ui.fragments.NotificationsFragment"
+        android:label="fragment_notifications"
+        tools:layout="@layout/fragment_notifications" />
+    <fragment
+        android:id="@+id/order_option"
+        android:name="com.khedr.ecommerce.ui.fragments.OrdersFragment"
+        android:label="fragment_orders"
+        tools:layout="@layout/fragment_orders" />
+    <fragment
+        android:id="@+id/account_option"
+        android:name="com.khedr.ecommerce.ui.fragments.AccountFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_account" />
+</navigation>

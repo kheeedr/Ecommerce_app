@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.khedr.ecommerce.com.khedr.loginwithapi.ui.SplashActivity">
+
+        <ImageView
+            android:id="@+id/iv_splash_left_back"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/_100sdp"
+            android:layout_marginRight="@dimen/_30sdp"
+            android:src="@drawable/back_left"
+            app:layout_constraintBottom_toTopOf="@id/iv_splash_right_back"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/iv_splash_right_back"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginLeft="@dimen/_80sdp"
+            android:src="@drawable/right_back"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_splash_left_back" />
+
+        <TextView
+            android:id="@+id/tv_splash_khadrawy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_80sdp"
+            android:layout_marginEnd="@dimen/_40sdp"
+            android:fontFamily="@font/montserrat_medium"
+            android:text="@string/khadrawy"
+            android:textColor="@color/secondary"
+            android:textSize="@dimen/_30sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_40sdp"
+            android:fontFamily="@font/montserrat_semi_bold"
+            android:paddingBottom="@dimen/_3sdp"
+            android:text="@string/market"
+            android:textColor="@color/natural1"
+            android:textSize="@dimen/_12sdp"
+            app:layout_constraintBottom_toBottomOf="@id/tv_splash_khadrawy"
+            app:layout_constraintStart_toEndOf="@id/tv_splash_khadrawy" />
+
+        <ImageView
+            android:id="@+id/iv_splash_man"
+            android:layout_width="@dimen/_230sdp"
+            android:layout_height="@dimen/_230sdp"
+            android:src="@drawable/man_with_fruits_bag"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <ImageView
+            android:id="@+id/progress_splash"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:src="@drawable/ic_primary_hexa_shape"
+            android:translationZ="@dimen/_30sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_splash_man" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

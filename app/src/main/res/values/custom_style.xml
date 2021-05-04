@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Three_rounded_corners">
+        <item name="cornerSizeBottomLeft">20%</item>
+        <item name="cornerSizeBottomRight">20%</item>
+        <item name="cornerSizeTopLeft">20%</item>
+        <item name="cornerSizeTopRight">0%</item>
+    </style>
+
+    <style name="Small_three_rounded_corners">
+        <item name="cornerSizeBottomLeft">20%</item>
+        <item name="cornerSizeBottomRight">20%</item>
+        <item name="cornerSizeTopLeft">20%</item>
+        <item name="cornerSizeTopRight">0%</item>
+
+    </style>
+</resources>

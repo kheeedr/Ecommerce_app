@@ -1,0 +1,444 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.khedr.ecommerce.com.khedr.loginwithapi.ui.ContactUsActivity">
+
+        <TextView
+            android:id="@+id/main_tv_contact_us"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:fontFamily="@font/montserrat_semi_bold"
+            android:text="Contact Us"
+            android:textColor="@color/secondary"
+            android:textSize="@dimen/_18sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/bt_contact_back"
+            android:layout_width="@dimen/_45sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:contentDescription="@string/back_button"
+            android:paddingLeft="@dimen/_10sdp"
+            android:paddingTop="@dimen/_5sdp"
+            android:paddingRight="@dimen/_10sdp"
+            android:paddingBottom="@dimen/_10sdp"
+            android:rotation="180"
+            android:src="@drawable/ic_blue_right_arrow"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/_42sdp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/main_tv_contact_us"
+            app:layout_constraintVertical_bias="1.0">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/iv_contact_left_back"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:paddingStart="@dimen/_40sdp"
+                    android:src="@drawable/right_back"
+                    app:layout_constraintDimensionRatio="1:1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+                <ImageView
+                    android:id="@+id/iv_contact_girl"
+                    android:layout_width="@dimen/_250sdp"
+                    android:layout_height="@dimen/_210sdp"
+                    android:src="@drawable/contact_girl"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layout_contact_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_20sdp"
+                    android:background="@drawable/et_stroke_white"
+                    android:elevation="@dimen/_1sdp"
+                    android:paddingHorizontal="@dimen/_5sdp"
+                    android:paddingVertical="@dimen/_10sdp"
+                    android:translationZ="@dimen/_2sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/iv_contact_girl">
+
+
+                    <LinearLayout
+                        android:id="@+id/layout_fb"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingHorizontal="@dimen/_5sdp"
+                        android:paddingVertical="@dimen/_10sdp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+
+                        <ImageView
+                            android:layout_width="@dimen/_40sdp"
+                            android:layout_height="@dimen/_40sdp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginHorizontal="7dp"
+                            android:layout_marginVertical="2dp"
+                            android:gravity="center_horizontal"
+                            android:src="@drawable/facebook" />
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1">
+
+                            <TextView
+                                android:id="@+id/tv_our_fb_page"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/montserrat_semi_bold"
+                                android:paddingHorizontal="@dimen/_3sdp"
+                                android:paddingBottom="0dp"
+                                android:text="Visit our facebook page"
+                                android:textColor="@color/secondary"
+                                android:textSize="@dimen/_12sdp"
+                                app:layout_constraintBottom_toTopOf="@id/tv_fb_link"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+
+                            <TextView
+                                android:id="@+id/tv_fb_link"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/montserrat_semi_bold"
+                                android:gravity="center_vertical"
+                                android:paddingHorizontal="@dimen/_3sdp"
+                                android:paddingTop="@dimen/_1sdp"
+                                android:text="FB.com/ourPage"
+                                android:textColor="@color/natural1"
+                                android:textSize="@dimen/_10sdp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/tv_our_fb_page" />
+
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_3sdp"
+                        android:layout_marginHorizontal="@dimen/_10sdp"
+                        android:src="@drawable/dotted_divider"
+                        app:layout_constraintTop_toBottomOf="@id/layout_fb"
+                        tools:layout_editor_absoluteX="20dp" />
+
+                    <LinearLayout
+                        android:id="@+id/layout_youtube"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingHorizontal="@dimen/_5sdp"
+                        android:paddingVertical="@dimen/_10sdp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/layout_twitter">
+
+
+                        <ImageView
+                            android:layout_width="@dimen/_40sdp"
+                            android:layout_height="@dimen/_40sdp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginHorizontal="7dp"
+                            android:layout_marginVertical="2dp"
+                            android:gravity="center_horizontal"
+                            android:src="@drawable/youtube" />
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1">
+
+                            <TextView
+                                android:id="@+id/tv_our_youtube_page"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/montserrat_semi_bold"
+                                android:paddingHorizontal="@dimen/_3sdp"
+                                android:paddingBottom="0dp"
+                                android:text="Subscribe our channel"
+                                android:textColor="@color/secondary"
+                                android:textSize="@dimen/_12sdp"
+                                app:layout_constraintBottom_toTopOf="@id/tv_youtube_link"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+
+                            <TextView
+                                android:id="@+id/tv_youtube_link"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/montserrat_semi_bold"
+                                android:gravity="center_vertical"
+                                android:paddingHorizontal="@dimen/_3sdp"
+                                android:paddingTop="@dimen/_1sdp"
+                                android:text="youtube.com/ourChannel"
+                                android:textColor="@color/natural1"
+                                android:textSize="@dimen/_10sdp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/tv_our_youtube_page" />
+
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_3sdp"
+                        android:layout_marginHorizontal="@dimen/_10sdp"
+                        android:src="@drawable/dotted_divider"
+                        app:layout_constraintTop_toBottomOf="@id/layout_youtube"
+                        tools:layout_editor_absoluteX="20dp" />
+
+                    <LinearLayout
+                        android:id="@+id/layout_google_play"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingHorizontal="@dimen/_5sdp"
+                        android:paddingVertical="@dimen/_10sdp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/layout_youtube">
+
+
+                        <ImageView
+                            android:layout_width="@dimen/_40sdp"
+                            android:layout_height="@dimen/_40sdp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginHorizontal="7dp"
+                            android:layout_marginVertical="2dp"
+                            android:gravity="center_horizontal"
+                            android:padding="@dimen/_3sdp"
+                            android:src="@drawable/google_play" />
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1">
+
+                            <TextView
+                                android:id="@+id/tv_our_google_play"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/montserrat_semi_bold"
+                                android:paddingHorizontal="@dimen/_3sdp"
+                                android:paddingBottom="0dp"
+                                android:text="Rate us on google play"
+                                android:textColor="@color/secondary"
+                                android:textSize="@dimen/_12sdp"
+                                app:layout_constraintBottom_toTopOf="@id/tv_play_link"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+
+                            <TextView
+                                android:id="@+id/tv_play_link"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/montserrat_semi_bold"
+                                android:gravity="center_vertical"
+                                android:paddingHorizontal="@dimen/_3sdp"
+                                android:paddingTop="@dimen/_1sdp"
+                                android:text="play.google.com/store/ourApp"
+                                android:textColor="@color/natural1"
+                                android:textSize="@dimen/_10sdp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/tv_our_google_play" />
+
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_3sdp"
+                        android:layout_marginHorizontal="@dimen/_10sdp"
+                        android:src="@drawable/dotted_divider"
+                        app:layout_constraintTop_toBottomOf="@id/layout_google_play"
+                        tools:layout_editor_absoluteX="20dp" />
+
+                    <LinearLayout
+                        android:id="@+id/layout_twitter"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingHorizontal="@dimen/_5sdp"
+                        android:paddingVertical="@dimen/_10sdp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/layout_fb">
+
+
+                        <ImageView
+                            android:layout_width="@dimen/_40sdp"
+                            android:layout_height="@dimen/_40sdp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginHorizontal="7dp"
+                            android:layout_marginVertical="2dp"
+                            android:gravity="center_horizontal"
+                            android:src="@drawable/twitter" />
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1">
+
+                            <TextView
+                                android:id="@+id/tv_our_twitter_page"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/montserrat_semi_bold"
+                                android:paddingHorizontal="@dimen/_3sdp"
+                                android:paddingBottom="0dp"
+                                android:text="Follow us on twitter"
+                                android:textColor="@color/secondary"
+                                android:textSize="@dimen/_12sdp"
+                                app:layout_constraintBottom_toTopOf="@id/tv_twitter_link"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+
+                            <TextView
+                                android:id="@+id/tv_twitter_link"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/montserrat_semi_bold"
+                                android:gravity="center_vertical"
+                                android:paddingHorizontal="@dimen/_3sdp"
+                                android:paddingTop="@dimen/_1sdp"
+                                android:text="twitter.com/ourPage"
+                                android:textColor="@color/natural1"
+                                android:textSize="@dimen/_10sdp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/tv_our_twitter_page" />
+
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_3sdp"
+                        android:layout_marginHorizontal="@dimen/_10sdp"
+                        android:src="@drawable/dotted_divider"
+                        app:layout_constraintTop_toBottomOf="@id/layout_twitter"
+                        tools:layout_editor_absoluteX="20dp" />
+
+                    <LinearLayout
+                        android:id="@+id/layout_website"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingHorizontal="@dimen/_5sdp"
+                        android:paddingVertical="@dimen/_10sdp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/layout_google_play">
+
+
+                        <ImageView
+                            android:layout_width="@dimen/_40sdp"
+                            android:layout_height="@dimen/_40sdp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginHorizontal="7dp"
+                            android:layout_marginVertical="2dp"
+
+                            android:gravity="center_horizontal"
+                            android:src="@drawable/ic_link" />
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1">
+
+                            <TextView
+                                android:id="@+id/tv_our_website"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/montserrat_semi_bold"
+                                android:paddingHorizontal="@dimen/_3sdp"
+                                android:paddingBottom="0dp"
+                                android:text="Visit our website"
+                                android:textColor="@color/secondary"
+                                android:textSize="@dimen/_12sdp"
+                                app:layout_constraintBottom_toTopOf="@id/tv_web_link"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+
+                            <TextView
+                                android:id="@+id/tv_web_link"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/montserrat_semi_bold"
+                                android:gravity="center_vertical"
+                                android:paddingHorizontal="@dimen/_3sdp"
+                                android:paddingTop="@dimen/_1sdp"
+                                android:text="www.khadrawy.com"
+                                android:textColor="@color/natural1"
+                                android:textSize="@dimen/_10sdp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/tv_our_website" />
+
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                    </LinearLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_10sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/layout_contact_container"
+                    tools:ignore="UselessLeaf" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
