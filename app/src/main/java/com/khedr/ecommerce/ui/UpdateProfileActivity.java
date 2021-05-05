@@ -10,7 +10,6 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,14 +22,18 @@ import com.khedr.ecommerce.model.user.UserApiResponse;
 import com.khedr.ecommerce.model.user.UserDataForRegisterRequest;
 import com.khedr.ecommerce.network.ApiInterface;
 import com.khedr.ecommerce.network.RetrofitInstance;
+import com.khedr.ecommerce.ui.operations.UiOperations;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
+import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static com.khedr.ecommerce.ui.SignUpActivity.countWordsUsingSplit;
+import static com.khedr.ecommerce.ui.operations.UiOperations.countWordsUsingSplit;
 
 public class UpdateProfileActivity extends AppCompatActivity implements  View.OnClickListener {
     private static final int REQ_CODE = 102;
@@ -86,11 +89,11 @@ public class UpdateProfileActivity extends AppCompatActivity implements  View.On
 
     public void validateAndUpdateUser() {
 
-        String name = b.etUpdateName.getText().toString();
-        String email = b.etUpdateEmail.getText().toString();
-        String phone = b.etUpdatePhone.getText().toString();
-        String password = b.etUpdateNewPassword.getText().toString();
-        String rePassword = b.etUpdateRepassword.getText().toString();
+        String name = Objects.requireNonNull(b.etUpdateName.getText()).toString();
+        String email = Objects.requireNonNull(b.etUpdateEmail.getText()).toString();
+        String phone = Objects.requireNonNull(b.etUpdatePhone.getText()).toString();
+        String password = Objects.requireNonNull(b.etUpdateNewPassword.getText()).toString();
+        String rePassword = Objects.requireNonNull(b.etUpdateRepassword.getText()).toString();
         String image = Converters.fromBitmapToString(((BitmapDrawable) b.ivUpdateUserImage.getDrawable()).getBitmap());
 
         if (countWordsUsingSplit(name)<2) {
@@ -133,25 +136,31 @@ public class UpdateProfileActivity extends AppCompatActivity implements  View.On
                 .create(ApiInterface.class).updateProfile(token,user);
         call.enqueue(new Callback<UserApiResponse>() {
             @Override
-            public void onResponse(Call<UserApiResponse> call, Response<UserApiResponse> response) {
-                if (response.body().isStatus()){
+            public void onResponse(@NotNull Call<UserApiResponse> call, @NotNull Response<UserApiResponse> response) {
+                if (response.body() != null) {
+                    if (response.body().isStatus()){
 
-                    Toast.makeText(UpdateProfileActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
-                    LoginActivity.saveUserProfileToShared(response.body(),UpdateProfileActivity.this,user.getImage());
-                    startActivity(new Intent(UpdateProfileActivity.this, ProfileActivity.class));
-                    finish();
+                        UiOperations.shortToast(UpdateProfileActivity.this, response.body().getMessage());
+                        LoginActivity.saveUserProfileToShared(response.body(),UpdateProfileActivity.this,user.getImage());
+                        startActivity(new Intent(UpdateProfileActivity.this, ProfileActivity.class));
+                        finish();
+                    }else {
+                        b.btUpdateProfileSubmit.setVisibility(View.VISIBLE);
+                        b.progressUpdateProfile.setVisibility(View.INVISIBLE);
+                        UiOperations.shortToast(UpdateProfileActivity.this, response.body().getMessage());
+                    }
                 }else {
-                    b.btUpdateProfileSubmit.setVisibility(View.VISIBLE);
-                    b.progressUpdateProfile.setVisibility(View.INVISIBLE);
-                    Toast.makeText(UpdateProfileActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                    UiOperations.shortToast(UpdateProfileActivity.this, "Sorry, connection error");
+
                 }
+
             }
 
             @Override
-            public void onFailure(Call<UserApiResponse> call, Throwable t) {
+            public void onFailure(@NotNull Call<UserApiResponse> call, @NotNull Throwable t) {
                 b.btUpdateProfileSubmit.setVisibility(View.VISIBLE);
                 b.progressUpdateProfile.setVisibility(View.INVISIBLE);
-                Toast.makeText(UpdateProfileActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                UiOperations.shortToast(UpdateProfileActivity.this, "Sorry, connection error");
 
             }
         });

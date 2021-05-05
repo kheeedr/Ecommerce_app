@@ -126,7 +126,6 @@
                     android:layout_marginStart="@dimen/_20sdp"
                     android:background="@drawable/rounded_stroke_white"
                     android:elevation="@dimen/_2sdp"
-
                     android:gravity="center"
                     android:paddingHorizontal="@dimen/_8sdp"
                     android:text="@string/_1_1"
@@ -199,7 +198,6 @@
             android:paddingTop="@dimen/_10sdp"
             android:paddingBottom="@dimen/_10sdp"
             android:translationZ="@dimen/_20sdp"
-
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
@@ -251,11 +249,8 @@
                     android:id="@+id/layout_productDetails_plus"
                     android:layout_width="@dimen/_25sdp"
                     android:layout_height="@dimen/_25sdp"
-
                     android:background="@drawable/rounded_stroke_blue_small"
-
                     android:gravity="center_horizontal"
-
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_cart_product_name">
@@ -267,7 +262,6 @@
                         android:contentDescription="@string/todo"
                         android:src="@drawable/ic_blue_plus" />
                 </LinearLayout>
-
             </LinearLayout>
 
             <TextView
@@ -293,7 +287,6 @@
                 android:textSize="@dimen/_8sdp"
                 app:layout_constraintBottom_toBottomOf="@+id/tv_productDetails_price"
                 app:layout_constraintEnd_toStartOf="@+id/tv_productDetails_price"
-
                 />
 
             <androidx.constraintlayout.widget.ConstraintLayout

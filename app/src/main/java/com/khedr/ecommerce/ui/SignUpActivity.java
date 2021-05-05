@@ -9,7 +9,6 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,8 +21,12 @@ import com.khedr.ecommerce.model.user.UserApiResponse;
 import com.khedr.ecommerce.model.user.UserDataForRegisterRequest;
 import com.khedr.ecommerce.network.ApiInterface;
 import com.khedr.ecommerce.network.RetrofitInstance;
+import com.khedr.ecommerce.ui.operations.UiOperations;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
+import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -61,17 +64,17 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
     public void validateAndPostUser() {
 
-        String name = b.etSignName.getText().toString();
-        String email = b.etSignEmail.getText().toString();
-        String phone = b.etSignPhone.getText().toString();
-        String password = b.etSignPassword.getText().toString();
-        String rePassword = b.etSignRepassword.getText().toString();
+        String name = Objects.requireNonNull(b.etSignName.getText()).toString();
+        String email = Objects.requireNonNull(b.etSignEmail.getText()).toString();
+        String phone = Objects.requireNonNull(b.etSignPhone.getText()).toString();
+        String password = Objects.requireNonNull(b.etSignPassword.getText()).toString();
+        String rePassword = Objects.requireNonNull(b.etSignRepassword.getText()).toString();
         String image = Converters.fromBitmapToString(((BitmapDrawable) b.ivAddUser.getDrawable()).getBitmap());
 
-        if (countWordsUsingSplit(name) < 2) {
+        if (UiOperations.countWordsUsingSplit(name) < 2) {
             b.etSignName.setError("please enter full name");
             b.etSignName.requestFocus();
-        } else if (countWordsUsingSplit(name) > 4) {
+        } else if (UiOperations.countWordsUsingSplit(name) > 4) {
             b.etSignName.setError("sorry max words allowed is 4");
             b.etSignName.requestFocus();
         } else if (!Patterns.PHONE.matcher(phone).matches()) {
@@ -106,25 +109,28 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 .create(ApiInterface.class).register(user);
         call.enqueue(new Callback<UserApiResponse>() {
             @Override
-            public void onResponse(Call<UserApiResponse> call, Response<UserApiResponse> response) {
+            public void onResponse(@NotNull Call<UserApiResponse> call, @NotNull Response<UserApiResponse> response) {
 
-                if (response.body().isStatus()) {
-                    Toast.makeText(SignUpActivity.this, response.body().getMessage()
-                            + " You can login now", Toast.LENGTH_SHORT).show();
-                    finish();
-                } else {
-                    b.btSign.setVisibility(View.VISIBLE);
-                    b.progressSign.setVisibility(View.INVISIBLE);
-                    Toast.makeText(SignUpActivity.this, response.body().getMessage()
-                            , Toast.LENGTH_SHORT).show();
+                if (response.body() != null) {
+                    if (response.body().isStatus()) {
+                        UiOperations.shortToast(SignUpActivity.this, response.body().getMessage()
+                                + " You can login now");
+                        finish();
+                    } else {
+                        b.btSign.setVisibility(View.VISIBLE);
+                        b.progressSign.setVisibility(View.INVISIBLE);
+                        UiOperations.shortToast(SignUpActivity.this, response.body().getMessage());
+                    }
+                }else {
+                    UiOperations.shortToast(SignUpActivity.this, "Sorry, connection error");
                 }
             }
 
             @Override
-            public void onFailure(Call<UserApiResponse> call, Throwable t) {
+            public void onFailure(@NotNull Call<UserApiResponse> call, @NotNull Throwable t) {
                 b.btSign.setVisibility(View.VISIBLE);
                 b.progressSign.setVisibility(View.INVISIBLE);
-                Toast.makeText(SignUpActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                UiOperations.shortToast(SignUpActivity.this, "Sorry, connection error");
             }
         });
     }
@@ -150,15 +156,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 e.printStackTrace();
             }
         }
-    }
-
-
-    public static int countWordsUsingSplit(String input) {
-        if (input == null || input.isEmpty()) {
-            return 0;
-        }
-        String[] words = input.split("\\s+");
-        return words.length;
     }
 
 
