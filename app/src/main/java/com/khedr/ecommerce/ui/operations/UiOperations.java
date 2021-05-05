@@ -23,31 +23,43 @@ import com.khedr.ecommerce.database.Converters;
 
 public abstract class UiOperations {
 
-    public static  void AnimCenterToEnd( Context context,View view){
-        Animation animation = AnimationUtils.loadAnimation(context, R.anim.center_to_end);
-        view.startAnimation(animation);
+    public static Toast toast;
+
+    public static void shortToast(Context context, String message) {
+        if (toast != null) {
+            toast.cancel();
+        }
+        toast = Toast.makeText(context, message, Toast.LENGTH_SHORT);
+        toast.show();
+    }
+
+    public static void AnimCenterToEnd(Context context, View view) {
+        Animation moveToEnd = AnimationUtils.loadAnimation(context, R.anim.center_to_end);
+        view.startAnimation(moveToEnd);
         view.setVisibility(View.GONE);
     }
-    public static  void AnimJumpAndFade( Context context,View view){
+
+    public static void AnimJumpAndFade(Context context, View view) {
         Animation jump = AnimationUtils.loadAnimation(context, R.anim.jump_and_fade);
         view.startAnimation(jump);
     }
-    public static  void AnimEndToStart( Context context,View view){
+
+    public static void AnimEndToStart(Context context, View view) {
         Animation endToStart = AnimationUtils.loadAnimation(context, R.anim.end_to_start);
         view.startAnimation(endToStart);
     }
 
 
-    public static void getImageViaUrl( Context context,String url
-                        , ImageView imageView, String TAG, View progressBar) {
+    public static void getImageViaUrl(Context context, String url
+            , ImageView imageView, String TAG, View progressBar) {
         SharedPreferences pref = context.getSharedPreferences("logined", 0);
-        UiOperations.AnimJumpAndFade(context,progressBar);
+        UiOperations.AnimJumpAndFade(context, progressBar);
         Glide.with(context).load(url)
                 .listener(new RequestListener<Drawable>() {
                     @Override
                     public boolean onLoadFailed(@Nullable @org.jetbrains.annotations.Nullable GlideException e
                             , Object model, Target<Drawable> target, boolean isFirstResource) {
-                        Toast.makeText(context, "failed to load image", Toast.LENGTH_SHORT).show();
+                        shortToast(context, "failed to load image");
                         progressBar.clearAnimation();
                         progressBar.setVisibility(View.INVISIBLE);
                         return false;
@@ -56,7 +68,7 @@ public abstract class UiOperations {
                     @Override
                     public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target
                             , DataSource dataSource, boolean isFirstResource) {
-                        if (TAG=="AccountFragment"){
+                        if (TAG.equals("AccountFragment")) {
                             SharedPreferences.Editor pen = pref.edit();
                             pen.putBoolean(context.getString(R.string.pref_is_image_ready), true);
                             pen.putString(context.getString(R.string.pref_user_image),
@@ -74,8 +86,8 @@ public abstract class UiOperations {
 
 
     }
-    public static void getImageViaUrl( Context context,String url
-                        , ImageView imageView, String TAG) {
+
+    public static void getImageViaUrl(Context context, String url, ImageView imageView, String TAG) {
         SharedPreferences pref = context.getSharedPreferences("logined", 0);
 
         Glide.with(context).load(url)
@@ -83,20 +95,20 @@ public abstract class UiOperations {
                     @Override
                     public boolean onLoadFailed(@Nullable @org.jetbrains.annotations.Nullable GlideException e
                             , Object model, Target<Drawable> target, boolean isFirstResource) {
-                        Toast.makeText(context, "failed to load image", Toast.LENGTH_SHORT).show();
+                        shortToast(context, "failed to load image");
                         return false;
                     }
 
                     @Override
                     public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target
                             , DataSource dataSource, boolean isFirstResource) {
-                        if (TAG=="AccountFragment"){
+                        if (TAG.equals("AccountFragment")) {
                             SharedPreferences.Editor pen = pref.edit();
                             pen.putBoolean(context.getString(R.string.pref_is_image_ready), true);
                             pen.putString(context.getString(R.string.pref_user_image),
                                     Converters.fromBitmapToString(((BitmapDrawable) resource).getBitmap()));
                             pen.apply();
-                            Log.d(TAG, "mkhedr: glide succeeded");
+
                         }
                         return false;
                     }
@@ -105,4 +117,6 @@ public abstract class UiOperations {
 
 
     }
+
+
 }

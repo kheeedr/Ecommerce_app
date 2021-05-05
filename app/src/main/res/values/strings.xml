@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">KHADRAWY market</string>
     <string name="title_activity_sign_up">SignUpAct</string>
     <string name="prompt_email">Email</string>
@@ -55,7 +55,16 @@
     <string name="version">version 1.0</string>
     <string name="sign_up">Sign up</string>
     <string name="notifications">Notifications</string>
-    <string name="search">Search...</string>
+    <string name="search" tools:ignore="TypographyEllipsis">Search...</string>
     <string name="category_name">category_name</string>
     <string name="category_id">category_id</string>
+    <string name="details">Details</string>
+    <string name="_10">10%</string>
+    <string name="_1_1">1 / 1</string>
+    <string name="product_name">Product Name</string>
+    <string name="description">Description:</string>
+    <string name="_1">1</string>
+    <string name="price">price</string>
+    <string name="old_price">$10</string>
+    <string name="add_to_cart">add to cart</string>
 </resources>

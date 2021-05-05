@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.Toast;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -15,6 +15,8 @@ import com.khedr.ecommerce.model.homeapi.HomePageApiResponse;
 import com.khedr.ecommerce.network.ApiInterface;
 import com.khedr.ecommerce.network.RetrofitInstance;
 import com.khedr.ecommerce.ui.operations.UiOperations;
+
+import org.jetbrains.annotations.NotNull;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -44,24 +46,33 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     void getHomeContent() {
+
         String token = pref.getString(getString(R.string.pref_user_token), "");
         Call<HomePageApiResponse> call = RetrofitInstance.getRetrofitInstance()
                 .create(ApiInterface.class).getHomePage(token);
         call.enqueue(new Callback<HomePageApiResponse>() {
             @Override
-            public void onResponse(Call<HomePageApiResponse> call, Response<HomePageApiResponse> response) {
-                if (response.body().isStatus()) {
-                    homeResponse = response.body();
-                    startActivity(new Intent(SplashActivity.this, MainPageActivity.class));
-                    finish();
-                } else {
-                    Toast.makeText(SplashActivity.this, response.body().getMessage(), Toast.LENGTH_LONG).show();
+            public void onResponse(@NotNull Call<HomePageApiResponse> call, @NotNull Response<HomePageApiResponse> response) {
+                b.progressSplash.clearAnimation();
+                b.progressSplash.setVisibility(View.GONE);
+
+                if (response.body() != null) {
+                    if (response.body().isStatus()) {
+                        homeResponse = response.body();
+                        startActivity(new Intent(SplashActivity.this, MainPageActivity.class));
+                        finish();
+                    } else {
+                        UiOperations.shortToast(SplashActivity.this, response.body().getMessage());
+                    }
+                }else {
+                    UiOperations.shortToast(SplashActivity.this, "Sorry, connection error");
                 }
+
             }
 
             @Override
-            public void onFailure(Call<HomePageApiResponse> call, Throwable t) {
-                Toast.makeText(SplashActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
+            public void onFailure(@NotNull Call<HomePageApiResponse> call, @NotNull Throwable t) {
+                UiOperations.shortToast(SplashActivity.this, "Sorry, connection error");
             }
         });
     }
