@@ -4,8 +4,6 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Paint;
-import android.graphics.drawable.Drawable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,19 +11,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.DataSource;
-import com.bumptech.glide.load.engine.GlideException;
-import com.bumptech.glide.request.RequestListener;
-import com.bumptech.glide.request.target.Target;
 import com.khedr.ecommerce.R;
 import com.khedr.ecommerce.databinding.ActivityCartBinding;
+import com.khedr.ecommerce.operations.UiOperations;
 import com.khedr.ecommerce.pojo.product.cart.get.GetCartItems;
 import com.khedr.ecommerce.operations.ProductOperations;
 import com.khedr.ecommerce.operations.UserOperations;
@@ -41,7 +31,7 @@ import java.util.List;
 //import retrofit2.Response;
 //import static com.khedr.ecommerce.ui.CartActivity.total;
 
-public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder> implements RequestListener<Drawable> {
+public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder> {
     public static final String TAG = "CartAdapter";
     List<GetCartItems> cartItems = new ArrayList<>();
     Context context;
@@ -74,9 +64,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
     public void onBindViewHolder(@NonNull @NotNull CartAdapter.CartViewHolder holder, int position) {
 
         //set product image
-        Glide.with(context).load(cartItems.get(position).getProduct().getImage())
-                .listener(this).into(holder.iv);
 
+        UiOperations.getImageViaUrl(context,cartItems.get(position).getProduct().getImage(),holder.iv,TAG);
 
         //set product name and price;
         holder.tvProductPrice.setText("EGP " + cartItems.get(position).getProduct().getPrice());
@@ -170,20 +159,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
 //        }
 //    }
 
-
-    @Override
-    public boolean onLoadFailed(@Nullable @org.jetbrains.annotations.Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-        Toast.makeText(context, "glide failed", Toast.LENGTH_SHORT).show();
-        Log.d(TAG, "mkhedr: glide failed");
-        return false;
-    }
-
-    @Override
-    public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-        Log.d(TAG, "mkhedr: glide succeeded");
-
-        return false;
-    }
 
     @Override
     public int getItemCount() {
