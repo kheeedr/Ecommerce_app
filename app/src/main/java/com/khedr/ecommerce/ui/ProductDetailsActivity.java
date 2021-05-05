@@ -20,14 +20,10 @@ import com.khedr.ecommerce.databinding.ActivityProductDetailsBinding;
 import com.khedr.ecommerce.model.product.Product;
 import com.khedr.ecommerce.ui.adapters.ProductImagesAdapter;
 import com.khedr.ecommerce.ui.operations.ProductOperations;
-import com.khedr.ecommerce.ui.operations.UserOperations;
-
-import org.jetbrains.annotations.NotNull;
-
+import org.jetbrains.annotations.NotNull ;
 import java.util.ArrayList;
 import java.util.Objects;
 
-import retrofit2.http.POST;
 
 public class ProductDetailsActivity extends AppCompatActivity implements View.OnClickListener {
     public ActivityProductDetailsBinding b;
@@ -88,13 +84,6 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
             onBackPressed();
         } else if (v == b.ivProductDetailsInFavourite) {
 
-            if (is_favourite[0]) {
-                b.ivProductDetailsInFavourite.setImageResource(R.drawable.ic_outlined_heart);
-
-            } else {
-                b.ivProductDetailsInFavourite.setImageResource(R.drawable.ic_red_heart);
-
-            }
             ProductOperations.addProductToFavorite(this,product.getId(),b.ivProductDetailsInFavourite,is_favourite);
         } else if (v == b.ivProductDetailsInCart) {
             startActivity(new Intent(ProductDetailsActivity.this, CartActivity.class));

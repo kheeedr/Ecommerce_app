@@ -5,7 +5,6 @@ import android.content.Context;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -34,7 +33,6 @@ import static com.khedr.ecommerce.ui.CartActivity.total;
 
 public abstract class ProductOperations {
 
-
     public static void addProductToCart(Context context, int productId, View btToCart, ImageView progressBar) {
         if (UserOperations.isSignedIn(context)) {
             progressBar.setVisibility(View.VISIBLE);
@@ -51,7 +49,7 @@ public abstract class ProductOperations {
                     btToCart.setVisibility(View.VISIBLE);
 
                     if (response.body() != null) {
-                        Toast.makeText(context, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                        UiOperations.shortToast(context, response.body().getMessage());
                     }
                 }
 
@@ -60,11 +58,11 @@ public abstract class ProductOperations {
                     progressBar.clearAnimation();
                     progressBar.setVisibility(View.GONE);
                     btToCart.setVisibility(View.VISIBLE);
-                    Toast.makeText(context, t.getMessage(), Toast.LENGTH_LONG).show();
+                    UiOperations.shortToast(context, t.getMessage());
                 }
             });
         } else {
-            Toast.makeText(context, "you should login first", Toast.LENGTH_LONG).show();
+            UiOperations.shortToast(context, "you should login first");
             progressBar.setVisibility(View.GONE);
             btToCart.setVisibility(View.VISIBLE);
         }
@@ -84,12 +82,13 @@ public abstract class ProductOperations {
             public void onResponse(@NotNull Call<UpdateQuantityResponse> call, @NotNull Response<UpdateQuantityResponse> response) {
                 if (response.body() != null) {
                     if (response.body().isStatus()) {
-                        Toast.makeText(context, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                        UiOperations.shortToast(context, response.body().getMessage());
+
                     } else {
-                        Toast.makeText(context, "Sorry, " + response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                        UiOperations.shortToast(context, "Sorry, " + response.body().getMessage());
                     }
                 } else {
-                    Toast.makeText(context, "Sorry, connection error", Toast.LENGTH_SHORT).show();
+                    UiOperations.shortToast(context, "Sorry, connection error");
                 }
                 progressBar.clearAnimation();
                 progressBar.setVisibility(View.GONE);
@@ -101,7 +100,7 @@ public abstract class ProductOperations {
                 progressBar.clearAnimation();
                 progressBar.setVisibility(View.GONE);
                 btToCart.setVisibility(View.VISIBLE);
-                Toast.makeText(context, "Sorry, " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                UiOperations.shortToast(context, t.getMessage());
             }
         });
 
@@ -123,20 +122,21 @@ public abstract class ProductOperations {
                             total = response.body().getData().getTotal();
                             cartTotal.setText("Total: " + (int) Math.ceil(total) + " EGP");
                         }
-                        Toast.makeText(context, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                        UiOperations.shortToast(context, response.body().getMessage());
+
                     } else {
                         tvQuantity.setText(String.valueOf(oldValue));
-                        Toast.makeText(context, "Sorry, " + response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                        UiOperations.shortToast(context, "Sorry, " + response.body().getMessage());
                     }
                 } else {
-                    Toast.makeText(context, "Sorry, connection error", Toast.LENGTH_SHORT).show();
+                    UiOperations.shortToast(context, "Sorry, connection error");
                 }
             }
 
             @Override
             public void onFailure(@NotNull Call<UpdateQuantityResponse> call, @NotNull Throwable t) {
                 tvQuantity.setText(String.valueOf(oldValue));
-                Toast.makeText(context, "Sorry, " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                UiOperations.shortToast(context, t.getMessage());
             }
         });
     }
@@ -164,22 +164,21 @@ public abstract class ProductOperations {
                             }
 
                         } else {
-                            Toast.makeText(context, response.body().getMessage(), Toast.LENGTH_LONG).show();
+                            UiOperations.shortToast(context, "Sorry, " + response.body().getMessage());
                         }
                     } else {
-                        Toast.makeText(context, "Sorry, connection error", Toast.LENGTH_SHORT).show();
+                        UiOperations.shortToast(context, "Sorry, connection error");
                     }
 
                 }
 
                 @Override
                 public void onFailure(@NotNull Call<GetCartResponse> call, @NotNull Throwable t) {
-                    Toast.makeText(context, t.getMessage(), Toast.LENGTH_LONG).show();
-
+                    UiOperations.shortToast(context, t.getMessage());
                 }
             });
         } else {
-            Toast.makeText(context, "you should login first", Toast.LENGTH_LONG).show();
+            UiOperations.shortToast(context, "you should login first");
         }
     }
 
@@ -188,6 +187,12 @@ public abstract class ProductOperations {
 
         if (UserOperations.isSignedIn(context)) {
 
+            if (is_favourite[0]) {
+                statusIcon.setImageResource(R.drawable.ic_outlined_heart);
+
+            } else {
+                statusIcon.setImageResource(R.drawable.ic_red_heart);
+            }
             ProductId id = new ProductId(productId);
             String token = UserOperations.getPref(context).getString(context.getString(R.string.pref_user_token), "");
             Call<PostFavoriteResponse> call = RetrofitInstance.getRetrofitInstance().create(ApiInterface.class).addToFavorite(token, id);
@@ -195,32 +200,40 @@ public abstract class ProductOperations {
                 @Override
                 public void onResponse(@NonNull Call<PostFavoriteResponse> call, @NonNull Response<PostFavoriteResponse> response) {
 
-                    if (response.body() != null){
-                        if (response.body().isStatus()) {
-                            is_favourite[0] = !is_favourite[0];
-                        } else {
-                            if (is_favourite[0]) {
-                                statusIcon.setImageResource(R.drawable.ic_red_heart);
+                    if (response.body() != null && response.body().isStatus()) {
+                        is_favourite[0] = !is_favourite[0];
+                    } else {
+                        UiOperations.shortToast(context, "Sorry, connection error");
+                        if (is_favourite[0]) {
+                            statusIcon.setImageResource(R.drawable.ic_red_heart);
 
-                            } else {
-                                statusIcon.setImageResource(R.drawable.ic_outlined_heart);
-                            }
-                            Toast.makeText(context, "Sorry, connection error", Toast.LENGTH_SHORT).show();
+                        } else {
+                            statusIcon.setImageResource(R.drawable.ic_outlined_heart);
                         }
-                    }
-                    else {
-                        Toast.makeText(context, "Sorry, connection error", Toast.LENGTH_SHORT).show();
                     }
                 }
 
                 @Override
                 public void onFailure
                         (@NonNull Call<PostFavoriteResponse> call, @NonNull Throwable t) {
-                    Toast.makeText(context, t.getMessage(), Toast.LENGTH_LONG).show();
+                    UiOperations.shortToast(context, t.getMessage());
+
+                    if (is_favourite[0]) {
+                        statusIcon.setImageResource(R.drawable.ic_red_heart);
+
+                    } else {
+                        statusIcon.setImageResource(R.drawable.ic_outlined_heart);
+                    }
                 }
             });
         } else {
-            Toast.makeText(context, "you should login first", Toast.LENGTH_LONG).show();
+            UiOperations.shortToast(context, "you should login first");
+            if (is_favourite[0]) {
+                statusIcon.setImageResource(R.drawable.ic_red_heart);
+
+            } else {
+                statusIcon.setImageResource(R.drawable.ic_outlined_heart);
+            }
         }
     }
 }
