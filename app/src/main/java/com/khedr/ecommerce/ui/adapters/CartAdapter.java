@@ -64,7 +64,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
     public void onBindViewHolder(@NonNull @NotNull CartAdapter.CartViewHolder holder, int position) {
 
         //set product image
-
         UiOperations.getImageViaUrl(context,cartItems.get(position).getProduct().getImage(),holder.iv,TAG);
 
         //set product name and price;

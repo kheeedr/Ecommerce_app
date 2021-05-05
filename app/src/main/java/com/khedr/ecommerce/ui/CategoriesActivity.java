@@ -1,9 +1,11 @@
 package com.khedr.ecommerce.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -16,6 +18,7 @@ import com.khedr.ecommerce.network.ApiInterface;
 import com.khedr.ecommerce.network.RetrofitInstance;
 import com.khedr.ecommerce.ui.adapters.CategoriesAdapter;
 import com.khedr.ecommerce.operations.UiOperations;
+import com.khedr.ecommerce.ui.fragments.HomeFragment;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -25,7 +28,7 @@ import retrofit2.Response;
 
 public class CategoriesActivity extends AppCompatActivity implements View.OnClickListener {
     ActivityCategoriesBinding b;
-    CategoriesAdapter categoriesAdapter = new CategoriesAdapter(this);
+    CategoriesAdapter categoriesAdapter ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +36,7 @@ public class CategoriesActivity extends AppCompatActivity implements View.OnClic
         b = DataBindingUtil.setContentView(this, R.layout.activity_categories);
         UiOperations.AnimJumpAndFade(this,b.progressCategories);
         UiOperations.AnimEndToStart(this,b.viewCategoriesUnderMoto);
+        categoriesAdapter = new CategoriesAdapter(this);
         b.rvCategories.setLayoutManager(new GridLayoutManager(this,2, RecyclerView.VERTICAL,false));
         b.rvCategories.setAdapter(categoriesAdapter);
         b.btCategoriesBack.setOnClickListener(this);
@@ -74,4 +78,6 @@ public class CategoriesActivity extends AppCompatActivity implements View.OnClic
             onBackPressed();
         }
     }
+
+
 }

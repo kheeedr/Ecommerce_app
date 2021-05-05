@@ -24,7 +24,6 @@ public class Converters {
 @TypeConverter
     public static Bitmap fromStringToBitmap(String stringPicture) {
         byte[] decodedString = Base64.decode(stringPicture, Base64.DEFAULT);
-        Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-        return decodedByte;
+    return BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
     }
 }

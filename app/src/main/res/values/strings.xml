@@ -56,7 +56,7 @@
     <string name="sign_up">Sign up</string>
     <string name="notifications">Notifications</string>
     <string name="search" tools:ignore="TypographyEllipsis">Search...</string>
-    <string name="category_name">category_name</string>
+    <string name="category_name">Category name</string>
     <string name="category_id">category_id</string>
     <string name="details">Details</string>
     <string name="_10">10%</string>
@@ -67,4 +67,9 @@
     <string name="price">price</string>
     <string name="old_price">$10</string>
     <string name="add_to_cart">add to cart</string>
+    <string name="categories">Categories</string>
+    <string name="discount_voucher">Discount Voucher</string>
+    <string name="prevent_corona">Prevent Corona</string>
+    <string name="contact_n_us">Contact \n Us</string>
+    <string name="chat_support">Chat Support</string>
 </resources>

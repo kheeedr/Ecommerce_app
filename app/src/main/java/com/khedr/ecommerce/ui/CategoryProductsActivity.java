@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -20,6 +21,7 @@ import com.khedr.ecommerce.network.RetrofitInstance;
 import com.khedr.ecommerce.ui.adapters.ProductsAdapter;
 import com.khedr.ecommerce.operations.UiOperations;
 import com.khedr.ecommerce.operations.UserOperations;
+import com.khedr.ecommerce.ui.fragments.HomeFragment;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -31,6 +33,7 @@ public class CategoryProductsActivity extends AppCompatActivity implements View.
     ActivityCategoryItemsBinding b;
     SharedPreferences pref;
     ProductsAdapter productsAdapter;
+    private static final String TAG = "CategoryProductsActivity";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,9 +49,11 @@ public class CategoryProductsActivity extends AppCompatActivity implements View.
                 ,2, RecyclerView.VERTICAL,false);
         b.rvItemCategory.setLayoutManager(gridLayoutManager);
         b.rvItemCategory.setAdapter(productsAdapter);
+        if (getIntent()!=null){
         Intent intent=getIntent();
         b.mainTvItemCategory.setText(intent.getStringExtra(getString(R.string.category_name)));
         getItemsByCategory(intent.getIntExtra(getString(R.string.category_id),0));
+        }
     }
 
     @Override
@@ -69,20 +74,29 @@ public class CategoryProductsActivity extends AppCompatActivity implements View.
                         productsAdapter.setProductsList(response.body().getData().getData());
                     }
                     else {
-                        Toast.makeText(CategoryProductsActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                        UiOperations.shortToast(CategoryProductsActivity.this, response.body().getMessage());
                     }
                 }else {
-                    Toast.makeText(CategoryProductsActivity.this, "Sorry, connection error", Toast.LENGTH_SHORT).show();
+                    UiOperations.shortToast(CategoryProductsActivity.this, "Sorry, connection error");
+
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<GetCategoryItemsResponse> call,@NonNull  Throwable t) {
                 UiOperations.AnimCenterToEnd(CategoryProductsActivity.this,b.progressItemCategory);
-                Toast.makeText(CategoryProductsActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                UiOperations.shortToast(CategoryProductsActivity.this, "Sorry, connection error");
 
             }
         });
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable @org.jetbrains.annotations.Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode== HomeFragment.REQ_CODE&&resultCode==RESULT_OK){
+
+        }
+
     }
 
 }

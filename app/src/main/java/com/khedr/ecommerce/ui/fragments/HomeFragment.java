@@ -21,6 +21,8 @@ import com.khedr.ecommerce.operations.UiOperations;
 import com.khedr.ecommerce.operations.UserOperations;
 import com.khedr.ecommerce.pojo.homeapi.HomePageApiResponse;
 import com.khedr.ecommerce.ui.CategoriesActivity;
+import com.khedr.ecommerce.ui.CategoryProductsActivity;
+import com.khedr.ecommerce.ui.ContactUsActivity;
 import com.khedr.ecommerce.ui.FavoritesActivity;
 import com.khedr.ecommerce.ui.SplashActivity;
 import com.khedr.ecommerce.ui.adapters.BannersAdapter;
@@ -34,6 +36,7 @@ import retrofit2.Response;
 
 public class HomeFragment extends Fragment implements View.OnClickListener {
 
+    public static final int REQ_CODE = 110;
     FragmentHomeBinding b;
     BannersAdapter bannersAdapter;
     ProductsAdapter productsAdapter;
@@ -73,6 +76,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         productsAdapter.setProductsList(SplashActivity.homeResponse.getData().getProducts());
         b.ivHomeFavorite.setOnClickListener(this);
         b.layoutHomeToCategories.setOnClickListener(this);
+        b.layoutHomeToContactUs.setOnClickListener(this);
+        b.layoutHomeToPreventCorona.setOnClickListener(this);
 
         return b.getRoot();
     }
@@ -90,6 +95,12 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         }
         else if(v==b.layoutHomeToCategories){
             startActivity(new Intent(getContext(), CategoriesActivity.class));
+        }
+        else if (v==b.layoutHomeToContactUs){
+            startActivity(new Intent(getContext(), ContactUsActivity.class));
+        }
+        else if (v==b.layoutHomeToPreventCorona){
+            startActivityForResult(new Intent(getContext(), CategoryProductsActivity.class),REQ_CODE);
         }
     }
     void getHomeContent(){

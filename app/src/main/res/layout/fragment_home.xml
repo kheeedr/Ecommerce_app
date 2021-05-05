@@ -79,7 +79,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:paddingHorizontal="@dimen/_3sdp"
-                                android:text="Categories"
+                                android:text="@string/categories"
                                 android:textColor="@color/secondary"
                                 android:textSize="@dimen/_10sdp" />
                         </LinearLayout>
@@ -111,13 +111,14 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/_25sdp"
                                 android:paddingHorizontal="@dimen/_3sdp"
-                                android:text="Discount Voucher"
+                                android:text="@string/discount_voucher"
                                 android:gravity="center"
                                 android:textColor="@color/secondary"
                                 android:textSize="@dimen/_10sdp" />
                         </LinearLayout>
 
                         <LinearLayout
+                            android:id="@+id/layout_home_to_prevent_corona"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:orientation="vertical"
@@ -144,13 +145,15 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:paddingHorizontal="@dimen/_3sdp"
-                                android:text="Prevent Corona"
+                                android:text="@string/prevent_corona"
                                 android:gravity="center"
                                 android:textColor="@color/secondary"
                                 android:textSize="@dimen/_10sdp" />
                         </LinearLayout>
 
                         <LinearLayout
+                            android:id="@+id/layout_home_to_contactUs"
+
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:orientation="vertical"
@@ -177,7 +180,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:paddingHorizontal="@dimen/_3sdp"
-                                android:text="Contact \n Us"
+                                android:text="@string/contact_n_us"
                                 android:gravity="center"
                                 android:textColor="@color/secondary"
                                 android:textSize="@dimen/_10sdp" />
@@ -210,7 +213,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:paddingHorizontal="@dimen/_3sdp"
-                                android:text="Chat Support"
+                                android:text="@string/chat_support"
                                 android:gravity="center"
                                 android:textColor="@color/secondary"
                                 android:textSize="@dimen/_10sdp" />
