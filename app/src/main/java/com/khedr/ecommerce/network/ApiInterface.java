@@ -1,19 +1,19 @@
 package com.khedr.ecommerce.network;
 
-import com.khedr.ecommerce.model.categories.GetCategoriesResponse;
-import com.khedr.ecommerce.model.categories.item.GetCategoryItemsResponse;
-import com.khedr.ecommerce.model.homeapi.HomePageApiResponse;
-import com.khedr.ecommerce.model.product.ProductId;
-import com.khedr.ecommerce.model.product.cart.get.GetCartResponse;
-import com.khedr.ecommerce.model.product.cart.post.PostCartResponse;
-import com.khedr.ecommerce.model.product.cart.update.Quantity;
-import com.khedr.ecommerce.model.product.cart.update.UpdateQuantityResponse;
-import com.khedr.ecommerce.model.product.favorites.get.GetFavoritesResponse;
-import com.khedr.ecommerce.model.product.favorites.post.PostFavoriteResponse;
-import com.khedr.ecommerce.model.user.TokenModel;
-import com.khedr.ecommerce.model.user.UserApiResponse;
-import com.khedr.ecommerce.model.user.UserDataForLoginRequest;
-import com.khedr.ecommerce.model.user.UserDataForRegisterRequest;
+import com.khedr.ecommerce.pojo.categories.GetCategoriesResponse;
+import com.khedr.ecommerce.pojo.categories.item.GetCategoryItemsResponse;
+import com.khedr.ecommerce.pojo.homeapi.HomePageApiResponse;
+import com.khedr.ecommerce.pojo.product.ProductId;
+import com.khedr.ecommerce.pojo.product.cart.get.GetCartResponse;
+import com.khedr.ecommerce.pojo.product.cart.post.PostCartResponse;
+import com.khedr.ecommerce.pojo.product.cart.update.Quantity;
+import com.khedr.ecommerce.pojo.product.cart.update.UpdateQuantityResponse;
+import com.khedr.ecommerce.pojo.product.favorites.get.GetFavoritesResponse;
+import com.khedr.ecommerce.pojo.product.favorites.post.PostFavoriteResponse;
+import com.khedr.ecommerce.pojo.user.TokenModel;
+import com.khedr.ecommerce.pojo.user.UserApiResponse;
+import com.khedr.ecommerce.pojo.user.UserDataForLoginRequest;
+import com.khedr.ecommerce.pojo.user.UserDataForRegisterRequest;
 
 import retrofit2.Call;
 import retrofit2.http.Body;

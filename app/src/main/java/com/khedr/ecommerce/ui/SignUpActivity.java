@@ -17,11 +17,11 @@ import androidx.databinding.DataBindingUtil;
 import com.khedr.ecommerce.R;
 import com.khedr.ecommerce.database.Converters;
 import com.khedr.ecommerce.databinding.ActivitySignUpBinding;
-import com.khedr.ecommerce.model.user.UserApiResponse;
-import com.khedr.ecommerce.model.user.UserDataForRegisterRequest;
+import com.khedr.ecommerce.pojo.user.UserApiResponse;
+import com.khedr.ecommerce.pojo.user.UserDataForRegisterRequest;
 import com.khedr.ecommerce.network.ApiInterface;
 import com.khedr.ecommerce.network.RetrofitInstance;
-import com.khedr.ecommerce.ui.operations.UiOperations;
+import com.khedr.ecommerce.operations.UiOperations;
 
 import org.jetbrains.annotations.NotNull;
 

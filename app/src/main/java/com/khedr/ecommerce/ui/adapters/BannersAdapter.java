@@ -10,8 +10,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.khedr.ecommerce.R;
-import com.khedr.ecommerce.model.homeapi.Banner;
-import com.khedr.ecommerce.ui.operations.UiOperations;
+import com.khedr.ecommerce.pojo.homeapi.Banner;
+import com.khedr.ecommerce.operations.UiOperations;
 
 import org.jetbrains.annotations.NotNull;
 

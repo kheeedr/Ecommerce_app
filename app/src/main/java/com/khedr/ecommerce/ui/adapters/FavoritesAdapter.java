@@ -22,7 +22,7 @@ import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.khedr.ecommerce.R;
-import com.khedr.ecommerce.model.product.favorites.get.InnerData;
+import com.khedr.ecommerce.pojo.product.favorites.get.InnerData;
 import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;

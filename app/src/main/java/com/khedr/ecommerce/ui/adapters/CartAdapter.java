@@ -1,5 +1,6 @@
 package com.khedr.ecommerce.ui.adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Paint;
@@ -25,24 +26,20 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.khedr.ecommerce.R;
 import com.khedr.ecommerce.databinding.ActivityCartBinding;
-import com.khedr.ecommerce.model.product.ProductId;
-import com.khedr.ecommerce.model.product.cart.get.GetCartItems;
-import com.khedr.ecommerce.model.product.cart.post.PostCartResponse;
-import com.khedr.ecommerce.network.ApiInterface;
-import com.khedr.ecommerce.network.RetrofitInstance;
-import com.khedr.ecommerce.ui.operations.ProductOperations;
-import com.khedr.ecommerce.ui.operations.UserOperations;
-
+import com.khedr.ecommerce.pojo.product.cart.get.GetCartItems;
+import com.khedr.ecommerce.operations.ProductOperations;
+import com.khedr.ecommerce.operations.UserOperations;
 import org.jetbrains.annotations.NotNull;
-
 import java.util.ArrayList;
 import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
-import static com.khedr.ecommerce.ui.CartActivity.total;
+//import com.khedr.ecommerce.pojo.product.ProductId;
+//import com.khedr.ecommerce.pojo.product.cart.post.PostCartResponse;
+//import com.khedr.ecommerce.network.ApiInterface;
+//import com.khedr.ecommerce.network.RetrofitInstance;
+//import retrofit2.Call;
+//import retrofit2.Callback;
+//import retrofit2.Response;
+//import static com.khedr.ecommerce.ui.CartActivity.total;
 
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder> implements RequestListener<Drawable> {
     public static final String TAG = "CartAdapter";
@@ -72,6 +69,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
                 .inflate(R.layout.item_cart, parent, false));
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull @NotNull CartAdapter.CartViewHolder holder, int position) {
 
@@ -81,12 +79,12 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
 
 
         //set product name and price;
-        holder.tvProductPrice.setText("EGP " + String.valueOf(cartItems.get(position).getProduct().getPrice()));
+        holder.tvProductPrice.setText("EGP " + cartItems.get(position).getProduct().getPrice());
         if (cartItems.get(position).getProduct().getDiscount() > 0) {
             holder.tvOldPrice.setText(String.valueOf(cartItems.get(position).getProduct().getOld_price()));
             holder.tvOldPrice.setPaintFlags(holder.tvOldPrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
             holder.tvDiscount.setVisibility(View.VISIBLE);
-            holder.tvDiscount.setText(String.valueOf((int) cartItems.get(position).getProduct().getDiscount()) + "%");
+            holder.tvDiscount.setText((int) cartItems.get(position).getProduct().getDiscount() + "%");
         } else {
             holder.tvOldPrice.setVisibility(View.GONE);
             holder.tvDiscount.setVisibility(View.GONE);
@@ -104,79 +102,73 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
 //                deleteProductFromCart(position, holder);
 //            }
 //        });
-        holder.btPLus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int oldQ = Integer.parseInt(holder.quantity.getText().toString());
-                int newQ = oldQ + 1;
+        holder.btPLus.setOnClickListener(v -> {
+            int oldQ = Integer.parseInt(holder.quantity.getText().toString());
+            int newQ = oldQ + 1;
+            holder.quantity.setText(String.valueOf(newQ));
+            int id = cartItems.get(position).getId();
+            ProductOperations.onClickUpdateQuantity(context,newQ, oldQ, id, holder.quantity,TAG,b.tvCartTotal);
+        });
+        holder.btMinus.setOnClickListener(v -> {
+            int oldQ = Integer.parseInt(holder.quantity.getText().toString());
+            if (oldQ > 1) {
+                int newQ = oldQ - 1;
                 holder.quantity.setText(String.valueOf(newQ));
                 int id = cartItems.get(position).getId();
                 ProductOperations.onClickUpdateQuantity(context,newQ, oldQ, id, holder.quantity,TAG,b.tvCartTotal);
-            }
-        });
-        holder.btMinus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int oldQ = Integer.parseInt(holder.quantity.getText().toString());
-                if (oldQ > 1) {
-                    int newQ = oldQ - 1;
-                    holder.quantity.setText(String.valueOf(newQ));
-                    int id = cartItems.get(position).getId();
-                    ProductOperations.onClickUpdateQuantity(context,newQ, oldQ, id, holder.quantity,TAG,b.tvCartTotal);
-
-                }
 
             }
+
         });
 
     }
 
 
-    public void deleteProductFromCart(int position, CartViewHolder holder) {
-        if (UserOperations.isSignedIn(context)) {
-            int id = cartItems.get(position).getProduct().getId();
-            ProductId productId = new ProductId(id);
-            String token = pref.getString(context.getString(R.string.pref_user_token), "");
-            Call<PostCartResponse> call = RetrofitInstance.getRetrofitInstance()
-                    .create(ApiInterface.class).addToCart(token, productId);
-            call.enqueue(new Callback<PostCartResponse>() {
-                @Override
-                public void onResponse(Call<PostCartResponse> call, Response<PostCartResponse> response) {
-                    if (response.body().isStatus()) {
-                        cartItems.remove(position);
-                        notifyDataSetChanged();
-                        if (!cartItems.isEmpty()) {
-                            setCartItems(cartItems);
-                            b.layoutCartFilled.setVisibility(View.VISIBLE);
-                            b.layoutCartEmpty.setVisibility(View.GONE);
-                            total -= (response.body().getData().getQuantity()) * (response.body().getData().getProduct().getPrice());
-                            b.tvCartTotal.setText("Total: " + String.valueOf((int) total) + " EGP");
-                        } else {
-                            b.layoutCartFilled.setVisibility(View.GONE);
-                            b.layoutCartEmpty.setVisibility(View.VISIBLE);
-                        }
-                    }
-                    holder.deleteFromCart.setVisibility(View.VISIBLE);
-                    holder.progressBar.setVisibility(View.GONE);
-                    b.layoutCartProgressBack.setVisibility(View.GONE);
-                    b.progressCart.setVisibility(View.GONE);
-                    Toast.makeText(context, response.body().getMessage(), Toast.LENGTH_SHORT).show();
-                }
-
-                @Override
-                public void onFailure(Call<PostCartResponse> call, Throwable t) {
-                    Toast.makeText(context, t.getMessage(), Toast.LENGTH_LONG).show();
-                    holder.deleteFromCart.setVisibility(View.VISIBLE);
-                    holder.progressBar.setVisibility(View.GONE);
-                    b.layoutCartProgressBack.setVisibility(View.GONE);
-                    b.progressCart.setVisibility(View.GONE);
-
-                }
-            });
-        } else {
-            Toast.makeText(context, "you should login first", Toast.LENGTH_LONG).show();
-        }
-    }
+//    public void deleteProductFromCart(int position, CartViewHolder holder) {
+//        if (UserOperations.isSignedIn(context)) {
+//            int id = cartItems.get(position).getProduct().getId();
+//            ProductId productId = new ProductId(id);
+//            String token = pref.getString(context.getString(R.string.pref_user_token), "");
+//            Call<PostCartResponse> call = RetrofitInstance.getRetrofitInstance()
+//                    .create(ApiInterface.class).addToCart(token, productId);
+//            call.enqueue(new Callback<PostCartResponse>() {
+//                @Override
+//                public void onResponse(Call<PostCartResponse> call, Response<PostCartResponse> response) {
+//                    if (response.body().isStatus()) {
+//                        cartItems.remove(position);
+//                        notifyDataSetChanged();
+//                        if (!cartItems.isEmpty()) {
+//                            setCartItems(cartItems);
+//                            b.layoutCartFilled.setVisibility(View.VISIBLE);
+//                            b.layoutCartEmpty.setVisibility(View.GONE);
+//                            total -= (response.body().getData().getQuantity()) * (response.body().getData().getProduct().getPrice());
+//                            b.tvCartTotal.setText("Total: " + String.valueOf((int) total) + " EGP");
+//                        } else {
+//                            b.layoutCartFilled.setVisibility(View.GONE);
+//                            b.layoutCartEmpty.setVisibility(View.VISIBLE);
+//                        }
+//                    }
+//                    holder.deleteFromCart.setVisibility(View.VISIBLE);
+//                    holder.progressBar.setVisibility(View.GONE);
+//                    b.layoutCartProgressBack.setVisibility(View.GONE);
+//                    b.progressCart.setVisibility(View.GONE);
+//                    Toast.makeText(context, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+//                }
+//
+//                @Override
+//                public void onFailure(Call<PostCartResponse> call, Throwable t) {
+//                    Toast.makeText(context, t.getMessage(), Toast.LENGTH_LONG).show();
+//                    holder.deleteFromCart.setVisibility(View.VISIBLE);
+//                    holder.progressBar.setVisibility(View.GONE);
+//                    b.layoutCartProgressBack.setVisibility(View.GONE);
+//                    b.progressCart.setVisibility(View.GONE);
+//
+//                }
+//            });
+//        } else {
+//            Toast.makeText(context, "you should login first", Toast.LENGTH_LONG).show();
+//        }
+//    }
 
 
     @Override

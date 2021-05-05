@@ -13,9 +13,9 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.khedr.ecommerce.R;
-import com.khedr.ecommerce.model.categories.GetCategoriesInnerData;
+import com.khedr.ecommerce.pojo.categories.GetCategoriesInnerData;
 import com.khedr.ecommerce.ui.CategoryProductsActivity;
-import com.khedr.ecommerce.ui.operations.UiOperations;
+import com.khedr.ecommerce.operations.UiOperations;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -48,14 +48,11 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
 
         UiOperations.getImageViaUrl(context,categoriesList.get(position).getImage(),holder.ivCategory,TAG,holder.progressbar);
         holder.tvCategory.setText(categoriesList.get(position).getName());
-        holder.catLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent=new Intent(context, CategoryProductsActivity.class);
-                intent.putExtra(context.getString(R.string.category_name),categoriesList.get(position).getName());
-                intent.putExtra(context.getString(R.string.category_id),categoriesList.get(position).getId());
-                context.startActivity(intent);
-            }
+        holder.catLayout.setOnClickListener(v -> {
+            Intent intent=new Intent(context, CategoryProductsActivity.class);
+            intent.putExtra(context.getString(R.string.category_name),categoriesList.get(position).getName());
+            intent.putExtra(context.getString(R.string.category_id),categoriesList.get(position).getId());
+            context.startActivity(intent);
         });
 
     }
@@ -65,7 +62,7 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
         return categoriesList.size();
     }
 
-    public class CategoriesViewHolder extends RecyclerView.ViewHolder {
+    public static class CategoriesViewHolder extends RecyclerView.ViewHolder {
         ImageView ivCategory, progressbar;
         TextView tvCategory;
         ConstraintLayout catLayout;

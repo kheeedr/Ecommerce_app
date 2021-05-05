@@ -10,30 +10,25 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
-
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
-
 import com.khedr.ecommerce.R;
 import com.khedr.ecommerce.database.Converters;
 import com.khedr.ecommerce.databinding.ActivityUpdateProfileBinding;
-import com.khedr.ecommerce.model.user.UserApiResponse;
-import com.khedr.ecommerce.model.user.UserDataForRegisterRequest;
+import com.khedr.ecommerce.pojo.user.UserApiResponse;
+import com.khedr.ecommerce.pojo.user.UserDataForRegisterRequest;
 import com.khedr.ecommerce.network.ApiInterface;
 import com.khedr.ecommerce.network.RetrofitInstance;
-import com.khedr.ecommerce.ui.operations.UiOperations;
-
+import com.khedr.ecommerce.operations.UiOperations;
 import org.jetbrains.annotations.NotNull;
-
 import java.io.IOException;
 import java.util.Objects;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static com.khedr.ecommerce.ui.operations.UiOperations.countWordsUsingSplit;
+import static com.khedr.ecommerce.operations.UiOperations.countWordsUsingSplit;
 
 public class UpdateProfileActivity extends AppCompatActivity implements  View.OnClickListener {
     private static final int REQ_CODE = 102;

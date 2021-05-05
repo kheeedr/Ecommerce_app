@@ -14,12 +14,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.khedr.ecommerce.R;
 import com.khedr.ecommerce.databinding.ActivityCategoryItemsBinding;
-import com.khedr.ecommerce.model.categories.item.GetCategoryItemsResponse;
+import com.khedr.ecommerce.pojo.categories.item.GetCategoryItemsResponse;
 import com.khedr.ecommerce.network.ApiInterface;
 import com.khedr.ecommerce.network.RetrofitInstance;
 import com.khedr.ecommerce.ui.adapters.ProductsAdapter;
-import com.khedr.ecommerce.ui.operations.UiOperations;
-import com.khedr.ecommerce.ui.operations.UserOperations;
+import com.khedr.ecommerce.operations.UiOperations;
+import com.khedr.ecommerce.operations.UserOperations;
 
 import org.jetbrains.annotations.NotNull;
 

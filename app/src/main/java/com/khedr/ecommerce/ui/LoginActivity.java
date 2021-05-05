@@ -6,17 +6,21 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
 import com.khedr.ecommerce.R;
 import com.khedr.ecommerce.databinding.ActivityLoginBinding;
-import com.khedr.ecommerce.model.user.UserApiResponse;
-import com.khedr.ecommerce.model.user.UserDataForLoginRequest;
+import com.khedr.ecommerce.operations.UiOperations;
+import com.khedr.ecommerce.pojo.user.UserApiResponse;
+import com.khedr.ecommerce.pojo.user.UserDataForLoginRequest;
 import com.khedr.ecommerce.network.ApiInterface;
 import com.khedr.ecommerce.network.RetrofitInstance;
+
+import org.jetbrains.annotations.NotNull;
+
+import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -24,7 +28,7 @@ import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     public ActivityLoginBinding b;
-    public static UserApiResponse successUserData;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,8 +46,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         if (id == R.id.bt_to_signup) {
             startActivity(new Intent(LoginActivity.this, SignUpActivity.class));
         } else if (id == R.id.bt_login) {
-            String email = b.etLoginEmail.getText().toString();
-            String password = b.etLoginPassword.getText().toString();
+            String email = Objects.requireNonNull(b.etLoginEmail.getText()).toString();
+            String password = Objects.requireNonNull(b.etLoginPassword.getText()).toString();
             if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
                 b.etLoginEmail.setError("email is not valid");
                 b.etLoginEmail.requestFocus();
@@ -66,23 +70,27 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         Call<UserApiResponse> call = RetrofitInstance.getRetrofitInstance().create(ApiInterface.class).login(user);
         call.enqueue(new Callback<UserApiResponse>() {
             @Override
-            public void onResponse(Call<UserApiResponse> call, Response<UserApiResponse> response) {
-                if (response.body().isStatus()) {
-                    Toast.makeText(LoginActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
-                    saveUserProfileToShared(response.body(), LoginActivity.this, null);
-                    finish();
-                } else {
-                    b.btLogin.setVisibility(View.VISIBLE);
-                    b.progressLogin.setVisibility(View.INVISIBLE);
-                    Toast.makeText(LoginActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+            public void onResponse(@NotNull Call<UserApiResponse> call, @NotNull Response<UserApiResponse> response) {
+                if (response.body() != null) {
+                    if (response.body().isStatus()) {
+                        saveUserProfileToShared(response.body(), LoginActivity.this, null);
+                        finish();
+                    } else {
+                        b.btLogin.setVisibility(View.VISIBLE);
+                        b.progressLogin.setVisibility(View.INVISIBLE);
+                        UiOperations.shortToast(LoginActivity.this, response.body().getMessage());
+                    }
+                }
+                else {
+                    UiOperations.shortToast(LoginActivity.this, "Sorry, connection error");
                 }
             }
 
             @Override
-            public void onFailure(Call<UserApiResponse> call, Throwable t) {
+            public void onFailure(@NotNull Call<UserApiResponse> call, @NotNull Throwable t) {
                 b.btLogin.setVisibility(View.VISIBLE);
                 b.progressLogin.setVisibility(View.INVISIBLE);
-                Toast.makeText(LoginActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                UiOperations.shortToast(LoginActivity.this, "Sorry, connection error");
             }
         });
 

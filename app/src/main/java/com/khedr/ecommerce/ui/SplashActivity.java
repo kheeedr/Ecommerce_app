@@ -11,10 +11,10 @@ import androidx.databinding.DataBindingUtil;
 
 import com.khedr.ecommerce.R;
 import com.khedr.ecommerce.databinding.ActivitySplashBinding;
-import com.khedr.ecommerce.model.homeapi.HomePageApiResponse;
+import com.khedr.ecommerce.pojo.homeapi.HomePageApiResponse;
 import com.khedr.ecommerce.network.ApiInterface;
 import com.khedr.ecommerce.network.RetrofitInstance;
-import com.khedr.ecommerce.ui.operations.UiOperations;
+import com.khedr.ecommerce.operations.UiOperations;
 
 import org.jetbrains.annotations.NotNull;
 

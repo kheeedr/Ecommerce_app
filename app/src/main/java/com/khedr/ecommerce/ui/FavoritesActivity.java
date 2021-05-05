@@ -3,7 +3,6 @@ package com.khedr.ecommerce.ui;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -12,17 +11,21 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.khedr.ecommerce.R;
 import com.khedr.ecommerce.databinding.ActivityFavoritesBinding;
-import com.khedr.ecommerce.model.product.favorites.get.GetFavoritesResponse;
 import com.khedr.ecommerce.network.ApiInterface;
 import com.khedr.ecommerce.network.RetrofitInstance;
+import com.khedr.ecommerce.operations.UiOperations;
+import com.khedr.ecommerce.operations.UserOperations;
+import com.khedr.ecommerce.pojo.product.favorites.get.GetFavoritesResponse;
 import com.khedr.ecommerce.ui.adapters.FavoritesAdapter;
+
+import org.jetbrains.annotations.NotNull;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class FavoritesActivity extends AppCompatActivity implements View.OnClickListener {
-    static ActivityFavoritesBinding b;
+    ActivityFavoritesBinding b;
     FavoritesAdapter favoritesAdapter;
     SharedPreferences pref;
 
@@ -48,37 +51,38 @@ public class FavoritesActivity extends AppCompatActivity implements View.OnClick
     }
 
     void getFavorites() {
-        if (isSignedIn()) {
+        if (UserOperations.isSignedIn(this)) {
             String token = pref.getString(getString(R.string.pref_user_token), "");
             Call<GetFavoritesResponse> call = RetrofitInstance.getRetrofitInstance()
                     .create(ApiInterface.class).getFavorites(token);
             call.enqueue(new Callback<GetFavoritesResponse>() {
                 @Override
-                public void onResponse(Call<GetFavoritesResponse> call, Response<GetFavoritesResponse> response) {
-                    if (response.body().isStatus()) {
-                        favoritesAdapter.setFavoritesList(response.body().getData().getData());
-                    } else {
-                        Toast.makeText(FavoritesActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
-
+                public void onResponse(@NotNull Call<GetFavoritesResponse> call, @NotNull Response<GetFavoritesResponse> response) {
+                    if (response.body() != null) {
+                        if (response.body().isStatus()) {
+                            favoritesAdapter.setFavoritesList(response.body().getData().getData());
+                        } else {
+                            UiOperations.shortToast(FavoritesActivity.this, response.body().getMessage());
+                        }
+                    }
+                    else {
+                        UiOperations.shortToast(FavoritesActivity.this, "Sorry, connection error");
                     }
                     b.progressFavorite.setVisibility(View.GONE);
                 }
 
                 @Override
-                public void onFailure(Call<GetFavoritesResponse> call, Throwable t) {
-                    Toast.makeText(FavoritesActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
+                public void onFailure(@NotNull Call<GetFavoritesResponse> call, @NotNull Throwable t) {
+                    UiOperations.shortToast(FavoritesActivity.this, "Sorry, connection error");
                     b.progressFavorite.setVisibility(View.GONE);
 
                 }
             });
         } else {
-            Toast.makeText(this, "you should login first", Toast.LENGTH_LONG).show();
+            UiOperations.shortToast(this, "you should login first");
             b.progressFavorite.setVisibility(View.GONE);
         }
     }
 
-    public boolean isSignedIn() {
-        return pref.getBoolean(getString(R.string.pref_status), false);
-    }
 }
 

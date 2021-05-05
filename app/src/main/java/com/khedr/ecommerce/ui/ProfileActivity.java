@@ -1,10 +1,10 @@
 package com.khedr.ecommerce.ui;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -12,10 +12,13 @@ import androidx.databinding.DataBindingUtil;
 import com.khedr.ecommerce.R;
 import com.khedr.ecommerce.database.Converters;
 import com.khedr.ecommerce.databinding.ActivityProfileBinding;
-import com.khedr.ecommerce.model.user.TokenModel;
-import com.khedr.ecommerce.model.user.UserApiResponse;
 import com.khedr.ecommerce.network.ApiInterface;
 import com.khedr.ecommerce.network.RetrofitInstance;
+import com.khedr.ecommerce.operations.UiOperations;
+import com.khedr.ecommerce.pojo.user.TokenModel;
+import com.khedr.ecommerce.pojo.user.UserApiResponse;
+
+import org.jetbrains.annotations.NotNull;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -25,6 +28,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     ActivityProfileBinding b;
     SharedPreferences pref;
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,8 +39,8 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         b.btProfileBack.setOnClickListener(this);
         b.btProfileEditUserInfo.setOnClickListener(this);
 
-        if(pref.getBoolean(getString(R.string.pref_is_image_ready),false)){
-            String photo=pref.getString(getString(R.string.pref_user_image),null);
+        if (pref.getBoolean(getString(R.string.pref_is_image_ready), false)) {
+            String photo = pref.getString(getString(R.string.pref_user_image), null);
             b.ivProfilePhoto.setImageBitmap(Converters.fromStringToBitmap(photo));
         }
         b.tvProfileUsername.setText(" " + pref.getString(getString(R.string.pref_user_name), null));
@@ -47,16 +51,14 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
     @Override
     public void onClick(View v) {
-        int id=v.getId();
-        if (id== R.id.bt_profile_logout) {
+        int id = v.getId();
+        if (id == R.id.bt_profile_logout) {
             b.btProfileLogout.setVisibility(View.GONE);
             b.progressLogout.setVisibility(View.VISIBLE);
             logOut();
-        }
-        else if(id== R.id.bt_profile_back){
+        } else if (id == R.id.bt_profile_back) {
             finish();
-        }
-        else if(id== R.id.bt_profile_edit_user_info){
+        } else if (id == R.id.bt_profile_edit_user_info) {
             startActivity(new Intent(v.getContext(), UpdateProfileActivity.class));
             finish();
         }
@@ -64,29 +66,33 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
     public void logOut() {
         String token = pref.getString(getString(R.string.pref_user_token), "");
-        TokenModel tokenModel=new TokenModel(token);
+        TokenModel tokenModel = new TokenModel(token);
         Call<UserApiResponse> call = RetrofitInstance.getRetrofitInstance()
-                .create(ApiInterface.class).logOut(token,tokenModel);
+                .create(ApiInterface.class).logOut(token, tokenModel);
 
         call.enqueue(new Callback<UserApiResponse>() {
             @Override
-            public void onResponse(Call<UserApiResponse> call, Response<UserApiResponse> response) {
+            public void onResponse(@NotNull Call<UserApiResponse> call, @NotNull Response<UserApiResponse> response) {
+                if (response.body() != null && response.body().isStatus()) {
+                    SharedPreferences.Editor pen = pref.edit();
+                    pen.putBoolean(getString(R.string.pref_status), false);
+                    pen.putBoolean(getString(R.string.pref_is_image_ready), false);
+                    pen.putString(getString(R.string.pref_user_token), "");
+                    pen.apply();
+                    UiOperations.shortToast(ProfileActivity.this, response.body().getMessage());
 
-                SharedPreferences.Editor pen = pref.edit();
-                pen.putBoolean(getString(R.string.pref_status), false);
-                pen.putBoolean(getString(R.string.pref_is_image_ready), false);
-                pen.putString(getString(R.string.pref_user_token), "");
-                pen.apply();
-
-                Toast.makeText(ProfileActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
                 finish();
+                }
+                else {
+                    UiOperations.shortToast(ProfileActivity.this, "Sorry, connection error");
+                }
             }
 
             @Override
-            public void onFailure(Call<UserApiResponse> call, Throwable t) {
+            public void onFailure(@NotNull Call<UserApiResponse> call, @NotNull Throwable t) {
                 b.btProfileLogout.setVisibility(View.VISIBLE);
                 b.progressLogout.setVisibility(View.INVISIBLE);
-                Toast.makeText(ProfileActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                UiOperations.shortToast(ProfileActivity.this, "Sorry, connection error");
             }
         });
 

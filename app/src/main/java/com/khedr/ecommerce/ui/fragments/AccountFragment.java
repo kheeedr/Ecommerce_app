@@ -1,5 +1,6 @@
 package com.khedr.ecommerce.ui.fragments;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -18,10 +19,11 @@ import com.khedr.ecommerce.ui.AboutUsActivity;
 import com.khedr.ecommerce.ui.ContactUsActivity;
 import com.khedr.ecommerce.ui.LoginActivity;
 import com.khedr.ecommerce.ui.ProfileActivity;
-import com.khedr.ecommerce.ui.operations.UiOperations;
-import com.khedr.ecommerce.ui.operations.UserOperations;
+import com.khedr.ecommerce.operations.UiOperations;
+import com.khedr.ecommerce.operations.UserOperations;
 
 import org.jetbrains.annotations.NotNull;
+
 
 
 public class AccountFragment extends Fragment implements View.OnClickListener {
@@ -56,8 +58,7 @@ public class AccountFragment extends Fragment implements View.OnClickListener {
 
         b= DataBindingUtil.inflate(inflater, R.layout.fragment_account, container, false);
 
-        pref = this.getActivity().getSharedPreferences("logined", 0);
-        Log.d(TAG, "mkhedr: onCreateView");
+        pref = UserOperations.getPref(this.requireActivity());
 
 
         b.layoutAccountToProfile.setOnClickListener(this);
@@ -87,11 +88,12 @@ public class AccountFragment extends Fragment implements View.OnClickListener {
         }else if (id == R.id.layout_account_to_contact) {
             startActivity(new Intent(v.getContext(), ContactUsActivity.class));
         } else if (id == R.id.bt_account_back) {
-            getActivity().onBackPressed();
+            requireActivity().onBackPressed();
         }
 
     }
 
+    @SuppressLint("SetTextI18n")
     public void refreshView() {
         // when refresh view
         if (UserOperations.isSignedIn(this.getActivity())) {
@@ -106,12 +108,12 @@ public class AccountFragment extends Fragment implements View.OnClickListener {
                 b.ivAccountUserImage.setImageBitmap(Converters.fromStringToBitmap(photo));
             } else {
                 String url = pref.getString(getString(R.string.pref_user_image_url), null);
-                UiOperations.getImageViaUrl(getContext(),url,  b.ivAccountUserImage,TAG);
+                UiOperations.getImageViaUrl(requireContext(),url,  b.ivAccountUserImage,TAG);
             }
 
             //update points
             int points = (pref.getInt(getString(R.string.pref_user_points), 0));
-            b.tvAccountNumberOfPoints.setText(String.valueOf(points)+" ");
+            b.tvAccountNumberOfPoints.setText(points +" ");
 
             //update cash
             String cash = pref.getString(getString(R.string.pref_user_credit), "0.00");
@@ -119,7 +121,7 @@ public class AccountFragment extends Fragment implements View.OnClickListener {
 
             //update referral code
             int code = pref.getInt(getString(R.string.pref_user_id), 0);
-            b.tvReferralCode.setText("000" + String.valueOf(code));
+            b.tvReferralCode.setText("000" + code);
 
         } else {
             // if not signed in

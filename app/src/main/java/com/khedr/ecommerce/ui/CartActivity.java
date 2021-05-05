@@ -14,13 +14,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.khedr.ecommerce.R;
 import com.khedr.ecommerce.databinding.ActivityCartBinding;
-import com.khedr.ecommerce.model.product.cart.get.GetCartItems;
-import com.khedr.ecommerce.model.product.cart.get.GetCartResponse;
+import com.khedr.ecommerce.pojo.product.cart.get.GetCartItems;
+import com.khedr.ecommerce.pojo.product.cart.get.GetCartResponse;
 import com.khedr.ecommerce.network.ApiInterface;
 import com.khedr.ecommerce.network.RetrofitInstance;
 import com.khedr.ecommerce.ui.adapters.CartAdapter;
-import com.khedr.ecommerce.ui.operations.UiOperations;
-import com.khedr.ecommerce.ui.operations.UserOperations;
+import com.khedr.ecommerce.operations.UiOperations;
+import com.khedr.ecommerce.operations.UserOperations;
 
 import org.jetbrains.annotations.NotNull;
 
