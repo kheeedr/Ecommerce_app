@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SearchView;
 
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
@@ -24,12 +25,11 @@ import com.khedr.ecommerce.ui.CategoriesActivity;
 import com.khedr.ecommerce.ui.CategoryProductsActivity;
 import com.khedr.ecommerce.ui.ContactUsActivity;
 import com.khedr.ecommerce.ui.FavoritesActivity;
+import com.khedr.ecommerce.ui.SearchActivity;
 import com.khedr.ecommerce.ui.SplashActivity;
 import com.khedr.ecommerce.ui.adapters.BannersAdapter;
 import com.khedr.ecommerce.ui.adapters.ProductsAdapter;
-
 import org.jetbrains.annotations.NotNull;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -78,6 +78,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         b.layoutHomeToCategories.setOnClickListener(this);
         b.layoutHomeToContactUs.setOnClickListener(this);
         b.layoutHomeToPreventCorona.setOnClickListener(this);
+        b.svHome.setOnClickListener(this);
+
 
         return b.getRoot();
     }
@@ -100,7 +102,13 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             startActivity(new Intent(getContext(), ContactUsActivity.class));
         }
         else if (v==b.layoutHomeToPreventCorona){
-            startActivityForResult(new Intent(getContext(), CategoryProductsActivity.class),REQ_CODE);
+            Intent intent =new Intent(getContext(), CategoryProductsActivity.class);
+            intent.putExtra(requireContext().getString(R.string.category_name),"Prevent Corona");
+
+            startActivity(intent);
+        }
+        else if (v==b.svHome){
+            startActivity(new Intent(getContext(), SearchActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
         }
     }
     void getHomeContent(){

@@ -38,9 +38,9 @@
                     android:id="@+id/scroll_home_shortcuts"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:scrollbars="none"
-                    android:paddingHorizontal="@dimen/_14sdp"
                     android:layout_marginBottom="@dimen/_3sdp"
+                    android:paddingHorizontal="@dimen/_14sdp"
+                    android:scrollbars="none"
                     app:layout_constraintBottom_toTopOf="@+id/rv_home_products"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -110,9 +110,9 @@
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/_25sdp"
+                                android:gravity="center"
                                 android:paddingHorizontal="@dimen/_3sdp"
                                 android:text="@string/discount_voucher"
-                                android:gravity="center"
                                 android:textColor="@color/secondary"
                                 android:textSize="@dimen/_10sdp" />
                         </LinearLayout>
@@ -144,9 +144,9 @@
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:gravity="center"
                                 android:paddingHorizontal="@dimen/_3sdp"
                                 android:text="@string/prevent_corona"
-                                android:gravity="center"
                                 android:textColor="@color/secondary"
                                 android:textSize="@dimen/_10sdp" />
                         </LinearLayout>
@@ -179,9 +179,9 @@
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:gravity="center"
                                 android:paddingHorizontal="@dimen/_3sdp"
                                 android:text="@string/contact_n_us"
-                                android:gravity="center"
                                 android:textColor="@color/secondary"
                                 android:textSize="@dimen/_10sdp" />
                         </LinearLayout>
@@ -212,9 +212,9 @@
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:gravity="center"
                                 android:paddingHorizontal="@dimen/_3sdp"
                                 android:text="@string/chat_support"
-                                android:gravity="center"
                                 android:textColor="@color/secondary"
                                 android:textSize="@dimen/_10sdp" />
                         </LinearLayout>
@@ -246,31 +246,41 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <com.google.android.material.textfield.TextInputLayout
+            <LinearLayout
                 android:id="@+id/sv_home"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_20sdp"
                 android:layout_marginTop="@dimen/_10sdp"
+                android:background="@drawable/et_stroke"
                 android:backgroundTint="@color/et_back"
-                app:hintEnabled="false"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:paddingTop="@dimen/_3sdp"
+                android:paddingBottom="@dimen/_4sdp"
+                android:paddingStart="@dimen/_9sdp"
                 app:layout_constraintEnd_toStartOf="@+id/qr_home"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:startIconDrawable="@drawable/ic_search"
-                app:startIconTint="@color/natural3">
+                app:layout_constraintTop_toTopOf="parent">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/et_stroke"
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_search"
+                    android:layout_marginEnd="@dimen/_12sdp"/>
+
+                <TextView
+
+                    android:id="@+id/sv_home_textInputLayout"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:fontFamily="@font/montserrat_regular"
-                    android:hint="@string/search"
                     android:paddingVertical="@dimen/_5sdp"
-                    android:textColorHint="@color/natural3"
+                    android:text="@string/search"
+                    android:textColor="@color/natural3"
                     android:textSize="@dimen/_15sdp" />
-            </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
 
             <ImageView
                 android:id="@+id/qr_home"

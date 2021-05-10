@@ -15,6 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.khedr.ecommerce.R;
 import com.khedr.ecommerce.databinding.ActivityCategoryItemsBinding;
+import com.khedr.ecommerce.pojo.categories.GetCategoriesInnerData;
+import com.khedr.ecommerce.pojo.categories.GetCategoriesResponse;
 import com.khedr.ecommerce.pojo.categories.item.GetCategoryItemsResponse;
 import com.khedr.ecommerce.network.ApiInterface;
 import com.khedr.ecommerce.network.RetrofitInstance;
@@ -49,10 +51,15 @@ public class CategoryProductsActivity extends AppCompatActivity implements View.
                 ,2, RecyclerView.VERTICAL,false);
         b.rvItemCategory.setLayoutManager(gridLayoutManager);
         b.rvItemCategory.setAdapter(productsAdapter);
-        if (getIntent()!=null){
+
         Intent intent=getIntent();
         b.mainTvItemCategory.setText(intent.getStringExtra(getString(R.string.category_name)));
-        getItemsByCategory(intent.getIntExtra(getString(R.string.category_id),0));
+        if (intent.getStringExtra(getString(R.string.category_name)).equals("Prevent Corona"))
+        {
+            getCategoryByName("Prevent Corona");
+        }
+        else {
+            getItemsByCategory(intent.getIntExtra(getString(R.string.category_id), 0));
         }
     }
 
@@ -90,12 +97,41 @@ public class CategoryProductsActivity extends AppCompatActivity implements View.
             }
         });
     }
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable @org.jetbrains.annotations.Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode== HomeFragment.REQ_CODE&&resultCode==RESULT_OK){
+    public void getCategoryByName(String categoryName){
 
-        }
+        Call<GetCategoriesResponse> call=RetrofitInstance.getRetrofitInstance().create(ApiInterface.class).getCategories();
+        call.enqueue(new Callback<GetCategoriesResponse>() {
+            @Override
+            public void onResponse(@NotNull Call<GetCategoriesResponse> call, @NotNull Response<GetCategoriesResponse> response) {
+                if (response.body() != null) {
+                    boolean succeeded=false;
+                    if (response.body().isStatus()){
+                        for (GetCategoriesInnerData data:response.body().getData().getData()){
+                            if (data.getName().equals(categoryName)){
+                                getItemsByCategory(data.getId());
+                                succeeded=true;
+                                break;
+                            }
+                        }
+                        if (!succeeded){
+                            UiOperations.shortToast(CategoryProductsActivity.this, "Sorry, no item found");
+                        }
+
+                    }
+                    else {
+                        UiOperations.shortToast(CategoryProductsActivity.this, response.body().getMessage());
+                    }
+                }else {
+                    UiOperations.shortToast(CategoryProductsActivity.this, "Sorry, connection error");
+                }
+            }
+
+            @Override
+            public void onFailure(@NotNull Call<GetCategoriesResponse> call, @NotNull Throwable t) {
+                UiOperations.shortToast(CategoryProductsActivity.this, "Sorry, connection error");
+            }
+        });
+
 
     }
 

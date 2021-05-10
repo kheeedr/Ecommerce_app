@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.khedr.ecommerce">
+
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -10,26 +11,26 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="false"
         android:theme="@style/Theme.Ecommerce">
-        <activity android:name="com.khedr.ecommerce.ui.SplashActivity">
+        <activity android:name=".ui.SearchActivity"></activity>
+        <activity android:name=".ui.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.khedr.ecommerce.ui.CategoryProductsActivity" />
-        <activity android:name="com.khedr.ecommerce.ui.FavoritesActivity" />
-        <activity android:name="com.khedr.ecommerce.ui.CartActivity" />
-        <activity android:name="com.khedr.ecommerce.ui.MainPageActivity" />
-        <activity android:name="com.khedr.ecommerce.ui.ProductDetailsActivity"/>
-        <activity android:name="com.khedr.ecommerce.ui.CategoriesActivity" />
-
-        <activity android:name="com.khedr.ecommerce.ui.ContactUsActivity" />
-        <activity android:name="com.khedr.ecommerce.ui.LoginActivity" />
-        <activity android:name="com.khedr.ecommerce.ui.AboutUsActivity" />
-        <activity android:name="com.khedr.ecommerce.ui.UpdateProfileActivity" />
-        <activity android:name="com.khedr.ecommerce.ui.ProfileActivity" />
-
-        <activity android:name="com.khedr.ecommerce.ui.SignUpActivity" />
+        <activity android:name=".ui.CategoryProductsActivity" />
+        <activity android:name=".ui.FavoritesActivity" />
+        <activity android:name=".ui.CartActivity" />
+        <activity android:name=".ui.MainPageActivity" />
+        <activity android:name=".ui.ProductDetailsActivity" />
+        <activity android:name=".ui.CategoriesActivity" />
+        <activity android:name=".ui.ContactUsActivity" />
+        <activity android:name=".ui.LoginActivity" />
+        <activity android:name=".ui.AboutUsActivity" />
+        <activity android:name=".ui.UpdateProfileActivity" />
+        <activity android:name=".ui.ProfileActivity" />
+        <activity android:name=".ui.SignUpActivity" />
     </application>
 
 </manifest>

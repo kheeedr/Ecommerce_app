@@ -1,16 +1,12 @@
 package com.khedr.ecommerce.ui;
 
-import android.content.Intent;
+
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
-
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.khedr.ecommerce.R;
 import com.khedr.ecommerce.databinding.ActivityCategoriesBinding;
 import com.khedr.ecommerce.pojo.categories.GetCategoriesResponse;
@@ -18,10 +14,7 @@ import com.khedr.ecommerce.network.ApiInterface;
 import com.khedr.ecommerce.network.RetrofitInstance;
 import com.khedr.ecommerce.ui.adapters.CategoriesAdapter;
 import com.khedr.ecommerce.operations.UiOperations;
-import com.khedr.ecommerce.ui.fragments.HomeFragment;
-
 import org.jetbrains.annotations.NotNull;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -55,7 +48,7 @@ public class CategoriesActivity extends AppCompatActivity implements View.OnClic
                         categoriesAdapter.setCategoriesList(response.body().getData().getData());
                     }
                     else {
-                        Toast.makeText(CategoriesActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                        UiOperations.shortToast(CategoriesActivity.this, response.body().getMessage());
                     }
                 }else {
                     UiOperations.shortToast(CategoriesActivity.this, "Sorry, connection error");
