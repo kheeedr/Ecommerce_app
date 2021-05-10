@@ -4,10 +4,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -21,9 +19,8 @@ import com.khedr.ecommerce.pojo.categories.item.GetCategoryItemsResponse;
 import com.khedr.ecommerce.network.ApiInterface;
 import com.khedr.ecommerce.network.RetrofitInstance;
 import com.khedr.ecommerce.ui.adapters.ProductsAdapter;
-import com.khedr.ecommerce.operations.UiOperations;
-import com.khedr.ecommerce.operations.UserOperations;
-import com.khedr.ecommerce.ui.fragments.HomeFragment;
+import com.khedr.ecommerce.utils.UiUtils;
+import com.khedr.ecommerce.utils.UserOperations;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -43,8 +40,8 @@ public class CategoryProductsActivity extends AppCompatActivity implements View.
         pref= UserOperations.getPref(this);
         productsAdapter=new ProductsAdapter(this);
 
-        UiOperations.AnimJumpAndFade(this,b.progressItemCategory);
-        UiOperations.AnimEndToStart(this,b.viewItemCategoryUnderMoto);
+        UiUtils.AnimJumpAndFade(this,b.progressItemCategory);
+        UiUtils.AnimEndToStart(this,b.viewItemCategoryUnderMoto);
 
         b.btItemCategoryBack.setOnClickListener(this);
         GridLayoutManager gridLayoutManager=new GridLayoutManager(this
@@ -75,24 +72,24 @@ public class CategoryProductsActivity extends AppCompatActivity implements View.
         call.enqueue(new Callback<GetCategoryItemsResponse>() {
             @Override
             public void onResponse(@NonNull Call<GetCategoryItemsResponse> call, @NotNull Response<GetCategoryItemsResponse> response) {
-                UiOperations.AnimCenterToEnd(CategoryProductsActivity.this,b.progressItemCategory);
+                UiUtils.AnimCenterToEnd(CategoryProductsActivity.this,b.progressItemCategory);
                 if (response.body() != null) {
                     if (response.body().isStatus()){
                         productsAdapter.setProductsList(response.body().getData().getData());
                     }
                     else {
-                        UiOperations.shortToast(CategoryProductsActivity.this, response.body().getMessage());
+                        UiUtils.shortToast(CategoryProductsActivity.this, response.body().getMessage());
                     }
                 }else {
-                    UiOperations.shortToast(CategoryProductsActivity.this, "Sorry, connection error");
+                    UiUtils.shortToast(CategoryProductsActivity.this, "Sorry, connection error");
 
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<GetCategoryItemsResponse> call,@NonNull  Throwable t) {
-                UiOperations.AnimCenterToEnd(CategoryProductsActivity.this,b.progressItemCategory);
-                UiOperations.shortToast(CategoryProductsActivity.this, "Sorry, connection error");
+                UiUtils.AnimCenterToEnd(CategoryProductsActivity.this,b.progressItemCategory);
+                UiUtils.shortToast(CategoryProductsActivity.this, "Sorry, connection error");
 
             }
         });
@@ -114,21 +111,21 @@ public class CategoryProductsActivity extends AppCompatActivity implements View.
                             }
                         }
                         if (!succeeded){
-                            UiOperations.shortToast(CategoryProductsActivity.this, "Sorry, no item found");
+                            UiUtils.shortToast(CategoryProductsActivity.this, "Sorry, no item found");
                         }
 
                     }
                     else {
-                        UiOperations.shortToast(CategoryProductsActivity.this, response.body().getMessage());
+                        UiUtils.shortToast(CategoryProductsActivity.this, response.body().getMessage());
                     }
                 }else {
-                    UiOperations.shortToast(CategoryProductsActivity.this, "Sorry, connection error");
+                    UiUtils.shortToast(CategoryProductsActivity.this, "Sorry, connection error");
                 }
             }
 
             @Override
             public void onFailure(@NotNull Call<GetCategoriesResponse> call, @NotNull Throwable t) {
-                UiOperations.shortToast(CategoryProductsActivity.this, "Sorry, connection error");
+                UiUtils.shortToast(CategoryProductsActivity.this, "Sorry, connection error");
             }
         });
 

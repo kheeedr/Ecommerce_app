@@ -1,4 +1,4 @@
-package com.khedr.ecommerce.operations;
+package com.khedr.ecommerce.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;

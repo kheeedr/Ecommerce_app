@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.khedr.ecommerce.R;
 import com.khedr.ecommerce.pojo.categories.GetCategoriesInnerData;
 import com.khedr.ecommerce.ui.CategoryProductsActivity;
-import com.khedr.ecommerce.operations.UiOperations;
+import com.khedr.ecommerce.utils.UiUtils;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -46,7 +46,7 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
     @Override
     public void onBindViewHolder(@NonNull @NotNull CategoriesAdapter.CategoriesViewHolder holder, int position) {
 
-        UiOperations.getImageViaUrl(context,categoriesList.get(position).getImage(),holder.ivCategory,TAG,holder.progressbar);
+        UiUtils.getImageViaUrl(context,categoriesList.get(position).getImage(),holder.ivCategory,TAG,holder.progressbar);
         holder.tvCategory.setText(categoriesList.get(position).getName());
         holder.catLayout.setOnClickListener(v -> {
             Intent intent=new Intent(context, CategoryProductsActivity.class);

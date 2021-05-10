@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.khedr.ecommerce.R;
 import com.khedr.ecommerce.pojo.homeapi.Banner;
-import com.khedr.ecommerce.operations.UiOperations;
+import com.khedr.ecommerce.utils.UiUtils;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -47,7 +47,7 @@ public class BannersAdapter extends RecyclerView.Adapter<BannersAdapter.BannersV
     @Override
     public void onBindViewHolder(@NonNull @NotNull BannersAdapter.BannersViewHolder holder, int position) {
 
-        UiOperations.getImageViaUrl(context,bannersList.get(position).getImage(), holder.iv,TAG,holder.ivProgressbar);
+        UiUtils.getImageViaUrl(context,bannersList.get(position).getImage(), holder.iv,TAG,holder.ivProgressbar);
 
     }
 

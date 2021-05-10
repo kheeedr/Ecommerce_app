@@ -20,7 +20,7 @@ import com.khedr.ecommerce.pojo.user.UserApiResponse;
 import com.khedr.ecommerce.pojo.user.UserDataForRegisterRequest;
 import com.khedr.ecommerce.network.ApiInterface;
 import com.khedr.ecommerce.network.RetrofitInstance;
-import com.khedr.ecommerce.operations.UiOperations;
+import com.khedr.ecommerce.utils.UiUtils;
 import org.jetbrains.annotations.NotNull;
 import java.io.IOException;
 import java.util.Objects;
@@ -28,7 +28,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static com.khedr.ecommerce.operations.UiOperations.countWordsUsingSplit;
+import static com.khedr.ecommerce.utils.UiUtils.countWordsUsingSplit;
 
 public class UpdateProfileActivity extends AppCompatActivity implements  View.OnClickListener {
     private static final int REQ_CODE = 102;
@@ -135,17 +135,17 @@ public class UpdateProfileActivity extends AppCompatActivity implements  View.On
                 if (response.body() != null) {
                     if (response.body().isStatus()){
 
-                        UiOperations.shortToast(UpdateProfileActivity.this, response.body().getMessage());
+                        UiUtils.shortToast(UpdateProfileActivity.this, response.body().getMessage());
                         LoginActivity.saveUserProfileToShared(response.body(),UpdateProfileActivity.this,user.getImage());
                         startActivity(new Intent(UpdateProfileActivity.this, ProfileActivity.class));
                         finish();
                     }else {
                         b.btUpdateProfileSubmit.setVisibility(View.VISIBLE);
                         b.progressUpdateProfile.setVisibility(View.INVISIBLE);
-                        UiOperations.shortToast(UpdateProfileActivity.this, response.body().getMessage());
+                        UiUtils.shortToast(UpdateProfileActivity.this, response.body().getMessage());
                     }
                 }else {
-                    UiOperations.shortToast(UpdateProfileActivity.this, "Sorry, connection error");
+                    UiUtils.shortToast(UpdateProfileActivity.this, "Sorry, connection error");
 
                 }
 
@@ -155,7 +155,7 @@ public class UpdateProfileActivity extends AppCompatActivity implements  View.On
             public void onFailure(@NotNull Call<UserApiResponse> call, @NotNull Throwable t) {
                 b.btUpdateProfileSubmit.setVisibility(View.VISIBLE);
                 b.progressUpdateProfile.setVisibility(View.INVISIBLE);
-                UiOperations.shortToast(UpdateProfileActivity.this, "Sorry, connection error");
+                UiUtils.shortToast(UpdateProfileActivity.this, "Sorry, connection error");
 
             }
         });

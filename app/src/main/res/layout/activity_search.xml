@@ -9,6 +9,7 @@
         tools:context=".ui.SearchActivity">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_search_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
@@ -25,14 +26,14 @@
                 android:layout_marginStart="@dimen/_20sdp"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:backgroundTint="@color/et_back"
+                android:imeOptions="actionSearch"
                 app:endIconMode="clear_text"
                 app:hintEnabled="false"
-                app:layout_constraintEnd_toStartOf="@+id/qr_home"
+                app:layout_constraintEnd_toStartOf="@+id/bt_search_cancel"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:startIconDrawable="@drawable/ic_search"
                 app:startIconTint="@color/natural3"
-                android:imeOptions="actionSearch"
 
 
                 >
@@ -44,24 +45,22 @@
                     android:background="@drawable/et_stroke"
                     android:fontFamily="@font/montserrat_regular"
                     android:hint="@string/search"
-                    android:paddingVertical="@dimen/_5sdp"
-                    android:textColorHint="@color/natural3"
-                    android:textSize="@dimen/_15sdp"
                     android:imeOptions="actionSearch"
                     android:inputType="text"
                     android:maxLines="1"
-                    android:focusedByDefault="true"
-                    tools:targetApi="o"
+                    android:paddingVertical="@dimen/_5sdp"
+                    android:textColorHint="@color/natural3"
+                    android:textSize="@dimen/_15sdp"
+
                     />
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
-                android:id="@+id/qr_home"
-                android:layout_width="@dimen/_50sdp"
+                android:id="@+id/bt_search_cancel"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:layout_marginEnd="@dimen/_10sdp"
                 android:gravity="center"
+                android:padding="@dimen/_10sdp"
                 android:text="Cancel"
                 android:textColor="@color/primary"
                 android:textSize="@dimen/_12sdp"
@@ -70,7 +69,18 @@
                 app:layout_constraintStart_toEndOf="@id/sv_search_layout"
                 app:layout_constraintTop_toTopOf="@id/sv_search_layout" />
 
-
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_search_suggestion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_5sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/layout_search_input"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:reverseLayout="false"
+            />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

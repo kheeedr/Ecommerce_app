@@ -19,8 +19,8 @@ import com.khedr.ecommerce.pojo.product.cart.get.GetCartResponse;
 import com.khedr.ecommerce.network.ApiInterface;
 import com.khedr.ecommerce.network.RetrofitInstance;
 import com.khedr.ecommerce.ui.adapters.CartAdapter;
-import com.khedr.ecommerce.operations.UiOperations;
-import com.khedr.ecommerce.operations.UserOperations;
+import com.khedr.ecommerce.utils.UiUtils;
+import com.khedr.ecommerce.utils.UserOperations;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -42,8 +42,8 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         b = DataBindingUtil.setContentView(this, R.layout.activity_cart);
         pref = UserOperations.getPref(this);
-        UiOperations.AnimJumpAndFade(this, b.progressCart);
-        UiOperations.AnimEndToStart(this, b.viewCartUnderMoto);
+        UiUtils.AnimJumpAndFade(this, b.progressCart);
+        UiUtils.AnimEndToStart(this, b.viewCartUnderMoto);
         b.btCartShopNow.setOnClickListener(this);
         b.btCartBack.setOnClickListener(this);
         b.layoutCartProgressBack.setOnClickListener(this);
@@ -81,7 +81,7 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
                 @SuppressLint("SetTextI18n")
                 @Override
                 public void onResponse(@NotNull Call<GetCartResponse> call,@NotNull Response<GetCartResponse> response) {
-                    UiOperations.AnimCenterToEnd(CartActivity.this, b.progressCart);
+                    UiUtils.AnimCenterToEnd(CartActivity.this, b.progressCart);
                     if (response.body() != null) {
                         if (response.body().isStatus()) {
                             ArrayList<GetCartItems> cartItems = response.body().getData().getCart_items();
@@ -106,12 +106,12 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
                 @Override
                 public void onFailure(@NotNull Call<GetCartResponse> call,@NotNull Throwable t) {
                     Toast.makeText(CartActivity.this, "connection error...", Toast.LENGTH_LONG).show();
-                    UiOperations.AnimCenterToEnd(CartActivity.this, b.progressCart);
+                    UiUtils.AnimCenterToEnd(CartActivity.this, b.progressCart);
                 }
             });
         } else {
             Toast.makeText(this, "you should login first", Toast.LENGTH_LONG).show();
-            UiOperations.AnimCenterToEnd(CartActivity.this, b.progressCart);
+            UiUtils.AnimCenterToEnd(CartActivity.this, b.progressCart);
         }
     }
 

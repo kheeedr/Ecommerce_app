@@ -12,7 +12,7 @@ import androidx.databinding.DataBindingUtil;
 
 import com.khedr.ecommerce.R;
 import com.khedr.ecommerce.databinding.ActivityLoginBinding;
-import com.khedr.ecommerce.operations.UiOperations;
+import com.khedr.ecommerce.utils.UiUtils;
 import com.khedr.ecommerce.pojo.user.UserApiResponse;
 import com.khedr.ecommerce.pojo.user.UserDataForLoginRequest;
 import com.khedr.ecommerce.network.ApiInterface;
@@ -78,11 +78,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     } else {
                         b.btLogin.setVisibility(View.VISIBLE);
                         b.progressLogin.setVisibility(View.INVISIBLE);
-                        UiOperations.shortToast(LoginActivity.this, response.body().getMessage());
+                        UiUtils.shortToast(LoginActivity.this, response.body().getMessage());
                     }
                 }
                 else {
-                    UiOperations.shortToast(LoginActivity.this, "Sorry, connection error");
+                    UiUtils.shortToast(LoginActivity.this, "Sorry, connection error");
                 }
             }
 
@@ -90,7 +90,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             public void onFailure(@NotNull Call<UserApiResponse> call, @NotNull Throwable t) {
                 b.btLogin.setVisibility(View.VISIBLE);
                 b.progressLogin.setVisibility(View.INVISIBLE);
-                UiOperations.shortToast(LoginActivity.this, "Sorry, connection error");
+                UiUtils.shortToast(LoginActivity.this, "Sorry, connection error");
             }
         });
 

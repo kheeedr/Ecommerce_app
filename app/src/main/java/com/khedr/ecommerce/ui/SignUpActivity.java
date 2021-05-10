@@ -21,7 +21,7 @@ import com.khedr.ecommerce.pojo.user.UserApiResponse;
 import com.khedr.ecommerce.pojo.user.UserDataForRegisterRequest;
 import com.khedr.ecommerce.network.ApiInterface;
 import com.khedr.ecommerce.network.RetrofitInstance;
-import com.khedr.ecommerce.operations.UiOperations;
+import com.khedr.ecommerce.utils.UiUtils;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -71,10 +71,10 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         String rePassword = Objects.requireNonNull(b.etSignRepassword.getText()).toString();
         String image = Converters.fromBitmapToString(((BitmapDrawable) b.ivAddUser.getDrawable()).getBitmap());
 
-        if (UiOperations.countWordsUsingSplit(name) < 2) {
+        if (UiUtils.countWordsUsingSplit(name) < 2) {
             b.etSignName.setError("please enter full name");
             b.etSignName.requestFocus();
-        } else if (UiOperations.countWordsUsingSplit(name) > 4) {
+        } else if (UiUtils.countWordsUsingSplit(name) > 4) {
             b.etSignName.setError("sorry max words allowed is 4");
             b.etSignName.requestFocus();
         } else if (!Patterns.PHONE.matcher(phone).matches()) {
@@ -113,16 +113,16 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
                 if (response.body() != null) {
                     if (response.body().isStatus()) {
-                        UiOperations.shortToast(SignUpActivity.this, response.body().getMessage()
+                        UiUtils.shortToast(SignUpActivity.this, response.body().getMessage()
                                 + " You can login now");
                         finish();
                     } else {
                         b.btSign.setVisibility(View.VISIBLE);
                         b.progressSign.setVisibility(View.INVISIBLE);
-                        UiOperations.shortToast(SignUpActivity.this, response.body().getMessage());
+                        UiUtils.shortToast(SignUpActivity.this, response.body().getMessage());
                     }
                 }else {
-                    UiOperations.shortToast(SignUpActivity.this, "Sorry, connection error");
+                    UiUtils.shortToast(SignUpActivity.this, "Sorry, connection error");
                 }
             }
 
@@ -130,7 +130,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             public void onFailure(@NotNull Call<UserApiResponse> call, @NotNull Throwable t) {
                 b.btSign.setVisibility(View.VISIBLE);
                 b.progressSign.setVisibility(View.INVISIBLE);
-                UiOperations.shortToast(SignUpActivity.this, "Sorry, connection error");
+                UiUtils.shortToast(SignUpActivity.this, "Sorry, connection error");
             }
         });
     }

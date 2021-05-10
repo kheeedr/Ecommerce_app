@@ -13,8 +13,8 @@ import com.khedr.ecommerce.R;
 import com.khedr.ecommerce.databinding.ActivityFavoritesBinding;
 import com.khedr.ecommerce.network.ApiInterface;
 import com.khedr.ecommerce.network.RetrofitInstance;
-import com.khedr.ecommerce.operations.UiOperations;
-import com.khedr.ecommerce.operations.UserOperations;
+import com.khedr.ecommerce.utils.UiUtils;
+import com.khedr.ecommerce.utils.UserOperations;
 import com.khedr.ecommerce.pojo.product.favorites.get.GetFavoritesResponse;
 import com.khedr.ecommerce.ui.adapters.FavoritesAdapter;
 
@@ -62,24 +62,24 @@ public class FavoritesActivity extends AppCompatActivity implements View.OnClick
                         if (response.body().isStatus()) {
                             favoritesAdapter.setFavoritesList(response.body().getData().getData());
                         } else {
-                            UiOperations.shortToast(FavoritesActivity.this, response.body().getMessage());
+                            UiUtils.shortToast(FavoritesActivity.this, response.body().getMessage());
                         }
                     }
                     else {
-                        UiOperations.shortToast(FavoritesActivity.this, "Sorry, connection error");
+                        UiUtils.shortToast(FavoritesActivity.this, "Sorry, connection error");
                     }
                     b.progressFavorite.setVisibility(View.GONE);
                 }
 
                 @Override
                 public void onFailure(@NotNull Call<GetFavoritesResponse> call, @NotNull Throwable t) {
-                    UiOperations.shortToast(FavoritesActivity.this, "Sorry, connection error");
+                    UiUtils.shortToast(FavoritesActivity.this, "Sorry, connection error");
                     b.progressFavorite.setVisibility(View.GONE);
 
                 }
             });
         } else {
-            UiOperations.shortToast(this, "you should login first");
+            UiUtils.shortToast(this, "you should login first");
             b.progressFavorite.setVisibility(View.GONE);
         }
     }

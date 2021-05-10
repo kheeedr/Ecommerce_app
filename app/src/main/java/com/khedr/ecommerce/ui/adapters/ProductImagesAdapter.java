@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.khedr.ecommerce.R;
-import com.khedr.ecommerce.operations.UiOperations;
+import com.khedr.ecommerce.utils.UiUtils;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -37,7 +37,7 @@ public class ProductImagesAdapter extends RecyclerView.Adapter<ProductImagesAdap
 
     @Override
     public void onBindViewHolder(@NonNull @NotNull ProductImagesAdapter.ImagesViewHolder holder, int position) {
-        UiOperations.getImageViaUrl(context, imagesList.get(position), holder.imageView, TAG, holder.progressBar);
+        UiUtils.getImageViaUrl(context, imagesList.get(position), holder.imageView, TAG, holder.progressBar);
     }
 
     @Override

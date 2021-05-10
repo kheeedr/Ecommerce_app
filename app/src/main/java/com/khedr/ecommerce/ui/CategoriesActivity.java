@@ -13,7 +13,7 @@ import com.khedr.ecommerce.pojo.categories.GetCategoriesResponse;
 import com.khedr.ecommerce.network.ApiInterface;
 import com.khedr.ecommerce.network.RetrofitInstance;
 import com.khedr.ecommerce.ui.adapters.CategoriesAdapter;
-import com.khedr.ecommerce.operations.UiOperations;
+import com.khedr.ecommerce.utils.UiUtils;
 import org.jetbrains.annotations.NotNull;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -27,8 +27,8 @@ public class CategoriesActivity extends AppCompatActivity implements View.OnClic
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         b = DataBindingUtil.setContentView(this, R.layout.activity_categories);
-        UiOperations.AnimJumpAndFade(this,b.progressCategories);
-        UiOperations.AnimEndToStart(this,b.viewCategoriesUnderMoto);
+        UiUtils.AnimJumpAndFade(this,b.progressCategories);
+        UiUtils.AnimEndToStart(this,b.viewCategoriesUnderMoto);
         categoriesAdapter = new CategoriesAdapter(this);
         b.rvCategories.setLayoutManager(new GridLayoutManager(this,2, RecyclerView.VERTICAL,false));
         b.rvCategories.setAdapter(categoriesAdapter);
@@ -42,23 +42,23 @@ public class CategoriesActivity extends AppCompatActivity implements View.OnClic
         call.enqueue(new Callback<GetCategoriesResponse>() {
             @Override
             public void onResponse(@NotNull Call<GetCategoriesResponse> call, @NotNull Response<GetCategoriesResponse> response) {
-                UiOperations.AnimCenterToEnd(CategoriesActivity.this,b.progressCategories);
+                UiUtils.AnimCenterToEnd(CategoriesActivity.this,b.progressCategories);
                 if (response.body() != null) {
                     if (response.body().isStatus()){
                         categoriesAdapter.setCategoriesList(response.body().getData().getData());
                     }
                     else {
-                        UiOperations.shortToast(CategoriesActivity.this, response.body().getMessage());
+                        UiUtils.shortToast(CategoriesActivity.this, response.body().getMessage());
                     }
                 }else {
-                    UiOperations.shortToast(CategoriesActivity.this, "Sorry, connection error");
+                    UiUtils.shortToast(CategoriesActivity.this, "Sorry, connection error");
                 }
             }
 
             @Override
             public void onFailure(@NotNull Call<GetCategoriesResponse> call, @NotNull Throwable t) {
-                UiOperations.shortToast(CategoriesActivity.this, "Sorry, connection error");
-                UiOperations.AnimCenterToEnd(CategoriesActivity.this,b.progressCategories);
+                UiUtils.shortToast(CategoriesActivity.this, "Sorry, connection error");
+                UiUtils.AnimCenterToEnd(CategoriesActivity.this,b.progressCategories);
             }
         });
 

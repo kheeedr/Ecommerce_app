@@ -1,4 +1,4 @@
-package com.khedr.ecommerce.operations;
+package com.khedr.ecommerce.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -21,7 +21,7 @@ import com.bumptech.glide.request.target.Target;
 import com.khedr.ecommerce.R;
 import com.khedr.ecommerce.database.Converters;
 
-public abstract class UiOperations {
+public abstract class UiUtils {
 
     public static Toast toast;
 
@@ -53,7 +53,7 @@ public abstract class UiOperations {
     public static void getImageViaUrl(Context context, String url
             , ImageView imageView, String TAG, View progressBar) {
         SharedPreferences pref = context.getSharedPreferences("logined", 0);
-        UiOperations.AnimJumpAndFade(context, progressBar);
+        UiUtils.AnimJumpAndFade(context, progressBar);
         Glide.with(context).load(url)
                 .listener(new RequestListener<Drawable>() {
                     @Override

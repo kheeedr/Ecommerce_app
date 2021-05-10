@@ -14,7 +14,7 @@ import com.khedr.ecommerce.database.Converters;
 import com.khedr.ecommerce.databinding.ActivityProfileBinding;
 import com.khedr.ecommerce.network.ApiInterface;
 import com.khedr.ecommerce.network.RetrofitInstance;
-import com.khedr.ecommerce.operations.UiOperations;
+import com.khedr.ecommerce.utils.UiUtils;
 import com.khedr.ecommerce.pojo.user.TokenModel;
 import com.khedr.ecommerce.pojo.user.UserApiResponse;
 
@@ -79,12 +79,12 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                     pen.putBoolean(getString(R.string.pref_is_image_ready), false);
                     pen.putString(getString(R.string.pref_user_token), "");
                     pen.apply();
-                    UiOperations.shortToast(ProfileActivity.this, response.body().getMessage());
+                    UiUtils.shortToast(ProfileActivity.this, response.body().getMessage());
 
                 finish();
                 }
                 else {
-                    UiOperations.shortToast(ProfileActivity.this, "Sorry, connection error");
+                    UiUtils.shortToast(ProfileActivity.this, "Sorry, connection error");
                 }
             }
 
@@ -92,7 +92,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             public void onFailure(@NotNull Call<UserApiResponse> call, @NotNull Throwable t) {
                 b.btProfileLogout.setVisibility(View.VISIBLE);
                 b.progressLogout.setVisibility(View.INVISIBLE);
-                UiOperations.shortToast(ProfileActivity.this, "Sorry, connection error");
+                UiUtils.shortToast(ProfileActivity.this, "Sorry, connection error");
             }
         });
 

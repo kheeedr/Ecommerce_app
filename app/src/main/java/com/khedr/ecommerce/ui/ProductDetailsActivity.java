@@ -19,7 +19,7 @@ import com.khedr.ecommerce.R;
 import com.khedr.ecommerce.databinding.ActivityProductDetailsBinding;
 import com.khedr.ecommerce.pojo.product.Product;
 import com.khedr.ecommerce.ui.adapters.ProductImagesAdapter;
-import com.khedr.ecommerce.operations.ProductOperations;
+import com.khedr.ecommerce.utils.ProductOperations;
 import org.jetbrains.annotations.NotNull ;
 import java.util.ArrayList;
 import java.util.Objects;

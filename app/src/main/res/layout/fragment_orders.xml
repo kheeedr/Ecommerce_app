@@ -35,7 +35,8 @@
             android:rotation="180"
             android:src="@drawable/ic_blue_right_arrow"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            />
 
         <!--  when layout is empty -->
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -87,7 +88,7 @@
                     android:layout_marginVertical="@dimen/_10sdp"
                     android:paddingHorizontal="@dimen/_30sdp"
                     android:text="Looks like you haven't made your order yet."
-                    android:textAlignment="center"
+                    android:gravity="center"
                     android:textColor="@color/natural1"
                     android:textSize="@dimen/_12sdp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -102,11 +103,8 @@
                     android:layout_marginHorizontal="@dimen/_10sdp"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:background="@drawable/bt_back_filled"
-                    android:drawableEnd="@drawable/ic_cart"
                     android:fontFamily="@font/montserrat_medium"
                     android:paddingVertical="@dimen/_2sdp"
-                    android:paddingStart="@dimen/_85sdp"
-                    android:paddingEnd="@dimen/_50sdp"
                     android:text="To Cart"
                     android:textAlignment="center"
                     android:textAllCaps="false"

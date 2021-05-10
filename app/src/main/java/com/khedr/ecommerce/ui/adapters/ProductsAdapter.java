@@ -18,9 +18,9 @@ import com.khedr.ecommerce.R;
 import com.khedr.ecommerce.pojo.product.Product;
 import com.khedr.ecommerce.ui.ProductDetailsActivity;
 import com.khedr.ecommerce.ui.SplashActivity;
-import com.khedr.ecommerce.operations.ProductOperations;
-import com.khedr.ecommerce.operations.UiOperations;
-import com.khedr.ecommerce.operations.UserOperations;
+import com.khedr.ecommerce.utils.ProductOperations;
+import com.khedr.ecommerce.utils.UiUtils;
+import com.khedr.ecommerce.utils.UserOperations;
 import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
@@ -56,7 +56,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
     public void onBindViewHolder(@NonNull @NotNull ProductsAdapter.ProductsViewHolder holder, int position) {
 
         //set product image
-        UiOperations.getImageViaUrl(context, productsList.get(position).getImage(), holder.ivProduct, TAG, holder.ivProgressbar);
+        UiUtils.getImageViaUrl(context, productsList.get(position).getImage(), holder.ivProduct, TAG, holder.ivProgressbar);
 
         //set product name and price
         holder.tvProductPrice.setText("EGP " + productsList.get(position).getPrice());

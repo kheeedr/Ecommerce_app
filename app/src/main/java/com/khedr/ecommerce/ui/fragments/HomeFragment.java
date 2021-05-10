@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.SearchView;
 
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
@@ -18,8 +17,8 @@ import com.khedr.ecommerce.R;
 import com.khedr.ecommerce.databinding.FragmentHomeBinding;
 import com.khedr.ecommerce.network.ApiInterface;
 import com.khedr.ecommerce.network.RetrofitInstance;
-import com.khedr.ecommerce.operations.UiOperations;
-import com.khedr.ecommerce.operations.UserOperations;
+import com.khedr.ecommerce.utils.UiUtils;
+import com.khedr.ecommerce.utils.UserOperations;
 import com.khedr.ecommerce.pojo.homeapi.HomePageApiResponse;
 import com.khedr.ecommerce.ui.CategoriesActivity;
 import com.khedr.ecommerce.ui.CategoryProductsActivity;
@@ -124,16 +123,16 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                         productsAdapter.setProductsList(response.body().getData().getProducts());
                     }
                     else {
-                        UiOperations.shortToast(getContext(),response.body().getMessage());
+                        UiUtils.shortToast(getContext(),response.body().getMessage());
                     }
                 }
                 else {
-                    UiOperations.shortToast(getContext(), "Sorry, connection error");
+                    UiUtils.shortToast(getContext(), "Sorry, connection error");
                 }
             }
             @Override
             public void onFailure(@NotNull Call<HomePageApiResponse> call, @NotNull Throwable t) {
-                UiOperations.shortToast(getContext(), "Sorry, connection error");
+                UiUtils.shortToast(getContext(), "Sorry, connection error");
             }
         });
     }

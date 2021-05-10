@@ -15,10 +15,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.khedr.ecommerce.R;
 import com.khedr.ecommerce.databinding.ActivityCartBinding;
-import com.khedr.ecommerce.operations.UiOperations;
+import com.khedr.ecommerce.utils.UiUtils;
 import com.khedr.ecommerce.pojo.product.cart.get.GetCartItems;
-import com.khedr.ecommerce.operations.ProductOperations;
-import com.khedr.ecommerce.operations.UserOperations;
+import com.khedr.ecommerce.utils.ProductOperations;
+import com.khedr.ecommerce.utils.UserOperations;
 import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
@@ -64,7 +64,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
     public void onBindViewHolder(@NonNull @NotNull CartAdapter.CartViewHolder holder, int position) {
 
         //set product image
-        UiOperations.getImageViaUrl(context,cartItems.get(position).getProduct().getImage(),holder.iv,TAG);
+        UiUtils.getImageViaUrl(context,cartItems.get(position).getProduct().getImage(),holder.iv,TAG);
 
         //set product name and price;
         holder.tvProductPrice.setText("EGP " + cartItems.get(position).getProduct().getPrice());

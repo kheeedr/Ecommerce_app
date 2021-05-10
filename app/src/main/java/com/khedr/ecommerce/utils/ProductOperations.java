@@ -1,4 +1,4 @@
-package com.khedr.ecommerce.operations;
+package com.khedr.ecommerce.utils;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -36,7 +36,7 @@ public abstract class ProductOperations {
     public static void addProductToCart(Context context, int productId, View btToCart, ImageView progressBar) {
         if (UserOperations.isSignedIn(context)) {
             progressBar.setVisibility(View.VISIBLE);
-            UiOperations.AnimJumpAndFade(context, progressBar);
+            UiUtils.AnimJumpAndFade(context, progressBar);
             btToCart.setVisibility(View.GONE);
             ProductId id = new ProductId(productId);
             String token = UserOperations.getPref(context).getString(context.getString(R.string.pref_user_token), "");
@@ -49,10 +49,10 @@ public abstract class ProductOperations {
                     btToCart.setVisibility(View.VISIBLE);
 
                     if (response.body() != null) {
-                        UiOperations.shortToast(context, response.body().getMessage());
+                        UiUtils.shortToast(context, response.body().getMessage());
                     }
                     else {
-                        UiOperations.shortToast(context, "Sorry, connection error");
+                        UiUtils.shortToast(context, "Sorry, connection error");
                     }
                 }
 
@@ -61,11 +61,11 @@ public abstract class ProductOperations {
                     progressBar.clearAnimation();
                     progressBar.setVisibility(View.GONE);
                     btToCart.setVisibility(View.VISIBLE);
-                    UiOperations.shortToast(context, "Sorry, connection error");
+                    UiUtils.shortToast(context, "Sorry, connection error");
                 }
             });
         } else {
-            UiOperations.shortToast(context, "you should login first");
+            UiUtils.shortToast(context, "you should login first");
             progressBar.setVisibility(View.GONE);
             btToCart.setVisibility(View.VISIBLE);
         }
@@ -74,7 +74,7 @@ public abstract class ProductOperations {
     // from product
     public static void updateQuantity(Context context, int newValue, int productId, View btToCart, ImageView progressBar) {
         btToCart.setVisibility(View.GONE);
-        UiOperations.AnimJumpAndFade(context, progressBar);
+        UiUtils.AnimJumpAndFade(context, progressBar);
 
         String token = UserOperations.getPref(context).getString(context.getString(R.string.pref_user_token), "");
         Quantity quantity = new Quantity(newValue);
@@ -85,13 +85,13 @@ public abstract class ProductOperations {
             public void onResponse(@NotNull Call<UpdateQuantityResponse> call, @NotNull Response<UpdateQuantityResponse> response) {
                 if (response.body() != null) {
                     if (response.body().isStatus()) {
-                        UiOperations.shortToast(context, response.body().getMessage());
+                        UiUtils.shortToast(context, response.body().getMessage());
 
                     } else {
-                        UiOperations.shortToast(context, "Sorry, " + response.body().getMessage());
+                        UiUtils.shortToast(context, "Sorry, " + response.body().getMessage());
                     }
                 } else {
-                    UiOperations.shortToast(context, "Sorry, connection error");
+                    UiUtils.shortToast(context, "Sorry, connection error");
                 }
                 progressBar.clearAnimation();
                 progressBar.setVisibility(View.GONE);
@@ -103,7 +103,7 @@ public abstract class ProductOperations {
                 progressBar.clearAnimation();
                 progressBar.setVisibility(View.GONE);
                 btToCart.setVisibility(View.VISIBLE);
-                UiOperations.shortToast(context, t.getMessage());
+                UiUtils.shortToast(context, t.getMessage());
             }
         });
 
@@ -125,21 +125,21 @@ public abstract class ProductOperations {
                             total = response.body().getData().getTotal();
                             cartTotal.setText("Total: " + (int) Math.ceil(total) + " EGP");
                         }
-                        UiOperations.shortToast(context, response.body().getMessage());
+                        UiUtils.shortToast(context, response.body().getMessage());
 
                     } else {
                         tvQuantity.setText(String.valueOf(oldValue));
-                        UiOperations.shortToast(context, "Sorry, " + response.body().getMessage());
+                        UiUtils.shortToast(context, "Sorry, " + response.body().getMessage());
                     }
                 } else {
-                    UiOperations.shortToast(context, "Sorry, connection error");
+                    UiUtils.shortToast(context, "Sorry, connection error");
                 }
             }
 
             @Override
             public void onFailure(@NotNull Call<UpdateQuantityResponse> call, @NotNull Throwable t) {
                 tvQuantity.setText(String.valueOf(oldValue));
-                UiOperations.shortToast(context, t.getMessage());
+                UiUtils.shortToast(context, t.getMessage());
             }
         });
     }
@@ -167,21 +167,21 @@ public abstract class ProductOperations {
                             }
 
                         } else {
-                            UiOperations.shortToast(context, "Sorry, " + response.body().getMessage());
+                            UiUtils.shortToast(context, "Sorry, " + response.body().getMessage());
                         }
                     } else {
-                        UiOperations.shortToast(context, "Sorry, connection error");
+                        UiUtils.shortToast(context, "Sorry, connection error");
                     }
 
                 }
 
                 @Override
                 public void onFailure(@NotNull Call<GetCartResponse> call, @NotNull Throwable t) {
-                    UiOperations.shortToast(context, t.getMessage());
+                    UiUtils.shortToast(context, t.getMessage());
                 }
             });
         } else {
-            UiOperations.shortToast(context, "you should login first");
+            UiUtils.shortToast(context, "you should login first");
         }
     }
 
@@ -206,7 +206,7 @@ public abstract class ProductOperations {
                     if (response.body() != null && response.body().isStatus()) {
                         is_favourite[0] = !is_favourite[0];
                     } else {
-                        UiOperations.shortToast(context, "Sorry, connection error");
+                        UiUtils.shortToast(context, "Sorry, connection error");
                         if (is_favourite[0]) {
                             statusIcon.setImageResource(R.drawable.ic_red_heart);
 
@@ -219,7 +219,7 @@ public abstract class ProductOperations {
                 @Override
                 public void onFailure
                         (@NonNull Call<PostFavoriteResponse> call, @NonNull Throwable t) {
-                    UiOperations.shortToast(context, t.getMessage());
+                    UiUtils.shortToast(context, t.getMessage());
 
                     if (is_favourite[0]) {
                         statusIcon.setImageResource(R.drawable.ic_red_heart);
@@ -230,7 +230,7 @@ public abstract class ProductOperations {
                 }
             });
         } else {
-            UiOperations.shortToast(context, "you should login first");
+            UiUtils.shortToast(context, "you should login first");
             if (is_favourite[0]) {
                 statusIcon.setImageResource(R.drawable.ic_red_heart);
 

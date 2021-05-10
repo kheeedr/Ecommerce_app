@@ -14,7 +14,7 @@ import com.khedr.ecommerce.databinding.ActivitySplashBinding;
 import com.khedr.ecommerce.pojo.homeapi.HomePageApiResponse;
 import com.khedr.ecommerce.network.ApiInterface;
 import com.khedr.ecommerce.network.RetrofitInstance;
-import com.khedr.ecommerce.operations.UiOperations;
+import com.khedr.ecommerce.utils.UiUtils;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -32,7 +32,7 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         b = DataBindingUtil.setContentView(this, R.layout.activity_splash);
-        UiOperations.AnimJumpAndFade(this, b.progressSplash);
+        UiUtils.AnimJumpAndFade(this, b.progressSplash);
 
         pref = getSharedPreferences("logined", 0);
         Log.d(TAG, "mkhedr: onCreate");
@@ -62,17 +62,17 @@ public class SplashActivity extends AppCompatActivity {
                         startActivity(new Intent(SplashActivity.this, MainPageActivity.class));
                         finish();
                     } else {
-                        UiOperations.shortToast(SplashActivity.this, response.body().getMessage());
+                        UiUtils.shortToast(SplashActivity.this, response.body().getMessage());
                     }
                 }else {
-                    UiOperations.shortToast(SplashActivity.this, "Sorry, connection error");
+                    UiUtils.shortToast(SplashActivity.this, "Sorry, connection error");
                 }
 
             }
 
             @Override
             public void onFailure(@NotNull Call<HomePageApiResponse> call, @NotNull Throwable t) {
-                UiOperations.shortToast(SplashActivity.this, "Sorry, connection error");
+                UiUtils.shortToast(SplashActivity.this, "Sorry, connection error");
             }
         });
     }
