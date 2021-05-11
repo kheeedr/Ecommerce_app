@@ -3,6 +3,10 @@ package com.khedr.ecommerce.pojo.product.search;
 public class SearchRequest {
     String text;
 
+    public SearchRequest(String text) {
+        this.text = text;
+    }
+
     public String getText() {
         return text;
     }
@@ -11,7 +15,5 @@ public class SearchRequest {
         this.text = text;
     }
 
-    public SearchRequest(String text) {
-        this.text = text;
-    }
+
 }

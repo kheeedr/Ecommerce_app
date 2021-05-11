@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.MutableLiveData;
 
 import com.khedr.ecommerce.R;
 import com.khedr.ecommerce.pojo.product.ProductId;
@@ -19,6 +20,8 @@ import com.khedr.ecommerce.pojo.product.favorites.post.PostFavoriteResponse;
 import com.khedr.ecommerce.network.ApiInterface;
 import com.khedr.ecommerce.network.RetrofitInstance;
 
+import com.khedr.ecommerce.pojo.product.search.SearchRequest;
+import com.khedr.ecommerce.pojo.product.search.SearchResponse;
 import com.khedr.ecommerce.ui.adapters.CartAdapter;
 
 import org.jetbrains.annotations.NotNull;
@@ -50,8 +53,7 @@ public abstract class ProductOperations {
 
                     if (response.body() != null) {
                         UiUtils.shortToast(context, response.body().getMessage());
-                    }
-                    else {
+                    } else {
                         UiUtils.shortToast(context, "Sorry, connection error");
                     }
                 }
@@ -147,7 +149,7 @@ public abstract class ProductOperations {
     public static void getCartIdAndUpdateQuantity(Context context, int newValue, int productId, View btToCart, ImageView progressBar) {
 
         if (UserOperations.isSignedIn(context)) {
-            String token = UserOperations.getPref(context).getString(context.getString(R.string.pref_user_token), "");
+            String token = UserOperations.getUserToken(context);
 
             Call<GetCartResponse> call = RetrofitInstance.getRetrofitInstance().create(ApiInterface.class).getCart(token);
             call.enqueue(new Callback<GetCartResponse>() {
@@ -238,5 +240,35 @@ public abstract class ProductOperations {
                 statusIcon.setImageResource(R.drawable.ic_outlined_heart);
             }
         }
+    }
+
+    public static void performSearch(Context context, String searchText, MutableLiveData<boolean[]> isSucceeded, SearchResponse[] body) {
+        boolean[] succeeded = {false};
+        String token = UserOperations.getUserToken(context);
+        SearchRequest searchRequest = new SearchRequest(searchText);
+        Call<SearchResponse> call = RetrofitInstance.getRetrofitInstance().create(ApiInterface.class)
+                .getSearchProducts(token, searchRequest);
+        call.enqueue(new Callback<SearchResponse>() {
+            @Override
+            public void onResponse(@NotNull Call<SearchResponse> call, @NotNull Response<SearchResponse> response) {
+                if (response.body() != null) {
+                    succeeded[0] = response.body().isStatus();
+                    body[0] = response.body();
+
+                } else {
+                    succeeded[0] = false;
+                    body[0]=null;
+                }
+                isSucceeded.setValue(succeeded);
+            }
+
+            @Override
+            public void onFailure(@NotNull Call<SearchResponse> call, @NotNull Throwable t) {
+                succeeded[0] = false;
+                body[0]=null;
+                isSucceeded.setValue(succeeded);
+            }
+        });
+
     }
 }

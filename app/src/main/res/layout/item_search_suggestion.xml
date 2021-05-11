@@ -10,16 +10,17 @@
             android:id="@+id/tv_search_suggestion"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/_5sdp"
+            android:layout_margin="@dimen/_10sdp"
             android:maxLines="1"
-            android:text="iphone 12 265GB 6GB ram "
+            android:text="@string/iphone_12_265gb_6gb_ram"
             android:textColor="@color/secondary"
             android:textSize="@dimen/_12sdp" />
         <View
+            android:id="@+id/divider_under_searchSuggestion"
             android:layout_width="match_parent"
             android:layout_height="1px"
             android:background="@color/secondary"
-            android:layout_marginHorizontal="@dimen/_15sdp"
+            android:layout_marginHorizontal="@dimen/_20sdp"
             />
     </LinearLayout>
 </layout>

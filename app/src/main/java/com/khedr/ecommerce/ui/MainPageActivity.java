@@ -1,6 +1,5 @@
 package com.khedr.ecommerce.ui;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -17,12 +16,10 @@ import com.khedr.ecommerce.databinding.ActivityMainPageBinding;
 public class MainPageActivity extends AppCompatActivity implements View.OnClickListener {
 
     ActivityMainPageBinding b;
-    public static Activity activity;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         b = DataBindingUtil.setContentView(this, R.layout.activity_main_page);
-        activity=this;
         // bottom navigation
         b.bottomNavigationMainPage.getMenu().findItem(R.id.under_fab_option).setCheckable(false);
         b.bottomNavigationMainPage.getMenu().findItem(R.id.under_fab_option).setEnabled(false);

@@ -10,6 +10,7 @@ import com.khedr.ecommerce.pojo.product.cart.update.Quantity;
 import com.khedr.ecommerce.pojo.product.cart.update.UpdateQuantityResponse;
 import com.khedr.ecommerce.pojo.product.favorites.get.GetFavoritesResponse;
 import com.khedr.ecommerce.pojo.product.favorites.post.PostFavoriteResponse;
+import com.khedr.ecommerce.pojo.product.search.SearchRequest;
 import com.khedr.ecommerce.pojo.product.search.SearchResponse;
 import com.khedr.ecommerce.pojo.user.TokenModel;
 import com.khedr.ecommerce.pojo.user.UserApiResponse;
@@ -85,7 +86,7 @@ public interface ApiInterface {
 
     // search
     @Headers({"lang:en", "Content-Type:application/json"})
-    @GET("products/search")
+    @POST("products/search")
     Call<SearchResponse> getSearchProducts(@Header("Authorization") String token
-            , @Body Quantity quantity);
+            , @Body SearchRequest searchRequest);
 }

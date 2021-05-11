@@ -15,4 +15,8 @@ public abstract class UserOperations {
     public synchronized static SharedPreferences getPref(Context context){
         return context.getSharedPreferences("logined", 0);
     }
+    public static String getUserToken(Context context){
+
+        return getPref(context).getString(context.getString(R.string.pref_user_token), "");
+    }
 }
