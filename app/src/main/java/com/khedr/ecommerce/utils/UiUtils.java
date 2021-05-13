@@ -33,18 +33,25 @@ public abstract class UiUtils {
         toast.show();
     }
 
-    public static void AnimCenterToEnd(Context context, View view) {
+
+
+    public static void animCenterToEnd(Context context, View view) {
         Animation moveToEnd = AnimationUtils.loadAnimation(context, R.anim.center_to_end);
         view.startAnimation(moveToEnd);
         view.setVisibility(View.GONE);
     }
 
-    public static void AnimJumpAndFade(Context context, View view) {
+    public static void animJumpAndFade(Context context, View view) {
         Animation jump = AnimationUtils.loadAnimation(context, R.anim.jump_and_fade);
         view.startAnimation(jump);
     }
+    public static void motoJumpAndFade(Context context, View parentView,View ground) {
+        parentView.setVisibility(View.VISIBLE);
+        animJumpAndFade(context,parentView);
+        animEndToStart(context,ground);
+    }
 
-    public static void AnimEndToStart(Context context, View view) {
+    public static void animEndToStart(Context context, View view) {
         Animation endToStart = AnimationUtils.loadAnimation(context, R.anim.end_to_start);
         view.startAnimation(endToStart);
     }
@@ -53,7 +60,7 @@ public abstract class UiUtils {
     public static void getImageViaUrl(Context context, String url
             , ImageView imageView, String TAG, View progressBar) {
         SharedPreferences pref = context.getSharedPreferences("logined", 0);
-        UiUtils.AnimJumpAndFade(context, progressBar);
+        UiUtils.animJumpAndFade(context, progressBar);
         Glide.with(context).load(url)
                 .listener(new RequestListener<Drawable>() {
                     @Override

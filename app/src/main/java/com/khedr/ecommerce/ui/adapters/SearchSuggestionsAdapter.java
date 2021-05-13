@@ -2,6 +2,7 @@ package com.khedr.ecommerce.ui.adapters;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,10 +10,9 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-
 import com.khedr.ecommerce.databinding.ItemSearchSuggestionBinding;
-import com.khedr.ecommerce.pojo.categories.GetCategoriesInnerData;
 import com.khedr.ecommerce.pojo.product.Product;
+import com.khedr.ecommerce.ui.ProductDetailsActivity;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -33,6 +33,11 @@ public class SearchSuggestionsAdapter extends RecyclerView.Adapter<SearchSuggest
         if(position==suggestionsList.size()){
             holder.b.dividerUnderSearchSuggestion.setVisibility(View.GONE);
         }
+        holder.b.layoutSearchSuggestion.setOnClickListener(v -> {
+            Intent intent = new Intent(context, ProductDetailsActivity.class);
+            intent.putExtra("product", suggestionsList.get(position));
+            context.startActivity(intent);
+        });
     }
 
     public void setSuggestionsList(ArrayList<Product> suggestionsList) {

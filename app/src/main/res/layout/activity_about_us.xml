@@ -103,7 +103,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_7sdp"
                     android:text="About Us &amp; Our terms"
-                    android:textAlignment="center"
+                    android:gravity="center"
                     android:textColor="@color/secondary"
                     android:textSize="@dimen/_20sdp"
 

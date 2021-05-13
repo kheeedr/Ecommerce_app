@@ -39,7 +39,7 @@ public abstract class ProductOperations {
     public static void addProductToCart(Context context, int productId, View btToCart, ImageView progressBar) {
         if (UserOperations.isSignedIn(context)) {
             progressBar.setVisibility(View.VISIBLE);
-            UiUtils.AnimJumpAndFade(context, progressBar);
+            UiUtils.animJumpAndFade(context, progressBar);
             btToCart.setVisibility(View.GONE);
             ProductId id = new ProductId(productId);
             String token = UserOperations.getPref(context).getString(context.getString(R.string.pref_user_token), "");
@@ -76,7 +76,7 @@ public abstract class ProductOperations {
     // from product
     public static void updateQuantity(Context context, int newValue, int productId, View btToCart, ImageView progressBar) {
         btToCart.setVisibility(View.GONE);
-        UiUtils.AnimJumpAndFade(context, progressBar);
+        UiUtils.animJumpAndFade(context, progressBar);
 
         String token = UserOperations.getPref(context).getString(context.getString(R.string.pref_user_token), "");
         Quantity quantity = new Quantity(newValue);

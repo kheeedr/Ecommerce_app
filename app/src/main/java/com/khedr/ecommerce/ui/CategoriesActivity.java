@@ -27,8 +27,8 @@ public class CategoriesActivity extends AppCompatActivity implements View.OnClic
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         b = DataBindingUtil.setContentView(this, R.layout.activity_categories);
-        UiUtils.AnimJumpAndFade(this,b.progressCategories);
-        UiUtils.AnimEndToStart(this,b.viewCategoriesUnderMoto);
+        UiUtils.animJumpAndFade(this,b.progressCategories);
+        UiUtils.animEndToStart(this,b.viewCategoriesUnderMoto);
         categoriesAdapter = new CategoriesAdapter(this);
         b.rvCategories.setLayoutManager(new GridLayoutManager(this,2, RecyclerView.VERTICAL,false));
         b.rvCategories.setAdapter(categoriesAdapter);
@@ -42,7 +42,7 @@ public class CategoriesActivity extends AppCompatActivity implements View.OnClic
         call.enqueue(new Callback<GetCategoriesResponse>() {
             @Override
             public void onResponse(@NotNull Call<GetCategoriesResponse> call, @NotNull Response<GetCategoriesResponse> response) {
-                UiUtils.AnimCenterToEnd(CategoriesActivity.this,b.progressCategories);
+                UiUtils.animCenterToEnd(CategoriesActivity.this,b.progressCategories);
                 if (response.body() != null) {
                     if (response.body().isStatus()){
                         categoriesAdapter.setCategoriesList(response.body().getData().getData());
@@ -58,7 +58,7 @@ public class CategoriesActivity extends AppCompatActivity implements View.OnClic
             @Override
             public void onFailure(@NotNull Call<GetCategoriesResponse> call, @NotNull Throwable t) {
                 UiUtils.shortToast(CategoriesActivity.this, "Sorry, connection error");
-                UiUtils.AnimCenterToEnd(CategoriesActivity.this,b.progressCategories);
+                UiUtils.animCenterToEnd(CategoriesActivity.this,b.progressCategories);
             }
         });
 

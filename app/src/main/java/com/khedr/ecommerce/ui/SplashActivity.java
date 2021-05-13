@@ -25,14 +25,14 @@ import retrofit2.Response;
 public class SplashActivity extends AppCompatActivity {
     ActivitySplashBinding b;
     SharedPreferences pref;
-    public static HomePageApiResponse homeResponse;
+    public static HomePageApiResponse homeResponse=new HomePageApiResponse(false,null,null);
     private static final String TAG = "SplashActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         b = DataBindingUtil.setContentView(this, R.layout.activity_splash);
-        UiUtils.AnimJumpAndFade(this, b.progressSplash);
+        UiUtils.animJumpAndFade(this, b.progressSplash);
 
         pref = getSharedPreferences("logined", 0);
         Log.d(TAG, "mkhedr: onCreate");

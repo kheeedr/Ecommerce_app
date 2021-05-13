@@ -1,12 +1,13 @@
 package com.khedr.ecommerce.ui;
 
-import android.content.Intent;
+import android.content.Context;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -44,16 +45,31 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
         b.svSearchEt.requestFocus();
         b.svSearchEt.setOnEditorActionListener((v, actionId, event) -> {
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+
+                InputMethodManager inputManager = (InputMethodManager) this.getSystemService(Context.INPUT_METHOD_SERVICE);
+                inputManager.hideSoftInputFromWindow(this.getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+                b.progressSearch.setVisibility(View.VISIBLE);
+                UiUtils.motoJumpAndFade(this,b.progressSearch,b.vProgressSearch);
                 b.rvSearchSuggestion.setVisibility(View.GONE);
-                b.rvSearchProducts.setVisibility(View.VISIBLE);
+                b.rvSearchProducts.setVisibility(View.GONE);
                 ProductOperations.performSearch(this, v.getText().toString(), isSearchSucceeded, body);
+                b.parentSearch.setId(View.generateViewId());
+
                 return true;
             }
             return false;
         });
         isSearchSucceeded.observe(this, booleans -> {
+            UiUtils.animCenterToEnd(this,b.progressSearch);
             if (booleans[0]) {
-                productsAdapter.setProductsList(body[0].getData().getData());
+                if (!body[0].getData().getData().isEmpty()) {
+                    productsAdapter.setProductsList(body[0].getData().getData());
+                    b.rvSearchProducts.setVisibility(View.VISIBLE);
+                    b.layoutSearchProductNotFound.setVisibility(View.GONE);
+                }else {
+                    b.rvSearchProducts.setVisibility(View.GONE);
+                    b.layoutSearchProductNotFound.setVisibility(View.VISIBLE);
+                }
             } else {
                 UiUtils.shortToast(this, "Connection error");
             }
@@ -70,6 +86,8 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 b.rvSearchSuggestion.setVisibility(View.VISIBLE);
                 b.rvSearchProducts.setVisibility(View.GONE);
+                b.layoutSearchProductNotFound.setVisibility(View.GONE);
+
                 if (!s.toString().isEmpty()) {
                     suggestionsAdapter.setSuggestionsList(getSuggestions(s.toString()));
                 } else {
