@@ -20,7 +20,7 @@ import com.khedr.ecommerce.network.ApiInterface;
 import com.khedr.ecommerce.network.RetrofitInstance;
 import com.khedr.ecommerce.ui.adapters.ProductsAdapter;
 import com.khedr.ecommerce.utils.UiUtils;
-import com.khedr.ecommerce.utils.UserOperations;
+import com.khedr.ecommerce.utils.UserUtils;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -38,7 +38,7 @@ public class CategoryProductsActivity extends AppCompatActivity implements View.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         b = DataBindingUtil.setContentView(this, R.layout.activity_category_items);
-        pref = UserOperations.getPref(this);
+        pref = UserUtils.getPref(this);
         productsAdapter = new ProductsAdapter(this);
 
         UiUtils.animJumpAndFade(this, b.progressCategoryProducts);

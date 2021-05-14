@@ -18,7 +18,7 @@ import com.khedr.ecommerce.databinding.FragmentHomeBinding;
 import com.khedr.ecommerce.network.ApiInterface;
 import com.khedr.ecommerce.network.RetrofitInstance;
 import com.khedr.ecommerce.utils.UiUtils;
-import com.khedr.ecommerce.utils.UserOperations;
+import com.khedr.ecommerce.utils.UserUtils;
 import com.khedr.ecommerce.pojo.homeapi.HomePageApiResponse;
 import com.khedr.ecommerce.ui.CategoriesActivity;
 import com.khedr.ecommerce.ui.CategoryProductsActivity;
@@ -56,7 +56,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         b = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false);
-        pref = UserOperations.getPref(requireContext());
+        pref = UserUtils.getPref(requireContext());
 
         //banners rv
         bannersAdapter = new BannersAdapter(getContext());
@@ -86,7 +86,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onResume() {
         super.onResume();
-        getHomeContent();
+        //getHomeContent();
     }
 
     @Override

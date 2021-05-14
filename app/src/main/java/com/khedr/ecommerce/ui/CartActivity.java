@@ -20,7 +20,7 @@ import com.khedr.ecommerce.network.ApiInterface;
 import com.khedr.ecommerce.network.RetrofitInstance;
 import com.khedr.ecommerce.ui.adapters.CartAdapter;
 import com.khedr.ecommerce.utils.UiUtils;
-import com.khedr.ecommerce.utils.UserOperations;
+import com.khedr.ecommerce.utils.UserUtils;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -41,7 +41,7 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         b = DataBindingUtil.setContentView(this, R.layout.activity_cart);
-        pref = UserOperations.getPref(this);
+        pref = UserUtils.getPref(this);
         UiUtils.animJumpAndFade(this, b.progressCart);
         UiUtils.animEndToStart(this, b.viewCartUnderMoto);
         b.btCartShopNow.setOnClickListener(this);
@@ -73,7 +73,7 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
 
     public void getCartProducts() {
 
-        if (UserOperations.isSignedIn(this)) {
+        if (UserUtils.isSignedIn(this)) {
             String token = pref.getString(getString(R.string.pref_user_token), "");
 
             Call<GetCartResponse> call = RetrofitInstance.getRetrofitInstance().create(ApiInterface.class).getCart(token);

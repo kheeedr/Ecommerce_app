@@ -14,7 +14,7 @@ import com.khedr.ecommerce.databinding.ActivityFavoritesBinding;
 import com.khedr.ecommerce.network.ApiInterface;
 import com.khedr.ecommerce.network.RetrofitInstance;
 import com.khedr.ecommerce.utils.UiUtils;
-import com.khedr.ecommerce.utils.UserOperations;
+import com.khedr.ecommerce.utils.UserUtils;
 import com.khedr.ecommerce.pojo.product.favorites.get.GetFavoritesResponse;
 import com.khedr.ecommerce.ui.adapters.FavoritesAdapter;
 
@@ -51,7 +51,7 @@ public class FavoritesActivity extends AppCompatActivity implements View.OnClick
     }
 
     void getFavorites() {
-        if (UserOperations.isSignedIn(this)) {
+        if (UserUtils.isSignedIn(this)) {
             String token = pref.getString(getString(R.string.pref_user_token), "");
             Call<GetFavoritesResponse> call = RetrofitInstance.getRetrofitInstance()
                     .create(ApiInterface.class).getFavorites(token);

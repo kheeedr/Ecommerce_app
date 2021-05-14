@@ -18,9 +18,9 @@ import com.khedr.ecommerce.R;
 import com.khedr.ecommerce.pojo.product.Product;
 import com.khedr.ecommerce.ui.ProductDetailsActivity;
 import com.khedr.ecommerce.ui.SplashActivity;
-import com.khedr.ecommerce.utils.ProductOperations;
+import com.khedr.ecommerce.utils.ProductUtils;
 import com.khedr.ecommerce.utils.UiUtils;
-import com.khedr.ecommerce.utils.UserOperations;
+import com.khedr.ecommerce.utils.UserUtils;
 import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +35,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
 
     public ProductsAdapter(Context context) {
         this.context = context;
-        pref = UserOperations.getPref(context);
+        pref = UserUtils.getPref(context);
     }
 
     public void setProductsList(List<Product> productsList) {
@@ -75,7 +75,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
 
         holder.btToCart.setOnClickListener(v -> {
             int id = SplashActivity.homeResponse.getData().getProducts().get(position).getId();
-            ProductOperations.addProductToCart(context, id, holder.btToCart, holder.addProgressbar);
+            ProductUtils.addProductToCart(context, id, holder.btToCart, holder.addProgressbar);
         });
 
         holder.productLayout.setOnClickListener(v -> {

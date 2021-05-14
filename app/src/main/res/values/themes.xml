@@ -2,11 +2,11 @@
     <!-- Base application theme. -->
     <style name="Theme.Ecommerce" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Primary brand color. -->
-        <!-- Primary brand color. -->
         <item name="colorPrimary">@color/primary</item>
         <item name="colorPrimaryVariant">@color/secondary</item>
         <item name="colorOnPrimary">@color/white</item>
         <item name="fontFamily">@font/montserrat_medium</item>
+        <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
 
 
         <!-- Status bar color. -->

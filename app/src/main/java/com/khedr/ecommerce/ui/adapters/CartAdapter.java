@@ -17,8 +17,8 @@ import com.khedr.ecommerce.R;
 import com.khedr.ecommerce.databinding.ActivityCartBinding;
 import com.khedr.ecommerce.utils.UiUtils;
 import com.khedr.ecommerce.pojo.product.cart.get.GetCartItems;
-import com.khedr.ecommerce.utils.ProductOperations;
-import com.khedr.ecommerce.utils.UserOperations;
+import com.khedr.ecommerce.utils.ProductUtils;
+import com.khedr.ecommerce.utils.UserUtils;
 import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +41,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
     public CartAdapter(Context context, ActivityCartBinding b) {
         this.context = context;
         this.b = b;
-        pref = UserOperations.getPref(context);
+        pref = UserUtils.getPref(context);
     }
 
 
@@ -95,7 +95,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
             int newQ = oldQ + 1;
             holder.quantity.setText(String.valueOf(newQ));
             int id = cartItems.get(position).getId();
-            ProductOperations.onClickUpdateQuantity(context,newQ, oldQ, id, holder.quantity,TAG,b.tvCartTotal);
+            ProductUtils.onClickUpdateQuantity(context,newQ, oldQ, id, holder.quantity,TAG,b.tvCartTotal);
         });
         holder.btMinus.setOnClickListener(v -> {
             int oldQ = Integer.parseInt(holder.quantity.getText().toString());
@@ -103,7 +103,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
                 int newQ = oldQ - 1;
                 holder.quantity.setText(String.valueOf(newQ));
                 int id = cartItems.get(position).getId();
-                ProductOperations.onClickUpdateQuantity(context,newQ, oldQ, id, holder.quantity,TAG,b.tvCartTotal);
+                ProductUtils.onClickUpdateQuantity(context,newQ, oldQ, id, holder.quantity,TAG,b.tvCartTotal);
 
             }
 

@@ -19,7 +19,7 @@ import com.khedr.ecommerce.R;
 import com.khedr.ecommerce.databinding.ActivityProductDetailsBinding;
 import com.khedr.ecommerce.pojo.product.Product;
 import com.khedr.ecommerce.ui.adapters.ProductImagesAdapter;
-import com.khedr.ecommerce.utils.ProductOperations;
+import com.khedr.ecommerce.utils.ProductUtils;
 import org.jetbrains.annotations.NotNull ;
 import java.util.ArrayList;
 import java.util.Objects;
@@ -84,7 +84,7 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
             onBackPressed();
         } else if (v == b.ivProductDetailsInFavourite) {
 
-            ProductOperations.addProductToFavorite(this,product.getId(),b.ivProductDetailsInFavourite,is_favourite);
+            ProductUtils.addProductToFavorite(this,product.getId(),b.ivProductDetailsInFavourite,is_favourite);
         } else if (v == b.ivProductDetailsInCart) {
             startActivity(new Intent(ProductDetailsActivity.this, CartActivity.class));
         } else if (v == b.layoutProductDetailsPlus) {
@@ -101,10 +101,10 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
             boolean inCart = product.isIn_cart();
             int productId = product.getId();
             if (!inCart) {
-                ProductOperations.addProductToCart(this, productId, b.btProductDetailsToCart, b.progressProductDetailsToCart);
+                ProductUtils.addProductToCart(this, productId, b.btProductDetailsToCart, b.progressProductDetailsToCart);
             } else {
                 int newQuantity = Integer.parseInt(b.tvProductDetailsEditableQuantity.getText().toString());
-                ProductOperations.getCartIdAndUpdateQuantity(this, newQuantity, productId, b.btProductDetailsToCart, b.progressProductDetailsToCart);
+                ProductUtils.getCartIdAndUpdateQuantity(this, newQuantity, productId, b.btProductDetailsToCart, b.progressProductDetailsToCart);
             }
         }
     }

@@ -34,15 +34,15 @@ import retrofit2.Response;
 
 import static com.khedr.ecommerce.ui.CartActivity.total;
 
-public abstract class ProductOperations {
+public abstract class ProductUtils {
 
     public static void addProductToCart(Context context, int productId, View btToCart, ImageView progressBar) {
-        if (UserOperations.isSignedIn(context)) {
+        if (UserUtils.isSignedIn(context)) {
             progressBar.setVisibility(View.VISIBLE);
             UiUtils.animJumpAndFade(context, progressBar);
             btToCart.setVisibility(View.GONE);
             ProductId id = new ProductId(productId);
-            String token = UserOperations.getPref(context).getString(context.getString(R.string.pref_user_token), "");
+            String token = UserUtils.getPref(context).getString(context.getString(R.string.pref_user_token), "");
             Call<PostCartResponse> call = RetrofitInstance.getRetrofitInstance().create(ApiInterface.class).addToCart(token, id);
             call.enqueue(new Callback<PostCartResponse>() {
                 @Override
@@ -76,9 +76,10 @@ public abstract class ProductOperations {
     // from product
     public static void updateQuantity(Context context, int newValue, int productId, View btToCart, ImageView progressBar) {
         btToCart.setVisibility(View.GONE);
+        progressBar.setVisibility(View.VISIBLE);
         UiUtils.animJumpAndFade(context, progressBar);
 
-        String token = UserOperations.getPref(context).getString(context.getString(R.string.pref_user_token), "");
+        String token = UserUtils.getPref(context).getString(context.getString(R.string.pref_user_token), "");
         Quantity quantity = new Quantity(newValue);
         Call<UpdateQuantityResponse> call = RetrofitInstance.getRetrofitInstance()
                 .create(ApiInterface.class).updateQuantity(token, productId, quantity);
@@ -113,7 +114,7 @@ public abstract class ProductOperations {
 
     //from cart
     public static void onClickUpdateQuantity(Context context, int newValue, int oldValue, int productId, TextView tvQuantity, String TAG, TextView cartTotal) {
-        String token = UserOperations.getPref(context).getString(context.getString(R.string.pref_user_token), "");
+        String token = UserUtils.getPref(context).getString(context.getString(R.string.pref_user_token), "");
         Quantity quantity = new Quantity(newValue);
         Call<UpdateQuantityResponse> call = RetrofitInstance.getRetrofitInstance()
                 .create(ApiInterface.class).updateQuantity(token, productId, quantity);
@@ -148,8 +149,8 @@ public abstract class ProductOperations {
 
     public static void getCartIdAndUpdateQuantity(Context context, int newValue, int productId, View btToCart, ImageView progressBar) {
 
-        if (UserOperations.isSignedIn(context)) {
-            String token = UserOperations.getUserToken(context);
+        if (UserUtils.isSignedIn(context)) {
+            String token = UserUtils.getUserToken(context);
 
             Call<GetCartResponse> call = RetrofitInstance.getRetrofitInstance().create(ApiInterface.class).getCart(token);
             call.enqueue(new Callback<GetCartResponse>() {
@@ -190,7 +191,7 @@ public abstract class ProductOperations {
 
     public static void addProductToFavorite(Context context, int productId, ImageView statusIcon, boolean[] is_favourite) {
 
-        if (UserOperations.isSignedIn(context)) {
+        if (UserUtils.isSignedIn(context)) {
 
             if (is_favourite[0]) {
                 statusIcon.setImageResource(R.drawable.ic_outlined_heart);
@@ -199,7 +200,7 @@ public abstract class ProductOperations {
                 statusIcon.setImageResource(R.drawable.ic_red_heart);
             }
             ProductId id = new ProductId(productId);
-            String token = UserOperations.getPref(context).getString(context.getString(R.string.pref_user_token), "");
+            String token = UserUtils.getPref(context).getString(context.getString(R.string.pref_user_token), "");
             Call<PostFavoriteResponse> call = RetrofitInstance.getRetrofitInstance().create(ApiInterface.class).addToFavorite(token, id);
             call.enqueue(new Callback<PostFavoriteResponse>() {
                 @Override
@@ -244,7 +245,7 @@ public abstract class ProductOperations {
 
     public static void performSearch(Context context, String searchText, MutableLiveData<boolean[]> isSucceeded, SearchResponse[] body) {
         boolean[] succeeded = {false};
-        String token = UserOperations.getUserToken(context);
+        String token = UserUtils.getUserToken(context);
         SearchRequest searchRequest = new SearchRequest(searchText);
         Call<SearchResponse> call = RetrofitInstance.getRetrofitInstance().create(ApiInterface.class)
                 .getSearchProducts(token, searchRequest);

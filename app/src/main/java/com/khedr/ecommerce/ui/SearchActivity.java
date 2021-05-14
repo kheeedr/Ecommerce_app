@@ -19,7 +19,7 @@ import com.khedr.ecommerce.pojo.product.Product;
 import com.khedr.ecommerce.pojo.product.search.SearchResponse;
 import com.khedr.ecommerce.ui.adapters.ProductsAdapter;
 import com.khedr.ecommerce.ui.adapters.SearchSuggestionsAdapter;
-import com.khedr.ecommerce.utils.ProductOperations;
+import com.khedr.ecommerce.utils.ProductUtils;
 import com.khedr.ecommerce.utils.UiUtils;
 
 import java.util.ArrayList;
@@ -52,7 +52,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
                 UiUtils.motoJumpAndFade(this,b.progressSearch,b.vProgressSearch);
                 b.rvSearchSuggestion.setVisibility(View.GONE);
                 b.rvSearchProducts.setVisibility(View.GONE);
-                ProductOperations.performSearch(this, v.getText().toString(), isSearchSucceeded, body);
+                ProductUtils.performSearch(this, v.getText().toString(), isSearchSucceeded, body);
                 b.parentSearch.setId(View.generateViewId());
 
                 return true;

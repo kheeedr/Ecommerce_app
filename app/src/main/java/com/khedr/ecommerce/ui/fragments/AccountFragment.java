@@ -20,7 +20,7 @@ import com.khedr.ecommerce.ui.ContactUsActivity;
 import com.khedr.ecommerce.ui.LoginActivity;
 import com.khedr.ecommerce.ui.ProfileActivity;
 import com.khedr.ecommerce.utils.UiUtils;
-import com.khedr.ecommerce.utils.UserOperations;
+import com.khedr.ecommerce.utils.UserUtils;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -58,7 +58,7 @@ public class AccountFragment extends Fragment implements View.OnClickListener {
 
         b= DataBindingUtil.inflate(inflater, R.layout.fragment_account, container, false);
 
-        pref = UserOperations.getPref(this.requireActivity());
+        pref = UserUtils.getPref(this.requireActivity());
 
 
         b.layoutAccountToProfile.setOnClickListener(this);
@@ -76,7 +76,7 @@ public class AccountFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         int id = v.getId();
         if (id == R.id.layout_account_to_profile) {
-            if (UserOperations.isSignedIn(this.getActivity())) {
+            if (UserUtils.isSignedIn(this.getActivity())) {
                 //to profile
                 startActivity(new Intent(v.getContext(), ProfileActivity.class));
             } else {
@@ -96,7 +96,7 @@ public class AccountFragment extends Fragment implements View.OnClickListener {
     @SuppressLint("SetTextI18n")
     public void refreshView() {
         // when refresh view
-        if (UserOperations.isSignedIn(this.getActivity())) {
+        if (UserUtils.isSignedIn(this.getActivity())) {
             //update username and phone
             b.tvAccountUsername.setText(pref.getString(getString(R.string.pref_user_name), "error name"));
             b.tvAccountUserPhone.setText(pref.getString(getString(R.string.pref_user_phone), "error phone"));

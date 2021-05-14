@@ -196,7 +196,6 @@
             android:elevation="@dimen/_30sdp"
             android:paddingHorizontal="@dimen/_20sdp"
             android:paddingTop="@dimen/_10sdp"
-            android:paddingBottom="@dimen/_10sdp"
             android:translationZ="@dimen/_20sdp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -206,7 +205,6 @@
                 android:id="@+id/layout_productDetails_change_quantity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/_10sdp"
                 android:orientation="horizontal"
                 app:layout_constraintBottom_toTopOf="@id/layout_productDetails_bt_and_progress"
                 app:layout_constraintStart_toStartOf="parent"
@@ -292,7 +290,8 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/layout_productDetails_bt_and_progress"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/_60sdp"
+                android:paddingVertical="@dimen/_10sdp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -318,14 +317,15 @@
 
                 <ImageView
                     android:id="@+id/progress_productDetails_to_cart"
-                    android:layout_width="@dimen/_40sdp"
-                    android:layout_height="@dimen/_40sdp"
+                    android:layout_width="@dimen/_30sdp"
+                    android:layout_height="@dimen/_30sdp"
                     android:contentDescription="@string/todo"
                     android:src="@drawable/ic_primary_hexa_shape"
                     android:visibility="invisible"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

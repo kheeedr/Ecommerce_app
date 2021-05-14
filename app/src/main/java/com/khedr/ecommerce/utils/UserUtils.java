@@ -5,7 +5,7 @@ import android.content.SharedPreferences;
 
 import com.khedr.ecommerce.R;
 
-public abstract class UserOperations {
+public abstract class UserUtils {
 
 
     public static boolean isSignedIn(Context context) {
