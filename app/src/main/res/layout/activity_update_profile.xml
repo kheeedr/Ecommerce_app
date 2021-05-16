@@ -15,7 +15,7 @@
             android:layout_marginTop="@dimen/_10sdp"
             android:layout_marginBottom="@dimen/_5sdp"
             android:fontFamily="@font/montserrat_semi_bold"
-            android:text="Update profile"
+            android:text="@string/update_profile"
             android:textColor="@color/secondary"
             android:textSize="@dimen/_18sdp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -76,7 +76,8 @@
                         android:layout_alignParentBottom="true"
                         android:background="@drawable/ic_gray_circle"
                         android:padding="@dimen/_20sdp"
-                        android:src="@drawable/ic_pen" />
+                        android:src="@drawable/ic_pen"
+                        android:contentDescription="@string/todo"/>
                 </RelativeLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -100,7 +101,7 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/et_stroke"
                         android:fontFamily="@font/montserrat_medium"
-                        android:hint="Name"
+                        android:hint="@string/name"
                         android:inputType="textPersonName"
                         android:textColor="@color/secondary"
                         android:textSize="@dimen/_12sdp" />
@@ -128,7 +129,7 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/et_stroke"
                         android:fontFamily="@font/montserrat_medium"
-                        android:hint="Phone"
+                        android:hint="@string/phone"
                         android:inputType="phone"
                         android:textColor="@color/secondary"
                         android:textSize="@dimen/_12sdp" />
@@ -155,7 +156,7 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/et_stroke"
                         android:fontFamily="@font/montserrat_medium"
-                        android:hint="E-mail"
+                        android:hint="@string/e_mail"
                         android:inputType="textEmailAddress"
                         android:textColor="@color/secondary"
                         android:textSize="@dimen/_12sdp" />
@@ -185,7 +186,7 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/et_stroke"
                         android:fontFamily="@font/montserrat_medium"
-                        android:hint="New Password"
+                        android:hint="@string/new_password"
                         android:inputType="textPassword"
                         android:textColor="@color/secondary"
                         android:textSize="@dimen/_12sdp" />
@@ -214,7 +215,7 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/et_stroke"
                         android:fontFamily="@font/montserrat_medium"
-                        android:hint="Re-password"
+                        android:hint="@string/re_password"
                         android:inputType="textPassword"
                         android:textColor="@color/secondary"
                         android:textSize="@dimen/_12sdp" />
@@ -241,7 +242,7 @@
                         android:background="@drawable/bt_back_filled"
                         android:fontFamily="@font/montserrat_medium"
                         android:paddingVertical="@dimen/_2sdp"
-                        android:text="Update"
+                        android:text="@string/update"
                         android:textAllCaps="false"
                         android:textColor="@color/white"
                         android:textSize="20sp"

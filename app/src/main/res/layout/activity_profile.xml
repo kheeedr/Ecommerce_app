@@ -15,7 +15,7 @@
             android:layout_marginTop="@dimen/_10sdp"
             android:layout_marginBottom="@dimen/_5sdp"
             android:fontFamily="@font/montserrat_semi_bold"
-            android:text="My Account"
+            android:text="@string/my_account"
             android:textColor="@color/secondary"
             android:textSize="@dimen/_18sdp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -48,7 +48,8 @@
             android:paddingBottom="@dimen/_8sdp"
             android:src="@drawable/ic_account_edit"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="@string/todo"/>
 
         <ScrollView
             android:layout_width="match_parent"
@@ -96,7 +97,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_5sdp"
                         android:padding="@dimen/_5sdp"
-                        android:text="Full name"
+                        android:text="@string/full_name"
                         android:textColor="@color/natural1"
                         android:textSize="@dimen/_15sdp" />
 
@@ -106,7 +107,7 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/et_stroke"
                         android:padding="@dimen/_10sdp"
-                        android:text=" Mohamed Khedr"
+                        android:text="@string/mohamed_khedr"
                         android:textColor="@color/secondary"
                         android:textSize="@dimen/_12sdp"
                         app:drawableStartCompat="@drawable/ic_blue_person" />
@@ -117,7 +118,7 @@
                         android:layout_marginStart="@dimen/_5sdp"
                         android:layout_marginTop="@dimen/_5sdp"
                         android:padding="@dimen/_5sdp"
-                        android:text="Phone number"
+                        android:text="@string/phone_number"
                         android:textColor="@color/natural1"
                         android:textSize="@dimen/_15sdp" />
 
@@ -127,7 +128,7 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/et_stroke"
                         android:padding="@dimen/_10sdp"
-                        android:text=" 01026730615"
+                        android:text="@string/_01026730615"
                         android:textColor="@color/secondary"
                         android:textSize="@dimen/_12sdp"
                         app:drawableStartCompat="@drawable/ic_blue_phone" />
@@ -138,7 +139,7 @@
                         android:layout_marginStart="@dimen/_5sdp"
                         android:layout_marginTop="@dimen/_5sdp"
                         android:padding="@dimen/_5sdp"
-                        android:text="E-mail"
+                        android:text="@string/e_mail"
                         android:textColor="@color/natural1"
                         android:textSize="@dimen/_15sdp" />
 
@@ -148,7 +149,7 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/et_stroke"
                         android:padding="@dimen/_10sdp"
-                        android:text=" mkheeedr@gmail.com"
+                        android:text="@string/mkheeedr_gmail_com"
                         android:textColor="@color/secondary"
                         android:textSize="@dimen/_12sdp"
                         app:drawableStartCompat="@drawable/ic_blue_email" />
@@ -179,7 +180,8 @@
                         android:src="@drawable/ic_primary_pin"
                         android:visibility="gone"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:contentDescription="@string/todo"/>
 
                     <ImageView
                         android:id="@+id/iv_profile_edit_address"
@@ -190,14 +192,15 @@
                         android:src="@drawable/ic_pen"
                         android:visibility="gone"
                         app:layout_constraintEnd_toStartOf="@id/iv_profile_remove_address"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:contentDescription="@string/todo" />
 
                     <TextView
                         android:id="@+id/tv_profile_address_word"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/_5sdp"
-                        android:text="Address"
+                        android:text="@string/address"
                         android:textColor="@color/natural1"
                         android:textSize="@dimen/_15sdp"
                         app:layout_constraintStart_toStartOf="parent"
@@ -209,7 +212,7 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/et_stroke"
                         android:padding="@dimen/_10sdp"
-                        android:text=" Mansoura, Adaqahlya"
+                        android:text="@string/mansoura_adaqahlya"
                         android:textColor="@color/secondary"
                         android:textSize="@dimen/_12sdp"
                         android:visibility="visible"
@@ -227,7 +230,8 @@
                         android:visibility="gone"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/tv_profile_address_word" />
+                        app:layout_constraintTop_toBottomOf="@+id/tv_profile_address_word"
+                        android:contentDescription="@string/todo"/>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

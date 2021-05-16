@@ -20,6 +20,8 @@ import com.khedr.ecommerce.databinding.ActivityProductDetailsBinding;
 import com.khedr.ecommerce.pojo.product.Product;
 import com.khedr.ecommerce.ui.adapters.ProductImagesAdapter;
 import com.khedr.ecommerce.utils.ProductUtils;
+import com.khedr.ecommerce.utils.UserUtils;
+
 import org.jetbrains.annotations.NotNull ;
 import java.util.ArrayList;
 import java.util.Objects;
@@ -42,18 +44,20 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         b = DataBindingUtil.setContentView(this, R.layout.activity_product_details);
-        pref = getSharedPreferences("logined", 0);
+        pref = UserUtils.getPref(this);
 
         product= (Product) getIntent().getSerializableExtra("product");
         imagesList = product.getImages();
         adapter = new ProductImagesAdapter(this, imagesList);
         b.rvProductDetails.setAdapter(adapter);
+
         b.btProductDetailsBack.setOnClickListener(this);
         b.ivProductDetailsInFavourite.setOnClickListener(this);
         b.ivProductDetailsInCart.setOnClickListener(this);
         b.layoutProductDetailsPlus.setOnClickListener(this);
         b.layoutProductDetailsMinus.setOnClickListener(this);
         b.btProductDetailsToCart.setOnClickListener(this);
+
         helper.attachToRecyclerView(b.rvProductDetails);
         b.tvProductDetailsImageNum.setText(1 + " / " + imagesList.size());
 

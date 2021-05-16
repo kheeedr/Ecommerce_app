@@ -15,7 +15,7 @@
             android:layout_marginTop="@dimen/_10sdp"
             android:layout_marginBottom="@dimen/_5sdp"
             android:fontFamily="@font/montserrat_semi_bold"
-            android:text="Favorites"
+            android:text="@string/favorites"
             android:textColor="@color/secondary"
             android:textSize="@dimen/_18sdp"
             app:layout_constraintEnd_toEndOf="parent"

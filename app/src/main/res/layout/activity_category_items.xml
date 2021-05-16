@@ -69,8 +69,8 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:contentDescription="@string/todo" />
             <View
                 android:id="@+id/view_categoryProducts_under_moto"
                 android:layout_width="match_parent"
@@ -98,12 +98,13 @@
                 android:src="@drawable/ic_not_found"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:contentDescription="@string/todo" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="No products found"
+                android:text="@string/no_products_found"
                 android:textColor="@color/secondary"
                 android:textSize="@dimen/_15sdp"
                 android:layout_marginTop="@dimen/_10sdp"

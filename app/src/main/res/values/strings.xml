@@ -11,8 +11,7 @@
     <string name="login_failed">"Login failed"</string>
     <string name="khadrawy">KHADRAWY</string>
     <string name="market">market</string>
-    <string name="e_mail">E-mail</string>
-    <string name="password">Password</string>
+
     <string name="login">Login</string>
     <string name="new_user_sign_up">New user? Sign Up</string>
     <!-- TODO: Remove or change this placeholder text -->
@@ -29,7 +28,6 @@
     <string name="pref_user_image_url">pref_user_image_url</string>
     <string name="pref_is_image_ready">pref_is_image_ready</string>
     <string name="pref_user_image">pref_user_image</string>
-    <string name="cart">Cart</string>
     <string name="account">Account</string>
     <string name="login_now">Login now</string>
     <string name="click_here_to_login">click here to login</string>
@@ -44,7 +42,7 @@
     <string name="referral_code">Referral Code:</string>
     <string name="_00000000">00000000</string>
     <string name="introduce_your_friends_to_join_and_receive_rewards">Introduce your friends to join and receive rewards</string>
-    <string name="contact_us">Contact Us</string>
+
     <string name="tap_to_view_contact_information">Tap to view contact information</string>
     <string name="about_us">About Us</string>
     <string name="terms_of_use">Terms of use</string>
@@ -59,11 +57,11 @@
     <string name="category_name">Category name</string>
     <string name="category_id">category_id</string>
     <string name="details">Details</string>
-    <string name="_10">10%</string>
+
     <string name="_1_1">1 / 1</string>
     <string name="product_name">Product Name</string>
     <string name="description">Description:</string>
-    <string name="_1">1</string>
+
     <string name="price">price</string>
     <string name="old_price">$10</string>
     <string name="add_to_cart">add to cart</string>
@@ -74,4 +72,53 @@
     <string name="chat_support">Chat Support</string>
     <string name="cancel">Cancel</string>
     <string name="iphone_12_265gb_6gb_ram">iphone 12 265GB 6GB ram</string>
+
+    <string name="about_us_and_our_terms"><![CDATA[About Us & Our terms]]></string>
+    <string name="lorem_ipsum_text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</string>
+    <string name="total">Total:</string>
+    <string name="cart">Cart</string>
+    <string name="order_now">Order now</string>
+    <string name="your_cart_is_empty">Your cart is empty</string>
+    <string name="looks_like_you_haven_t_add_any_item_yet">Looks like you haven\'t add any item yet.</string>
+    <string name="shop_now">Shop now</string>
+    <string name="no_products_found">No products found</string>
+    <string name="contact_us">Contact Us</string>
+    <string name="visit_our_facebook_page">Visit our facebook page</string>
+    <string name="fb_com_ourPage">FB.com/ourPage</string>
+    <string name="subscribe_our_channel">Subscribe our channel</string>
+    <string name="youtube_com_ourChannel">youtube.com/ourChannel</string>
+    <string name="rate_us_on_google_play">Rate us on google play</string>
+    <string name="play_google_com_store_ourApp">play.google.com/store/ourApp</string>
+    <string name="follow_us_on_twitter">Follow us on twitter</string>
+    <string name="twitter_com_ourPage">twitter.com/ourPage</string>
+    <string name="visit_our_website">Visit our website</string>
+    <string name="www_khadrawy_com">www.khadrawy.com</string>
+    <string name="favorites">Favorites</string>
+    <string name="my_account">My Account</string>
+    <string name="full_name">Full name</string>
+    <string name="mohamed_khedr">Mohamed Khedr</string>
+    <string name="phone_number">Phone number</string>
+    <string name="_01026730615">01026730615</string>
+    <string name="e_mail">E-mail</string>
+    <string name="mkheeedr_gmail_com">mkheeedr@gmail.com</string>
+    <string name="address">Address</string>
+    <string name="mansoura_adaqahlya">Mansoura, Adaqahlya</string>
+
+
+    <string name="phone">Phone</string>
+
+    <string name="password">Password</string>
+    <string name="update_profile">Update profile</string>
+    <string name="name">Name</string>
+
+    <string name="new_password">New Password</string>
+    <string name="re_password">Re-password</string>
+    <string name="update">Update</string>
+    <string name="orders">Orders</string>
+    <string name="your_orders_list_is_empty">Your Orders list is empty</string>
+    <string name="looks_like_you_haven_t_made_your_order_yet">Looks like you haven\'t made your order yet.</string>
+    <string name="to_cart">To Cart</string>
+    <string name="quantity">Quantity</string>
+    <string name="_1">1</string>
+    <string name="_10">10%</string>
 </resources>

@@ -16,7 +16,7 @@
             android:layout_marginTop="@dimen/_10sdp"
             android:layout_marginBottom="@dimen/_5sdp"
             android:fontFamily="@font/montserrat_semi_bold"
-            android:text="Cart"
+            android:text="@string/cart"
             android:textColor="@color/secondary"
             android:textSize="@dimen/_18sdp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -77,7 +77,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/_10sdp"
-                    android:text="Total: "
+                    android:text="@string/total"
                     android:textColor="@color/secondary"
                     android:textSize="@dimen/_15sdp"
                     app:layout_constraintBottom_toTopOf="@id/bt_cart_order_now"
@@ -91,7 +91,7 @@
                     android:background="@drawable/bt_back_filled"
                     android:fontFamily="@font/montserrat_medium"
                     android:paddingVertical="@dimen/_2sdp"
-                    android:text="Order now"
+                    android:text="@string/order_now"
                     android:textAllCaps="false"
                     android:textColor="@color/white"
                     android:textSize="20sp"
@@ -136,7 +136,8 @@
                 android:src="@drawable/ic_cart_back"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:contentDescription="@string/todo"/>
 
             <ImageView
                 android:id="@+id/iv_cart_bag"
@@ -148,7 +149,8 @@
                 app:layout_constraintBottom_toBottomOf="@+id/iv_cart_back"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:contentDescription="@string/todo" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/layout_cart_to_shop_now"
@@ -169,7 +171,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/_10sdp"
-                    android:text="Your cart is empty"
+                    android:text="@string/your_cart_is_empty"
                     android:textColor="@color/secondary"
                     android:textSize="@dimen/_16sdp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -182,7 +184,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginVertical="@dimen/_10sdp"
                     android:paddingHorizontal="@dimen/_30sdp"
-                    android:text="Looks like you haven't add any item yet."
+                    android:text="@string/looks_like_you_haven_t_add_any_item_yet"
                     android:textAlignment="center"
                     android:textColor="@color/natural1"
                     android:textSize="@dimen/_12sdp"
@@ -200,7 +202,7 @@
                     android:background="@drawable/bt_back_filled"
                     android:fontFamily="@font/montserrat_medium"
                     android:paddingVertical="@dimen/_2sdp"
-                    android:text="Shop now"
+                    android:text="@string/shop_now"
                     android:textAlignment="center"
                     android:textAllCaps="false"
                     android:textColor="@color/white"
@@ -240,8 +242,8 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:contentDescription="@string/todo"/>
             <View
             android:id="@+id/view_cart_under_moto"
             android:layout_width="match_parent"

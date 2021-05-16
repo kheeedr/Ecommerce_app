@@ -20,7 +20,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:navGraph="@navigation/nav_controller" />
+            app:navGraph="@navigation/nav_controller"
+            tools:ignore="FragmentTagUsage" />
 
         <com.google.android.material.bottomappbar.BottomAppBar
             android:id="@+id/bottomAppBar"
@@ -44,7 +45,8 @@
                 app:labelVisibilityMode="labeled"
                 app:menu="@menu/menu_app_bar"
 
-                android:translationZ="0dp" />
+                android:translationZ="0dp"
+                tools:ignore="UnusedAttribute" />
         </com.google.android.material.bottomappbar.BottomAppBar>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton

@@ -15,7 +15,6 @@ import com.khedr.ecommerce.databinding.ActivitySplashBinding;
 import com.khedr.ecommerce.pojo.homeapi.HomePageApiResponse;
 import com.khedr.ecommerce.network.ApiInterface;
 import com.khedr.ecommerce.network.RetrofitInstance;
-import com.khedr.ecommerce.pojo.product.Product;
 import com.khedr.ecommerce.utils.UiUtils;
 import com.khedr.ecommerce.utils.UserUtils;
 

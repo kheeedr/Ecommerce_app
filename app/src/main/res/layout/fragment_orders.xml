@@ -15,7 +15,7 @@
             android:layout_marginTop="@dimen/_10sdp"
             android:layout_marginBottom="@dimen/_5sdp"
             android:fontFamily="@font/montserrat_semi_bold"
-            android:text="Orders"
+            android:text="@string/orders"
             android:textColor="@color/secondary"
             android:textSize="@dimen/_18sdp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -53,7 +53,8 @@
                 android:src="@drawable/empty_orders_bag"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:contentDescription="@string/todo"/>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/layout_orders_to_shop_now"
@@ -74,7 +75,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/_10sdp"
-                    android:text="Your Orders list is empty"
+                    android:text="@string/your_orders_list_is_empty"
                     android:textColor="@color/secondary"
                     android:textSize="@dimen/_16sdp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -87,7 +88,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginVertical="@dimen/_10sdp"
                     android:paddingHorizontal="@dimen/_30sdp"
-                    android:text="Looks like you haven't made your order yet."
+                    android:text="@string/looks_like_you_haven_t_made_your_order_yet"
                     android:gravity="center"
                     android:textColor="@color/natural1"
                     android:textSize="@dimen/_12sdp"
@@ -105,7 +106,7 @@
                     android:background="@drawable/bt_back_filled"
                     android:fontFamily="@font/montserrat_medium"
                     android:paddingVertical="@dimen/_2sdp"
-                    android:text="To Cart"
+                    android:text="@string/to_cart"
                     android:textAlignment="center"
                     android:textAllCaps="false"
                     android:textColor="@color/white"

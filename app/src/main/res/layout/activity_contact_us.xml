@@ -15,7 +15,7 @@
             android:layout_marginTop="@dimen/_10sdp"
             android:layout_marginBottom="@dimen/_5sdp"
             android:fontFamily="@font/montserrat_semi_bold"
-            android:text="Contact Us"
+            android:text="@string/contact_us"
             android:textColor="@color/secondary"
             android:textSize="@dimen/_18sdp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -62,7 +62,8 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:contentDescription="@string/todo" />
                 <ImageView
                     android:id="@+id/iv_contact_girl"
                     android:layout_width="@dimen/_250sdp"
@@ -70,7 +71,8 @@
                     android:src="@drawable/contact_girl"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:contentDescription="@string/todo"/>
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/layout_contact_container"
                     android:layout_width="match_parent"
@@ -105,7 +107,8 @@
                             android:layout_marginHorizontal="7dp"
                             android:layout_marginVertical="2dp"
                             android:gravity="center_horizontal"
-                            android:src="@drawable/facebook" />
+                            android:src="@drawable/facebook"
+                            android:contentDescription="@string/todo" />
 
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="0dp"
@@ -119,7 +122,7 @@
                                 android:fontFamily="@font/montserrat_semi_bold"
                                 android:paddingHorizontal="@dimen/_3sdp"
                                 android:paddingBottom="0dp"
-                                android:text="Visit our facebook page"
+                                android:text="@string/visit_our_facebook_page"
                                 android:textColor="@color/secondary"
                                 android:textSize="@dimen/_12sdp"
                                 app:layout_constraintBottom_toTopOf="@id/tv_fb_link"
@@ -135,7 +138,7 @@
                                 android:gravity="center_vertical"
                                 android:paddingHorizontal="@dimen/_3sdp"
                                 android:paddingTop="@dimen/_1sdp"
-                                android:text="FB.com/ourPage"
+                                android:text="@string/fb_com_ourPage"
                                 android:textColor="@color/natural1"
                                 android:textSize="@dimen/_10sdp"
                                 app:layout_constraintBottom_toBottomOf="parent"
@@ -154,7 +157,8 @@
                         android:layout_marginHorizontal="@dimen/_10sdp"
                         android:src="@drawable/dotted_divider"
                         app:layout_constraintTop_toBottomOf="@id/layout_fb"
-                        tools:layout_editor_absoluteX="20dp" />
+                        tools:layout_editor_absoluteX="20dp"
+                        android:contentDescription="@string/todo"/>
 
                     <LinearLayout
                         android:id="@+id/layout_youtube"
@@ -175,7 +179,8 @@
                             android:layout_marginHorizontal="7dp"
                             android:layout_marginVertical="2dp"
                             android:gravity="center_horizontal"
-                            android:src="@drawable/youtube" />
+                            android:src="@drawable/youtube"
+                            android:contentDescription="@string/todo" />
 
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="0dp"
@@ -189,7 +194,7 @@
                                 android:fontFamily="@font/montserrat_semi_bold"
                                 android:paddingHorizontal="@dimen/_3sdp"
                                 android:paddingBottom="0dp"
-                                android:text="Subscribe our channel"
+                                android:text="@string/subscribe_our_channel"
                                 android:textColor="@color/secondary"
                                 android:textSize="@dimen/_12sdp"
                                 app:layout_constraintBottom_toTopOf="@id/tv_youtube_link"
@@ -205,7 +210,7 @@
                                 android:gravity="center_vertical"
                                 android:paddingHorizontal="@dimen/_3sdp"
                                 android:paddingTop="@dimen/_1sdp"
-                                android:text="youtube.com/ourChannel"
+                                android:text="@string/youtube_com_ourChannel"
                                 android:textColor="@color/natural1"
                                 android:textSize="@dimen/_10sdp"
                                 app:layout_constraintBottom_toBottomOf="parent"
@@ -224,7 +229,8 @@
                         android:layout_marginHorizontal="@dimen/_10sdp"
                         android:src="@drawable/dotted_divider"
                         app:layout_constraintTop_toBottomOf="@id/layout_youtube"
-                        tools:layout_editor_absoluteX="20dp" />
+                        tools:layout_editor_absoluteX="20dp"
+                        android:contentDescription="@string/todo"/>
 
                     <LinearLayout
                         android:id="@+id/layout_google_play"
@@ -246,7 +252,8 @@
                             android:layout_marginVertical="2dp"
                             android:gravity="center_horizontal"
                             android:padding="@dimen/_3sdp"
-                            android:src="@drawable/google_play" />
+                            android:src="@drawable/google_play"
+                            android:contentDescription="@string/todo"/>
 
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="0dp"
@@ -260,7 +267,7 @@
                                 android:fontFamily="@font/montserrat_semi_bold"
                                 android:paddingHorizontal="@dimen/_3sdp"
                                 android:paddingBottom="0dp"
-                                android:text="Rate us on google play"
+                                android:text="@string/rate_us_on_google_play"
                                 android:textColor="@color/secondary"
                                 android:textSize="@dimen/_12sdp"
                                 app:layout_constraintBottom_toTopOf="@id/tv_play_link"
@@ -276,7 +283,7 @@
                                 android:gravity="center_vertical"
                                 android:paddingHorizontal="@dimen/_3sdp"
                                 android:paddingTop="@dimen/_1sdp"
-                                android:text="play.google.com/store/ourApp"
+                                android:text="@string/play_google_com_store_ourApp"
                                 android:textColor="@color/natural1"
                                 android:textSize="@dimen/_10sdp"
                                 app:layout_constraintBottom_toBottomOf="parent"
@@ -295,7 +302,8 @@
                         android:layout_marginHorizontal="@dimen/_10sdp"
                         android:src="@drawable/dotted_divider"
                         app:layout_constraintTop_toBottomOf="@id/layout_google_play"
-                        tools:layout_editor_absoluteX="20dp" />
+                        tools:layout_editor_absoluteX="20dp"
+                        android:contentDescription="@string/todo" />
 
                     <LinearLayout
                         android:id="@+id/layout_twitter"
@@ -316,7 +324,8 @@
                             android:layout_marginHorizontal="7dp"
                             android:layout_marginVertical="2dp"
                             android:gravity="center_horizontal"
-                            android:src="@drawable/twitter" />
+                            android:src="@drawable/twitter"
+                            android:contentDescription="@string/todo" />
 
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="0dp"
@@ -330,7 +339,7 @@
                                 android:fontFamily="@font/montserrat_semi_bold"
                                 android:paddingHorizontal="@dimen/_3sdp"
                                 android:paddingBottom="0dp"
-                                android:text="Follow us on twitter"
+                                android:text="@string/follow_us_on_twitter"
                                 android:textColor="@color/secondary"
                                 android:textSize="@dimen/_12sdp"
                                 app:layout_constraintBottom_toTopOf="@id/tv_twitter_link"
@@ -346,7 +355,7 @@
                                 android:gravity="center_vertical"
                                 android:paddingHorizontal="@dimen/_3sdp"
                                 android:paddingTop="@dimen/_1sdp"
-                                android:text="twitter.com/ourPage"
+                                android:text="@string/twitter_com_ourPage"
                                 android:textColor="@color/natural1"
                                 android:textSize="@dimen/_10sdp"
                                 app:layout_constraintBottom_toBottomOf="parent"
@@ -365,7 +374,8 @@
                         android:layout_marginHorizontal="@dimen/_10sdp"
                         android:src="@drawable/dotted_divider"
                         app:layout_constraintTop_toBottomOf="@id/layout_twitter"
-                        tools:layout_editor_absoluteX="20dp" />
+                        tools:layout_editor_absoluteX="20dp"
+                        android:contentDescription="@string/todo"/>
 
                     <LinearLayout
                         android:id="@+id/layout_website"
@@ -387,7 +397,8 @@
                             android:layout_marginVertical="2dp"
 
                             android:gravity="center_horizontal"
-                            android:src="@drawable/ic_link" />
+                            android:src="@drawable/ic_link"
+                            android:contentDescription="@string/todo"/>
 
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="0dp"
@@ -401,7 +412,7 @@
                                 android:fontFamily="@font/montserrat_semi_bold"
                                 android:paddingHorizontal="@dimen/_3sdp"
                                 android:paddingBottom="0dp"
-                                android:text="Visit our website"
+                                android:text="@string/visit_our_website"
                                 android:textColor="@color/secondary"
                                 android:textSize="@dimen/_12sdp"
                                 app:layout_constraintBottom_toTopOf="@id/tv_web_link"
@@ -417,7 +428,7 @@
                                 android:gravity="center_vertical"
                                 android:paddingHorizontal="@dimen/_3sdp"
                                 android:paddingTop="@dimen/_1sdp"
-                                android:text="www.khadrawy.com"
+                                android:text="@string/www_khadrawy_com"
                                 android:textColor="@color/natural1"
                                 android:textSize="@dimen/_10sdp"
                                 app:layout_constraintBottom_toBottomOf="parent"

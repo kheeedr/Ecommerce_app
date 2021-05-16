@@ -15,7 +15,7 @@
             android:layout_marginTop="@dimen/_10sdp"
             android:layout_marginBottom="@dimen/_5sdp"
             android:fontFamily="@font/montserrat_semi_bold"
-            android:text="About Us"
+            android:text="@string/about_us"
             android:textColor="@color/secondary"
             android:textSize="@dimen/_18sdp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -59,7 +59,8 @@
                     app:layout_constraintDimensionRatio="1:1"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:contentDescription="@string/todo" />
 
                 <TextView
                     android:id="@+id/tv_about_khadrawy"
@@ -95,14 +96,15 @@
                     android:src="@drawable/man_with_fruits_bag"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_about_khadrawy" />
+                    app:layout_constraintTop_toBottomOf="@+id/tv_about_khadrawy"
+                    android:contentDescription="@string/todo"/>
 
                 <TextView
                     android:id="@+id/tv_about_in_mid"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_7sdp"
-                    android:text="About Us &amp; Our terms"
+                    android:text="@string/about_us_and_our_terms"
                     android:gravity="center"
                     android:textColor="@color/secondary"
                     android:textSize="@dimen/_20sdp"
@@ -116,7 +118,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_7sdp"
-                    android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged."
+                    android:text="@string/lorem_ipsum_text"
                     android:layout_marginHorizontal="@dimen/_15sdp"
                     android:textAlignment="center"
                     android:justificationMode="inter_word"
@@ -125,14 +127,16 @@
                     android:textSize="@dimen/_11sdp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_about_in_mid" />
+                    app:layout_constraintTop_toBottomOf="@+id/tv_about_in_mid"
+                    tools:ignore="UnusedAttribute" />
                 <ImageView
                     android:layout_width="@dimen/_15sdp"
                     android:layout_height="@dimen/_15sdp"
                     android:layout_marginTop="@dimen/_9sdp"
                     app:layout_constraintEnd_toStartOf="@id/tv_about_version"
                     app:layout_constraintTop_toTopOf="@id/tv_about_version"
-                    android:src="@drawable/ic_info"/>
+                    android:src="@drawable/ic_info"
+                    android:contentDescription="@string/todo"/>
                 <TextView
                     android:id="@+id/tv_about_version"
                     android:layout_width="wrap_content"

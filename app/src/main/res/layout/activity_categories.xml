@@ -13,7 +13,7 @@
         android:layout_marginTop="@dimen/_10sdp"
         android:layout_marginBottom="@dimen/_5sdp"
         android:fontFamily="@font/montserrat_semi_bold"
-        android:text="Categories"
+        android:text="@string/categories"
         android:textColor="@color/secondary"
         android:textSize="@dimen/_18sdp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -68,8 +68,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:translationZ="@dimen/_30sdp"
-
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="@string/todo" />
 
         <View
             android:id="@+id/view_categories_under_moto"

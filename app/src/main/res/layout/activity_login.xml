@@ -59,7 +59,8 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:contentDescription="@string/todo" />
 
                 <TextView
                     android:id="@+id/tv_login_khadrawy"
@@ -96,7 +97,8 @@
                     app:layout_constraintBottom_toTopOf="@id/et_login_email_layout"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:contentDescription="@string/todo"/>
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/et_login_email_layout"

@@ -27,7 +27,7 @@
             android:layout_marginStart="@dimen/_80sdp"
             android:layout_marginTop="@dimen/_10sdp"
             android:fontFamily="@font/montserrat_semi_bold"
-            android:text="$10"
+            android:text="@string/old_price"
             android:textColor="@color/primary"
             android:textSize="@dimen/_12sdp"
             app:layout_constraintStart_toStartOf="parent"
@@ -40,7 +40,7 @@
             android:layout_marginStart="@dimen/_5sdp"
             android:layout_marginTop="@dimen/_10sdp"
             android:fontFamily="@font/montserrat_semi_bold"
-            android:text="$10"
+            android:text="@string/old_price"
             android:textColor="@color/natural1"
             android:textSize="@dimen/_8sdp"
             app:layout_constraintBottom_toBottomOf="@+id/tv_cart_price"
@@ -58,7 +58,7 @@
             android:layout_marginEnd="@dimen/_50sdp"
             android:fontFamily="@font/montserrat_semi_bold"
             android:maxLines="2"
-            android:text="Product name"
+            android:text="@string/product_name"
             android:textColor="@color/secondary"
             android:textSize="@dimen/_10sdp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -74,9 +74,9 @@
             android:layout_marginVertical="@dimen/_5sdp"
             android:fontFamily="@font/montserrat_semi_bold"
             android:maxLines="1"
-            android:text="Quantity  "
+            android:text="@string/quantity"
             android:textColor="@color/secondary"
-
+            android:layout_marginEnd="@dimen/_5sdp"
             android:textSize="@dimen/_10sdp"
             app:layout_constraintBottom_toBottomOf="@+id/layout_cart_minus"
             app:layout_constraintEnd_toStartOf="@+id/layout_cart_minus"
@@ -112,7 +112,7 @@
             android:layout_marginVertical="@dimen/_5sdp"
             android:gravity="center"
             android:minWidth="@dimen/_30sdp"
-            android:text="1"
+            android:text="@string/_1"
             android:textColor="@color/secondary"
 
             android:background="@color/trans"
@@ -151,7 +151,8 @@
             android:padding="@dimen/_10sdp"
             android:src="@drawable/ic_blue_trash"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="@string/todo" />
 
 
         <ProgressBar
@@ -189,7 +190,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="@string/todo" />
     </androidx.constraintlayout.widget.ConstraintLayout>
     <TextView
         android:id="@+id/tv_cart_discount"
@@ -197,7 +199,7 @@
         android:layout_height="@dimen/_40sdp"
         android:background="@drawable/ic_discount_back"
         android:gravity="center"
-        android:text="10%"
+        android:text="@string/_10"
         android:rotation="15"
         android:textColor="@color/white"
         android:textSize="@dimen/_16sdp"

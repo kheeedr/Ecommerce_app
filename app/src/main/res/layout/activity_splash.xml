@@ -14,13 +14,14 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="@dimen/_100sdp"
-            android:layout_marginRight="@dimen/_30sdp"
+            android:layout_marginEnd="@dimen/_30sdp"
             android:src="@drawable/back_left"
             app:layout_constraintBottom_toTopOf="@id/iv_splash_right_back"
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="@string/todo"/>
 
         <ImageView
             android:id="@+id/iv_splash_right_back"
@@ -32,7 +33,8 @@
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/iv_splash_left_back" />
+            app:layout_constraintTop_toBottomOf="@+id/iv_splash_left_back"
+            android:contentDescription="@string/todo" />
 
         <TextView
             android:id="@+id/tv_splash_khadrawy"
@@ -68,7 +70,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="@string/todo"/>
 
 
         <ImageView
@@ -80,7 +83,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/iv_splash_man" />
+            app:layout_constraintTop_toBottomOf="@+id/iv_splash_man"
+            android:contentDescription="@string/todo"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

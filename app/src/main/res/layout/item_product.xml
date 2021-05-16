@@ -27,7 +27,8 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:contentDescription="@string/todo"/>
 
             <LinearLayout
                 android:id="@+id/layout_product_to_cart"
@@ -57,7 +58,8 @@
                 android:src="@drawable/ic_primary_hexa_shape"
                 android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:contentDescription="@string/todo" />
 
             <TextView
                 android:id="@+id/tv_product_price"
@@ -66,7 +68,7 @@
                 android:layout_marginHorizontal="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:fontFamily="@font/montserrat_semi_bold"
-                android:text="$10"
+                android:text="@string/old_price"
                 android:textColor="@color/primary"
                 android:textSize="@dimen/_10sdp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -79,7 +81,7 @@
                 android:layout_marginHorizontal="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_2sdp"
                 android:fontFamily="@font/montserrat_semi_bold"
-                android:text="$11"
+                android:text="@string/old_price"
                 android:textColor="@color/natural1"
                 android:textSize="@dimen/_8sdp"
                 android:visibility="visible"
@@ -95,7 +97,8 @@
                 android:src="@drawable/fresh_veg"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:contentDescription="@string/todo" />
 
             <TextView
                 android:id="@+id/tv_product_name"
@@ -104,7 +107,7 @@
                 android:layout_margin="@dimen/_10sdp"
                 android:fontFamily="@font/montserrat_semi_bold"
                 android:maxLines="2"
-                android:text="Product name"
+                android:text="@string/product_name"
                 android:textColor="@color/secondary"
                 android:textSize="@dimen/_10sdp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -120,7 +123,7 @@
             android:background="@drawable/ic_discount_back"
             android:gravity="center"
             android:rotation="15"
-            android:text="10%"
+            android:text="@string/_10"
             android:textColor="@color/white"
             android:textSize="@dimen/_16sdp"
             android:translationZ="@dimen/_6sdp"
