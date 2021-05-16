@@ -2,14 +2,12 @@ package com.khedr.ecommerce.ui.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.khedr.ecommerce.R;
+import com.khedr.ecommerce.databinding.ItemProductImagesBinding;
 import com.khedr.ecommerce.utils.UiUtils;
 
 import org.jetbrains.annotations.NotNull;
@@ -32,12 +30,12 @@ public class ProductImagesAdapter extends RecyclerView.Adapter<ProductImagesAdap
     @NotNull
     @Override
     public ImagesViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
-        return new ImagesViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_product_images, parent, false));
+        return new ImagesViewHolder(ItemProductImagesBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull @NotNull ProductImagesAdapter.ImagesViewHolder holder, int position) {
-        UiUtils.getImageViaUrl(context, imagesList.get(position), holder.imageView, TAG, holder.progressBar);
+        UiUtils.getImageViaUrl(context, imagesList.get(position), holder.b.ivItemImages, TAG, holder.b.progressRvImagesIv);
     }
 
     @Override
@@ -46,13 +44,14 @@ public class ProductImagesAdapter extends RecyclerView.Adapter<ProductImagesAdap
     }
 
     public static class ImagesViewHolder extends RecyclerView.ViewHolder {
-        ImageView imageView;
-        ImageView progressBar;
 
-        public ImagesViewHolder(@NonNull @NotNull View itemView) {
-            super(itemView);
-            imageView = itemView.findViewById(R.id.iv_itemImages);
-            progressBar = itemView.findViewById(R.id.progress_rvImages_iv);
+        ItemProductImagesBinding b;
+
+        public ImagesViewHolder(@NonNull @NotNull ItemProductImagesBinding b) {
+            super(b.getRoot());
+            this.b = b;
         }
+
+
     }
 }

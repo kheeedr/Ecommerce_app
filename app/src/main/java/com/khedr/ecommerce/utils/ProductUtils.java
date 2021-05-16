@@ -199,6 +199,7 @@ public abstract class ProductUtils {
             } else {
                 statusIcon.setImageResource(R.drawable.ic_red_heart);
             }
+
             ProductId id = new ProductId(productId);
             String token = UserUtils.getPref(context).getString(context.getString(R.string.pref_user_token), "");
             Call<PostFavoriteResponse> call = RetrofitInstance.getRetrofitInstance().create(ApiInterface.class).addToFavorite(token, id);
@@ -258,7 +259,7 @@ public abstract class ProductUtils {
 
                 } else {
                     succeeded[0] = false;
-                    body[0]=null;
+                    body[0] = null;
                 }
                 isSucceeded.setValue(succeeded);
             }
@@ -266,7 +267,7 @@ public abstract class ProductUtils {
             @Override
             public void onFailure(@NotNull Call<SearchResponse> call, @NotNull Throwable t) {
                 succeeded[0] = false;
-                body[0]=null;
+                body[0] = null;
                 isSucceeded.setValue(succeeded);
             }
         });

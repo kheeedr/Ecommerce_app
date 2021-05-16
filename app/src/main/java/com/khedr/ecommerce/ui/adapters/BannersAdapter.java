@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.khedr.ecommerce.R;
+import com.khedr.ecommerce.databinding.ItemBannerBinding;
 import com.khedr.ecommerce.pojo.homeapi.Banner;
 import com.khedr.ecommerce.utils.UiUtils;
 
@@ -32,22 +33,19 @@ public class BannersAdapter extends RecyclerView.Adapter<BannersAdapter.BannersV
         this.bannersList = bannersList;
         notifyDataSetChanged();
     }
-//    public BannersAdapter(List<String> bannersList) {
-//        this.bannersList = bannersList;
-//    }
 
     @NonNull
     @NotNull
     @Override
     public BannersViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
-        return new BannersViewHolder(LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_banner, parent, false));
+        return new BannersViewHolder(ItemBannerBinding
+                .inflate(LayoutInflater.from(parent.getContext()), parent, false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull @NotNull BannersAdapter.BannersViewHolder holder, int position) {
 
-        UiUtils.getImageViaUrl(context,bannersList.get(position).getImage(), holder.iv,TAG,holder.ivProgressbar);
+        UiUtils.getImageViaUrl(context,bannersList.get(position).getImage(), holder.b.ivBannerItem, TAG,holder.b.progressBannerIv);
 
     }
 
@@ -59,12 +57,18 @@ public class BannersAdapter extends RecyclerView.Adapter<BannersAdapter.BannersV
     }
     static class BannersViewHolder extends RecyclerView.ViewHolder{
 
-        ImageView iv,ivProgressbar;
-        public BannersViewHolder(@NonNull @NotNull View itemView) {
-            super(itemView);
-            iv =(ImageView) itemView.findViewById(R.id.iv_banner_item);
-            ivProgressbar=itemView.findViewById(R.id.progress_banner_iv);
+        ItemBannerBinding b;
 
+        public BannersViewHolder(@NonNull @NotNull ItemBannerBinding b) {
+            super(b.getRoot());
+            this.b = b;
         }
+        //       ImageView iv,ivProgressbar;
+//        public BannersViewHolder(@NonNull @NotNull View itemView) {
+//            super(itemView);
+////            iv =(ImageView) itemView.findViewById(R.id.iv_banner_item);
+////            ivProgressbar=itemView.findViewById(R.id.progress_banner_iv);
+//
+//        }
     }
 }

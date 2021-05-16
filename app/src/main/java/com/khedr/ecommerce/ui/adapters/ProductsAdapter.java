@@ -8,20 +8,20 @@ import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
+
 import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
-import com.khedr.ecommerce.R;
+
+import com.khedr.ecommerce.databinding.ItemProductBinding;
 import com.khedr.ecommerce.pojo.product.Product;
 import com.khedr.ecommerce.ui.ProductDetailsActivity;
 import com.khedr.ecommerce.ui.SplashActivity;
 import com.khedr.ecommerce.utils.ProductUtils;
 import com.khedr.ecommerce.utils.UiUtils;
 import com.khedr.ecommerce.utils.UserUtils;
+
 import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,8 +47,8 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
     @NotNull
     @Override
     public ProductsAdapter.ProductsViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
-        return new ProductsViewHolder(LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_product, parent, false));
+        return new ProductsViewHolder(ItemProductBinding
+                .inflate(LayoutInflater.from(parent.getContext()), parent, false));
     }
 
     @SuppressLint("SetTextI18n")
@@ -56,29 +56,29 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
     public void onBindViewHolder(@NonNull @NotNull ProductsAdapter.ProductsViewHolder holder, int position) {
 
         //set product image
-        UiUtils.getImageViaUrl(context, productsList.get(position).getImage(), holder.ivProduct, TAG, holder.ivProgressbar);
+        UiUtils.getImageViaUrl(context, productsList.get(position).getImage(), holder.b.ivProduct, TAG, holder.b.progressProductIv);
 
         //set product name and price
-        holder.tvProductPrice.setText("EGP " + productsList.get(position).getPrice());
+        holder.b.tvProductPrice.setText("EGP " + productsList.get(position).getPrice());
 
         if (productsList.get(position).getDiscount() > 0) {
-            holder.tvOldPrice.setPaintFlags(holder.tvOldPrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-            holder.tvDiscount.setVisibility(View.VISIBLE);
-            holder.tvDiscount.setText((int) productsList.get(position).getDiscount() + "%");
-            holder.tvOldPrice.setText(String.valueOf(productsList.get(position).getOld_price()));
+            holder.b.tvProductOldPrice.setPaintFlags(holder.b.tvProductOldPrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+            holder.b.tvProductDiscount.setVisibility(View.VISIBLE);
+            holder.b.tvProductDiscount.setText((int) productsList.get(position).getDiscount() + "%");
+            holder.b.tvProductOldPrice.setText(String.valueOf(productsList.get(position).getOld_price()));
         } else {
-            holder.tvOldPrice.setVisibility(View.GONE);
-            holder.tvDiscount.setVisibility(View.GONE);
+            holder.b.tvProductOldPrice.setVisibility(View.GONE);
+            holder.b.tvProductDiscount.setVisibility(View.GONE);
         }
-        holder.tvProductName.setText(productsList.get(position).getName());
+        holder.b.tvProductName.setText(productsList.get(position).getName());
      
 
-        holder.btToCart.setOnClickListener(v -> {
+        holder.b.layoutProductToCart.setOnClickListener(v -> {
             int id = SplashActivity.homeResponse.getData().getProducts().get(position).getId();
-            ProductUtils.addProductToCart(context, id, holder.btToCart, holder.addProgressbar);
+            ProductUtils.addProductToCart(context, id, holder.b.layoutProductToCart, holder.b.progressProductAdd);
         });
 
-        holder.productLayout.setOnClickListener(v -> {
+        holder.b.layoutProduct.setOnClickListener(v -> {
             Intent intent = new Intent(context, ProductDetailsActivity.class);
             intent.putExtra("product", productsList.get(position));
             context.startActivity(intent);
@@ -94,24 +94,31 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
 
     static class ProductsViewHolder extends RecyclerView.ViewHolder {
 
-        ImageView ivProduct, ivToCart;
-        LinearLayout btToCart;
-        TextView tvProductPrice, tvOldPrice, tvProductName, tvDiscount;
-        ImageView addProgressbar, ivProgressbar;
-        ConstraintLayout productLayout;
+//        ImageView ivProduct, ivProductToCart;
+//        LinearLayout layoutProductToCart;
+//        TextView tvProductPrice, tvProductOldPrice, tvProductName, tvProductDiscount;
+//        ImageView progressProductAdd, progressProductIv;
+//        ConstraintLayout layoutProduct;
 
-        public ProductsViewHolder(@NonNull @NotNull View itemView) {
-            super(itemView);
-            ivProduct = itemView.findViewById(R.id.iv_product);
-            tvProductName = itemView.findViewById(R.id.tv_product_name);
-            tvProductPrice = itemView.findViewById(R.id.tv_product_price);
-            btToCart = itemView.findViewById(R.id.layout_product_to_cart);
-            tvOldPrice = itemView.findViewById(R.id.tv_product_old_price);
-            tvDiscount = itemView.findViewById(R.id.tv_product_discount);
-            ivToCart = itemView.findViewById(R.id.iv_product_to_cart);
-            addProgressbar = itemView.findViewById(R.id.progress_product_add);
-            productLayout = itemView.findViewById(R.id.layout_product);
-            ivProgressbar = itemView.findViewById(R.id.progress_product_iv);
+        ItemProductBinding b;
+
+        public ProductsViewHolder(@NonNull @NotNull ItemProductBinding b) {
+            super(b.getRoot());
+            this.b = b;
         }
+
+//        public ProductsViewHolder(@NonNull @NotNull View itemView) {
+//            super(itemView);
+//            ivProduct = itemView.findViewById(R.id.iv_product);
+//            tvProductName = itemView.findViewById(R.id.tv_product_name);
+//            tvProductPrice = itemView.findViewById(R.id.tv_product_price);
+//            layoutProductToCart = itemView.findViewById(R.id.layout_product_to_cart);
+//            tvProductOldPrice = itemView.findViewById(R.id.tv_product_old_price);
+//            tvProductDiscount = itemView.findViewById(R.id.tv_product_discount);
+//            ivProductToCart = itemView.findViewById(R.id.iv_product_to_cart);
+//            progressProductAdd = itemView.findViewById(R.id.progress_product_add);
+//            layoutProduct = itemView.findViewById(R.id.layout_product);
+//            progressProductIv = itemView.findViewById(R.id.progress_product_iv);
+//        }
     }
 }

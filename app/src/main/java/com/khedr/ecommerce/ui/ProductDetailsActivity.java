@@ -83,9 +83,9 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
         if (v == b.btProductDetailsBack) {
             onBackPressed();
         } else if (v == b.ivProductDetailsInFavourite) {
-
             ProductUtils.addProductToFavorite(this,product.getId(),b.ivProductDetailsInFavourite,is_favourite);
-        } else if (v == b.ivProductDetailsInCart) {
+        }
+        else if (v == b.ivProductDetailsInCart) {
             startActivity(new Intent(ProductDetailsActivity.this, CartActivity.class));
         } else if (v == b.layoutProductDetailsPlus) {
             int oldQ = Integer.parseInt(b.tvProductDetailsEditableQuantity.getText().toString());

@@ -3,6 +3,7 @@ package com.khedr.ecommerce.ui.fragments;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,7 @@ import com.khedr.ecommerce.R;
 import com.khedr.ecommerce.databinding.FragmentHomeBinding;
 import com.khedr.ecommerce.network.ApiInterface;
 import com.khedr.ecommerce.network.RetrofitInstance;
+import com.khedr.ecommerce.pojo.product.Product;
 import com.khedr.ecommerce.utils.UiUtils;
 import com.khedr.ecommerce.utils.UserUtils;
 import com.khedr.ecommerce.pojo.homeapi.HomePageApiResponse;
@@ -29,6 +31,10 @@ import com.khedr.ecommerce.ui.SplashActivity;
 import com.khedr.ecommerce.ui.adapters.BannersAdapter;
 import com.khedr.ecommerce.ui.adapters.ProductsAdapter;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
+import java.util.Collections;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -36,6 +42,7 @@ import retrofit2.Response;
 public class HomeFragment extends Fragment implements View.OnClickListener {
 
     public static final int REQ_CODE = 110;
+    private static final String TAG = "HomeFragment";
     FragmentHomeBinding b;
     BannersAdapter bannersAdapter;
     ProductsAdapter productsAdapter;
@@ -60,24 +67,21 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
         //banners rv
         bannersAdapter = new BannersAdapter(getContext());
-        LinearLayoutManager linearLayoutManager =new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, true);
-        linearLayoutManager.setStackFromEnd(true);
-        b.rvHomeBanners.setLayoutManager(linearLayoutManager);
         b.rvHomeBanners.setAdapter(bannersAdapter);
         bannersAdapter.setBannersList(SplashActivity.homeResponse.getData().getBanners());
 
         //products rv
         productsAdapter=new ProductsAdapter(getContext());
-        GridLayoutManager gridLayoutManager=new GridLayoutManager(getContext()
-                ,2,RecyclerView.VERTICAL,false);
-        b.rvHomeProducts.setLayoutManager(gridLayoutManager);
+
         b.rvHomeProducts.setAdapter(productsAdapter);
         productsAdapter.setProductsList(SplashActivity.homeResponse.getData().getProducts());
+
         b.ivHomeFavorite.setOnClickListener(this);
         b.layoutHomeToCategories.setOnClickListener(this);
         b.layoutHomeToContactUs.setOnClickListener(this);
         b.layoutHomeToPreventCorona.setOnClickListener(this);
         b.svHome.setOnClickListener(this);
+        Log.d(TAG, "mkhedr: onCreate");
 
 
         return b.getRoot();
@@ -120,7 +124,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 if (response.body() != null) {
                     if(response.body().isStatus()){
                         SplashActivity.homeResponse=response.body();
-                        productsAdapter.setProductsList(response.body().getData().getProducts());
+                        ArrayList<Product> products=response.body().getData().getProducts();
+                        Collections.reverse(products);
+                        productsAdapter.setProductsList(products);
                     }
                     else {
                         UiUtils.shortToast(getContext(),response.body().getMessage());

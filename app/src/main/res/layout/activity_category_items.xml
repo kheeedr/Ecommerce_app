@@ -6,7 +6,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.khedr.ecommerce.com.khedr.loginwithapi.ui.CategoryProductsActivity">
+        tools:context="com.khedr.ecommerce.ui.CategoryProductsActivity">
 
         <TextView
             android:id="@+id/main_tv_categoryProducts"
@@ -40,13 +40,15 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_categoryProducts"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/_5sdp"
             android:layout_marginTop="@dimen/_42sdp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0"
+            />
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/progress_categoryProducts"
             android:layout_width="@dimen/_70sdp"

@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -31,6 +32,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class CartActivity extends AppCompatActivity implements View.OnClickListener {
+    private static final String TAG ="CartActivity" ;
     public ActivityCartBinding b;
     CartAdapter cartAdapter;
     SharedPreferences pref;
@@ -51,6 +53,8 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
         b.rvCart.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
         b.rvCart.setAdapter(cartAdapter);
         getCartProducts();
+
+        Log.d(TAG, "mkhedr: onCreate");
 
 
     }

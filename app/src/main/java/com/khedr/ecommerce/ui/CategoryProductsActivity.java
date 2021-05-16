@@ -18,11 +18,15 @@ import com.khedr.ecommerce.pojo.categories.GetCategoriesResponse;
 import com.khedr.ecommerce.pojo.categories.item.GetCategoryItemsResponse;
 import com.khedr.ecommerce.network.ApiInterface;
 import com.khedr.ecommerce.network.RetrofitInstance;
+import com.khedr.ecommerce.pojo.product.Product;
 import com.khedr.ecommerce.ui.adapters.ProductsAdapter;
 import com.khedr.ecommerce.utils.UiUtils;
 import com.khedr.ecommerce.utils.UserUtils;
 
 import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
+import java.util.Collections;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -76,7 +80,9 @@ public class CategoryProductsActivity extends AppCompatActivity implements View.
                 if (response.body() != null) {
                     if (response.body().isStatus()) {
                         if (!response.body().getData().getData().isEmpty()) {
-                            productsAdapter.setProductsList(response.body().getData().getData());
+                            ArrayList<Product> products=response.body().getData().getData();
+                            Collections.reverse(products);
+                            productsAdapter.setProductsList(products);
                         }else {
                             b.layoutCategoryProductsProductNotFound.setVisibility(View.VISIBLE);
                         }

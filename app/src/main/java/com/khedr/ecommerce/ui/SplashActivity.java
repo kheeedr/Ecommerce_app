@@ -15,9 +15,14 @@ import com.khedr.ecommerce.databinding.ActivitySplashBinding;
 import com.khedr.ecommerce.pojo.homeapi.HomePageApiResponse;
 import com.khedr.ecommerce.network.ApiInterface;
 import com.khedr.ecommerce.network.RetrofitInstance;
+import com.khedr.ecommerce.pojo.product.Product;
 import com.khedr.ecommerce.utils.UiUtils;
+import com.khedr.ecommerce.utils.UserUtils;
 
 import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
+import java.util.Collections;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -26,18 +31,20 @@ import retrofit2.Response;
 public class SplashActivity extends AppCompatActivity {
     ActivitySplashBinding b;
     SharedPreferences pref;
+
     public static HomePageApiResponse homeResponse=new HomePageApiResponse(false,null,null);
     private static final String TAG = "SplashActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        super.onCreate(savedInstanceState);
 
         b = DataBindingUtil.setContentView(this, R.layout.activity_splash);
+
         UiUtils.animJumpAndFade(this, b.progressSplash);
 
-        pref = getSharedPreferences("logined", 0);
+        pref = UserUtils.getPref(this);
         Log.d(TAG, "mkhedr: onCreate");
     }
 
@@ -61,7 +68,12 @@ public class SplashActivity extends AppCompatActivity {
 
                 if (response.body() != null) {
                     if (response.body().isStatus()) {
+//                        ArrayList<Product> products=response.body().getData().getProducts();
+//                        Collections.reverse(products);
+
+
                         homeResponse = response.body();
+                        Collections.reverse(homeResponse.getData().getProducts());
                         startActivity(new Intent(SplashActivity.this, MainPageActivity.class));
                         finish();
                     } else {
