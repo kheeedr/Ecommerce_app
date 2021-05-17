@@ -1,8 +1,6 @@
 package com.khedr.ecommerce.pojo.user;
 
 public class UserDataForRegisterRequest {
-
-
     String name;
     String phone;
     String email;
@@ -56,4 +54,6 @@ public class UserDataForRegisterRequest {
     public void setImage(String image) {
         this.image = image;
     }
+
+
 }

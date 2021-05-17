@@ -60,6 +60,7 @@ public abstract class UiUtils {
     public static void getImageViaUrl(Context context, String url
             , ImageView imageView, String TAG, View progressBar) {
         SharedPreferences pref = context.getSharedPreferences("logined", 0);
+        progressBar.setVisibility(View.VISIBLE);
         UiUtils.animJumpAndFade(context, progressBar);
         Glide.with(context).load(url)
                 .listener(new RequestListener<Drawable>() {

@@ -1,12 +1,12 @@
 package com.khedr.ecommerce.pojo.product.favorites.get;
 
-import com.khedr.ecommerce.pojo.product.ProductForGet;
+import com.khedr.ecommerce.pojo.product.SimpleProduct;
 
 public class InnerData {
     int id;
-    ProductForGet product;
+    SimpleProduct product;
 
-    public InnerData(int id, ProductForGet product) {
+    public InnerData(int id, SimpleProduct product) {
         this.id = id;
         this.product = product;
     }
@@ -19,11 +19,11 @@ public class InnerData {
         this.id = id;
     }
 
-    public ProductForGet getProduct() {
+    public SimpleProduct getProduct() {
         return product;
     }
 
-    public void setProduct(ProductForGet product) {
+    public void setProduct(SimpleProduct product) {
         this.product = product;
     }
 }

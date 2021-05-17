@@ -108,7 +108,7 @@ public class AccountFragment extends Fragment implements View.OnClickListener {
                 b.ivAccountUserImage.setImageBitmap(Converters.fromStringToBitmap(photo));
             } else {
                 String url = pref.getString(getString(R.string.pref_user_image_url), null);
-                UiUtils.getImageViaUrl(requireContext(),url,  b.ivAccountUserImage,TAG);
+                UiUtils.getImageViaUrl(requireContext(),url,  b.ivAccountUserImage,TAG,b.progressAccount);
             }
 
             //update points

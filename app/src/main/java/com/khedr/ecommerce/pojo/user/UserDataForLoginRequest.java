@@ -35,28 +35,9 @@ public class UserDataForLoginRequest {
         this.token = token;
     }
 
-    //for register request
-    public UserDataForLoginRequest(String name, String phone, String email, String password, String image) {
-        this.name = name;
-        this.email = email;
-        this.phone = phone;
-        this.password = password;
-        this.image = image;
-    }
-    //for register response
-    public UserDataForLoginRequest(String name, String phone, String email, int id, String image, String token) {
-        this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.id = id;
-        this.image = image;
-        this.token = token;
-    }
-    //for logout response
-    public UserDataForLoginRequest(int id, String token) {
-        this.id = id;
-        this.token = token;
-    }
+
+
+
 
     public String getPassword() {
         return password;

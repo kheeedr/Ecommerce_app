@@ -1,30 +1,14 @@
 package com.khedr.ecommerce.pojo.user;
 
-public class UserApiResponse {
-    boolean status;
-    String message;
+import com.khedr.ecommerce.pojo.StatusAndMessage;
+
+public class UserApiResponse extends StatusAndMessage {
+
     UserDataForLoginRequest data;
 
     public UserApiResponse(boolean status, String message, UserDataForLoginRequest data) {
-        this.status = status;
-        this.message = message;
+        super(status, message);
         this.data = data;
-    }
-
-    public boolean isStatus() {
-        return status;
-    }
-
-    public void setStatus(boolean status) {
-        this.status = status;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
     }
 
     public UserDataForLoginRequest getData() {

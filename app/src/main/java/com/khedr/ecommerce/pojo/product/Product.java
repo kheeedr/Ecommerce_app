@@ -3,7 +3,7 @@ package com.khedr.ecommerce.pojo.product;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Product implements Serializable {
+public class Product  implements Serializable  {
 
     int id;
     double price;
@@ -15,20 +15,6 @@ public class Product implements Serializable {
     ArrayList<String> images;
     boolean in_favorites;
     boolean in_cart;
-
-    public Product(int id, double price, double old_price, double discount, String image, String name
-            , String description, ArrayList<String> images, boolean in_favorites, boolean in_cart) {
-        this.id = id;
-        this.price = price;
-        this.old_price = old_price;
-        this.discount = discount;
-        this.image = image;
-        this.name = name;
-        this.description = description;
-        this.images = images;
-        this.in_favorites = in_favorites;
-        this.in_cart = in_cart;
-    }
 
     public int getId() {
         return id;
@@ -84,6 +70,19 @@ public class Product implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Product(int id, double price, double old_price, double discount, String image, String name, String description, ArrayList<String> images, boolean in_favorites, boolean in_cart) {
+        this.id = id;
+        this.price = price;
+        this.old_price = old_price;
+        this.discount = discount;
+        this.image = image;
+        this.name = name;
+        this.description = description;
+        this.images = images;
+        this.in_favorites = in_favorites;
+        this.in_cart = in_cart;
     }
 
     public ArrayList<String> getImages() {

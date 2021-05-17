@@ -1,13 +1,13 @@
 package com.khedr.ecommerce.pojo.product.cart.post;
 
-import com.khedr.ecommerce.pojo.product.ProductForGet;
+import com.khedr.ecommerce.pojo.product.SimpleProduct;
 
 public class PostCartData {
     int id;
     int quantity;
-    ProductForGet product;
+    SimpleProduct product;
 
-    public PostCartData(int id, int quantity, ProductForGet product) {
+    public PostCartData(int id, int quantity, SimpleProduct product) {
         this.id = id;
         this.quantity = quantity;
         this.product = product;
@@ -29,11 +29,11 @@ public class PostCartData {
         this.quantity = quantity;
     }
 
-    public ProductForGet getProduct() {
+    public SimpleProduct getProduct() {
         return product;
     }
 
-    public void setProduct(ProductForGet product) {
+    public void setProduct(SimpleProduct product) {
         this.product = product;
     }
 }
