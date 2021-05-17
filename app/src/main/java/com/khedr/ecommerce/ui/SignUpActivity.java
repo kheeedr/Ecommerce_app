@@ -90,8 +90,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             b.etSignRepassword.setError("re-password is not equal the password ");
             b.etSignRepassword.requestFocus();
         } else {
-            b.btSign.setVisibility(View.GONE);
-            b.progressSign.setVisibility(View.VISIBLE);
+
             UserDataForRegisterRequest user = new UserDataForRegisterRequest(name, phone, email, password, image);
             postNewUser(user);
             Log.d(TAG, "mkhedr"
@@ -105,6 +104,9 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     public void postNewUser(UserDataForRegisterRequest user) {
+        b.btSign.setVisibility(View.GONE);
+        b.progressSign.setVisibility(View.VISIBLE);
+        UiUtils.animJumpAndFade(this,b.progressSign);
         Call<UserApiResponse> call = RetrofitInstance.getRetrofitInstance()
                 .create(ApiInterface.class).register(user);
         call.enqueue(new Callback<UserApiResponse>() {
@@ -118,6 +120,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                         finish();
                     } else {
                         b.btSign.setVisibility(View.VISIBLE);
+                        b.progressSign.clearAnimation();
                         b.progressSign.setVisibility(View.INVISIBLE);
                         UiUtils.shortToast(SignUpActivity.this, response.body().getMessage());
                     }
@@ -129,6 +132,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             @Override
             public void onFailure(@NotNull Call<UserApiResponse> call, @NotNull Throwable t) {
                 b.btSign.setVisibility(View.VISIBLE);
+                b.progressSign.clearAnimation();
                 b.progressSign.setVisibility(View.INVISIBLE);
                 UiUtils.shortToast(SignUpActivity.this, "Sorry, connection error");
             }

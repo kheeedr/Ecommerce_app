@@ -66,6 +66,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
     public void logOut() {
         String token = pref.getString(getString(R.string.pref_user_token), "");
+        UiUtils.animJumpAndFade(this, b.progressLogout);
         TokenModel tokenModel = new TokenModel(token);
         Call<UserApiResponse> call = RetrofitInstance.getRetrofitInstance()
                 .create(ApiInterface.class).logOut(token, tokenModel);
@@ -81,9 +82,8 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                     pen.apply();
                     UiUtils.shortToast(ProfileActivity.this, response.body().getMessage());
 
-                finish();
-                }
-                else {
+                    finish();
+                } else {
                     UiUtils.shortToast(ProfileActivity.this, "Sorry, connection error");
                 }
             }
@@ -91,6 +91,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             @Override
             public void onFailure(@NotNull Call<UserApiResponse> call, @NotNull Throwable t) {
                 b.btProfileLogout.setVisibility(View.VISIBLE);
+                b.progressLogout.clearAnimation();
                 b.progressLogout.setVisibility(View.INVISIBLE);
                 UiUtils.shortToast(ProfileActivity.this, "Sorry, connection error");
             }

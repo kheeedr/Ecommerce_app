@@ -55,8 +55,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 b.etLoginPassword.setError("password must be 6 letters at least");
                 b.etLoginPassword.requestFocus();
             } else {
-                b.btLogin.setVisibility(View.GONE);
-                b.progressLogin.setVisibility(View.VISIBLE);
+
                 UserDataForLoginRequest user = new UserDataForLoginRequest(email, password);
                 userLogin(user);
             }
@@ -66,7 +65,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     void userLogin(UserDataForLoginRequest user) {
-
+        b.btLogin.setVisibility(View.GONE);
+        b.progressLogin.setVisibility(View.VISIBLE);
+        UiUtils.animJumpAndFade(this,b.progressLogin);
         Call<UserApiResponse> call = RetrofitInstance.getRetrofitInstance().create(ApiInterface.class).login(user);
         call.enqueue(new Callback<UserApiResponse>() {
             @Override
@@ -77,6 +78,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         finish();
                     } else {
                         b.btLogin.setVisibility(View.VISIBLE);
+                        b.progressLogin.clearAnimation();
                         b.progressLogin.setVisibility(View.INVISIBLE);
                         UiUtils.shortToast(LoginActivity.this, response.body().getMessage());
                     }
@@ -89,6 +91,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             @Override
             public void onFailure(@NotNull Call<UserApiResponse> call, @NotNull Throwable t) {
                 b.btLogin.setVisibility(View.VISIBLE);
+                b.progressLogin.clearAnimation();
                 b.progressLogin.setVisibility(View.INVISIBLE);
                 UiUtils.shortToast(LoginActivity.this, "Sorry, connection error");
             }

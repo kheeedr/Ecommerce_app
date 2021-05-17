@@ -6,7 +6,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.khedr.ecommerce.com.khedr.loginwithapi.ui.SignUpActivity">
+        tools:context="com.khedr.ecommerce.ui.SignUpActivity">
 
         <TextView
             android:id="@+id/tv_sign_main"
@@ -226,7 +226,7 @@
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/layout_sign_bt"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="@dimen/_45sdp"
                         android:layout_marginVertical="@dimen/_20sdp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -253,14 +253,13 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
-                        <ProgressBar
+                        <ImageView
                             android:id="@+id/progress_sign"
-                            android:layout_width="@dimen/_40sdp"
-                            android:layout_height="@dimen/_40sdp"
-                            android:indeterminate="true"
-                            android:indeterminateTint="@color/secondary"
-                            android:indeterminateTintMode="src_atop"
+                            android:layout_width="@dimen/_30sdp"
+                            android:layout_height="@dimen/_30sdp"
+                            android:contentDescription="@string/todo"
                             android:visibility="invisible"
+                            android:src="@drawable/ic_primary_hexa_shape"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"

@@ -110,7 +110,8 @@
                         android:text="@string/mohamed_khedr"
                         android:textColor="@color/secondary"
                         android:textSize="@dimen/_12sdp"
-                        app:drawableStartCompat="@drawable/ic_blue_person" />
+                        app:drawableStartCompat="@drawable/ic_blue_person"
+                        android:drawablePadding="@dimen/_5sdp"/>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -131,7 +132,8 @@
                         android:text="@string/_01026730615"
                         android:textColor="@color/secondary"
                         android:textSize="@dimen/_12sdp"
-                        app:drawableStartCompat="@drawable/ic_blue_phone" />
+                        app:drawableStartCompat="@drawable/ic_blue_phone"
+                        android:drawablePadding="@dimen/_5sdp" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -152,7 +154,8 @@
                         android:text="@string/mkheeedr_gmail_com"
                         android:textColor="@color/secondary"
                         android:textSize="@dimen/_12sdp"
-                        app:drawableStartCompat="@drawable/ic_blue_email" />
+                        app:drawableStartCompat="@drawable/ic_blue_email"
+                        android:drawablePadding="@dimen/_5sdp"/>
 
 
                 </LinearLayout>
@@ -219,7 +222,8 @@
                         app:drawableStartCompat="@drawable/ic_location"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/tv_profile_address_word" />
+                        app:layout_constraintTop_toBottomOf="@+id/tv_profile_address_word"
+                        android:drawablePadding="@dimen/_5sdp"/>
 
                     <ImageView
                         android:id="@+id/iv_profile_new_address"
@@ -237,7 +241,7 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/_65sdp"
                     android:layout_margin="@dimen/_10sdp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -257,7 +261,7 @@
                         android:paddingHorizontal="@dimen/_15sdp"
                         android:paddingVertical="@dimen/_5sdp"
                         android:text="@string/sign_out"
-                        android:textAlignment="textStart"
+                        android:gravity="start"
                         android:textAllCaps="false"
                         android:textColor="@color/primary"
                         android:textSize="20sp"
@@ -268,14 +272,12 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <ProgressBar
+                    <ImageView
                         android:id="@+id/progress_logout"
-                        android:layout_width="@dimen/_40sdp"
-                        android:layout_height="@dimen/_40sdp"
-                        android:indeterminate="true"
-                        android:indeterminateTint="@color/secondary"
-                        android:indeterminateTintMode="src_atop"
-                        android:visibility="invisible"
+                        android:layout_width="@dimen/_30sdp"
+                        android:layout_height="@dimen/_30sdp"
+                        android:contentDescription="@string/todo"
+                        android:src="@drawable/ic_primary_hexa_shape"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
