@@ -94,11 +94,6 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
 
     static class ProductsViewHolder extends RecyclerView.ViewHolder {
 
-//        ImageView ivProduct, ivProductToCart;
-//        LinearLayout layoutProductToCart;
-//        TextView tvProductPrice, tvProductOldPrice, tvProductName, tvProductDiscount;
-//        ImageView progressProductAdd, progressProductIv;
-//        ConstraintLayout layoutProduct;
 
         ItemProductBinding b;
 
@@ -107,18 +102,5 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
             this.b = b;
         }
 
-//        public ProductsViewHolder(@NonNull @NotNull View itemView) {
-//            super(itemView);
-//            ivProduct = itemView.findViewById(R.id.iv_product);
-//            tvProductName = itemView.findViewById(R.id.tv_product_name);
-//            tvProductPrice = itemView.findViewById(R.id.tv_product_price);
-//            layoutProductToCart = itemView.findViewById(R.id.layout_product_to_cart);
-//            tvProductOldPrice = itemView.findViewById(R.id.tv_product_old_price);
-//            tvProductDiscount = itemView.findViewById(R.id.tv_product_discount);
-//            ivProductToCart = itemView.findViewById(R.id.iv_product_to_cart);
-//            progressProductAdd = itemView.findViewById(R.id.progress_product_add);
-//            layoutProduct = itemView.findViewById(R.id.layout_product);
-//            progressProductIv = itemView.findViewById(R.id.progress_product_iv);
-//        }
     }
 }

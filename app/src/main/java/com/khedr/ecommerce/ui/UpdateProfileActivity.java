@@ -127,8 +127,9 @@ public class UpdateProfileActivity extends AppCompatActivity implements  View.On
         }
     }
     public void updateUserInfo(UserDataForRegisterRequest user,String token){
+        String lang=UiUtils.getAppLang(this);
         Call<UserApiResponse> call= RetrofitInstance.getRetrofitInstance()
-                .create(ApiInterface.class).updateProfile(token,user);
+                .create(ApiInterface.class).updateProfile(lang,token,user);
         call.enqueue(new Callback<UserApiResponse>() {
             @Override
             public void onResponse(@NotNull Call<UserApiResponse> call, @NotNull Response<UserApiResponse> response) {
@@ -145,7 +146,7 @@ public class UpdateProfileActivity extends AppCompatActivity implements  View.On
                         UiUtils.shortToast(UpdateProfileActivity.this, response.body().getMessage());
                     }
                 }else {
-                    UiUtils.shortToast(UpdateProfileActivity.this, "Sorry, connection error");
+                    UiUtils.shortToast(UpdateProfileActivity.this,  getString(R.string.connection_error));
 
                 }
 
@@ -155,7 +156,7 @@ public class UpdateProfileActivity extends AppCompatActivity implements  View.On
             public void onFailure(@NotNull Call<UserApiResponse> call, @NotNull Throwable t) {
                 b.btUpdateProfileSubmit.setVisibility(View.VISIBLE);
                 b.progressUpdateProfile.setVisibility(View.INVISIBLE);
-                UiUtils.shortToast(UpdateProfileActivity.this, "Sorry, connection error");
+                UiUtils.shortToast(UpdateProfileActivity.this,  getString(R.string.connection_error));
 
             }
         });
@@ -165,7 +166,7 @@ public class UpdateProfileActivity extends AppCompatActivity implements  View.On
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent, "please select an Image to upload it"), REQ_CODE);
+        startActivityForResult(Intent.createChooser(intent, getString(R.string.select_profile_image)), REQ_CODE);
     }
 
     @Override

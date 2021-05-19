@@ -47,7 +47,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     BannersAdapter bannersAdapter;
     ProductsAdapter productsAdapter;
     SharedPreferences pref;
-    //private static final String TAG = "BannersAdapter";
 
     public HomeFragment() {
         // Required empty public constructor
@@ -84,14 +83,17 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         Log.d(TAG, "mkhedr: onCreate");
 
 
+
         return b.getRoot();
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        //getHomeContent();
+    public void onStart() {
+        super.onStart();
+        Log.d(TAG, "mkhedr: onStart");
+
     }
+
 
     @Override
     public void onClick(View v) {
@@ -106,18 +108,20 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         }
         else if (v==b.layoutHomeToPreventCorona){
             Intent intent =new Intent(getContext(), CategoryProductsActivity.class);
-            intent.putExtra(requireContext().getString(R.string.category_name),"Prevent Corona");
-
+            intent.putExtra(requireContext().getString(R.string.category_name),getString(R.string.prevent_corona));
             startActivity(intent);
         }
         else if (v==b.svHome){
             startActivity(new Intent(getContext(), SearchActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
         }
     }
+
     void getHomeContent(){
         String token = pref.getString(getString(R.string.pref_user_token), "");
+        String lang=UiUtils.getAppLang(getContext());
+
         Call<HomePageApiResponse> call= RetrofitInstance.getRetrofitInstance()
-                .create(ApiInterface.class).getHomePage(token);
+                .create(ApiInterface.class).getHomePage(lang,token);
         call.enqueue(new Callback<HomePageApiResponse>() {
             @Override
             public void onResponse(@NotNull Call<HomePageApiResponse> call, @NotNull Response<HomePageApiResponse> response) {
@@ -133,12 +137,12 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                     }
                 }
                 else {
-                    UiUtils.shortToast(getContext(), "Sorry, connection error");
+                    UiUtils.shortToast(getContext(),  getString(R.string.connection_error));
                 }
             }
             @Override
             public void onFailure(@NotNull Call<HomePageApiResponse> call, @NotNull Throwable t) {
-                UiUtils.shortToast(getContext(), "Sorry, connection error");
+                UiUtils.shortToast(getContext(),  getString(R.string.connection_error));
             }
         });
     }

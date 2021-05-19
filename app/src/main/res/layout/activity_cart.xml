@@ -7,7 +7,7 @@
 
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.khedr.ecommerce.com.khedr.loginwithapi.ui.CartActivity">
+        tools:context="com.khedr.ecommerce.ui.CartActivity">
 
         <TextView
             android:id="@+id/main_tv_cart"

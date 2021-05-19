@@ -6,7 +6,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.khedr.ecommerce.com.khedr.loginwithapi.ui.LoginActivity">
+        tools:context="com.khedr.ecommerce.ui.LoginActivity">
 
         <TextView
             android:id="@+id/tv_login_main"
@@ -53,7 +53,7 @@
                     android:id="@+id/iv_login_left_back"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:paddingStart="@dimen/_40sdp"
+                    android:paddingLeft="@dimen/_40sdp"
                     android:src="@drawable/right_back"
                     app:layout_constraintDimensionRatio="1:1"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -93,7 +93,7 @@
                     android:layout_width="@dimen/_250sdp"
                     android:layout_height="@dimen/_250sdp"
                     android:layout_marginTop="@dimen/_85sdp"
-                    android:src="@drawable/ic_girl"
+                    android:src="@drawable/iv_girl"
                     app:layout_constraintBottom_toTopOf="@id/et_login_email_layout"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -123,6 +123,7 @@
                         android:autofillHints="email"
                         android:background="@drawable/et_stroke"
                         android:fontFamily="@font/montserrat_medium"
+                        android:textAlignment="viewStart"
                         android:hint="@string/e_mail"
                         android:inputType="textEmailAddress"
                         android:textColor="@color/secondary" />
@@ -152,6 +153,7 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/et_stroke"
                         android:fontFamily="@font/montserrat_medium"
+                        android:textAlignment="viewStart"
                         android:hint="@string/password"
                         android:inputType="textPassword"
                         android:textColor="@color/secondary"

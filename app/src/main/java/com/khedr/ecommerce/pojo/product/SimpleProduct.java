@@ -1,6 +1,5 @@
 package com.khedr.ecommerce.pojo.product;
 
-import com.khedr.ecommerce.pojo.product.favorites.post.FavoriteProduct;
 
 public class SimpleProduct  {
     int id;

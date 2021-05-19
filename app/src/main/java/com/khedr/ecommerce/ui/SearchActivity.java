@@ -59,6 +59,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
             }
             return false;
         });
+
         isSearchSucceeded.observe(this, booleans -> {
             UiUtils.animCenterToEnd(this,b.progressSearch);
             if (booleans[0]) {
@@ -71,10 +72,9 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
                     b.layoutSearchProductNotFound.setVisibility(View.VISIBLE);
                 }
             } else {
-                UiUtils.shortToast(this, "Connection error");
+                UiUtils.shortToast(this,  getString(R.string.connection_error));
             }
         });
-
 
         b.svSearchEt.addTextChangedListener(new TextWatcher() {
             @Override

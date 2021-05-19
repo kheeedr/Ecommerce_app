@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">الخضراوي ماركت</string>
+
+    <string name="prompt_email">البريد الالكتروني</string>
+    <string name="prompt_password">كلمة السر</string>
+    <string name="action_sign_in">تسجيل الدخول او انشاء حساب</string>
+    <string name="action_sign_in_short">تسجيل الدخول</string>
+    <string name="welcome">مرحبا</string>
+    <string name="invalid_username">اسم مسخدم غير صالح</string>
+    <string name="invalid_password">كلمة السر يجب ان تكون اكثر من  5 حروف</string>
+    <string name="login_failed">فشل تسجيل الدخول</string>
+    <string name="khadrawy">الخضراوي</string>
+    <string name="market">ماركت</string>
+
+    <string name="login">تسجيل الدخول</string>
+    <string name="new_user_sign_up">"مستخدم جديد ؟ انشاء حساب "</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="sign_out">تسجيل خروج</string>
+    <string name="pref_status">status</string>
+    <string name="pref_user_name">pref_use_name</string>
+    <string name="pref_user_token">pref_user_token</string>
+    <string name="pref_user_phone">pref_user_phone</string>
+    <string name="pref_user_email">pref_user_email</string>
+    <string name="pref_user_id">pref_user_id</string>
+    <string name="pref_user_points">pref_user_points</string>
+    <string name="pref_user_credit">pref_user_credit</string>
+    <string name="pref_user_image_url">pref_user_image_url</string>
+    <string name="pref_is_image_ready">pref_is_image_ready</string>
+    <string name="pref_user_image">pref_user_image</string>
+    <string name="login_now">تسجيل الدخول</string>
+    <string name="click_here_to_login">اضغط لتسجيل الدخول</string>
+    <string name="membership_points">نقاط العضويه</string>
+    <string name="_0">0</string>
+    <string name="points">نقطه</string>
+    <string name="cash_wallet">محفظة الرصيد</string>
+    <string name="dollar_sign">$</string>
+    <string name="_0_00">0.00</string>
+    <string name="back_button">زر الرجوع</string>
+    <string name="todo">TODO</string>
+    <string name="referral_code">كود التحويل:</string>
+    <string name="_00000000">00000000</string>
+    <string name="introduce_your_friends_to_join_and_receive_rewards">ارسله الى اصدقائك لكي ينضمو  واحصل هدايا</string>
+
+    <string name="tap_to_view_contact_information">اضغط لعرض معلومات التواصل</string>
+    <string name="about_us">من نحن ؟</string>
+    <string name="terms_of_use">"شروط الاستخدام "</string>
+    <string name="f_a_q">الاسئله الاشائعه</string>
+    <string name="answers_of_popular_questions">اجابات للاسئله الشائعه</string>
+    <string name="language">اللغه</string>
+    <string name="english">عربي</string>
+    <string name="version">رقم الاصدار  1.0</string>
+    <string name="sign_up">انشاء حساب</string>
+    <string name="notifications">"الاشعارات "</string>
+    <string name="search" tools:ignore="TypographyEllipsis">بحث ...</string>
+    <string name="category_name">اسم القسم</string>
+    <string name="category_id">category_id</string>
+    <string name="details">"التفاصيل "</string>
+
+    <string name="_1_1">1 / 1</string>
+    <string name="product_name">اسم المنتج</string>
+    <string name="description">وصف المنتج:</string>
+
+    <string name="price">"السعر "</string>
+    <string name="old_price">$10</string>
+    <string name="add_to_cart">اضف الى عربة التسوق</string>
+    <string name="categories">الاقسام</string>
+    <string name="discount_voucher">قسائم الخصومات</string>
+    <string name="prevent_corona">مكافحة كورونا</string>
+    <string name="contact_n_us">اتصل   بنا</string>
+    <string name="chat_support">الدعم افني</string>
+    <string name="cancel">الغاء</string>
+    <string name="iphone_12_265gb_6gb_ram">iphone 12 265GB 6GB ram</string>
+
+    <string name="about_us_and_our_terms"><![CDATA[من نحن  & شروط الاستخدام ]]></string>
+    <string name="lorem_ipsum_text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</string>
+    <string name="total">المبلغ الكلي:</string>
+    <string name="cart">عربة التسوق</string>
+    <string name="order_now">اطلب الان</string>
+    <string name="your_cart_is_empty">عربة التسوق فارغه</string>
+    <string name="looks_like_you_haven_t_add_any_item_yet">لم تقم باضفة منتجات الى عربة التسوق بعد</string>
+    <string name="shop_now">تسوق الان</string>
+    <string name="no_products_found">لاتوجد منتجات</string>
+    <string name="contact_us">"اتصل بنا "</string>
+    <string name="visit_our_facebook_page">قم بزيارة صفحتنا على الفيسبوك</string>
+    <string name="fb_com_ourPage">FB.com/ourPage</string>
+    <string name="subscribe_our_channel">اشترك في قناتنا على اليوتيوب</string>
+    <string name="youtube_com_ourChannel">youtube.com/ourChannel</string>
+    <string name="rate_us_on_google_play">قيم تطبيقاتنا على متجر بلاي</string>
+    <string name="play_google_com_store_ourApp">play.google.com/store/ourApp</string>
+    <string name="follow_us_on_twitter">قم مبتابعتنا على تويتر</string>
+    <string name="twitter_com_ourPage">twitter.com/ourPage</string>
+    <string name="visit_our_website">قم بزيارة موقعنا الالكتروني</string>
+    <string name="www_khadrawy_com">www.khadrawy.com</string>
+    <string name="favorites">المفضلة</string>
+    <string name="my_account">حسابي</string>
+    <string name="full_name">اسم المستخدم</string>
+    <string name="mohamed_khedr">Mohamed Khedr</string>
+    <string name="phone_number">رقم الهاتف</string>
+    <string name="_01026730615">01026730615</string>
+    <string name="e_mail">البريد الالكتروني</string>
+    <string name="mkheeedr_gmail_com">mkheeedr@gmail.com</string>
+    <string name="address">العنوان</string>
+    <string name="mansoura_adaqahlya">المنصورة, الدقهليه</string>
+
+
+    <string name="phone">رقم الهاتف</string>
+
+    <string name="password">كلمة السر</string>
+    <string name="update_profile">تعديل الملف الشخصي</string>
+    <string name="name">اسم المستخدم</string>
+
+    <string name="new_password">كلمة السر الجديده</string>
+    <string name="re_password">اعادة كتابة كلمة السر</string>
+    <string name="update">تعديل</string>
+    <string name="orders">الطلبات</string>
+    <string name="your_orders_list_is_empty">قائمة الطلبات فارغه</string>
+    <string name="looks_like_you_haven_t_made_your_order_yet">انت لم تقم بأي طلبات بعد</string>
+    <string name="to_cart">فتح  عربة التسوق</string>
+    <string name="quantity">الكميه</string>
+    <string name="_1">1</string>
+    <string name="_10">10%</string>
+    <string name="account">حسابي</string>
+    <string name="english_lang">English</string>
+    <string name="arabic_lang">عربي</string>
+    <string name="connection_error">خطأ في الاتصال بالانترنت</string>
+    <string name="select_profile_image">اختر صورة الملف الشخصي</string>
+    <string name="you_should_login_first">سجل الدخول اولا</string>
+    <string name="failed_to_load_image">فشل تحميل الصوره</string>
+    <string name="toast_sorry"> </string>
+    <string name="system_default">لغة النظام</string>
+    <string name="pref_app_language">pref_app_language</string>
+    <string name="home">الرئيسيه</string>
+    <string name="notify">الاشعارات</string>
+    <string name="order">الطلبات</string>
+    <string name="you_can_login_now">" يمكنك تسجيل الدخول "</string>
+</resources>

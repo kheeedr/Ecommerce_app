@@ -53,8 +53,10 @@ public class FavoritesActivity extends AppCompatActivity implements View.OnClick
     void getFavorites() {
         if (UserUtils.isSignedIn(this)) {
             String token = pref.getString(getString(R.string.pref_user_token), "");
+            String lang=UiUtils.getAppLang(this);
+
             Call<GetFavoritesResponse> call = RetrofitInstance.getRetrofitInstance()
-                    .create(ApiInterface.class).getFavorites(token);
+                    .create(ApiInterface.class).getFavorites(lang,token);
             call.enqueue(new Callback<GetFavoritesResponse>() {
                 @Override
                 public void onResponse(@NotNull Call<GetFavoritesResponse> call, @NotNull Response<GetFavoritesResponse> response) {
@@ -66,20 +68,20 @@ public class FavoritesActivity extends AppCompatActivity implements View.OnClick
                         }
                     }
                     else {
-                        UiUtils.shortToast(FavoritesActivity.this, "Sorry, connection error");
+                        UiUtils.shortToast(FavoritesActivity.this, getString(R.string.connection_error));
                     }
                     b.progressFavorite.setVisibility(View.GONE);
                 }
 
                 @Override
                 public void onFailure(@NotNull Call<GetFavoritesResponse> call, @NotNull Throwable t) {
-                    UiUtils.shortToast(FavoritesActivity.this, "Sorry, connection error");
+                    UiUtils.shortToast(FavoritesActivity.this,  getString(R.string.connection_error));
                     b.progressFavorite.setVisibility(View.GONE);
 
                 }
             });
         } else {
-            UiUtils.shortToast(this, "you should login first");
+            UiUtils.shortToast(this,  getString(R.string.connection_error));
             b.progressFavorite.setVisibility(View.GONE);
         }
     }

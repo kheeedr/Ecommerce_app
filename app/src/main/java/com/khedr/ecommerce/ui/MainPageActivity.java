@@ -1,6 +1,7 @@
 package com.khedr.ecommerce.ui;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 
@@ -12,13 +13,19 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.khedr.ecommerce.R;
 import com.khedr.ecommerce.databinding.ActivityMainPageBinding;
+import com.khedr.ecommerce.utils.UiUtils;
+import com.khedr.ecommerce.utils.UserUtils;
 
 public class MainPageActivity extends AppCompatActivity implements View.OnClickListener {
 
     ActivityMainPageBinding b;
+    SharedPreferences pref;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        pref = UserUtils.getPref(this);
+        UiUtils.setLocale(this);
         b = DataBindingUtil.setContentView(this, R.layout.activity_main_page);
         // bottom navigation
         b.bottomNavigationMainPage.getMenu().findItem(R.id.under_fab_option).setCheckable(false);
@@ -34,15 +41,13 @@ public class MainPageActivity extends AppCompatActivity implements View.OnClickL
         b.fabMainPage.setOnClickListener(this);
 
 
-
-
     }
 
 
     @Override
     public void onClick(View v) {
-        if (v==b.fabMainPage){
-            startActivity(new Intent(MainPageActivity.this,CartActivity.class));
+        if (v == b.fabMainPage) {
+            startActivity(new Intent(MainPageActivity.this, CartActivity.class));
         }
     }
 }

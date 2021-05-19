@@ -6,7 +6,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.khedr.ecommerce.com.khedr.loginwithapi.ui.ContactUsActivity">
+        tools:context="com.khedr.ecommerce.ui.ContactUsActivity">
 
         <TextView
             android:id="@+id/main_tv_contact_us"

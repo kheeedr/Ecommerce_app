@@ -6,7 +6,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.khedr.ecommerce.com.khedr.loginwithapi.ui.fragments.HomeFragment">
+        tools:context="com.khedr.ecommerce.ui.fragments.HomeFragment">
 
         <androidx.core.widget.NestedScrollView
             android:id="@+id/scroll_home"
@@ -82,9 +82,10 @@
 
                             <TextView
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
+                                android:layout_height="@dimen/_25sdp"
                                 android:paddingHorizontal="@dimen/_3sdp"
                                 android:text="@string/categories"
+                                android:gravity="center_horizontal"
                                 android:textColor="@color/secondary"
                                 android:textSize="@dimen/_10sdp" />
                         </LinearLayout>
@@ -115,7 +116,7 @@
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/_25sdp"
-                                android:gravity="center"
+                                android:gravity="center_horizontal"
                                 android:paddingHorizontal="@dimen/_3sdp"
                                 android:text="@string/discount_voucher"
                                 android:textColor="@color/secondary"
@@ -148,8 +149,8 @@
 
                             <TextView
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:gravity="center"
+                                android:layout_height="@dimen/_25sdp"
+                                android:gravity="center_horizontal"
                                 android:paddingHorizontal="@dimen/_3sdp"
                                 android:text="@string/prevent_corona"
                                 android:textColor="@color/secondary"
@@ -184,7 +185,7 @@
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:gravity="center"
+                                android:gravity="center_horizontal"
                                 android:paddingHorizontal="@dimen/_3sdp"
                                 android:text="@string/contact_n_us"
                                 android:textColor="@color/secondary"
@@ -216,8 +217,8 @@
 
                             <TextView
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:gravity="center"
+                                android:layout_height="@dimen/_25sdp"
+                                android:gravity="center_horizontal"
                                 android:paddingHorizontal="@dimen/_3sdp"
                                 android:text="@string/chat_support"
                                 android:textColor="@color/secondary"
@@ -287,6 +288,7 @@
                     android:fontFamily="@font/montserrat_regular"
                     android:paddingVertical="@dimen/_5sdp"
                     android:text="@string/search"
+                    android:textAlignment="viewStart"
                     android:textColor="@color/natural3"
                     android:textSize="@dimen/_15sdp" />
             </LinearLayout>

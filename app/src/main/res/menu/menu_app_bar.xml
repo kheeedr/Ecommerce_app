@@ -6,13 +6,13 @@
     <item
         android:id="@+id/home_option"
         android:icon="@drawable/ic_shop"
-        android:title="Home"
+        android:title="@string/home"
         app:showAsAction="always" />
 
     <item
         android:id="@+id/notifications_option"
         android:icon="@drawable/ic_alarm"
-        android:title="Notify"
+        android:title="@string/notify"
         app:showAsAction="always"
 
         />
@@ -24,13 +24,13 @@
     <item
         android:id="@+id/order_option"
         android:icon="@drawable/ic_bag"
-        android:title="Order"
+        android:title="@string/order"
         app:showAsAction="always" />
 
     <item
         android:id="@+id/account_option"
         android:icon="@drawable/ic_account"
-        android:title="Account"
+        android:title="@string/account"
         app:showAsAction="always" />
 
 </menu>

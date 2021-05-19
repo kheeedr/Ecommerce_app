@@ -56,8 +56,8 @@ public class CategoryProductsActivity extends AppCompatActivity implements View.
 
         Intent intent = getIntent();
         b.mainTvCategoryProducts.setText(intent.getStringExtra(getString(R.string.category_name)));
-        if (intent.getStringExtra(getString(R.string.category_name)).equals("Prevent Corona")) {
-            getCategoryByName("Prevent Corona");
+        if (intent.getStringExtra(getString(R.string.category_name)).equals(getString(R.string.prevent_corona))) {
+            getCategoryByName(getString(R.string.prevent_corona));
         } else {
             getItemsByCategory(intent.getIntExtra(getString(R.string.category_id), 0));
         }
@@ -72,7 +72,9 @@ public class CategoryProductsActivity extends AppCompatActivity implements View.
 
     public void getItemsByCategory(int id) {
         String token = pref.getString(getString(R.string.pref_user_token), "");
-        Call<GetCategoryItemsResponse> call = RetrofitInstance.getRetrofitInstance().create(ApiInterface.class).getCategoryItems(token, id);
+        String lang=UiUtils.getAppLang(this);
+
+        Call<GetCategoryItemsResponse> call = RetrofitInstance.getRetrofitInstance().create(ApiInterface.class).getCategoryItems(lang,token, id);
         call.enqueue(new Callback<GetCategoryItemsResponse>() {
             @Override
             public void onResponse(@NonNull Call<GetCategoryItemsResponse> call, @NotNull Response<GetCategoryItemsResponse> response) {
@@ -90,7 +92,7 @@ public class CategoryProductsActivity extends AppCompatActivity implements View.
                         UiUtils.shortToast(CategoryProductsActivity.this, response.body().getMessage());
                     }
                 } else {
-                    UiUtils.shortToast(CategoryProductsActivity.this, "Sorry, connection error");
+                    UiUtils.shortToast(CategoryProductsActivity.this, getString(R.string.connection_error));
 
                 }
             }
@@ -98,15 +100,16 @@ public class CategoryProductsActivity extends AppCompatActivity implements View.
             @Override
             public void onFailure(@NonNull Call<GetCategoryItemsResponse> call, @NonNull Throwable t) {
                 UiUtils.animCenterToEnd(CategoryProductsActivity.this, b.progressCategoryProducts);
-                UiUtils.shortToast(CategoryProductsActivity.this, "Sorry, connection error");
+                UiUtils.shortToast(CategoryProductsActivity.this, getString(R.string.connection_error));
 
             }
         });
     }
 
     public void getCategoryByName(String categoryName) {
+        String lang=UiUtils.getAppLang(this);
 
-        Call<GetCategoriesResponse> call = RetrofitInstance.getRetrofitInstance().create(ApiInterface.class).getCategories();
+        Call<GetCategoriesResponse> call = RetrofitInstance.getRetrofitInstance().create(ApiInterface.class).getCategories(lang);
         call.enqueue(new Callback<GetCategoriesResponse>() {
             @Override
             public void onResponse(@NotNull Call<GetCategoriesResponse> call, @NotNull Response<GetCategoriesResponse> response) {
@@ -121,20 +124,20 @@ public class CategoryProductsActivity extends AppCompatActivity implements View.
                             }
                         }
                         if (!succeeded) {
-                            UiUtils.shortToast(CategoryProductsActivity.this, "Sorry, no item found");
+                            UiUtils.shortToast(CategoryProductsActivity.this, getString(R.string.connection_error));
                         }
 
                     } else {
                         UiUtils.shortToast(CategoryProductsActivity.this, response.body().getMessage());
                     }
                 } else {
-                    UiUtils.shortToast(CategoryProductsActivity.this, "Sorry, connection error");
+                    UiUtils.shortToast(CategoryProductsActivity.this, getString(R.string.connection_error));
                 }
             }
 
             @Override
             public void onFailure(@NotNull Call<GetCategoriesResponse> call, @NotNull Throwable t) {
-                UiUtils.shortToast(CategoryProductsActivity.this, "Sorry, connection error");
+                UiUtils.shortToast(CategoryProductsActivity.this, getString(R.string.connection_error));
             }
         });
 

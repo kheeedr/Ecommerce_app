@@ -107,8 +107,9 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         b.btSign.setVisibility(View.GONE);
         b.progressSign.setVisibility(View.VISIBLE);
         UiUtils.animJumpAndFade(this,b.progressSign);
+        String lang=UiUtils.getAppLang(this);
         Call<UserApiResponse> call = RetrofitInstance.getRetrofitInstance()
-                .create(ApiInterface.class).register(user);
+                .create(ApiInterface.class).register(lang,user);
         call.enqueue(new Callback<UserApiResponse>() {
             @Override
             public void onResponse(@NotNull Call<UserApiResponse> call, @NotNull Response<UserApiResponse> response) {
@@ -116,7 +117,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 if (response.body() != null) {
                     if (response.body().isStatus()) {
                         UiUtils.shortToast(SignUpActivity.this, response.body().getMessage()
-                                + " You can login now");
+                                + getString(R.string.you_can_login_now));
                         finish();
                     } else {
                         b.btSign.setVisibility(View.VISIBLE);
@@ -125,7 +126,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                         UiUtils.shortToast(SignUpActivity.this, response.body().getMessage());
                     }
                 }else {
-                    UiUtils.shortToast(SignUpActivity.this, "Sorry, connection error");
+                    UiUtils.shortToast(SignUpActivity.this,  getString(R.string.connection_error));
                 }
             }
 
@@ -134,7 +135,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 b.btSign.setVisibility(View.VISIBLE);
                 b.progressSign.clearAnimation();
                 b.progressSign.setVisibility(View.INVISIBLE);
-                UiUtils.shortToast(SignUpActivity.this, "Sorry, connection error");
+                UiUtils.shortToast(SignUpActivity.this,  getString(R.string.connection_error));
             }
         });
     }
@@ -143,7 +144,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent, "please select an Image to upload it"), REQ_CODE);
+        startActivityForResult(Intent.createChooser(intent, getString(R.string.select_profile_image)), REQ_CODE);
     }
 
     @Override

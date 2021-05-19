@@ -7,14 +7,14 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.khedr.ecommerce.com.khedr.loginwithapi.ui.SplashActivity">
+        tools:context="com.khedr.ecommerce.ui.SplashActivity">
 
         <ImageView
             android:id="@+id/iv_splash_left_back"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="@dimen/_100sdp"
-            android:layout_marginEnd="@dimen/_30sdp"
+            android:layout_marginRight="@dimen/_30sdp"
             android:src="@drawable/back_left"
             app:layout_constraintBottom_toTopOf="@id/iv_splash_right_back"
             app:layout_constraintDimensionRatio="1:1"

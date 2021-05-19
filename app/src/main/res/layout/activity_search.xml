@@ -7,7 +7,7 @@
         android:id="@+id/parent_search"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.SearchActivity">
+        tools:context="com.khedr.ecommerce.ui.SearchActivity">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layout_search_input"

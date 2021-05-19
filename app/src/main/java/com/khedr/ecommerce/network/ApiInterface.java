@@ -28,65 +28,65 @@ import retrofit2.http.Path;
 
 public interface ApiInterface {
     //user
-    @Headers({"lang:en", "Content-Type:application/json"})
+    @Headers({ "Content-Type:application/json"})
     @POST("register")
-    Call<UserApiResponse> register(@Body UserDataForRegisterRequest user);
+    Call<UserApiResponse> register(@Header("lang") String lang,@Body UserDataForRegisterRequest user);
 
-    @Headers({"lang:en", "Content-Type:application/json"})
+    @Headers({"Content-Type:application/json"})
     @POST("login")
-    Call<UserApiResponse> login(@Body UserDataForLoginRequest user);
+    Call<UserApiResponse> login(@Header("lang") String lang,@Body UserDataForLoginRequest user);
 
-    @Headers({"lang:en", "Content-Type:application/json"})
+    @Headers({ "Content-Type:application/json"})
     @POST("logout")
-    Call<UserApiResponse> logOut(@Header("Authorization") String token, @Body TokenModel tokenModel);
+    Call<UserApiResponse> logOut(@Header("lang") String lang,@Header("Authorization") String token, @Body TokenModel tokenModel);
 
     @Headers({"lang:en", "Content-Type:application/json"})
     @PUT("update-profile")
-    Call<UserApiResponse> updateProfile(@Header("Authorization") String token, @Body UserDataForRegisterRequest user);
+    Call<UserApiResponse> updateProfile(@Header("lang") String lang,@Header("Authorization") String token, @Body UserDataForRegisterRequest user);
 
     //  Home
-    @Headers({"lang:en", "Content-Type:application/json"})
+    @Headers({ "Content-Type:application/json"})
     @GET("home")
-    Call<HomePageApiResponse> getHomePage(@Header("Authorization") String token);
+    Call<HomePageApiResponse> getHomePage(@Header("lang") String lang,@Header("Authorization") String token);
 
     // favorite
-    @Headers({"lang:en", "Content-Type:application/json"})
+    @Headers({ "Content-Type:application/json"})
     @POST("favorites")
-    Call<PostFavoriteResponse> addToFavorite(@Header("Authorization") String token
+    Call<PostFavoriteResponse> addToFavorite(@Header("lang") String lang,@Header("Authorization") String token
             , @Body ProductId product_id);
 
-    @Headers({"lang:en", "Content-Type:application/json"})
+    @Headers({ "Content-Type:application/json"})
     @GET("favorites")
-    Call<GetFavoritesResponse> getFavorites(@Header("Authorization") String token);
+    Call<GetFavoritesResponse> getFavorites(@Header("lang") String lang,@Header("Authorization") String token);
 
     // cart
-    @Headers({"lang:en", "Content-Type:application/json"})
+    @Headers({ "Content-Type:application/json"})
     @POST("carts")
-    Call<PostCartResponse> addToCart(@Header("Authorization") String token
+    Call<PostCartResponse> addToCart(@Header("lang") String lang,@Header("Authorization") String token
             , @Body ProductId product_id);
 
-    @Headers({"lang:en", "Content-Type:application/json"})
+    @Headers({ "Content-Type:application/json"})
     @GET("carts")
-    Call<GetCartResponse> getCart(@Header("Authorization") String token);
+    Call<GetCartResponse> getCart(@Header("lang") String lang,@Header("Authorization") String token);
 
-    @Headers({"lang:en", "Content-Type:application/json"})
+    @Headers({ "Content-Type:application/json"})
     @PUT("carts/{product_id}")
-    Call<UpdateQuantityResponse> updateQuantity(@Header("Authorization") String token
+    Call<UpdateQuantityResponse> updateQuantity(@Header("lang") String lang,@Header("Authorization") String token
             , @Path("product_id") int product_id, @Body Quantity quantity);
 
     // Categories
-    @Headers({"lang:en", "Content-Type:application/json"})
+    @Headers({ "Content-Type:application/json"})
     @GET("categories")
-    Call<GetCategoriesResponse> getCategories();
+    Call<GetCategoriesResponse> getCategories(@Header("lang") String lang);
     //items by category
-    @Headers({"lang:en", "Content-Type:application/json"})
+    @Headers({ "Content-Type:application/json"})
     @GET("categories/{product_id}")
-    Call<GetCategoryItemsResponse> getCategoryItems(@Header("Authorization") String token
+    Call<GetCategoryItemsResponse> getCategoryItems(@Header("lang") String lang,@Header("Authorization") String token
             , @Path("product_id") int product_id);
 
     // search
-    @Headers({"lang:en", "Content-Type:application/json"})
+    @Headers({ "Content-Type:application/json"})
     @POST("products/search")
-    Call<SearchResponse> getSearchProducts(@Header("Authorization") String token
+    Call<SearchResponse> getSearchProducts(@Header("lang") String lang,@Header("Authorization") String token
             , @Body SearchRequest searchRequest);
 }

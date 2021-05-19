@@ -68,7 +68,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         b.btLogin.setVisibility(View.GONE);
         b.progressLogin.setVisibility(View.VISIBLE);
         UiUtils.animJumpAndFade(this,b.progressLogin);
-        Call<UserApiResponse> call = RetrofitInstance.getRetrofitInstance().create(ApiInterface.class).login(user);
+        String lang=UiUtils.getAppLang(this);
+
+        Call<UserApiResponse> call = RetrofitInstance.getRetrofitInstance().create(ApiInterface.class).login(lang ,user);
         call.enqueue(new Callback<UserApiResponse>() {
             @Override
             public void onResponse(@NotNull Call<UserApiResponse> call, @NotNull Response<UserApiResponse> response) {
@@ -84,7 +86,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     }
                 }
                 else {
-                    UiUtils.shortToast(LoginActivity.this, "Sorry, connection error");
+                    UiUtils.shortToast(LoginActivity.this,  getString(R.string.connection_error));
                 }
             }
 
@@ -93,7 +95,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 b.btLogin.setVisibility(View.VISIBLE);
                 b.progressLogin.clearAnimation();
                 b.progressLogin.setVisibility(View.INVISIBLE);
-                UiUtils.shortToast(LoginActivity.this, "Sorry, connection error");
+                UiUtils.shortToast(LoginActivity.this,  getString(R.string.connection_error));
             }
         });
 

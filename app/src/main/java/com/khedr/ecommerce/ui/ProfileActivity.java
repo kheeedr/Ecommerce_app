@@ -68,8 +68,10 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         String token = pref.getString(getString(R.string.pref_user_token), "");
         UiUtils.animJumpAndFade(this, b.progressLogout);
         TokenModel tokenModel = new TokenModel(token);
+        String lang=UiUtils.getAppLang(this);
+
         Call<UserApiResponse> call = RetrofitInstance.getRetrofitInstance()
-                .create(ApiInterface.class).logOut(token, tokenModel);
+                .create(ApiInterface.class).logOut(lang,token, tokenModel);
 
         call.enqueue(new Callback<UserApiResponse>() {
             @Override
@@ -84,7 +86,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
                     finish();
                 } else {
-                    UiUtils.shortToast(ProfileActivity.this, "Sorry, connection error");
+                    UiUtils.shortToast(ProfileActivity.this,  getString(R.string.connection_error));
                 }
             }
 
@@ -93,7 +95,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                 b.btProfileLogout.setVisibility(View.VISIBLE);
                 b.progressLogout.clearAnimation();
                 b.progressLogout.setVisibility(View.INVISIBLE);
-                UiUtils.shortToast(ProfileActivity.this, "Sorry, connection error");
+                UiUtils.shortToast(ProfileActivity.this,  getString(R.string.connection_error));
             }
         });
 

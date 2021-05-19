@@ -43,7 +43,9 @@ public abstract class ProductUtils {
             btToCart.setVisibility(View.GONE);
             ProductId id = new ProductId(productId);
             String token = UserUtils.getPref(context).getString(context.getString(R.string.pref_user_token), "");
-            Call<PostCartResponse> call = RetrofitInstance.getRetrofitInstance().create(ApiInterface.class).addToCart(token, id);
+            String lang=UiUtils.getAppLang(context);
+
+            Call<PostCartResponse> call = RetrofitInstance.getRetrofitInstance().create(ApiInterface.class).addToCart(lang,token, id);
             call.enqueue(new Callback<PostCartResponse>() {
                 @Override
                 public void onResponse(@NotNull Call<PostCartResponse> call, @NotNull Response<PostCartResponse> response) {
@@ -54,7 +56,7 @@ public abstract class ProductUtils {
                     if (response.body() != null) {
                         UiUtils.shortToast(context, response.body().getMessage());
                     } else {
-                        UiUtils.shortToast(context, "Sorry, connection error");
+                        UiUtils.shortToast(context,  context.getString(R.string.connection_error));
                     }
                 }
 
@@ -63,11 +65,11 @@ public abstract class ProductUtils {
                     progressBar.clearAnimation();
                     progressBar.setVisibility(View.GONE);
                     btToCart.setVisibility(View.VISIBLE);
-                    UiUtils.shortToast(context, "Sorry, connection error");
+                    UiUtils.shortToast(context, context.getString(R.string.connection_error));
                 }
             });
         } else {
-            UiUtils.shortToast(context, "you should login first");
+            UiUtils.shortToast(context, context.getString(R.string.you_should_login_first));
             progressBar.setVisibility(View.GONE);
             btToCart.setVisibility(View.VISIBLE);
         }
@@ -81,8 +83,10 @@ public abstract class ProductUtils {
 
         String token = UserUtils.getPref(context).getString(context.getString(R.string.pref_user_token), "");
         Quantity quantity = new Quantity(newValue);
+        String lang=UiUtils.getAppLang(context);
+
         Call<UpdateQuantityResponse> call = RetrofitInstance.getRetrofitInstance()
-                .create(ApiInterface.class).updateQuantity(token, productId, quantity);
+                .create(ApiInterface.class).updateQuantity(lang,token, productId, quantity);
         call.enqueue(new Callback<UpdateQuantityResponse>() {
             @Override
             public void onResponse(@NotNull Call<UpdateQuantityResponse> call, @NotNull Response<UpdateQuantityResponse> response) {
@@ -91,10 +95,10 @@ public abstract class ProductUtils {
                         UiUtils.shortToast(context, response.body().getMessage());
 
                     } else {
-                        UiUtils.shortToast(context, "Sorry, " + response.body().getMessage());
+                        UiUtils.shortToast(context, context.getString(R.string.toast_sorry)  + response.body().getMessage());
                     }
                 } else {
-                    UiUtils.shortToast(context, "Sorry, connection error");
+                    UiUtils.shortToast(context, context.getString(R.string.connection_error));
                 }
                 progressBar.clearAnimation();
                 progressBar.setVisibility(View.GONE);
@@ -116,8 +120,10 @@ public abstract class ProductUtils {
     public static void onClickUpdateQuantity(Context context, int newValue, int oldValue, int productId, TextView tvQuantity, String TAG, TextView cartTotal) {
         String token = UserUtils.getPref(context).getString(context.getString(R.string.pref_user_token), "");
         Quantity quantity = new Quantity(newValue);
+        String lang=UiUtils.getAppLang(context);
+
         Call<UpdateQuantityResponse> call = RetrofitInstance.getRetrofitInstance()
-                .create(ApiInterface.class).updateQuantity(token, productId, quantity);
+                .create(ApiInterface.class).updateQuantity(lang,token, productId, quantity);
         call.enqueue(new Callback<UpdateQuantityResponse>() {
             @SuppressLint("SetTextI18n")
             @Override
@@ -132,10 +138,10 @@ public abstract class ProductUtils {
 
                     } else {
                         tvQuantity.setText(String.valueOf(oldValue));
-                        UiUtils.shortToast(context, "Sorry, " + response.body().getMessage());
+                        UiUtils.shortToast(context, context.getString(R.string.toast_sorry)  + response.body().getMessage());
                     }
                 } else {
-                    UiUtils.shortToast(context, "Sorry, connection error");
+                    UiUtils.shortToast(context, context.getString(R.string.connection_error));
                 }
             }
 
@@ -151,8 +157,9 @@ public abstract class ProductUtils {
 
         if (UserUtils.isSignedIn(context)) {
             String token = UserUtils.getUserToken(context);
+            String lang=UiUtils.getAppLang(context);
 
-            Call<GetCartResponse> call = RetrofitInstance.getRetrofitInstance().create(ApiInterface.class).getCart(token);
+            Call<GetCartResponse> call = RetrofitInstance.getRetrofitInstance().create(ApiInterface.class).getCart(lang,token);
             call.enqueue(new Callback<GetCartResponse>() {
                 @Override
                 public void onResponse(@NotNull Call<GetCartResponse> call, @NotNull Response<GetCartResponse> response) {
@@ -170,10 +177,10 @@ public abstract class ProductUtils {
                             }
 
                         } else {
-                            UiUtils.shortToast(context, "Sorry, " + response.body().getMessage());
+                            UiUtils.shortToast(context, context.getString(R.string.toast_sorry) + response.body().getMessage());
                         }
                     } else {
-                        UiUtils.shortToast(context, "Sorry, connection error");
+                        UiUtils.shortToast(context, context.getString(R.string.connection_error));
                     }
 
                 }
@@ -184,7 +191,7 @@ public abstract class ProductUtils {
                 }
             });
         } else {
-            UiUtils.shortToast(context, "you should login first");
+            UiUtils.shortToast(context, context.getString(R.string.you_should_login_first));
         }
     }
 
@@ -202,7 +209,9 @@ public abstract class ProductUtils {
 
             ProductId id = new ProductId(productId);
             String token = UserUtils.getPref(context).getString(context.getString(R.string.pref_user_token), "");
-            Call<PostFavoriteResponse> call = RetrofitInstance.getRetrofitInstance().create(ApiInterface.class).addToFavorite(token, id);
+            String lang=UiUtils.getAppLang(context);
+
+            Call<PostFavoriteResponse> call = RetrofitInstance.getRetrofitInstance().create(ApiInterface.class).addToFavorite(lang,token, id);
             call.enqueue(new Callback<PostFavoriteResponse>() {
                 @Override
                 public void onResponse(@NonNull Call<PostFavoriteResponse> call, @NonNull Response<PostFavoriteResponse> response) {
@@ -210,7 +219,7 @@ public abstract class ProductUtils {
                     if (response.body() != null && response.body().isStatus()) {
                         is_favourite[0] = !is_favourite[0];
                     } else {
-                        UiUtils.shortToast(context, "Sorry, connection error");
+                        UiUtils.shortToast(context, context.getString(R.string.connection_error));
                         if (is_favourite[0]) {
                             statusIcon.setImageResource(R.drawable.ic_red_heart);
 
@@ -234,7 +243,7 @@ public abstract class ProductUtils {
                 }
             });
         } else {
-            UiUtils.shortToast(context, "you should login first");
+            UiUtils.shortToast(context, context.getString(R.string.connection_error));
             if (is_favourite[0]) {
                 statusIcon.setImageResource(R.drawable.ic_red_heart);
 
@@ -247,9 +256,10 @@ public abstract class ProductUtils {
     public static void performSearch(Context context, String searchText, MutableLiveData<boolean[]> isSucceeded, SearchResponse[] body) {
         boolean[] succeeded = {false};
         String token = UserUtils.getUserToken(context);
+        String lang=UiUtils.getAppLang(context);
         SearchRequest searchRequest = new SearchRequest(searchText);
         Call<SearchResponse> call = RetrofitInstance.getRetrofitInstance().create(ApiInterface.class)
-                .getSearchProducts(token, searchRequest);
+                .getSearchProducts(lang,token, searchRequest);
         call.enqueue(new Callback<SearchResponse>() {
             @Override
             public void onResponse(@NotNull Call<SearchResponse> call, @NotNull Response<SearchResponse> response) {

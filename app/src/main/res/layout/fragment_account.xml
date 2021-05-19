@@ -6,7 +6,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.khedr.ecommerce.com.khedr.loginwithapi.ui.fragments.AccountFragment">
+        tools:context="com.khedr.ecommerce.ui.fragments.AccountFragment">
 
         <TextView
             android:id="@+id/main_tv_account"
@@ -146,9 +146,8 @@
 
                             <TextView
                                 android:id="@+id/tv_account_user_phone"
-                                android:layout_width="0dp"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="1"
                                 android:fontFamily="@font/montserrat_semi_bold"
                                 android:gravity="center_vertical"
                                 android:padding="@dimen/_5sdp"
@@ -163,7 +162,8 @@
                         android:layout_width="@dimen/_15sdp"
                         android:layout_height="match_parent"
                         android:contentDescription="@string/todo"
-                        android:src="@drawable/ic_blue_right_arrow" />
+                        android:src="@drawable/ic_blue_right_arrow"
+                        />
                 </LinearLayout>
 
                 <LinearLayout
@@ -246,6 +246,7 @@
                                 android:layout_weight="1"
                                 android:fontFamily="@font/montserrat_semi_bold"
                                 android:gravity="center_vertical"
+                                android:paddingStart="@dimen/_2sdp"
                                 android:text="@string/points"
                                 android:textColor="@color/primary"
                                 android:textSize="@dimen/_12sdp" />
@@ -340,7 +341,7 @@
                                     android:layout_weight="1"
                                     android:fontFamily="@font/montserrat_semi_bold"
                                     android:gravity="center_vertical"
-                                    android:paddingHorizontal="@dimen/_3sdp"
+                                    android:paddingHorizontal="@dimen/_1sdp"
                                     android:paddingTop="@dimen/_1sdp"
                                     android:text="@string/_0_00"
                                     android:textColor="#F7D96F"
@@ -413,8 +414,9 @@
                                 android:text="@string/_00000000"
                                 android:textColor="@color/natural2"
                                 android:textSize="@dimen/_12sdp"
+                                app:layout_constraintBottom_toBottomOf="@+id/tv_referral_code_word"
                                 app:layout_constraintStart_toEndOf="@id/tv_referral_code_word"
-                                app:layout_constraintTop_toTopOf="parent" />
+                                app:layout_constraintTop_toTopOf="@+id/tv_referral_code_word" />
 
                             <LinearLayout
                                 android:id="@+id/layout_under_referral_code"
@@ -715,6 +717,8 @@
                         android:src="@drawable/dotted_divider" />
 
                     <LinearLayout
+                        android:id="@+id/layout_account_to_language"
+
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"

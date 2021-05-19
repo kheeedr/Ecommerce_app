@@ -1,6 +1,5 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">KHADRAWY market</string>
-    <string name="title_activity_sign_up">SignUpAct</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
     <string name="action_sign_in">Sign in or register</string>
@@ -121,4 +120,18 @@
     <string name="quantity">Quantity</string>
     <string name="_1">1</string>
     <string name="_10">10%</string>
+    <string name="english_lang">English</string>
+    <string name="arabic_lang">عربي</string>
+    <string name="connection_error">Sorry, connection error</string>
+    <string name="select_profile_image">please select a profile Image</string>
+    <string name="you_should_login_first">you should login first</string>
+    <string name="failed_to_load_image">failed to load image</string>
+    <string name="toast_sorry">Sorry, </string>
+    <string name="system_default">System default</string>
+    <string name="pref_app_language">pref_app_language</string>
+    <string name="home">Home</string>
+    <string name="notify">Notify</string>
+    <string name="order">Order</string>
+    <string name="you_can_login_now">" You can login now"</string>
+
 </resources>

@@ -2,6 +2,7 @@ package com.khedr.ecommerce.ui;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -22,6 +23,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -31,21 +33,22 @@ public class SplashActivity extends AppCompatActivity {
     ActivitySplashBinding b;
     SharedPreferences pref;
 
-    public static HomePageApiResponse homeResponse=new HomePageApiResponse(false,null,null);
+    public static HomePageApiResponse homeResponse = new HomePageApiResponse(false, null, null);
     private static final String TAG = "SplashActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         super.onCreate(savedInstanceState);
-
+        pref = UserUtils.getPref(this);
+        UiUtils.setLocale(this);
         b = DataBindingUtil.setContentView(this, R.layout.activity_splash);
 
         UiUtils.animJumpAndFade(this, b.progressSplash);
 
-        pref = UserUtils.getPref(this);
         Log.d(TAG, "mkhedr: onCreate");
     }
+
 
     @Override
     protected void onStart() {
@@ -57,8 +60,10 @@ public class SplashActivity extends AppCompatActivity {
     void getHomeContent() {
 
         String token = pref.getString(getString(R.string.pref_user_token), "");
+        String lang=UiUtils.getAppLang(this);
+
         Call<HomePageApiResponse> call = RetrofitInstance.getRetrofitInstance()
-                .create(ApiInterface.class).getHomePage(token);
+                .create(ApiInterface.class).getHomePage(lang,token);
         call.enqueue(new Callback<HomePageApiResponse>() {
             @Override
             public void onResponse(@NotNull Call<HomePageApiResponse> call, @NotNull Response<HomePageApiResponse> response) {
@@ -73,20 +78,22 @@ public class SplashActivity extends AppCompatActivity {
 
                         homeResponse = response.body();
                         Collections.reverse(homeResponse.getData().getProducts());
+
                         startActivity(new Intent(SplashActivity.this, MainPageActivity.class));
                         finish();
+
                     } else {
                         UiUtils.shortToast(SplashActivity.this, response.body().getMessage());
                     }
-                }else {
-                    UiUtils.shortToast(SplashActivity.this, "Sorry, connection error");
+                } else {
+                    UiUtils.shortToast(SplashActivity.this, getString(R.string.connection_error));
                 }
 
             }
 
             @Override
             public void onFailure(@NotNull Call<HomePageApiResponse> call, @NotNull Throwable t) {
-                UiUtils.shortToast(SplashActivity.this, "Sorry, connection error");
+                UiUtils.shortToast(SplashActivity.this, getString(R.string.connection_error));
             }
         });
     }

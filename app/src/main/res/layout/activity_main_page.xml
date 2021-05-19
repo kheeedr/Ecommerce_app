@@ -6,7 +6,8 @@
     <androidx.coordinatorlayout.widget.CoordinatorLayout
 
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        >
 
         <fragment
             android:id="@+id/fragmentContainerView"
@@ -15,7 +16,6 @@
             android:layout_height="match_parent"
             android:layout_marginBottom="@dimen/_15sdp"
             app:defaultNavHost="true"
-
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -58,7 +58,26 @@
             android:src="@drawable/ic_cart"
             app:backgroundTint="@color/primary"
             app:layout_anchor="@id/bottomAppBar"
-            app:tint="@color/white" />
+            app:tint="@color/white" >
+
+        </com.google.android.material.floatingactionbutton.FloatingActionButton>
+
+<!--        <TextView-->
+<!--            android:id="@+id/tv_main_cart_num"-->
+<!--            android:layout_width="@dimen/_10sdp"-->
+<!--            android:layout_height="@dimen/_10sdp"-->
+<!--          -->
+<!--            android:background="@drawable/ic_discount_back"-->
+<!--            android:gravity="center"-->
+<!--            android:rotation="15"-->
+<!--            android:text="11"-->
+<!--            android:textColor="@color/white"-->
+<!--            android:textSize="@dimen/_6sdp"-->
+<!--            android:translationZ="@dimen/_9sdp"-->
+<!--            android:visibility="visible"-->
+<!--            app:layout_anchor="@+id/fab_main_page"-->
+<!--            app:layout_anchorGravity="start|top"-->
+<!--            />-->
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </layout>
