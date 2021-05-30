@@ -36,8 +36,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:reverseLayout="true"
-                    app:stackFromEnd="true"
-                    />
+                    app:stackFromEnd="true" />
 
                 <HorizontalScrollView
                     android:id="@+id/scroll_home_shortcuts"
@@ -83,9 +82,9 @@
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/_25sdp"
+                                android:gravity="center_horizontal"
                                 android:paddingHorizontal="@dimen/_3sdp"
                                 android:text="@string/categories"
-                                android:gravity="center_horizontal"
                                 android:textColor="@color/secondary"
                                 android:textSize="@dimen/_10sdp" />
                         </LinearLayout>
@@ -233,15 +232,15 @@
                     android:id="@+id/rv_home_products"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                     android:orientation="vertical"
-                    app:spanCount="2"
                     android:paddingHorizontal="@dimen/_10sdp"
                     android:paddingBottom="@dimen/_45sdp"
+                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/scroll_home_shortcuts" />
+                    app:layout_constraintTop_toBottomOf="@id/scroll_home_shortcuts"
+                    app:spanCount="2" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
@@ -280,7 +279,6 @@
                     android:contentDescription="@string/todo" />
 
                 <TextView
-
                     android:id="@+id/sv_home_textInputLayout"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
