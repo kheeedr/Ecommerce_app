@@ -121,7 +121,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         String lang=UiUtils.getAppLang(getContext());
 
         Call<HomePageApiResponse> call= RetrofitInstance.getRetrofitInstance()
-                .create(ApiInterface.class).getHomePage(lang,token);
+                .getHomePage(getContext(),token);
         call.enqueue(new Callback<HomePageApiResponse>() {
             @Override
             public void onResponse(@NotNull Call<HomePageApiResponse> call, @NotNull Response<HomePageApiResponse> response) {

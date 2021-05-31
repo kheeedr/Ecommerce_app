@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -153,8 +154,14 @@ public abstract class UiUtils {
         if (!appLang.equals("")) {
             return appLang;
         } else {
+
             Locale defaultLocale = Resources.getSystem().getConfiguration().locale;
             return defaultLocale.getLanguage();
         }
+    }
+
+    public static void textError(EditText editText, String errorMessage) {
+        editText.setError(errorMessage);
+        editText.requestFocus();
     }
 }

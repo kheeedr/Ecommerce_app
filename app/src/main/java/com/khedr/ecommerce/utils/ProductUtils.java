@@ -45,7 +45,7 @@ public abstract class ProductUtils {
             String token = UserUtils.getPref(context).getString(context.getString(R.string.pref_user_token), "");
             String lang=UiUtils.getAppLang(context);
 
-            Call<PostCartResponse> call = RetrofitInstance.getRetrofitInstance().create(ApiInterface.class).addToCart(lang,token, id);
+            Call<PostCartResponse> call = RetrofitInstance.getRetrofitInstance().addToCart(context,token, id);
             call.enqueue(new Callback<PostCartResponse>() {
                 @Override
                 public void onResponse(@NotNull Call<PostCartResponse> call, @NotNull Response<PostCartResponse> response) {
@@ -86,7 +86,7 @@ public abstract class ProductUtils {
         String lang=UiUtils.getAppLang(context);
 
         Call<UpdateQuantityResponse> call = RetrofitInstance.getRetrofitInstance()
-                .create(ApiInterface.class).updateQuantity(lang,token, productId, quantity);
+                .updateQuantity(context,token, productId, quantity);
         call.enqueue(new Callback<UpdateQuantityResponse>() {
             @Override
             public void onResponse(@NotNull Call<UpdateQuantityResponse> call, @NotNull Response<UpdateQuantityResponse> response) {
@@ -123,7 +123,7 @@ public abstract class ProductUtils {
         String lang=UiUtils.getAppLang(context);
 
         Call<UpdateQuantityResponse> call = RetrofitInstance.getRetrofitInstance()
-                .create(ApiInterface.class).updateQuantity(lang,token, productId, quantity);
+                .updateQuantity(context,token, productId, quantity);
         call.enqueue(new Callback<UpdateQuantityResponse>() {
             @SuppressLint("SetTextI18n")
             @Override
@@ -159,7 +159,7 @@ public abstract class ProductUtils {
             String token = UserUtils.getUserToken(context);
             String lang=UiUtils.getAppLang(context);
 
-            Call<GetCartResponse> call = RetrofitInstance.getRetrofitInstance().create(ApiInterface.class).getCart(lang,token);
+            Call<GetCartResponse> call = RetrofitInstance.getRetrofitInstance().getCart(context,token);
             call.enqueue(new Callback<GetCartResponse>() {
                 @Override
                 public void onResponse(@NotNull Call<GetCartResponse> call, @NotNull Response<GetCartResponse> response) {
@@ -211,7 +211,7 @@ public abstract class ProductUtils {
             String token = UserUtils.getPref(context).getString(context.getString(R.string.pref_user_token), "");
             String lang=UiUtils.getAppLang(context);
 
-            Call<PostFavoriteResponse> call = RetrofitInstance.getRetrofitInstance().create(ApiInterface.class).addToFavorite(lang,token, id);
+            Call<PostFavoriteResponse> call = RetrofitInstance.getRetrofitInstance().addToFavorite(context,token, id);
             call.enqueue(new Callback<PostFavoriteResponse>() {
                 @Override
                 public void onResponse(@NonNull Call<PostFavoriteResponse> call, @NonNull Response<PostFavoriteResponse> response) {
@@ -258,8 +258,8 @@ public abstract class ProductUtils {
         String token = UserUtils.getUserToken(context);
         String lang=UiUtils.getAppLang(context);
         SearchRequest searchRequest = new SearchRequest(searchText);
-        Call<SearchResponse> call = RetrofitInstance.getRetrofitInstance().create(ApiInterface.class)
-                .getSearchProducts(lang,token, searchRequest);
+        Call<SearchResponse> call = RetrofitInstance.getRetrofitInstance()
+                .getSearchProducts(context,token, searchRequest);
         call.enqueue(new Callback<SearchResponse>() {
             @Override
             public void onResponse(@NotNull Call<SearchResponse> call, @NotNull Response<SearchResponse> response) {

@@ -74,7 +74,7 @@ public class CategoryProductsActivity extends AppCompatActivity implements View.
         String token = pref.getString(getString(R.string.pref_user_token), "");
         String lang=UiUtils.getAppLang(this);
 
-        Call<GetCategoryItemsResponse> call = RetrofitInstance.getRetrofitInstance().create(ApiInterface.class).getCategoryItems(lang,token, id);
+        Call<GetCategoryItemsResponse> call = RetrofitInstance.getRetrofitInstance().getCategoryItems(this,token, id);
         call.enqueue(new Callback<GetCategoryItemsResponse>() {
             @Override
             public void onResponse(@NonNull Call<GetCategoryItemsResponse> call, @NotNull Response<GetCategoryItemsResponse> response) {
@@ -109,7 +109,7 @@ public class CategoryProductsActivity extends AppCompatActivity implements View.
     public void getCategoryByName(String categoryName) {
         String lang=UiUtils.getAppLang(this);
 
-        Call<GetCategoriesResponse> call = RetrofitInstance.getRetrofitInstance().create(ApiInterface.class).getCategories(lang);
+        Call<GetCategoriesResponse> call = RetrofitInstance.getRetrofitInstance().getCategories(this);
         call.enqueue(new Callback<GetCategoriesResponse>() {
             @Override
             public void onResponse(@NotNull Call<GetCategoriesResponse> call, @NotNull Response<GetCategoriesResponse> response) {

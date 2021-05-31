@@ -56,7 +56,7 @@ public class FavoritesActivity extends AppCompatActivity implements View.OnClick
             String lang=UiUtils.getAppLang(this);
 
             Call<GetFavoritesResponse> call = RetrofitInstance.getRetrofitInstance()
-                    .create(ApiInterface.class).getFavorites(lang,token);
+                    .getFavorites(this,token);
             call.enqueue(new Callback<GetFavoritesResponse>() {
                 @Override
                 public void onResponse(@NotNull Call<GetFavoritesResponse> call, @NotNull Response<GetFavoritesResponse> response) {

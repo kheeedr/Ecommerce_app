@@ -7,7 +7,7 @@
 
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/_25sdp"
+        android:layout_marginTop="25dp"
         tools:context="com.khedr.ecommerce.ui.CartActivity">
 
         <TextView
@@ -55,6 +55,7 @@
                 android:id="@+id/rv_cart"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
+                android:fillViewport="true"
                 android:layout_marginHorizontal="@dimen/_10sdp"
                 app:layout_constraintBottom_toTopOf="@id/layout_cart_to_order"
                 app:layout_constraintEnd_toEndOf="parent"

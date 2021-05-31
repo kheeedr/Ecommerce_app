@@ -42,7 +42,7 @@ public class CategoriesActivity extends AppCompatActivity implements View.OnClic
 
     public void getCategories() {
         String lang = UiUtils.getAppLang(this);
-        Call<GetCategoriesResponse> call = RetrofitInstance.getRetrofitInstance().create(ApiInterface.class).getCategories(lang);
+        Call<GetCategoriesResponse> call = RetrofitInstance.getRetrofitInstance().getCategories(this);
         call.enqueue(new Callback<GetCategoriesResponse>() {
             @Override
             public void onResponse(@NotNull Call<GetCategoriesResponse> call, @NotNull Response<GetCategoriesResponse> response) {

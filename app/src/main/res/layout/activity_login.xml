@@ -6,7 +6,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/_25sdp"
+        android:layout_marginTop="25dp"
         tools:context="com.khedr.ecommerce.ui.LoginActivity">
 
         <TextView
@@ -42,6 +42,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="@dimen/_42sdp"
+            android:fillViewport="true"
             >
 
             <androidx.constraintlayout.widget.ConstraintLayout

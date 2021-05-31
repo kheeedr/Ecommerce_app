@@ -81,7 +81,7 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
             String token = pref.getString(getString(R.string.pref_user_token), "");
             String lang=UiUtils.getAppLang(this);
 
-            Call<GetCartResponse> call = RetrofitInstance.getRetrofitInstance().create(ApiInterface.class).getCart(lang,token);
+            Call<GetCartResponse> call = RetrofitInstance.getRetrofitInstance().getCart(this,token);
             call.enqueue(new Callback<GetCartResponse>() {
                 @SuppressLint("SetTextI18n")
                 @Override

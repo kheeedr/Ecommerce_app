@@ -12,6 +12,7 @@ import androidx.databinding.DataBindingUtil;
 
 import com.khedr.ecommerce.R;
 import com.khedr.ecommerce.databinding.ActivityLoginBinding;
+import com.khedr.ecommerce.ui.signUp.SignUpActivity;
 import com.khedr.ecommerce.utils.UiUtils;
 import com.khedr.ecommerce.pojo.user.UserApiResponse;
 import com.khedr.ecommerce.pojo.user.UserDataForLoginRequest;
@@ -70,7 +71,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         UiUtils.animJumpAndFade(this,b.progressLogin);
         String lang=UiUtils.getAppLang(this);
 
-        Call<UserApiResponse> call = RetrofitInstance.getRetrofitInstance().create(ApiInterface.class).login(lang ,user);
+        Call<UserApiResponse> call = RetrofitInstance.getRetrofitInstance().login(this ,user);
         call.enqueue(new Callback<UserApiResponse>() {
             @Override
             public void onResponse(@NotNull Call<UserApiResponse> call, @NotNull Response<UserApiResponse> response) {

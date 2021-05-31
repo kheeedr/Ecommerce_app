@@ -57,17 +57,26 @@ dependencies {
     implementation "com.squareup.retrofit2:retrofit:2.9.0"
 
     //Room
-    def room_version = "2.2.5"
+    def room_version = "2.3.0"
     implementation "androidx.room:room-runtime:$room_version"
     annotationProcessor "androidx.room:room-compiler:$room_version"
+    //room and RxJava
+    implementation "androidx.room:room-rxjava2:$room_version"
 
     //RxJava
     def rxJavaVersion = '2.1.1'
     implementation "io.reactivex.rxjava2:rxandroid:$rxJavaVersion"
-    implementation "io.reactivex.rxjava2:rxjava:$rxJavaVersion"
+    implementation "io.reactivex.rxjava2:rxjava:2.2.9"
 
-    //room and RxJava
-    implementation "androidx.room:room-rxjava2:$room_version"
+    //retrofit with rxjava
+    implementation  'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
+
+    // ViewModel
+    def lifecycle_version = "2.3.1"
+    implementation "androidx.lifecycle:lifecycle-viewmodel:$lifecycle_version"
+    // LiveData
+    implementation "androidx.lifecycle:lifecycle-livedata:$lifecycle_version"
+
     //Gson
     implementation 'com.google.code.gson:gson:2.8.6'
 

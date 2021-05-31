@@ -1,0 +1,32 @@
+ /**
+     public void postNewUser(UserDataForRegisterRequest user) {
+
+
+     Call<UserApiResponse> call = RetrofitInstance.getRetrofitInstance()
+     .create(ApiInterface.class).register(lang,user);
+     call.enqueue(new Callback<UserApiResponse>() {
+    @Override public void onResponse(@NotNull Call<UserApiResponse> call, @NotNull Response<UserApiResponse> response) {
+
+    if (response.body() != null) {
+    if (response.body().isStatus()) {
+
+    } else {
+    b.btSign.setVisibility(View.VISIBLE);
+    b.progressSign.clearAnimation();
+    b.progressSign.setVisibility(View.INVISIBLE);
+    UiUtils.shortToast(SignUpActivity.this, response.body().getMessage());
+    }
+    }else {
+    UiUtils.shortToast(SignUpActivity.this,  getString(R.string.connection_error));
+    }
+    }
+
+    @Override public void onFailure(@NotNull Call<UserApiResponse> call, @NotNull Throwable t) {
+    b.btSign.setVisibility(View.VISIBLE);
+    b.progressSign.clearAnimation();
+    b.progressSign.setVisibility(View.INVISIBLE);
+    UiUtils.shortToast(SignUpActivity.this,  getString(R.string.connection_error));
+    }
+    });
+     }
+     */

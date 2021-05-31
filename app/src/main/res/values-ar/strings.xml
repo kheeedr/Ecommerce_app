@@ -29,6 +29,7 @@
     <string name="pref_user_image_url">pref_user_image_url</string>
     <string name="pref_is_image_ready">pref_is_image_ready</string>
     <string name="pref_user_image">pref_user_image</string>
+    <string name="pref_app_language">pref_app_language</string>
     <string name="login_now">تسجيل الدخول</string>
     <string name="click_here_to_login">اضغط لتسجيل الدخول</string>
     <string name="membership_points">نقاط العضويه</string>
@@ -130,9 +131,15 @@
     <string name="failed_to_load_image">فشل تحميل الصوره</string>
     <string name="toast_sorry"> </string>
     <string name="system_default">لغة النظام</string>
-    <string name="pref_app_language">pref_app_language</string>
+
     <string name="home">الرئيسيه</string>
     <string name="notify">الاشعارات</string>
     <string name="order">الطلبات</string>
     <string name="you_can_login_now">" يمكنك تسجيل الدخول "</string>
+    <string name="enter_full_name">please enter full name</string>
+    <string name="max_words_4">sorry max words allowed is 4</string>
+    <string name="Invalid_phone">phone is not valid</string>
+    <string name="invalid_email">email is not valid</string>
+    <string name="short_password">password must be 6 letters at least</string>
+    <string name="invalid_repassword">\"re-password is not equal the password \"</string>
 </resources>

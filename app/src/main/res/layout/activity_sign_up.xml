@@ -6,8 +6,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/_25sdp"
-        tools:context="com.khedr.ecommerce.ui.SignUpActivity">
+        android:layout_marginTop="25dp"
+        tools:context="com.khedr.ecommerce.ui.signUp.SignUpActivity">
 
         <TextView
             android:id="@+id/tv_sign_main"
@@ -41,6 +41,7 @@
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:fillViewport="true"
             android:layout_marginTop="@dimen/_42sdp">
 
             <androidx.constraintlayout.widget.ConstraintLayout

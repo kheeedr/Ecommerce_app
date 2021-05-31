@@ -71,7 +71,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         String lang=UiUtils.getAppLang(this);
 
         Call<UserApiResponse> call = RetrofitInstance.getRetrofitInstance()
-                .create(ApiInterface.class).logOut(lang,token, tokenModel);
+                .logOut(this,token, tokenModel);
 
         call.enqueue(new Callback<UserApiResponse>() {
             @Override

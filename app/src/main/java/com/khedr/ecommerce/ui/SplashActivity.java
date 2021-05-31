@@ -63,7 +63,7 @@ public class SplashActivity extends AppCompatActivity {
         String lang=UiUtils.getAppLang(this);
 
         Call<HomePageApiResponse> call = RetrofitInstance.getRetrofitInstance()
-                .create(ApiInterface.class).getHomePage(lang,token);
+                .getHomePage(this,token);
         call.enqueue(new Callback<HomePageApiResponse>() {
             @Override
             public void onResponse(@NotNull Call<HomePageApiResponse> call, @NotNull Response<HomePageApiResponse> response) {

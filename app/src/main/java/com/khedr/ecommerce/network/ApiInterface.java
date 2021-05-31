@@ -17,6 +17,7 @@ import com.khedr.ecommerce.pojo.user.UserApiResponse;
 import com.khedr.ecommerce.pojo.user.UserDataForLoginRequest;
 import com.khedr.ecommerce.pojo.user.UserDataForRegisterRequest;
 
+import io.reactivex.Single;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -30,7 +31,7 @@ public interface ApiInterface {
     //user
     @Headers({ "Content-Type:application/json"})
     @POST("register")
-    Call<UserApiResponse> register(@Header("lang") String lang,@Body UserDataForRegisterRequest user);
+    Single<UserApiResponse> register(@Header("lang") String lang, @Body UserDataForRegisterRequest user);
 
     @Headers({"Content-Type:application/json"})
     @POST("login")

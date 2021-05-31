@@ -133,5 +133,11 @@
     <string name="notify">Notify</string>
     <string name="order">Order</string>
     <string name="you_can_login_now">" You can login now"</string>
+    <string name="enter_full_name">please enter full name</string>
+    <string name="max_words_4">sorry max words allowed is 4</string>
+    <string name="Invalid_phone">phone is not valid</string>
+    <string name="invalid_email">email is not valid</string>
+    <string name="short_password">password must be 6 letters at least</string>
+    <string name="invalid_repassword">\"re-password is not equal the password \"</string>
 
 </resources>

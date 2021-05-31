@@ -6,7 +6,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/_25sdp"
+        android:layout_marginTop="25dp"
         tools:context="com.khedr.ecommerce.ui.ContactUsActivity">
 
         <TextView
@@ -43,6 +43,7 @@
             android:layout_height="match_parent"
             android:layout_marginTop="@dimen/_42sdp"
             android:orientation="vertical"
+            android:fillViewport="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
