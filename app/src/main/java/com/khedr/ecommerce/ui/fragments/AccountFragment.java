@@ -1,6 +1,5 @@
 package com.khedr.ecommerce.ui.fragments;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -18,7 +17,7 @@ import com.khedr.ecommerce.databinding.FragmentAccountBinding;
 import com.khedr.ecommerce.ui.AboutUsActivity;
 import com.khedr.ecommerce.ui.ContactUsActivity;
 import com.khedr.ecommerce.ui.LanguageActivity;
-import com.khedr.ecommerce.ui.LoginActivity;
+import com.khedr.ecommerce.ui.login.LoginActivity;
 import com.khedr.ecommerce.ui.ProfileActivity;
 import com.khedr.ecommerce.utils.UiUtils;
 import com.khedr.ecommerce.utils.UserUtils;

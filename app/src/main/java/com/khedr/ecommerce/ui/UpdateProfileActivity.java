@@ -26,6 +26,7 @@ import com.khedr.ecommerce.pojo.user.UserApiResponse;
 import com.khedr.ecommerce.pojo.user.UserDataForRegisterRequest;
 import com.khedr.ecommerce.network.RetrofitInstance;
 import com.khedr.ecommerce.utils.UiUtils;
+import com.khedr.ecommerce.utils.UserUtils;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -142,7 +143,7 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
                     if (response.body().isStatus()) {
 
                         UiUtils.shortToast(UpdateProfileActivity.this, response.body().getMessage());
-                        LoginActivity.saveUserProfileToShared(response.body(), UpdateProfileActivity.this, user.getImage());
+                        UserUtils.saveUserProfileToShared(response.body(), UpdateProfileActivity.this, user.getImage());
                         startActivity(new Intent(UpdateProfileActivity.this, ProfileActivity.class));
                         finish();
                     } else {

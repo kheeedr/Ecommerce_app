@@ -35,7 +35,7 @@ public interface ApiInterface {
 
     @Headers({"Content-Type:application/json"})
     @POST("login")
-    Call<UserApiResponse> login(@Header("lang") String lang,@Body UserDataForLoginRequest user);
+    Single<UserApiResponse> login(@Header("lang") String lang,@Body UserDataForLoginRequest user);
 
     @Headers({ "Content-Type:application/json"})
     @POST("logout")

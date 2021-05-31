@@ -46,7 +46,7 @@
         <activity android:name=".ui.ContactUsActivity"
             android:screenOrientation="nosensor"
             android:windowSoftInputMode="adjustPan|stateHidden"/>
-        <activity android:name=".ui.LoginActivity"
+        <activity android:name=".ui.login.LoginActivity"
             android:screenOrientation="nosensor"
             android:windowSoftInputMode="adjustPan|stateHidden"/>
         <activity android:name=".ui.AboutUsActivity"

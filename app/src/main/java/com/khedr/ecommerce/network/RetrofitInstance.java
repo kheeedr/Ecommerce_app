@@ -65,6 +65,9 @@ public final class RetrofitInstance {
         return apiInterface.register(getLang(context), user);
     }
 
+    public Single<UserApiResponse> login(Context context, UserDataForLoginRequest user) {
+        return apiInterface.login(getLang(context), user);
+    }
     public Call<GetCartResponse> getCart(Context context, String token) {
         return apiInterface.getCart(getLang(context), token);
     }
@@ -85,9 +88,6 @@ public final class RetrofitInstance {
         return apiInterface.getHomePage(getLang(context), token);
     }
 
-    public Call<UserApiResponse> login(Context context, UserDataForLoginRequest user) {
-        return apiInterface.login(getLang(context), user);
-    }
 
     public Call<UserApiResponse> logOut(Context context, String token, TokenModel tokenModel) {
         return apiInterface.logOut(getLang(context), token, tokenModel);
