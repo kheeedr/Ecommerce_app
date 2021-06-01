@@ -17,7 +17,7 @@ import java.util.ArrayList;
 public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.CategoriesViewHolder> {
     Context context;
     ArrayList<GetCategoriesInnerData> categoriesList = new ArrayList<>();
-    private static final String TAG = "ProductsAdapter";
+
 
     public CategoriesAdapter(Context context) {
         this.context = context;

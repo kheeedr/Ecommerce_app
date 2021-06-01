@@ -21,9 +21,9 @@ import io.reactivex.schedulers.Schedulers;
 
 public class SplashViewModel extends ViewModel {
     MutableLiveData<Boolean> isLoading = new MutableLiveData<>();
-    MutableLiveData<HomePageApiResponse> responseBody = new MutableLiveData<>();
+    public MutableLiveData<HomePageApiResponse> responseBody = new MutableLiveData<>();
 
-    void getHomeContent(Context context) {
+    public void getHomeContent(Context context) {
         isLoading.setValue(true);
         String token = UserUtils.getUserToken(context);
         HomePageApiResponse nullResponse=new HomePageApiResponse(false,context.getString(R.string.connection_error),null);

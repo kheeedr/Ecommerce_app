@@ -2,6 +2,7 @@ package com.khedr.ecommerce.pojo.homeapi;
 
 import com.khedr.ecommerce.pojo.product.Product;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 public class BannersAndProductsModel {

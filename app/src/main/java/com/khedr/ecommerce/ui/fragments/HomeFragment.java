@@ -10,39 +10,34 @@ import android.view.ViewGroup;
 
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.khedr.ecommerce.R;
 import com.khedr.ecommerce.databinding.FragmentHomeBinding;
-import com.khedr.ecommerce.network.RetrofitInstance;
-import com.khedr.ecommerce.pojo.product.Product;
-import com.khedr.ecommerce.utils.UiUtils;
-import com.khedr.ecommerce.utils.UserUtils;
-import com.khedr.ecommerce.pojo.homeapi.HomePageApiResponse;
+import com.khedr.ecommerce.pojo.homeapi.BannersAndProductsModel;
 import com.khedr.ecommerce.ui.activites.CategoriesActivity;
 import com.khedr.ecommerce.ui.activites.CategoryProductsActivity;
 import com.khedr.ecommerce.ui.activites.ContactUsActivity;
 import com.khedr.ecommerce.ui.activites.FavoritesActivity;
 import com.khedr.ecommerce.ui.activites.SearchActivity;
 import com.khedr.ecommerce.ui.activites.splash.SplashActivity;
+import com.khedr.ecommerce.ui.activites.splash.SplashViewModel;
 import com.khedr.ecommerce.ui.adapters.BannersAdapter;
 import com.khedr.ecommerce.ui.adapters.ProductsAdapter;
+import com.khedr.ecommerce.utils.UserUtils;
+
 import org.jetbrains.annotations.NotNull;
-
-import java.util.ArrayList;
-import java.util.Collections;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class HomeFragment extends Fragment implements View.OnClickListener {
 
     public static final int REQ_CODE = 110;
     private static final String TAG = "HomeFragment";
+    public static BannersAndProductsModel homeResponse;
     FragmentHomeBinding b;
     BannersAdapter bannersAdapter;
     ProductsAdapter productsAdapter;
     SharedPreferences pref;
+    SplashViewModel viewModel;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -60,24 +55,32 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         b = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false);
         pref = UserUtils.getPref(requireContext());
 
-        //banners rv
-        bannersAdapter = new BannersAdapter(getContext());
-        b.rvHomeBanners.setAdapter(bannersAdapter);
-        bannersAdapter.setBannersList(SplashActivity.homeResponse.getData().getBanners());
-
-        //products rv
-        productsAdapter=new ProductsAdapter(getContext());
-
-        b.rvHomeProducts.setAdapter(productsAdapter);
-        productsAdapter.setProductsList(SplashActivity.homeResponse.getData().getProducts());
-
         b.ivHomeFavorite.setOnClickListener(this);
         b.layoutHomeToCategories.setOnClickListener(this);
         b.layoutHomeToContactUs.setOnClickListener(this);
         b.layoutHomeToPreventCorona.setOnClickListener(this);
         b.svHome.setOnClickListener(this);
-        Log.d(TAG, "mkhedr: onCreate");
+        //banners rv
+        bannersAdapter = new BannersAdapter(getContext());
+        b.rvHomeBanners.setAdapter(bannersAdapter);
+        bannersAdapter.setBannersList(homeResponse.getBanners());
 
+        //products rv
+        productsAdapter = new ProductsAdapter(getContext());
+        b.rvHomeProducts.setAdapter(productsAdapter);
+        productsAdapter.setProductsList(homeResponse.getProducts());
+
+        viewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(this.requireActivity().getApplication())).get(SplashViewModel.class);
+        viewModel.responseBody.observe(this.requireActivity(), homePageApiResponse -> {
+            if (homePageApiResponse.isStatus()) {
+                homeResponse = homePageApiResponse.getData();
+                bannersAdapter.setBannersList(homeResponse.getBanners());
+                productsAdapter.setProductsList(homeResponse.getProducts());
+
+            }
+        });
+
+        Log.d(TAG, "mkhedr: onCreateView");
 
 
         return b.getRoot();
@@ -86,60 +89,32 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onStart() {
         super.onStart();
-        Log.d(TAG, "mkhedr: onStart");
+        if (homeResponse==null){
+            homeResponse= SplashActivity.homeResponse;
+        }else {
+            Log.d(TAG, "mkhedr: onStart");
+            viewModel.getHomeContent(requireContext());
+        }
 
     }
 
 
     @Override
     public void onClick(View v) {
-        if (v==b.ivHomeFavorite){
+        if (v == b.ivHomeFavorite) {
             startActivity(new Intent(getContext(), FavoritesActivity.class));
-        }
-        else if(v==b.layoutHomeToCategories){
+        } else if (v == b.layoutHomeToCategories) {
             startActivity(new Intent(getContext(), CategoriesActivity.class));
-        }
-        else if (v==b.layoutHomeToContactUs){
+        } else if (v == b.layoutHomeToContactUs) {
             startActivity(new Intent(getContext(), ContactUsActivity.class));
-        }
-        else if (v==b.layoutHomeToPreventCorona){
-            Intent intent =new Intent(getContext(), CategoryProductsActivity.class);
-            intent.putExtra(requireContext().getString(R.string.category_name),getString(R.string.prevent_corona));
+        } else if (v == b.layoutHomeToPreventCorona) {
+            Intent intent = new Intent(getContext(), CategoryProductsActivity.class);
+            intent.putExtra(requireContext().getString(R.string.category_name), getString(R.string.prevent_corona));
             startActivity(intent);
-        }
-        else if (v==b.svHome){
+        } else if (v == b.svHome) {
             startActivity(new Intent(getContext(), SearchActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
         }
     }
 
-//    void getHomeContent(){
-//        String token = pref.getString(getString(R.string.pref_user_token), "");
-//        String lang=UiUtils.getAppLang(getContext());
-//
-//        Call<HomePageApiResponse> call= RetrofitInstance.getRetrofitInstance()
-//                .getHomePage(getContext(),token);
-//        call.enqueue(new Callback<HomePageApiResponse>() {
-//            @Override
-//            public void onResponse(@NotNull Call<HomePageApiResponse> call, @NotNull Response<HomePageApiResponse> response) {
-//                if (response.body() != null) {
-//                    if(response.body().isStatus()){
-//                        SplashActivity.homeResponse=response.body();
-//                        ArrayList<Product> products=response.body().getData().getProducts();
-//                        Collections.reverse(products);
-//                        productsAdapter.setProductsList(products);
-//                    }
-//                    else {
-//                        UiUtils.shortToast(getContext(),response.body().getMessage());
-//                    }
-//                }
-//                else {
-//                    UiUtils.shortToast(getContext(),  getString(R.string.connection_error));
-//                }
-//            }
-//            @Override
-//            public void onFailure(@NotNull Call<HomePageApiResponse> call, @NotNull Throwable t) {
-//                UiUtils.shortToast(getContext(),  getString(R.string.connection_error));
-//            }
-//        });
-//    }
+
 }
