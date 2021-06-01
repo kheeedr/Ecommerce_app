@@ -50,7 +50,7 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
     public void onBindViewHolder(@NonNull @NotNull FavoritesViewHolder holder, int position) {
         pref = context.getSharedPreferences("logined", 0);
         //set product image
-        UiUtils.getImageViaUrl(context,favoritesList.get(position).getProduct().getImage(), holder.b.ivProduct, TAG, holder.b.progressProductIv);
+        UiUtils.getImageViaUrl(context,favoritesList.get(position).getProduct().getImage(), holder.b.ivProduct, holder.b.progressProductIv);
 
 
         //set product name and price;

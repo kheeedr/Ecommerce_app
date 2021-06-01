@@ -14,8 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.khedr.ecommerce.databinding.ItemProductBinding;
 import com.khedr.ecommerce.pojo.product.Product;
-import com.khedr.ecommerce.ui.ProductDetailsActivity;
-import com.khedr.ecommerce.ui.SplashActivity;
+import com.khedr.ecommerce.ui.activites.ProductDetailsActivity;
+import com.khedr.ecommerce.ui.activites.splash.SplashActivity;
 import com.khedr.ecommerce.utils.ProductUtils;
 import com.khedr.ecommerce.utils.UiUtils;
 import com.khedr.ecommerce.utils.UserUtils;
@@ -56,7 +56,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
     public void onBindViewHolder(@NonNull @NotNull ProductsAdapter.ProductsViewHolder holder, int position) {
 
         //set product image
-        UiUtils.getImageViaUrl(context, productsList.get(position).getImage(), holder.b.ivProduct, TAG, holder.b.progressProductIv);
+        UiUtils.getImageViaUrl(context, productsList.get(position).getImage(), holder.b.ivProduct, holder.b.progressProductIv);
 
         //set product name and price
         holder.b.tvProductPrice.setText("EGP " + productsList.get(position).getPrice());

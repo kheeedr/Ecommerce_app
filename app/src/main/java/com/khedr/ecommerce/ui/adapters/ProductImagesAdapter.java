@@ -35,7 +35,7 @@ public class ProductImagesAdapter extends RecyclerView.Adapter<ProductImagesAdap
 
     @Override
     public void onBindViewHolder(@NonNull @NotNull ProductImagesAdapter.ImagesViewHolder holder, int position) {
-        UiUtils.getImageViaUrl(context, imagesList.get(position), holder.b.ivItemImages, TAG, holder.b.progressRvImagesIv);
+        UiUtils.getImageViaUrl(context, imagesList.get(position), holder.b.ivItemImages, holder.b.progressRvImagesIv);
     }
 
     @Override

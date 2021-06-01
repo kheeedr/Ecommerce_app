@@ -7,7 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="25dp"
-        tools:context="com.khedr.ecommerce.ui.AboutUsActivity">
+        tools:context=".ui.activites.aboutUs.AboutUsActivity">
 
         <TextView
             android:id="@+id/main_tv_about_us"

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
@@ -8,7 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="25dp"
-        tools:context="com.khedr.ecommerce.ui.SplashActivity">
+        tools:context="com.khedr.ecommerce.ui.activites.splash.SplashActivity">
 
         <ImageView
             android:id="@+id/iv_splash_left_back"
@@ -16,26 +15,26 @@
             android:layout_height="0dp"
             android:layout_marginTop="@dimen/_100sdp"
             android:layout_marginRight="@dimen/_30sdp"
+            android:contentDescription="@string/todo"
             android:src="@drawable/back_left"
             app:layout_constraintBottom_toTopOf="@id/iv_splash_right_back"
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:contentDescription="@string/todo"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/iv_splash_right_back"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginLeft="@dimen/_80sdp"
+            android:contentDescription="@string/todo"
             android:src="@drawable/right_back"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/iv_splash_left_back"
-            android:contentDescription="@string/todo" />
+            app:layout_constraintTop_toBottomOf="@+id/iv_splash_left_back" />
 
         <TextView
             android:id="@+id/tv_splash_khadrawy"
@@ -67,25 +66,44 @@
             android:id="@+id/iv_splash_man"
             android:layout_width="@dimen/_230sdp"
             android:layout_height="@dimen/_230sdp"
+            android:contentDescription="@string/todo"
             android:src="@drawable/man_with_fruits_bag"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:contentDescription="@string/todo"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
+        <Button
+            android:id="@+id/bt_tryAgain_splash"
+            style="@style/Widget.MaterialComponents.Button"
+            android:layout_width="@dimen/_150sdp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bt_back_filled"
+            android:fontFamily="@font/montserrat_medium"
+            android:paddingVertical="@dimen/_2sdp"
+            android:text="@string/reconnect"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_15sdp"
+            android:visibility="gone"
+            app:layout_constraintVertical_bias="0.85"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_splash_man" />
 
         <ImageView
             android:id="@+id/progress_splash"
             android:layout_width="@dimen/_40sdp"
             android:layout_height="@dimen/_40sdp"
+            android:contentDescription="@string/todo"
             android:src="@drawable/ic_primary_hexa_shape"
             android:translationZ="@dimen/_30sdp"
+            android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/iv_splash_man"
-            android:contentDescription="@string/todo"/>
+            app:layout_constraintTop_toBottomOf="@+id/iv_splash_man" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

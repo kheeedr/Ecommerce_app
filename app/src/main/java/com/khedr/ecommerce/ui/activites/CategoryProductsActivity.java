@@ -1,4 +1,4 @@
-package com.khedr.ecommerce.ui;
+package com.khedr.ecommerce.ui.activites;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -16,7 +16,6 @@ import com.khedr.ecommerce.databinding.ActivityCategoryItemsBinding;
 import com.khedr.ecommerce.pojo.categories.GetCategoriesInnerData;
 import com.khedr.ecommerce.pojo.categories.GetCategoriesResponse;
 import com.khedr.ecommerce.pojo.categories.item.GetCategoryItemsResponse;
-import com.khedr.ecommerce.network.ApiInterface;
 import com.khedr.ecommerce.network.RetrofitInstance;
 import com.khedr.ecommerce.pojo.product.Product;
 import com.khedr.ecommerce.ui.adapters.ProductsAdapter;

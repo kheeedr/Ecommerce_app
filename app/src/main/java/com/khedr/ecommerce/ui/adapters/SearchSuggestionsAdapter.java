@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.khedr.ecommerce.databinding.ItemSearchSuggestionBinding;
 import com.khedr.ecommerce.pojo.product.Product;
-import com.khedr.ecommerce.ui.ProductDetailsActivity;
+import com.khedr.ecommerce.ui.activites.ProductDetailsActivity;
 
 import org.jetbrains.annotations.NotNull;
 

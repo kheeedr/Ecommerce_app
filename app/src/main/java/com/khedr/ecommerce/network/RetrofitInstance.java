@@ -2,8 +2,6 @@ package com.khedr.ecommerce.network;
 
 import android.content.Context;
 
-import androidx.core.content.ContextCompat;
-
 import com.khedr.ecommerce.pojo.categories.GetCategoriesResponse;
 import com.khedr.ecommerce.pojo.categories.item.GetCategoryItemsResponse;
 import com.khedr.ecommerce.pojo.homeapi.HomePageApiResponse;
@@ -22,21 +20,16 @@ import com.khedr.ecommerce.pojo.user.UserDataForLoginRequest;
 import com.khedr.ecommerce.pojo.user.UserDataForRegisterRequest;
 import com.khedr.ecommerce.utils.UiUtils;
 
-import java.util.Locale;
-
 import io.reactivex.Single;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
-import retrofit2.http.Body;
-import retrofit2.http.Header;
-import retrofit2.http.Path;
 
 public final class RetrofitInstance {
     private static final String BASE_URL = "https://student.valuxapps.com/api/";
     public static RetrofitInstance INSTANCE;
-    private ApiInterface apiInterface;
+    private final ApiInterface apiInterface;
 
     public RetrofitInstance() {
         Retrofit retrofit = new Retrofit
@@ -56,8 +49,7 @@ public final class RetrofitInstance {
     }
 
     public String getLang(Context context) {
-        String lang = UiUtils.getAppLang(context);
-        return lang;
+        return UiUtils.getAppLang(context);
     }
 
     public Single<UserApiResponse> register(Context context, UserDataForRegisterRequest user) {
@@ -68,6 +60,15 @@ public final class RetrofitInstance {
     public Single<UserApiResponse> login(Context context, UserDataForLoginRequest user) {
         return apiInterface.login(getLang(context), user);
     }
+
+    public Single<UserApiResponse> logOut(Context context, String token, TokenModel tokenModel) {
+        return apiInterface.logOut(getLang(context), token, tokenModel);
+    }
+
+    public Single<UserApiResponse> updateProfile(Context context, String token, UserDataForRegisterRequest user) {
+        return apiInterface.updateProfile(getLang(context), token, user);
+    }
+
     public Call<GetCartResponse> getCart(Context context, String token) {
         return apiInterface.getCart(getLang(context), token);
     }
@@ -84,18 +85,10 @@ public final class RetrofitInstance {
         return apiInterface.getFavorites(getLang(context), token);
     }
 
-    public Call<HomePageApiResponse> getHomePage(Context context, String token) {
+    public Single<HomePageApiResponse> getHomePage(Context context, String token) {
         return apiInterface.getHomePage(getLang(context), token);
     }
 
-
-    public Call<UserApiResponse> logOut(Context context, String token, TokenModel tokenModel) {
-        return apiInterface.logOut(getLang(context), token, tokenModel);
-    }
-
-    public Call<UserApiResponse> updateProfile(Context context, String token, UserDataForRegisterRequest user) {
-        return apiInterface.updateProfile(getLang(context), token, user);
-    }
 
     public Call<PostCartResponse> addToCart(Context context, String token, ProductId product_id) {
         return apiInterface.addToCart(getLang(context), token, product_id);

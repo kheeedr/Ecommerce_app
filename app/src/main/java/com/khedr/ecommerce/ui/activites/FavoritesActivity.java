@@ -1,4 +1,4 @@
-package com.khedr.ecommerce.ui;
+package com.khedr.ecommerce.ui.activites;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.khedr.ecommerce.R;
 import com.khedr.ecommerce.databinding.ActivityFavoritesBinding;
-import com.khedr.ecommerce.network.ApiInterface;
 import com.khedr.ecommerce.network.RetrofitInstance;
 import com.khedr.ecommerce.utils.UiUtils;
 import com.khedr.ecommerce.utils.UserUtils;

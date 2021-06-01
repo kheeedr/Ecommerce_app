@@ -139,5 +139,8 @@
     <string name="invalid_email">email is not valid</string>
     <string name="short_password">password must be 6 letters at least</string>
     <string name="invalid_repassword">\"re-password is not equal the password \"</string>
+    <string name="wait">Please wait...</string>
+    <string name="total_price">\"Total: \"</string>
+    <string name="reconnect">Reconnect</string>
 
 </resources>

@@ -32,7 +32,7 @@ import java.util.List;
 //import retrofit2.Callback;
 //import retrofit2.Response;
 //import com.khedr.ecommerce.R;
-//import static com.khedr.ecommerce.ui.CartActivity.total;
+//import static com.khedr.ecommerce.ui.activites.CartActivity.total;
 
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder> {
     public static final String TAG = "CartAdapter";
@@ -60,7 +60,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
     public void onBindViewHolder(@NonNull @NotNull CartAdapter.CartViewHolder holder, int position) {
 
         //set product image
-        UiUtils.getImageViaUrl(context, cartItems.get(position).getProduct().getImage(), holder.b.ivCartProduct, TAG);
+        UiUtils.getImageViaUrl(context, cartItems.get(position).getProduct().getImage(), holder.b.ivCartProduct, false);
 
         //set product name and price;
         holder.b.tvCartPrice.setText("EGP " + cartItems.get(position).getProduct().getPrice());

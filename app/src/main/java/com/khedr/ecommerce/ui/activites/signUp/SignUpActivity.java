@@ -1,4 +1,4 @@
-package com.khedr.ecommerce.ui.signUp;
+package com.khedr.ecommerce.ui.activites.signUp;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -71,7 +71,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         }
     }
 
-    public void manageProgressbar() {
+    private void manageProgressbar() {
         viewModel.isLoading.observe(this, aBoolean -> {
             if (aBoolean) {
                 b.btSign.setVisibility(View.GONE);
@@ -86,6 +86,9 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     public Pair<Boolean, UserDataForRegisterRequest> isValidUser() {
+
+        Pair<Boolean, UserDataForRegisterRequest> nullUser = new Pair<>(false, null);
+
         String name = Objects.requireNonNull(b.etSignName.getText()).toString();
         String email = Objects.requireNonNull(b.etSignEmail.getText()).toString();
         String phone = Objects.requireNonNull(b.etSignPhone.getText()).toString();
@@ -93,25 +96,30 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         String rePassword = Objects.requireNonNull(b.etSignRepassword.getText()).toString();
         String image = Converters.fromBitmapToString(((BitmapDrawable) b.ivAddUser.getDrawable()).getBitmap());
 
-        Pair<Boolean, UserDataForRegisterRequest> pair = new Pair<>(false, null);
         if (UiUtils.countWordsUsingSplit(name) < 2) {
             UiUtils.textError(b.etSignName, getString(R.string.enter_full_name));
-            return pair;
+            return nullUser;
+
         } else if (UiUtils.countWordsUsingSplit(name) > 4) {
             UiUtils.textError(b.etSignName, getString(R.string.max_words_4));
-            return pair;
+            return nullUser;
+
         } else if (!Patterns.PHONE.matcher(phone).matches()) {
             UiUtils.textError(b.etSignPhone, getString(R.string.Invalid_phone));
-            return pair;
+            return nullUser;
+
         } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             UiUtils.textError(b.etSignEmail, getString(R.string.invalid_email));
-            return pair;
+            return nullUser;
+
         } else if (password.length() < 6) {
             UiUtils.textError(b.etSignPassword, getString(R.string.short_password));
-            return pair;
+            return nullUser;
+
         } else if (!password.equals(rePassword)) {
             UiUtils.textError(b.etSignRepassword, getString(R.string.invalid_repassword));
-            return pair;
+            return nullUser;
+
         } else {
             UserDataForRegisterRequest user = new UserDataForRegisterRequest(name, phone, email, password, image);
             return new Pair<>(true, user);
@@ -146,8 +154,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         intent.setAction(Intent.ACTION_GET_CONTENT);
         someActivityResultLauncher.launch(Intent.createChooser(intent, getString(R.string.select_profile_image)));
     }
-
-
 
 
 }

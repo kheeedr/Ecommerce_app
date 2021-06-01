@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment;
 
 import com.khedr.ecommerce.R;
 import com.khedr.ecommerce.databinding.FragmentOrdersBinding;
-import com.khedr.ecommerce.ui.CartActivity;
+import com.khedr.ecommerce.ui.activites.CartActivity;
 
 
 public class OrdersFragment extends Fragment implements View.OnClickListener {

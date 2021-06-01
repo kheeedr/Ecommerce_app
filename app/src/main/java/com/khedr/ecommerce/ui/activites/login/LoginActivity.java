@@ -1,4 +1,4 @@
-package com.khedr.ecommerce.ui.login;
+package com.khedr.ecommerce.ui.activites.login;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,7 +13,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.khedr.ecommerce.R;
 import com.khedr.ecommerce.databinding.ActivityLoginBinding;
 import com.khedr.ecommerce.pojo.user.UserDataForLoginRequest;
-import com.khedr.ecommerce.ui.signUp.SignUpActivity;
+import com.khedr.ecommerce.ui.activites.signUp.SignUpActivity;
 import com.khedr.ecommerce.utils.UiUtils;
 import com.khedr.ecommerce.utils.UserUtils;
 
@@ -43,10 +43,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             }
         });
 
-
     }
 
-    public void manageProgressbar() {
+    private void manageProgressbar() {
 
         viewModel.isLoading.observe(this, aBoolean -> {
             if (aBoolean) {

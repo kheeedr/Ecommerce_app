@@ -39,16 +39,16 @@ public interface ApiInterface {
 
     @Headers({ "Content-Type:application/json"})
     @POST("logout")
-    Call<UserApiResponse> logOut(@Header("lang") String lang,@Header("Authorization") String token, @Body TokenModel tokenModel);
+    Single<UserApiResponse> logOut(@Header("lang") String lang,@Header("Authorization") String token, @Body TokenModel tokenModel);
 
-    @Headers({"lang:en", "Content-Type:application/json"})
+    @Headers({"Content-Type:application/json"})
     @PUT("update-profile")
-    Call<UserApiResponse> updateProfile(@Header("lang") String lang,@Header("Authorization") String token, @Body UserDataForRegisterRequest user);
+    Single<UserApiResponse> updateProfile(@Header("lang") String lang,@Header("Authorization") String token, @Body UserDataForRegisterRequest user);
 
     //  Home
     @Headers({ "Content-Type:application/json"})
     @GET("home")
-    Call<HomePageApiResponse> getHomePage(@Header("lang") String lang,@Header("Authorization") String token);
+    Single<HomePageApiResponse> getHomePage(@Header("lang") String lang,@Header("Authorization") String token);
 
     // favorite
     @Headers({ "Content-Type:application/json"})

@@ -10,24 +10,20 @@ import android.view.ViewGroup;
 
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.khedr.ecommerce.R;
 import com.khedr.ecommerce.databinding.FragmentHomeBinding;
-import com.khedr.ecommerce.network.ApiInterface;
 import com.khedr.ecommerce.network.RetrofitInstance;
 import com.khedr.ecommerce.pojo.product.Product;
 import com.khedr.ecommerce.utils.UiUtils;
 import com.khedr.ecommerce.utils.UserUtils;
 import com.khedr.ecommerce.pojo.homeapi.HomePageApiResponse;
-import com.khedr.ecommerce.ui.CategoriesActivity;
-import com.khedr.ecommerce.ui.CategoryProductsActivity;
-import com.khedr.ecommerce.ui.ContactUsActivity;
-import com.khedr.ecommerce.ui.FavoritesActivity;
-import com.khedr.ecommerce.ui.SearchActivity;
-import com.khedr.ecommerce.ui.SplashActivity;
+import com.khedr.ecommerce.ui.activites.CategoriesActivity;
+import com.khedr.ecommerce.ui.activites.CategoryProductsActivity;
+import com.khedr.ecommerce.ui.activites.ContactUsActivity;
+import com.khedr.ecommerce.ui.activites.FavoritesActivity;
+import com.khedr.ecommerce.ui.activites.SearchActivity;
+import com.khedr.ecommerce.ui.activites.splash.SplashActivity;
 import com.khedr.ecommerce.ui.adapters.BannersAdapter;
 import com.khedr.ecommerce.ui.adapters.ProductsAdapter;
 import org.jetbrains.annotations.NotNull;
@@ -116,34 +112,34 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         }
     }
 
-    void getHomeContent(){
-        String token = pref.getString(getString(R.string.pref_user_token), "");
-        String lang=UiUtils.getAppLang(getContext());
-
-        Call<HomePageApiResponse> call= RetrofitInstance.getRetrofitInstance()
-                .getHomePage(getContext(),token);
-        call.enqueue(new Callback<HomePageApiResponse>() {
-            @Override
-            public void onResponse(@NotNull Call<HomePageApiResponse> call, @NotNull Response<HomePageApiResponse> response) {
-                if (response.body() != null) {
-                    if(response.body().isStatus()){
-                        SplashActivity.homeResponse=response.body();
-                        ArrayList<Product> products=response.body().getData().getProducts();
-                        Collections.reverse(products);
-                        productsAdapter.setProductsList(products);
-                    }
-                    else {
-                        UiUtils.shortToast(getContext(),response.body().getMessage());
-                    }
-                }
-                else {
-                    UiUtils.shortToast(getContext(),  getString(R.string.connection_error));
-                }
-            }
-            @Override
-            public void onFailure(@NotNull Call<HomePageApiResponse> call, @NotNull Throwable t) {
-                UiUtils.shortToast(getContext(),  getString(R.string.connection_error));
-            }
-        });
-    }
+//    void getHomeContent(){
+//        String token = pref.getString(getString(R.string.pref_user_token), "");
+//        String lang=UiUtils.getAppLang(getContext());
+//
+//        Call<HomePageApiResponse> call= RetrofitInstance.getRetrofitInstance()
+//                .getHomePage(getContext(),token);
+//        call.enqueue(new Callback<HomePageApiResponse>() {
+//            @Override
+//            public void onResponse(@NotNull Call<HomePageApiResponse> call, @NotNull Response<HomePageApiResponse> response) {
+//                if (response.body() != null) {
+//                    if(response.body().isStatus()){
+//                        SplashActivity.homeResponse=response.body();
+//                        ArrayList<Product> products=response.body().getData().getProducts();
+//                        Collections.reverse(products);
+//                        productsAdapter.setProductsList(products);
+//                    }
+//                    else {
+//                        UiUtils.shortToast(getContext(),response.body().getMessage());
+//                    }
+//                }
+//                else {
+//                    UiUtils.shortToast(getContext(),  getString(R.string.connection_error));
+//                }
+//            }
+//            @Override
+//            public void onFailure(@NotNull Call<HomePageApiResponse> call, @NotNull Throwable t) {
+//                UiUtils.shortToast(getContext(),  getString(R.string.connection_error));
+//            }
+//        });
+//    }
 }

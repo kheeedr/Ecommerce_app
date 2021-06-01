@@ -7,7 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="25dp"
-        tools:context="com.khedr.ecommerce.ui.signUp.SignUpActivity">
+        tools:context=".ui.activites.signUp.SignUpActivity">
 
         <TextView
             android:id="@+id/tv_sign_main"
@@ -46,7 +46,8 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="0dp">
+                android:layout_height="0dp"
+                >
 
                 <RelativeLayout
                     android:id="@+id/iv_sign_user_layout"
@@ -253,7 +254,7 @@
                             android:text="@string/sign_up"
                             android:textAllCaps="false"
                             android:textColor="@color/white"
-                            android:textSize="20sp"
+                            android:textSize="@dimen/_15sdp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"

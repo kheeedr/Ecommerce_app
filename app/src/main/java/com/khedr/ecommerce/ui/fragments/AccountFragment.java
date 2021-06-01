@@ -14,11 +14,11 @@ import androidx.fragment.app.Fragment;
 import com.khedr.ecommerce.R;
 import com.khedr.ecommerce.database.Converters;
 import com.khedr.ecommerce.databinding.FragmentAccountBinding;
-import com.khedr.ecommerce.ui.AboutUsActivity;
-import com.khedr.ecommerce.ui.ContactUsActivity;
-import com.khedr.ecommerce.ui.LanguageActivity;
-import com.khedr.ecommerce.ui.login.LoginActivity;
-import com.khedr.ecommerce.ui.ProfileActivity;
+import com.khedr.ecommerce.ui.activites.AboutUsActivity;
+import com.khedr.ecommerce.ui.activites.ContactUsActivity;
+import com.khedr.ecommerce.ui.activites.LanguageActivity;
+import com.khedr.ecommerce.ui.activites.login.LoginActivity;
+import com.khedr.ecommerce.ui.activites.profile.ProfileActivity;
 import com.khedr.ecommerce.utils.UiUtils;
 import com.khedr.ecommerce.utils.UserUtils;
 
@@ -110,7 +110,7 @@ public class AccountFragment extends Fragment implements View.OnClickListener {
                 b.ivAccountUserImage.setImageBitmap(Converters.fromStringToBitmap(photo));
             } else {
                 String url = pref.getString(getString(R.string.pref_user_image_url), null);
-                UiUtils.getImageViaUrl(requireContext(), url, b.ivAccountUserImage, TAG, b.progressAccount);
+                UiUtils.getImageViaUrl(requireContext(), url, b.ivAccountUserImage, true);
             }
 
             //update points

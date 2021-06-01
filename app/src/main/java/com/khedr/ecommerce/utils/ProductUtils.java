@@ -17,7 +17,6 @@ import com.khedr.ecommerce.pojo.product.cart.post.PostCartResponse;
 import com.khedr.ecommerce.pojo.product.cart.update.Quantity;
 import com.khedr.ecommerce.pojo.product.cart.update.UpdateQuantityResponse;
 import com.khedr.ecommerce.pojo.product.favorites.post.PostFavoriteResponse;
-import com.khedr.ecommerce.network.ApiInterface;
 import com.khedr.ecommerce.network.RetrofitInstance;
 
 import com.khedr.ecommerce.pojo.product.search.SearchRequest;
@@ -32,7 +31,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static com.khedr.ecommerce.ui.CartActivity.total;
+import static com.khedr.ecommerce.ui.activites.CartActivity.total;
 
 public abstract class ProductUtils {
 

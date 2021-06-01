@@ -1,4 +1,4 @@
-package com.khedr.ecommerce.ui;
+package com.khedr.ecommerce.ui.activites.updateProfile;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -8,7 +8,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.util.Log;
+import android.util.Pair;
 import android.util.Patterns;
 import android.view.View;
 
@@ -18,42 +18,38 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.khedr.ecommerce.R;
 import com.khedr.ecommerce.database.Converters;
 import com.khedr.ecommerce.databinding.ActivityUpdateProfileBinding;
-import com.khedr.ecommerce.pojo.user.UserApiResponse;
 import com.khedr.ecommerce.pojo.user.UserDataForRegisterRequest;
-import com.khedr.ecommerce.network.RetrofitInstance;
+import com.khedr.ecommerce.ui.activites.profile.ProfileActivity;
 import com.khedr.ecommerce.utils.UiUtils;
 import com.khedr.ecommerce.utils.UserUtils;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.io.IOException;
 import java.util.Objects;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
-import static com.khedr.ecommerce.utils.UiUtils.countWordsUsingSplit;
 
 public class UpdateProfileActivity extends AppCompatActivity implements View.OnClickListener {
     private static final int REQ_CODE = 102;
     private static final String TAG = "UpdateProfileActivity";
     ActivityUpdateProfileBinding b;
     SharedPreferences pref;
+    UpdateProfileViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         b = DataBindingUtil.setContentView(this, R.layout.activity_update_profile);
         pref = getSharedPreferences("logined", 0);
+        viewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory
+                .getInstance(this.getApplication())).get(UpdateProfileViewModel.class);
 
         b.btUpdateProfileBack.setOnClickListener(this);
         b.ivUpdateUserImage.setOnClickListener(this);
         b.btUpdateProfileSubmit.setOnClickListener(this);
+        manageProgressbar();
         //set user image
         if (pref.getBoolean(getString(R.string.pref_is_image_ready), false)) {
             String photo = pref.getString(getString(R.string.pref_user_image), null);
@@ -65,6 +61,30 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
         b.etUpdatePhone.setText(pref.getString(getString(R.string.pref_user_phone), null));
         // set email
         b.etUpdateEmail.setText(pref.getString(getString(R.string.pref_user_email), null));
+        viewModel.responseBody.observe(this, userApiResponse -> {
+
+            UiUtils.shortToast(UpdateProfileActivity.this, userApiResponse.getMessage());
+
+            if (userApiResponse.isStatus()) {
+                UserUtils.saveUserProfileToShared(userApiResponse, this,null);
+                startActivity(new Intent(UpdateProfileActivity.this, ProfileActivity.class));
+                finish();
+            }
+        });
+    }
+
+    private void manageProgressbar() {
+        viewModel.isLoading.observe(this, aBoolean -> {
+            if (aBoolean) {
+                b.btUpdateProfileSubmit.setVisibility(View.GONE);
+                b.progressUpdateProfile.setVisibility(View.VISIBLE);
+                UiUtils.animJumpAndFade(this, b.progressUpdateProfile);
+            } else {
+                b.btUpdateProfileSubmit.setVisibility(View.VISIBLE);
+                b.progressUpdateProfile.clearAnimation();
+                b.progressUpdateProfile.setVisibility(View.INVISIBLE);
+            }
+        });
     }
 
     @Override
@@ -76,7 +96,9 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
             chooseImageIntent();
         } else if (v == b.btUpdateProfileSubmit) {
 
-            validateAndUpdateUser();
+            if (isValidUser().first) {
+                viewModel.updateUserInfo(this, isValidUser().second);
+            }
         }
 
 
@@ -89,7 +111,9 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
         finish();
     }
 
-    public void validateAndUpdateUser() {
+    public Pair<Boolean, UserDataForRegisterRequest> isValidUser() {
+
+        Pair<Boolean, UserDataForRegisterRequest> nullUser = new Pair<>(false, null);
 
         String name = Objects.requireNonNull(b.etUpdateName.getText()).toString();
         String email = Objects.requireNonNull(b.etUpdateEmail.getText()).toString();
@@ -98,75 +122,37 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
         String rePassword = Objects.requireNonNull(b.etUpdateRepassword.getText()).toString();
         String image = Converters.fromBitmapToString(((BitmapDrawable) b.ivUpdateUserImage.getDrawable()).getBitmap());
 
-        if (countWordsUsingSplit(name) < 2) {
-            b.etUpdateName.setError("please enter full name");
-            b.etUpdateName.requestFocus();
-        } else if (countWordsUsingSplit(name) > 4) {
-            b.etUpdateName.setError("sorry max words allowed is 4");
-            b.etUpdateName.requestFocus();
+        if (UiUtils.countWordsUsingSplit(name) < 2) {
+            UiUtils.textError(b.etUpdateName, getString(R.string.enter_full_name));
+            return nullUser;
+
+        } else if (UiUtils.countWordsUsingSplit(name) > 4) {
+            UiUtils.textError(b.etUpdateName, getString(R.string.max_words_4));
+            return nullUser;
+
         } else if (!Patterns.PHONE.matcher(phone).matches()) {
-            b.etUpdatePhone.setError("phone is not valid");
-            b.etUpdatePhone.requestFocus();
+            UiUtils.textError(b.etUpdatePhone, getString(R.string.Invalid_phone));
+            return nullUser;
+
         } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            b.etUpdateEmail.setError("email is not valid");
-            b.etUpdateEmail.requestFocus();
+            UiUtils.textError(b.etUpdateEmail, getString(R.string.invalid_email));
+            return nullUser;
+
         } else if (password.length() < 6) {
-            b.etUpdateNewPassword.setError("password must be 6 letters at least");
-            b.etUpdateNewPassword.requestFocus();
+            UiUtils.textError(b.etUpdateNewPassword, getString(R.string.short_password));
+            return nullUser;
+
         } else if (!password.equals(rePassword)) {
-            b.etUpdateRepassword.setError("re-password is not equal the password ");
-            b.etUpdateRepassword.requestFocus();
+            UiUtils.textError(b.etUpdateRepassword, getString(R.string.invalid_repassword));
+            return nullUser;
+
         } else {
-            b.btUpdateProfileSubmit.setVisibility(View.GONE);
-            b.progressUpdateProfile.setVisibility(View.VISIBLE);
             UserDataForRegisterRequest user = new UserDataForRegisterRequest(name, phone, email, password, image);
-            String token = pref.getString(getString(R.string.pref_user_token), "");
-            updateUserInfo(user, token);
-            Log.d(TAG, "mkhedr"
-                    + "\nname:" + user.getName()
-                    + "\nphone:" + user.getPhone()
-                    + "\nemail:" + user.getEmail()
-                    + "\npassword:" + user.getPassword()
-                    + "\nimage:" + user.getImage()
-            );
+            return new Pair<>(true, user);
         }
+
     }
 
-    public void updateUserInfo(UserDataForRegisterRequest user, String token) {
-        String lang = UiUtils.getAppLang(this);
-        Call<UserApiResponse> call = RetrofitInstance.getRetrofitInstance()
-                .updateProfile(this, token, user);
-        call.enqueue(new Callback<UserApiResponse>() {
-            @Override
-            public void onResponse(@NotNull Call<UserApiResponse> call, @NotNull Response<UserApiResponse> response) {
-                if (response.body() != null) {
-                    if (response.body().isStatus()) {
-
-                        UiUtils.shortToast(UpdateProfileActivity.this, response.body().getMessage());
-                        UserUtils.saveUserProfileToShared(response.body(), UpdateProfileActivity.this, user.getImage());
-                        startActivity(new Intent(UpdateProfileActivity.this, ProfileActivity.class));
-                        finish();
-                    } else {
-                        b.btUpdateProfileSubmit.setVisibility(View.VISIBLE);
-                        b.progressUpdateProfile.setVisibility(View.INVISIBLE);
-                        UiUtils.shortToast(UpdateProfileActivity.this, response.body().getMessage());
-                    }
-                } else {
-                    UiUtils.shortToast(UpdateProfileActivity.this, getString(R.string.connection_error));
-
-                }
-
-            }
-
-            @Override
-            public void onFailure(@NotNull Call<UserApiResponse> call, @NotNull Throwable t) {
-                b.btUpdateProfileSubmit.setVisibility(View.VISIBLE);
-                b.progressUpdateProfile.setVisibility(View.INVISIBLE);
-                UiUtils.shortToast(UpdateProfileActivity.this, getString(R.string.connection_error));
-
-            }
-        });
-    }
 
     // You can do the assignment inside onAttach or onCreate, i.e, before the activity is displayed
     ActivityResultLauncher<Intent> someActivityResultLauncher = registerForActivityResult(

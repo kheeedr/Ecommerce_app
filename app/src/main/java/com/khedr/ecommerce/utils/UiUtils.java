@@ -1,7 +1,6 @@
 package com.khedr.ecommerce.utils;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
@@ -24,7 +23,6 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.khedr.ecommerce.R;
 import com.khedr.ecommerce.database.Converters;
-import com.khedr.ecommerce.ui.SplashActivity;
 
 import java.util.Locale;
 
@@ -63,8 +61,7 @@ public abstract class UiUtils {
         view.startAnimation(endToStart);
     }
 
-    public static void getImageViaUrl(Context context, String url
-            , ImageView imageView, String TAG, View progressBar) {
+    public static void getImageViaUrl(Context context, String url , ImageView imageView, View progressBar) {
         SharedPreferences pref = context.getSharedPreferences("logined", 0);
         progressBar.setVisibility(View.VISIBLE);
         UiUtils.animJumpAndFade(context, progressBar);
@@ -82,26 +79,17 @@ public abstract class UiUtils {
                     @Override
                     public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target
                             , DataSource dataSource, boolean isFirstResource) {
-                        if (TAG.equals("AccountFragment")) {
-                            SharedPreferences.Editor pen = pref.edit();
-                            pen.putBoolean(context.getString(R.string.pref_is_image_ready), true);
-                            pen.putString(context.getString(R.string.pref_user_image),
-                                    Converters.fromBitmapToString(((BitmapDrawable) resource).getBitmap()));
-                            pen.apply();
-                            Log.d(TAG, "mkhedr: glide succeeded");
-                        }
+
                         progressBar.clearAnimation();
                         progressBar.setVisibility(View.INVISIBLE);
                         return false;
                     }
-                })
-
-                .into(imageView);
+                }).into(imageView);
 
 
     }
 
-    public static void getImageViaUrl(Context context, String url, ImageView imageView, String TAG) {
+    public static void getImageViaUrl(Context context, String url, ImageView imageView, boolean isUserImage) {
         SharedPreferences pref = context.getSharedPreferences("logined", 0);
 
         Glide.with(context).load(url)
@@ -116,18 +104,16 @@ public abstract class UiUtils {
                     @Override
                     public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target
                             , DataSource dataSource, boolean isFirstResource) {
-                        if (TAG.equals("AccountFragment")) {
+                        if (isUserImage) {
                             SharedPreferences.Editor pen = pref.edit();
                             pen.putBoolean(context.getString(R.string.pref_is_image_ready), true);
                             pen.putString(context.getString(R.string.pref_user_image),
                                     Converters.fromBitmapToString(((BitmapDrawable) resource).getBitmap()));
                             pen.apply();
-
                         }
                         return false;
                     }
-                })
-                .into(imageView);
+                }).into(imageView);
 
 
     }

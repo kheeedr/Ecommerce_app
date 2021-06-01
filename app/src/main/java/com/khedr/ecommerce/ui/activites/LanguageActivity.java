@@ -1,4 +1,4 @@
-package com.khedr.ecommerce.ui;
+package com.khedr.ecommerce.ui.activites;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -12,6 +12,7 @@ import android.view.View;
 
 import com.khedr.ecommerce.R;
 import com.khedr.ecommerce.databinding.ActivityLanguageBinding;
+import com.khedr.ecommerce.ui.activites.splash.SplashActivity;
 import com.khedr.ecommerce.utils.UiUtils;
 import com.khedr.ecommerce.utils.UserUtils;
 

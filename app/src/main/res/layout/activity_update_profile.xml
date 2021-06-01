@@ -7,7 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="25dp"
-        tools:context="com.khedr.ecommerce.ui.UpdateProfileActivity">
+        tools:context="com.khedr.ecommerce.ui.activites.updateProfile.UpdateProfileActivity">
 
         <TextView
             android:id="@+id/tv_update_profile"
@@ -235,21 +235,19 @@
                 android:text="@string/update"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
-                android:textSize="20sp"
+                android:textSize="@dimen/_15sdp"
                 android:visibility="visible"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <ProgressBar
-                android:id="@+id/progress_update_profile"
-                android:layout_width="@dimen/_40sdp"
-                android:layout_height="@dimen/_40sdp"
-                android:indeterminate="true"
-                android:indeterminateTint="@color/secondary"
-                android:indeterminateTintMode="src_atop"
-                android:visibility="invisible"
+            <ImageView
+                android:id="@+id/progress_updateProfile"
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:contentDescription="@string/todo"
+                android:src="@drawable/ic_primary_hexa_shape"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

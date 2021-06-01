@@ -1,4 +1,5 @@
-package com.khedr.ecommerce.ui;
+package com.khedr.ecommerce.ui.activites;
+
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -17,7 +18,6 @@ import com.khedr.ecommerce.R;
 import com.khedr.ecommerce.databinding.ActivityCartBinding;
 import com.khedr.ecommerce.pojo.product.cart.get.GetCartItems;
 import com.khedr.ecommerce.pojo.product.cart.get.GetCartResponse;
-import com.khedr.ecommerce.network.ApiInterface;
 import com.khedr.ecommerce.network.RetrofitInstance;
 import com.khedr.ecommerce.ui.adapters.CartAdapter;
 import com.khedr.ecommerce.utils.UiUtils;
@@ -70,7 +70,7 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(intent);
             finish();
         } else if (v == b.layoutCartProgressBack) {
-            Toast.makeText(this, "Please wait...", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.wait), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -79,7 +79,6 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
 
         if (UserUtils.isSignedIn(this)) {
             String token = pref.getString(getString(R.string.pref_user_token), "");
-            String lang=UiUtils.getAppLang(this);
 
             Call<GetCartResponse> call = RetrofitInstance.getRetrofitInstance().getCart(this,token);
             call.enqueue(new Callback<GetCartResponse>() {
@@ -91,7 +90,7 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
                         if (response.body().isStatus()) {
                             ArrayList<GetCartItems> cartItems = response.body().getData().getCart_items();
                             total = response.body().getData().getTotal();
-                            b.tvCartTotal.setText("Total: " + (int) Math.ceil(total) + " EGP");
+                            b.tvCartTotal.setText(getString(R.string.total_price) + (int) Math.ceil(total) + " EGP");
                             if (!cartItems.isEmpty()) {
                                 cartAdapter.setCartItems(cartItems);
                                 b.layoutCartFilled.setVisibility(View.VISIBLE);

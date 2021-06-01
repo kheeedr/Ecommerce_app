@@ -2,14 +2,11 @@ package com.khedr.ecommerce.ui.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.khedr.ecommerce.R;
 import com.khedr.ecommerce.databinding.ItemBannerBinding;
 import com.khedr.ecommerce.pojo.homeapi.Banner;
 import com.khedr.ecommerce.utils.UiUtils;
@@ -23,7 +20,6 @@ public class BannersAdapter extends RecyclerView.Adapter<BannersAdapter.BannersV
 
     List<Banner>bannersList=new ArrayList<>();
     Context context;
-    private static final String TAG="BannersAdapter";
 
     public BannersAdapter(Context context) {
         this.context = context;
@@ -45,16 +41,15 @@ public class BannersAdapter extends RecyclerView.Adapter<BannersAdapter.BannersV
     @Override
     public void onBindViewHolder(@NonNull @NotNull BannersAdapter.BannersViewHolder holder, int position) {
 
-        UiUtils.getImageViaUrl(context,bannersList.get(position).getImage(), holder.b.ivBannerItem, TAG,holder.b.progressBannerIv);
+        UiUtils.getImageViaUrl(context,bannersList.get(position).getImage(), holder.b.ivBannerItem, holder.b.progressBannerIv);
 
     }
-
-
 
     @Override
     public int getItemCount() {
         return bannersList.size();
     }
+
     static class BannersViewHolder extends RecyclerView.ViewHolder{
 
         ItemBannerBinding b;
@@ -63,12 +58,6 @@ public class BannersAdapter extends RecyclerView.Adapter<BannersAdapter.BannersV
             super(b.getRoot());
             this.b = b;
         }
-        //       ImageView iv,ivProgressbar;
-//        public BannersViewHolder(@NonNull @NotNull View itemView) {
-//            super(itemView);
-////            iv =(ImageView) itemView.findViewById(R.id.iv_banner_item);
-////            ivProgressbar=itemView.findViewById(R.id.progress_banner_iv);
-//
-//        }
+
     }
 }

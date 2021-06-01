@@ -1,4 +1,4 @@
-package com.khedr.ecommerce.ui;
+package com.khedr.ecommerce.ui.activites;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -17,6 +17,7 @@ import com.khedr.ecommerce.R;
 import com.khedr.ecommerce.databinding.ActivitySearchBinding;
 import com.khedr.ecommerce.pojo.product.Product;
 import com.khedr.ecommerce.pojo.product.search.SearchResponse;
+import com.khedr.ecommerce.ui.activites.splash.SplashActivity;
 import com.khedr.ecommerce.ui.adapters.ProductsAdapter;
 import com.khedr.ecommerce.ui.adapters.SearchSuggestionsAdapter;
 import com.khedr.ecommerce.utils.ProductUtils;

@@ -7,7 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="25dp"
-        tools:context="com.khedr.ecommerce.ui.login.LoginActivity">
+        tools:context=".ui.activites.login.LoginActivity">
 
         <TextView
             android:id="@+id/tv_login_main"
@@ -186,7 +186,7 @@
                         android:text="@string/login"
                         android:textAllCaps="false"
                         android:textColor="@color/white"
-                        android:textSize="20sp"
+                        android:textSize="@dimen/_15sdp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"

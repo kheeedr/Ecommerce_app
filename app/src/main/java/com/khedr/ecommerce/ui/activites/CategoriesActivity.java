@@ -1,4 +1,4 @@
-package com.khedr.ecommerce.ui;
+package com.khedr.ecommerce.ui.activites;
 
 
 import android.os.Bundle;
@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.khedr.ecommerce.R;
 import com.khedr.ecommerce.databinding.ActivityCategoriesBinding;
 import com.khedr.ecommerce.pojo.categories.GetCategoriesResponse;
-import com.khedr.ecommerce.network.ApiInterface;
 import com.khedr.ecommerce.network.RetrofitInstance;
 import com.khedr.ecommerce.ui.adapters.CategoriesAdapter;
 import com.khedr.ecommerce.utils.UiUtils;

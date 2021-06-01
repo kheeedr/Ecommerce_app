@@ -7,7 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="25dp"
-        tools:context="com.khedr.ecommerce.ui.ProfileActivity">
+        tools:context="com.khedr.ecommerce.ui.activites.profile.ProfileActivity">
 
         <TextView
             android:id="@+id/main_tv_my_account"
@@ -270,7 +270,7 @@
                         android:gravity="start"
                         android:textAllCaps="false"
                         android:textColor="@color/primary"
-                        android:textSize="20sp"
+                        android:textSize="@dimen/_15sdp"
                         android:translationZ="@dimen/_2sdp"
                         app:backgroundTint="@color/white"
                         app:layout_constraintBottom_toBottomOf="parent"
