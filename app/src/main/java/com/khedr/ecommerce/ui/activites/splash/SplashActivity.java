@@ -1,8 +1,8 @@
 package com.khedr.ecommerce.ui.activites.splash;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,26 +12,25 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.khedr.ecommerce.R;
 import com.khedr.ecommerce.databinding.ActivitySplashBinding;
+import com.khedr.ecommerce.pojo.homeapi.BannersAndProductsModel;
 import com.khedr.ecommerce.pojo.homeapi.HomePageApiResponse;
 import com.khedr.ecommerce.ui.activites.MainPageActivity;
 import com.khedr.ecommerce.utils.UiUtils;
-import com.khedr.ecommerce.utils.UserUtils;
 
+import java.io.Serializable;
 import java.util.Collections;
 
 public class SplashActivity extends AppCompatActivity implements View.OnClickListener {
     ActivitySplashBinding b;
-    SharedPreferences pref;
     SplashViewModel viewModel;
-    public static HomePageApiResponse homeResponse = new HomePageApiResponse(false, null, null);
-
+    public static BannersAndProductsModel homeResponse;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         super.onCreate(savedInstanceState);
-        pref = UserUtils.getPref(this);
+
         UiUtils.setLocale(this);
         b = DataBindingUtil.setContentView(this, R.layout.activity_splash);
         b.btTryAgainSplash.setOnClickListener(this);
@@ -41,15 +40,14 @@ public class SplashActivity extends AppCompatActivity implements View.OnClickLis
         UiUtils.animJumpAndFade(this, b.progressSplash);
         manageProgressbar();
 
-
-        viewModel.responseBody.observe(this,homePageApiResponse -> {
-            if(homePageApiResponse.isStatus()){
-                homeResponse = homePageApiResponse;
-                Collections.reverse(homeResponse.getData().getProducts());
+        viewModel.responseBody.observe(this, homePageApiResponse -> {
+            if (homePageApiResponse.isStatus()) {
+                homeResponse = homePageApiResponse.getData();
+                Collections.reverse(homeResponse.getProducts());
                 startActivity(new Intent(SplashActivity.this, MainPageActivity.class));
                 finish();
 
-            }else {
+            } else {
                 UiUtils.shortToast(SplashActivity.this, homePageApiResponse.getMessage());
                 b.btTryAgainSplash.setVisibility(View.VISIBLE);
             }
@@ -73,7 +71,7 @@ public class SplashActivity extends AppCompatActivity implements View.OnClickLis
 
     @Override
     public void onClick(View v) {
-        if (v==b.btTryAgainSplash){
+        if (v == b.btTryAgainSplash) {
             viewModel.getHomeContent(this);
         }
     }

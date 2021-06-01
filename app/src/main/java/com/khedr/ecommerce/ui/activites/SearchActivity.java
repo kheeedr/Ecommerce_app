@@ -118,7 +118,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     public ArrayList<Product> getSuggestions(String text) {
-        ArrayList<Product> products = SplashActivity.homeResponse.getData().getProducts();
+        ArrayList<Product> products = SplashActivity.homeResponse.getProducts();
         ArrayList<Product> suggestionsProducts = new ArrayList<>();
         for (Product product : products) {
             String name = product.getName().toLowerCase();

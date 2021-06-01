@@ -3,16 +3,22 @@ package com.khedr.ecommerce.ui.activites;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 
 import com.khedr.ecommerce.R;
 import com.khedr.ecommerce.databinding.ActivityMainPageBinding;
+import com.khedr.ecommerce.pojo.homeapi.BannersAndProductsModel;
+import com.khedr.ecommerce.pojo.homeapi.HomePageApiResponse;
+import com.khedr.ecommerce.ui.activites.splash.SplashActivity;
+import com.khedr.ecommerce.ui.activites.splash.SplashViewModel;
 import com.khedr.ecommerce.utils.UiUtils;
 import com.khedr.ecommerce.utils.UserUtils;
 
@@ -21,6 +27,7 @@ public class MainPageActivity extends AppCompatActivity implements View.OnClickL
     ActivityMainPageBinding b;
     SharedPreferences pref;
 
+    private static final String TAG = "MainPageActivity";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +50,12 @@ public class MainPageActivity extends AppCompatActivity implements View.OnClickL
 
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.d(TAG,"mkhedr:onStart");
+
+    }
 
     @Override
     public void onClick(View v) {

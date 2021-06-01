@@ -74,7 +74,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
      
 
         holder.b.layoutProductToCart.setOnClickListener(v -> {
-            int id = SplashActivity.homeResponse.getData().getProducts().get(position).getId();
+            int id = productsList.get(position).getId();
             ProductUtils.addProductToCart(context, id, holder.b.layoutProductToCart, holder.b.progressProductAdd);
         });
 

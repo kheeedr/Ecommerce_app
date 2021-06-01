@@ -142,5 +142,6 @@
     <string name="wait">Please wait...</string>
     <string name="total_price">\"Total: \"</string>
     <string name="reconnect">Reconnect</string>
+    <string name="splash_intent">from_splash_intent</string>
 
 </resources>
