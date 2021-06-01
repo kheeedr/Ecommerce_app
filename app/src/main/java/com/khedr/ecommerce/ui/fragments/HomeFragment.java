@@ -73,8 +73,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             productsAdapter.setProductsList(homeResponse.getProducts());
 
         } else {
-            Log.d(TAG, "mkhedr: contentRestartRequired");
             viewModel.getHomeContent(requireContext());
+            Log.d(TAG, "mkhedr: contentRestartRequired");
         }
 
 
