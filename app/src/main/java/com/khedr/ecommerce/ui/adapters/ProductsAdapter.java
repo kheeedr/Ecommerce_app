@@ -14,8 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.khedr.ecommerce.databinding.ItemProductBinding;
 import com.khedr.ecommerce.pojo.product.Product;
-import com.khedr.ecommerce.ui.activites.ProductDetailsActivity;
-import com.khedr.ecommerce.ui.activites.splash.SplashActivity;
+import com.khedr.ecommerce.ui.activities.product.ProductDetailsActivity;
 import com.khedr.ecommerce.utils.ProductUtils;
 import com.khedr.ecommerce.utils.UiUtils;
 import com.khedr.ecommerce.utils.UserUtils;

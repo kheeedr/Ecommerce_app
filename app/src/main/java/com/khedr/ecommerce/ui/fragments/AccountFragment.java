@@ -14,11 +14,11 @@ import androidx.fragment.app.Fragment;
 import com.khedr.ecommerce.R;
 import com.khedr.ecommerce.database.Converters;
 import com.khedr.ecommerce.databinding.FragmentAccountBinding;
-import com.khedr.ecommerce.ui.activites.AboutUsActivity;
-import com.khedr.ecommerce.ui.activites.ContactUsActivity;
-import com.khedr.ecommerce.ui.activites.LanguageActivity;
-import com.khedr.ecommerce.ui.activites.login.LoginActivity;
-import com.khedr.ecommerce.ui.activites.profile.ProfileActivity;
+import com.khedr.ecommerce.ui.activities.AboutUsActivity;
+import com.khedr.ecommerce.ui.activities.ContactUsActivity;
+import com.khedr.ecommerce.ui.activities.LanguageActivity;
+import com.khedr.ecommerce.ui.activities.login.LoginActivity;
+import com.khedr.ecommerce.ui.activities.profile.ProfileActivity;
 import com.khedr.ecommerce.utils.UiUtils;
 import com.khedr.ecommerce.utils.UserUtils;
 

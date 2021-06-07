@@ -7,7 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="25dp"
-        tools:context="com.khedr.ecommerce.ui.activites.ProductDetailsActivity">
+        tools:context="com.khedr.ecommerce.ui.activities.product.ProductDetailsActivity">
 
         <TextView
             android:id="@+id/main_tv_productDetails"
@@ -141,7 +141,7 @@
                 <LinearLayout
                     android:id="@+id/layout_productDetails_nameAndDetails"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="0dp"
                     android:background="@drawable/sheet_back"
                     android:elevation="@dimen/_40sdp"
                     android:orientation="vertical"
@@ -160,6 +160,7 @@
                         android:paddingHorizontal="@dimen/_10sdp"
                         android:paddingVertical="@dimen/_5sdp"
                         android:text="@string/product_name"
+                        android:fontFamily="@font/regular"
                         android:textColor="@color/secondary"
                         android:textSize="@dimen/_17sdp" />
 
@@ -167,25 +168,25 @@
                         android:id="@+id/tv_productDetails_description_tittle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/montserrat_semi_bold"
                         android:paddingHorizontal="@dimen/_10sdp"
                         android:paddingTop="@dimen/_5sdp"
                         android:text="@string/description"
                         android:textColor="@color/secondary"
-                        android:textSize="@dimen/_15sdp" />
+                        android:textSize="@dimen/_15sdp"
+                        />
 
                     <TextView
                         android:id="@+id/tv_productDetails_description"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="@dimen/_30sdp"
-                        android:lineHeight="@dimen/_15sdp"
                         android:paddingHorizontal="@dimen/_12sdp"
                         android:paddingVertical="@dimen/_1sdp"
                         android:text=""
                         android:textColor="@color/secondary"
                         android:textSize="@dimen/_12sdp"
-                        tools:targetApi="p" />
+                        tools:targetApi="p"
+                        style="@style/tv"/>
                 </LinearLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
@@ -292,8 +293,9 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/layout_productDetails_bt_and_progress"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/_60sdp"
-                android:paddingVertical="@dimen/_10sdp"
+                android:layout_height="@dimen/_50sdp"
+                android:paddingBottom="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_5sdp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -306,7 +308,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:background="@drawable/bt_back_filled"
-                    android:fontFamily="@font/montserrat_medium"
+                    android:fontFamily="@font/medium"
                     android:paddingVertical="@dimen/_2sdp"
                     android:text="@string/add_to_cart"
 

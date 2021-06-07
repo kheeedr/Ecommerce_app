@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="25dp"
-        tools:context="com.khedr.ecommerce.ui.activites.SearchActivity">
+        tools:context="com.khedr.ecommerce.ui.activities.SearchActivity">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layout_search_input"
@@ -42,7 +42,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/et_stroke"
-                    android:fontFamily="@font/montserrat_regular"
+                    android:fontFamily="@font/regular"
                     android:hint="@string/search"
                     android:imeOptions="actionSearch"
                     android:inputType="text"

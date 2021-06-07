@@ -5,7 +5,7 @@
         <item name="colorPrimary">@color/primary</item>
         <item name="colorPrimaryVariant">@color/secondary</item>
         <item name="colorOnPrimary">@color/white</item>
-        <item name="fontFamily">@font/montserrat_medium</item>
+        <item name="fontFamily">@font/medium</item>
         <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
 
         <!-- Status bar color. -->
@@ -13,6 +13,10 @@
         <!-- Customize your theme here. -->
         <item name="android:windowTranslucentStatus">true</item>
 
+
+    </style>
+    <style name="tv" parent="TextAppearance.AppCompat">
+        <item name="fontFamily">@font/regular</item>
 
     </style>
 </resources>

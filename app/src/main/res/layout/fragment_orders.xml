@@ -104,7 +104,7 @@
                     android:layout_marginHorizontal="@dimen/_10sdp"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:background="@drawable/bt_back_filled"
-                    android:fontFamily="@font/montserrat_medium"
+                    android:fontFamily="@font/medium"
                     android:paddingVertical="@dimen/_2sdp"
                     android:text="@string/to_cart"
                     android:textAlignment="center"

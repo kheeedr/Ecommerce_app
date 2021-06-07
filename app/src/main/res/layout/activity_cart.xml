@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="25dp"
-        tools:context="com.khedr.ecommerce.ui.activites.CartActivity">
+        tools:context="com.khedr.ecommerce.ui.activities.cart.CartActivity">
 
         <TextView
             android:id="@+id/main_tv_cart"
@@ -44,7 +44,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="@dimen/_42sdp"
-            android:visibility="gone"
+            android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -76,14 +76,16 @@
 
                 <TextView
                     android:id="@+id/tv_cart_total"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_10sdp"
+                    android:layout_marginVertical="@dimen/_5sdp"
                     android:text="@string/total"
+                    android:textAlignment="viewStart"
                     android:textColor="@color/secondary"
                     android:textSize="@dimen/_15sdp"
                     app:layout_constraintBottom_toTopOf="@id/bt_cart_order_now"
-                    app:layout_constraintEnd_toEndOf="parent" />
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
 
                 <Button
                     android:id="@+id/bt_cart_order_now"
@@ -91,7 +93,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:background="@drawable/bt_back_filled"
-                    android:fontFamily="@font/montserrat_medium"
+                    android:fontFamily="@font/medium"
                     android:paddingVertical="@dimen/_2sdp"
                     android:text="@string/order_now"
                     android:textAllCaps="false"
@@ -202,7 +204,7 @@
                     android:layout_marginHorizontal="@dimen/_10sdp"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:background="@drawable/bt_back_filled"
-                    android:fontFamily="@font/montserrat_medium"
+                    android:fontFamily="@font/medium"
                     android:paddingVertical="@dimen/_2sdp"
                     android:text="@string/shop_now"
                     android:textAlignment="center"
@@ -228,7 +230,7 @@
             android:id="@+id/progress_cart"
             android:layout_width="@dimen/_70sdp"
             android:layout_height="@dimen/_65sdp"
-            app:layout_constraintVertical_bias="0.65"
+            app:layout_constraintVertical_bias="0.55"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

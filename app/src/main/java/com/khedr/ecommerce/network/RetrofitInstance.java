@@ -69,6 +69,10 @@ public final class RetrofitInstance {
         return apiInterface.updateProfile(getLang(context), token, user);
     }
 
+    public Single<PostFavoriteResponse> addToFavorite(Context context, String token, ProductId id) {
+        return apiInterface.addToFavorite(getLang(context), token, id);
+    }
+
     public Call<GetCartResponse> getCart(Context context, String token) {
         return apiInterface.getCart(getLang(context), token);
     }
@@ -99,9 +103,6 @@ public final class RetrofitInstance {
     }
 
 
-    public Call<PostFavoriteResponse> addToFavorite(Context context, String token, ProductId id) {
-        return apiInterface.addToFavorite(getLang(context), token, id);
-    }
 
 
     public Call<SearchResponse> getSearchProducts(Context context, String token, SearchRequest searchRequest) {

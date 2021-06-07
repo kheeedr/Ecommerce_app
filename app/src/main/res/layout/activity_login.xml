@@ -7,7 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="25dp"
-        tools:context=".ui.activites.login.LoginActivity">
+        tools:context=".ui.activities.login.LoginActivity">
 
         <TextView
             android:id="@+id/tv_login_main"
@@ -70,7 +70,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_20sdp"
                     android:layout_marginEnd="@dimen/_40sdp"
-                    android:fontFamily="@font/montserrat_medium"
+                    android:fontFamily="@font/medium"
                     android:text="@string/khadrawy"
                     android:textColor="@color/secondary"
                     android:textSize="@dimen/_30sdp"
@@ -124,7 +124,7 @@
                         android:layout_height="wrap_content"
                         android:autofillHints="email"
                         android:background="@drawable/et_stroke"
-                        android:fontFamily="@font/montserrat_medium"
+                        android:fontFamily="@font/medium"
                         android:textAlignment="viewStart"
                         android:hint="@string/e_mail"
                         android:inputType="textEmailAddress"
@@ -154,7 +154,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/et_stroke"
-                        android:fontFamily="@font/montserrat_medium"
+                        android:fontFamily="@font/medium"
                         android:textAlignment="viewStart"
                         android:hint="@string/password"
                         android:inputType="textPassword"
@@ -181,7 +181,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:background="@drawable/bt_back_filled"
-                        android:fontFamily="@font/montserrat_medium"
+                        android:fontFamily="@font/medium"
                         android:paddingVertical="@dimen/_2sdp"
                         android:text="@string/login"
                         android:textAllCaps="false"
@@ -212,7 +212,7 @@
                     android:layout_marginHorizontal="@dimen/_20sdp"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:background="@drawable/bt_back"
-                    android:fontFamily="@font/montserrat_medium"
+                    android:fontFamily="@font/medium"
                     android:paddingVertical="@dimen/_2sdp"
                     android:text="@string/new_user_sign_up"
                     android:textAllCaps="false"

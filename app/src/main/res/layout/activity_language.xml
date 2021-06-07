@@ -7,7 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="25dp"
-        tools:context=".ui.activites.LanguageActivity">
+        tools:context=".ui.activities.LanguageActivity">
 
         <TextView
             android:id="@+id/main_tv_language"
@@ -78,6 +78,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:maxLines="1"
+                    android:fontFamily="@font/regular"
                     android:text="@string/system_default"
                     android:textColor="@color/secondary"
                     android:textSize="@dimen/_16sdp" />
@@ -162,7 +163,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-
+                    android:fontFamily="@font/regular"
                     android:maxLines="1"
                     android:text="@string/arabic_lang"
                     android:textColor="@color/secondary"

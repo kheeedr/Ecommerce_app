@@ -32,7 +32,7 @@ import java.util.List;
 //import retrofit2.Callback;
 //import retrofit2.Response;
 //import com.khedr.ecommerce.R;
-//import static com.khedr.ecommerce.ui.activites.CartActivity.total;
+//import static com.khedr.ecommerce.ui.activites.cart.CartActivity.total;
 
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder> {
     public static final String TAG = "CartAdapter";

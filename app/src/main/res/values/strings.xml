@@ -14,7 +14,6 @@
     <string name="login">Login</string>
     <string name="new_user_sign_up">New user? Sign Up</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="sign_out">sign out</string>
     <string name="pref_status">status</string>
     <string name="pref_user_name">pref_use_name</string>

@@ -7,7 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="25dp"
-        tools:context="com.khedr.ecommerce.ui.activites.CategoryProductsActivity">
+        tools:context="com.khedr.ecommerce.ui.activities.CategoryProductsActivity">
 
         <TextView
             android:id="@+id/main_tv_categoryProducts"
@@ -54,7 +54,7 @@
             android:id="@+id/progress_categoryProducts"
             android:layout_width="@dimen/_70sdp"
             android:layout_height="@dimen/_65sdp"
-            app:layout_constraintVertical_bias="0.65"
+            app:layout_constraintVertical_bias="0.55"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

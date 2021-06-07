@@ -7,7 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="25dp"
-        tools:context="com.khedr.ecommerce.ui.activites.splash.SplashActivity">
+        tools:context="com.khedr.ecommerce.ui.activities.splash.SplashActivity">
 
         <ImageView
             android:id="@+id/iv_splash_left_back"
@@ -42,7 +42,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_80sdp"
             android:layout_marginEnd="@dimen/_40sdp"
-            android:fontFamily="@font/montserrat_medium"
+            android:fontFamily="@font/medium"
             android:text="@string/khadrawy"
             android:textColor="@color/secondary"
             android:textSize="@dimen/_30sdp"
@@ -79,7 +79,7 @@
             android:layout_width="@dimen/_150sdp"
             android:layout_height="wrap_content"
             android:background="@drawable/bt_back_filled"
-            android:fontFamily="@font/montserrat_medium"
+            android:fontFamily="@font/medium"
             android:paddingVertical="@dimen/_2sdp"
             android:text="@string/reconnect"
             android:textAllCaps="false"

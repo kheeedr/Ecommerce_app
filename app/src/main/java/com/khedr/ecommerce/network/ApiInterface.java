@@ -53,7 +53,7 @@ public interface ApiInterface {
     // favorite
     @Headers({ "Content-Type:application/json"})
     @POST("favorites")
-    Call<PostFavoriteResponse> addToFavorite(@Header("lang") String lang,@Header("Authorization") String token
+    Single<PostFavoriteResponse> addToFavorite(@Header("lang") String lang,@Header("Authorization") String token
             , @Body ProductId product_id);
 
     @Headers({ "Content-Type:application/json"})

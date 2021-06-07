@@ -7,7 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="25dp"
-        tools:context=".ui.activites.signUp.SignUpActivity">
+        tools:context=".ui.activities.signUp.SignUpActivity">
 
         <TextView
             android:id="@+id/tv_sign_main"
@@ -108,7 +108,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@drawable/et_stroke"
-                            android:fontFamily="@font/montserrat_medium"
+                            android:fontFamily="@font/medium"
                             android:textAlignment="viewStart"
                             android:hint="@string/name"
                             android:inputType="textPersonName"
@@ -136,7 +136,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@drawable/et_stroke"
-                            android:fontFamily="@font/montserrat_medium"
+                            android:fontFamily="@font/medium"
                             android:textAlignment="viewStart"
                             android:hint="@string/phone"
                             android:inputType="phone"
@@ -163,7 +163,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@drawable/et_stroke"
-                            android:fontFamily="@font/montserrat_medium"
+                            android:fontFamily="@font/medium"
                             android:textAlignment="viewStart"
                             android:hint="@string/e_mail"
                             android:inputType="textEmailAddress"
@@ -192,7 +192,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@drawable/et_stroke"
-                            android:fontFamily="@font/montserrat_medium"
+                            android:fontFamily="@font/medium"
                             android:textAlignment="viewStart"
                             android:hint="@string/password"
                             android:inputType="textPassword"
@@ -221,7 +221,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:background="@drawable/et_stroke"
-                            android:fontFamily="@font/montserrat_medium"
+                            android:fontFamily="@font/medium"
                             android:textAlignment="viewStart"
                             android:hint="@string/re_password"
                             android:inputType="textPassword"
@@ -248,7 +248,7 @@
                             android:layout_height="wrap_content"
 
                             android:background="@drawable/bt_back_filled"
-                            android:fontFamily="@font/montserrat_medium"
+                            android:fontFamily="@font/medium"
                             android:paddingVertical="@dimen/_2sdp"
 
                             android:text="@string/sign_up"

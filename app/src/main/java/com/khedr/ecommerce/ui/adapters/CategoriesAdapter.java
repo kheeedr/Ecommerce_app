@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.khedr.ecommerce.R;
 import com.khedr.ecommerce.databinding.ItemCategoriesBinding;
 import com.khedr.ecommerce.pojo.categories.GetCategoriesInnerData;
-import com.khedr.ecommerce.ui.activites.CategoryProductsActivity;
+import com.khedr.ecommerce.ui.activities.CategoryProductsActivity;
 import com.khedr.ecommerce.utils.UiUtils;
 import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;

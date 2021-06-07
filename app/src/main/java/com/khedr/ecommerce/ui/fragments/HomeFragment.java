@@ -15,18 +15,20 @@ import androidx.lifecycle.ViewModelProvider;
 import com.khedr.ecommerce.R;
 import com.khedr.ecommerce.databinding.FragmentHomeBinding;
 import com.khedr.ecommerce.pojo.homeapi.BannersAndProductsModel;
-import com.khedr.ecommerce.ui.activites.CategoriesActivity;
-import com.khedr.ecommerce.ui.activites.CategoryProductsActivity;
-import com.khedr.ecommerce.ui.activites.ContactUsActivity;
-import com.khedr.ecommerce.ui.activites.FavoritesActivity;
-import com.khedr.ecommerce.ui.activites.SearchActivity;
-import com.khedr.ecommerce.ui.activites.splash.SplashActivity;
-import com.khedr.ecommerce.ui.activites.splash.SplashViewModel;
+import com.khedr.ecommerce.ui.activities.CategoriesActivity;
+import com.khedr.ecommerce.ui.activities.CategoryProductsActivity;
+import com.khedr.ecommerce.ui.activities.ContactUsActivity;
+import com.khedr.ecommerce.ui.activities.favourites.FavoritesActivity;
+import com.khedr.ecommerce.ui.activities.SearchActivity;
+import com.khedr.ecommerce.ui.activities.splash.SplashActivity;
+import com.khedr.ecommerce.ui.activities.splash.SplashViewModel;
 import com.khedr.ecommerce.ui.adapters.BannersAdapter;
 import com.khedr.ecommerce.ui.adapters.ProductsAdapter;
 import com.khedr.ecommerce.utils.UserUtils;
 
 import org.jetbrains.annotations.NotNull;
+
+import java.util.Collections;
 
 public class HomeFragment extends Fragment implements View.OnClickListener {
 
@@ -37,6 +39,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     ProductsAdapter productsAdapter;
     SharedPreferences pref;
     SplashViewModel viewModel;
+
 
     public HomeFragment() {
         // Required empty public constructor
@@ -60,31 +63,23 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         b.layoutHomeToPreventCorona.setOnClickListener(this);
         b.svHome.setOnClickListener(this);
 
+        homeResponse = SplashActivity.homeResponse;
+
         //banners rv
         bannersAdapter = new BannersAdapter(getContext());
+        bannersAdapter.setBannersList(homeResponse.getBanners());
         b.rvHomeBanners.setAdapter(bannersAdapter);
+
         //products rv
         productsAdapter = new ProductsAdapter(getContext());
+        productsAdapter.setProductsList(homeResponse.getProducts());
         b.rvHomeProducts.setAdapter(productsAdapter);
-
-        if (homeResponse == null) {
-            homeResponse = SplashActivity.homeResponse;
-            bannersAdapter.setBannersList(homeResponse.getBanners());
-            productsAdapter.setProductsList(homeResponse.getProducts());
-
-        } else {
-            viewModel.getHomeContent(requireContext());
-            Log.d(TAG, "mkhedr: contentRestartRequired");
-        }
-
-
-
 
         viewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(this.requireActivity().getApplication())).get(SplashViewModel.class);
         viewModel.responseBody.observe(this.requireActivity(), homePageApiResponse -> {
             if (homePageApiResponse.isStatus()) {
                 homeResponse = homePageApiResponse.getData();
-                bannersAdapter.setBannersList(homeResponse.getBanners());
+                Collections.reverse(homeResponse.getProducts());
                 productsAdapter.setProductsList(homeResponse.getProducts());
             }
         });
@@ -93,6 +88,15 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
 
         return b.getRoot();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        viewModel.getHomeContent(requireContext());
+        Log.d(TAG, "mkhedr: contentRestart");
+
+
     }
 
     @Override

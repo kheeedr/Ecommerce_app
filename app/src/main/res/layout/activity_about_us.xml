@@ -7,7 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="25dp"
-        tools:context=".ui.activites.aboutUs.AboutUsActivity">
+        tools:context=".ui.activities.aboutUs.AboutUsActivity">
 
         <TextView
             android:id="@+id/main_tv_about_us"
@@ -70,7 +70,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_20sdp"
                     android:layout_marginEnd="@dimen/_40sdp"
-                    android:fontFamily="@font/montserrat_medium"
+                    android:fontFamily="@font/medium"
                     android:text="@string/khadrawy"
                     android:textColor="@color/secondary"
                     android:textSize="@dimen/_30sdp"

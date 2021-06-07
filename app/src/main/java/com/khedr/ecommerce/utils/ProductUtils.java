@@ -6,7 +6,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 
 import com.khedr.ecommerce.R;
@@ -16,7 +15,6 @@ import com.khedr.ecommerce.pojo.product.cart.get.GetCartResponse;
 import com.khedr.ecommerce.pojo.product.cart.post.PostCartResponse;
 import com.khedr.ecommerce.pojo.product.cart.update.Quantity;
 import com.khedr.ecommerce.pojo.product.cart.update.UpdateQuantityResponse;
-import com.khedr.ecommerce.pojo.product.favorites.post.PostFavoriteResponse;
 import com.khedr.ecommerce.network.RetrofitInstance;
 
 import com.khedr.ecommerce.pojo.product.search.SearchRequest;
@@ -31,7 +29,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static com.khedr.ecommerce.ui.activites.CartActivity.total;
+import static com.khedr.ecommerce.ui.activities.cart.CartActivity.total;
 
 public abstract class ProductUtils {
 
@@ -195,62 +193,6 @@ public abstract class ProductUtils {
     }
 
 
-    public static void addProductToFavorite(Context context, int productId, ImageView statusIcon, boolean[] is_favourite) {
-
-        if (UserUtils.isSignedIn(context)) {
-
-            if (is_favourite[0]) {
-                statusIcon.setImageResource(R.drawable.ic_outlined_heart);
-
-            } else {
-                statusIcon.setImageResource(R.drawable.ic_red_heart);
-            }
-
-            ProductId id = new ProductId(productId);
-            String token = UserUtils.getPref(context).getString(context.getString(R.string.pref_user_token), "");
-            String lang=UiUtils.getAppLang(context);
-
-            Call<PostFavoriteResponse> call = RetrofitInstance.getRetrofitInstance().addToFavorite(context,token, id);
-            call.enqueue(new Callback<PostFavoriteResponse>() {
-                @Override
-                public void onResponse(@NonNull Call<PostFavoriteResponse> call, @NonNull Response<PostFavoriteResponse> response) {
-
-                    if (response.body() != null && response.body().isStatus()) {
-                        is_favourite[0] = !is_favourite[0];
-                    } else {
-                        UiUtils.shortToast(context, context.getString(R.string.connection_error));
-                        if (is_favourite[0]) {
-                            statusIcon.setImageResource(R.drawable.ic_red_heart);
-
-                        } else {
-                            statusIcon.setImageResource(R.drawable.ic_outlined_heart);
-                        }
-                    }
-                }
-
-                @Override
-                public void onFailure
-                        (@NonNull Call<PostFavoriteResponse> call, @NonNull Throwable t) {
-                    UiUtils.shortToast(context, t.getMessage());
-
-                    if (is_favourite[0]) {
-                        statusIcon.setImageResource(R.drawable.ic_red_heart);
-
-                    } else {
-                        statusIcon.setImageResource(R.drawable.ic_outlined_heart);
-                    }
-                }
-            });
-        } else {
-            UiUtils.shortToast(context, context.getString(R.string.connection_error));
-            if (is_favourite[0]) {
-                statusIcon.setImageResource(R.drawable.ic_red_heart);
-
-            } else {
-                statusIcon.setImageResource(R.drawable.ic_outlined_heart);
-            }
-        }
-    }
 
     public static void performSearch(Context context, String searchText, MutableLiveData<boolean[]> isSucceeded, SearchResponse[] body) {
         boolean[] succeeded = {false};
