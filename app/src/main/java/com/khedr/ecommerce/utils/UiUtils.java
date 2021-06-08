@@ -61,7 +61,7 @@ public abstract class UiUtils {
         view.startAnimation(endToStart);
     }
 
-    public static void getImageViaUrl(Context context, String url , ImageView imageView, View progressBar) {
+    public static void getImageViaUrl(Context context, String url, ImageView imageView, View progressBar) {
         SharedPreferences pref = context.getSharedPreferences("logined", 0);
         progressBar.setVisibility(View.VISIBLE);
         UiUtils.animJumpAndFade(context, progressBar);
@@ -133,6 +133,8 @@ public abstract class UiUtils {
         Configuration config = new Configuration();
         config.locale = locale;
         context.getResources().updateConfiguration(config, context.getResources().getDisplayMetrics());
+
+
     }
 
     public static String getAppLang(Context context) {
@@ -140,9 +142,12 @@ public abstract class UiUtils {
         if (!appLang.equals("")) {
             return appLang;
         } else {
-
             Locale defaultLocale = Resources.getSystem().getConfiguration().locale;
-            return defaultLocale.getLanguage();
+            if (defaultLocale.getLanguage().equals("ar")) {
+                return "ar";
+            } else {
+                return "en";
+            }
         }
     }
 

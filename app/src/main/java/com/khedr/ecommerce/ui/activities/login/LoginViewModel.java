@@ -27,26 +27,25 @@ public class LoginViewModel extends ViewModel {
         isLoading.setValue(true);
         UserApiResponse nullResponse = new UserApiResponse(false, context.getString(R.string.connection_error), null);
 
-        Single<UserApiResponse> responseSingle= RetrofitInstance.getRetrofitInstance().login(context, user).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
-        SingleObserver<UserApiResponse> responseObserver=new SingleObserver<UserApiResponse>() {
-            @Override
-            public void onSubscribe(@NotNull Disposable d) {
+        RetrofitInstance.getRetrofitInstance().login(context, user).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<UserApiResponse>() {
+                    @Override
+                    public void onSubscribe(@NotNull Disposable d) {
 
-            }
+                    }
 
-            @Override
-            public void onSuccess(@NotNull UserApiResponse userApiResponse) {
-                isLoading.setValue(false);
-                responseBody.setValue(userApiResponse);
+                    @Override
+                    public void onSuccess(@NotNull UserApiResponse userApiResponse) {
+                        isLoading.setValue(false);
+                        responseBody.setValue(userApiResponse);
 
-            }
+                    }
 
-            @Override
-            public void onError(@NotNull Throwable e) {
-                isLoading.setValue(false);
-                responseBody.setValue(nullResponse);
-            }
-        };
-        responseSingle.subscribe(responseObserver);
+                    @Override
+                    public void onError(@NotNull Throwable e) {
+                        isLoading.setValue(false);
+                        responseBody.setValue(nullResponse);
+                    }
+                });
     }
 }

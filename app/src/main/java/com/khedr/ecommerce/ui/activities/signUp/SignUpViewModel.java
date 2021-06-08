@@ -12,7 +12,6 @@ import com.khedr.ecommerce.pojo.user.UserDataForRegisterRequest;
 
 import org.jetbrains.annotations.NotNull;
 
-import io.reactivex.Single;
 import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -28,10 +27,7 @@ public class SignUpViewModel extends ViewModel {
     public void postNewUser(Context context, UserDataForRegisterRequest user) {
         isLoading.setValue(true);
         UserApiResponse nullResponse = new UserApiResponse(false, context.getString(R.string.connection_error), null);
-        Single<UserApiResponse> responseObservable = RetrofitInstance.getRetrofitInstance().register(context, user)
-                .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
-
-        SingleObserver<UserApiResponse> responseObserver = new SingleObserver<UserApiResponse>() {
+        RetrofitInstance.getRetrofitInstance().register(context, user).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new SingleObserver<UserApiResponse>() {
             @Override
             public void onSubscribe(@NotNull Disposable d) {
             }
@@ -47,9 +43,7 @@ public class SignUpViewModel extends ViewModel {
                 isLoading.setValue(false);
                 responseBody.setValue(nullResponse);
             }
-        };
-
-        responseObservable.subscribe(responseObserver);
+        });
     }
 
 

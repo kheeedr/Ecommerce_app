@@ -144,4 +144,5 @@
     <string name="total_price">\"Total: \"</string>
     <string name="reconnect">اعادة الاتصال</string>
     <string name="splash_intent">from_splash_intent</string>
+    <string name="coming_soon">سيتوفر قريبا</string>
 </resources>

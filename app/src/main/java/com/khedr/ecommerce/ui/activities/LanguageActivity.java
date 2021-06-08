@@ -80,11 +80,19 @@ public class LanguageActivity extends AppCompatActivity implements View.OnClickL
     }
 
     public void RestartApp() {
-        Intent intent = new Intent(this, SplashActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+        Intent i = getBaseContext().getPackageManager().
+                getLaunchIntentForPackage(getBaseContext().getPackageName());
+        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         finishAffinity();
-        startActivity(intent);
+        startActivity(i);
         finish();
+
+
+//        Intent intent = new Intent(this, SplashActivity.class);
+//        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//        startActivity(intent);
     }
 
     public void refreshSelection(String lang) {

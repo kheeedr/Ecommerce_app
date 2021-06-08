@@ -142,5 +142,6 @@
     <string name="total_price">\"Total: \"</string>
     <string name="reconnect">Reconnect</string>
     <string name="splash_intent">from_splash_intent</string>
+    <string name="coming_soon">Coming soon</string>
 
 </resources>

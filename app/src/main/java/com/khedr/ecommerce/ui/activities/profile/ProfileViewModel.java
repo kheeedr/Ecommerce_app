@@ -13,7 +13,6 @@ import com.khedr.ecommerce.utils.UserUtils;
 
 import org.jetbrains.annotations.NotNull;
 
-import io.reactivex.Single;
 import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -29,28 +28,27 @@ public class ProfileViewModel extends ViewModel {
         String token = UserUtils.getUserToken(context);
         TokenModel tokenModel = new TokenModel(token);
 
-        Single<UserApiResponse> responseSingle = RetrofitInstance.getRetrofitInstance().logOut(context, token, tokenModel).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+        RetrofitInstance.getRetrofitInstance().logOut(context, token, tokenModel).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
 
-        SingleObserver<UserApiResponse> responseObserver = new SingleObserver<UserApiResponse>() {
+                .subscribe(new SingleObserver<UserApiResponse>() {
 
-            @Override
-            public void onSubscribe(@NotNull Disposable d) {
-            }
+                    @Override
+                    public void onSubscribe(@NotNull Disposable d) {
+                    }
 
-            @Override
-            public void onSuccess(@NotNull UserApiResponse userApiResponse) {
-                isLoading.setValue(false);
-                responseBody.setValue(userApiResponse);
-            }
+                    @Override
+                    public void onSuccess(@NotNull UserApiResponse userApiResponse) {
+                        isLoading.setValue(false);
+                        responseBody.setValue(userApiResponse);
+                    }
 
-            @Override
-            public void onError(@NotNull Throwable e) {
-                isLoading.setValue(false);
-                responseBody.setValue(nullResponse);
-            }
+                    @Override
+                    public void onError(@NotNull Throwable e) {
+                        isLoading.setValue(false);
+                        responseBody.setValue(nullResponse);
+                    }
 
-        };
-        responseSingle.subscribe(responseObserver);
+                });
     }
 
 }

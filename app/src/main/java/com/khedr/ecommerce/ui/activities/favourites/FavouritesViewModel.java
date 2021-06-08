@@ -14,7 +14,6 @@ import com.khedr.ecommerce.utils.UserUtils;
 
 import org.jetbrains.annotations.NotNull;
 
-import io.reactivex.Single;
 import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -32,26 +31,25 @@ public class FavouritesViewModel extends ViewModel {
         ProductId id = new ProductId(productId);
         String token = UserUtils.getUserToken(context);
 
-        Single<PostFavoriteResponse> responseSingle = RetrofitInstance.getRetrofitInstance().addToFavorite(context, token, id).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
-        SingleObserver<PostFavoriteResponse> responseObserver = new SingleObserver<PostFavoriteResponse>() {
-            @Override
-            public void onSubscribe(@NotNull Disposable d) {
+        RetrofitInstance.getRetrofitInstance().addToFavorite(context, token, id).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<PostFavoriteResponse>() {
+                    @Override
+                    public void onSubscribe(@NotNull Disposable d) {
 
-            }
+                    }
 
-            @Override
-            public void onSuccess(@NotNull PostFavoriteResponse postFavoriteResponse) {
-                Log.d(TAG,"mkhedr: favorite");
-                setFavoriteResponseBody.setValue(postFavoriteResponse);
-            }
+                    @Override
+                    public void onSuccess(@NotNull PostFavoriteResponse postFavoriteResponse) {
+                        Log.d(TAG, "mkhedr: favorite");
+                        setFavoriteResponseBody.setValue(postFavoriteResponse);
+                    }
 
-            @Override
-            public void onError(@NotNull Throwable e) {
-                setFavoriteResponseBody.setValue(nullResponse);
-                Log.d(TAG,"mkhedr: "+e);
-            }
-        };
-        responseSingle.subscribe(responseObserver);
+                    @Override
+                    public void onError(@NotNull Throwable e) {
+                        setFavoriteResponseBody.setValue(nullResponse);
+                        Log.d(TAG, "mkhedr: " + e);
+                    }
+                });
     }
 
 
