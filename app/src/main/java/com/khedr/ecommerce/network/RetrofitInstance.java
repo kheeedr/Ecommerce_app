@@ -73,6 +73,10 @@ public final class RetrofitInstance {
         return apiInterface.addToFavorite(getLang(context), token, id);
     }
 
+    public Single<GetFavoritesResponse> getFavorites(Context context, String token) {
+        return apiInterface.getFavorites(getLang(context), token);
+    }
+
     public Call<GetCartResponse> getCart(Context context, String token) {
         return apiInterface.getCart(getLang(context), token);
     }
@@ -83,10 +87,6 @@ public final class RetrofitInstance {
 
     public Call<GetCategoryItemsResponse> getCategoryItems(Context context, String token, int id) {
         return apiInterface.getCategoryItems(getLang(context), token, id);
-    }
-
-    public Call<GetFavoritesResponse> getFavorites(Context context, String token) {
-        return apiInterface.getFavorites(getLang(context), token);
     }
 
     public Single<HomePageApiResponse> getHomePage(Context context, String token) {

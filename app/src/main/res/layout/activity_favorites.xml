@@ -38,29 +38,57 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ProgressBar
-            android:id="@+id/progress_favorite"
-            android:layout_width="@dimen/_40sdp"
-            android:layout_height="@dimen/_40sdp"
-            android:indeterminate="true"
-            android:indeterminateTint="@color/secondary"
-            android:indeterminateTintMode="src_atop"
+      <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/progress_favorites"
+            android:layout_width="@dimen/_70sdp"
+            android:layout_height="@dimen/_65sdp"
+            android:translationZ="@dimen/_30sdp"
+          android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/main_tv_favorites" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.55">
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/todo"
+                android:paddingRight="@dimen/_5sdp"
+                android:src="@drawable/moto"
+                android:translationZ="@dimen/_30sdp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="RtlHardcoded,RtlSymmetry" />
+
+            <View
+                android:id="@+id/view_categories_under_moto"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_2sdp"
+                android:background="@color/secondary"
+                app:layout_constraintBottom_toBottomOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_favorites"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/_42sdp"
             android:layout_marginHorizontal="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_42sdp"
+            android:orientation="vertical"
             android:paddingTop="@dimen/_10sdp"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.615"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/main_tv_favorites">
+            app:layout_constraintTop_toBottomOf="@id/main_tv_favorites"
+            app:layout_constraintVertical_bias="1.0"
+            app:reverseLayout="false"
+            app:spanCount="2">
 
         </androidx.recyclerview.widget.RecyclerView>
 

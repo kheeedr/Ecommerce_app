@@ -1,4 +1,4 @@
-package com.khedr.ecommerce.ui.activities;
+package com.khedr.ecommerce.ui.activities.search;
 
 import android.content.Context;
 import android.os.Bundle;

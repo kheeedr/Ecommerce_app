@@ -2,6 +2,8 @@ package com.khedr.ecommerce.pojo.product.favorites.get;
 
 import com.khedr.ecommerce.pojo.product.SimpleProduct;
 
+import java.io.Serializable;
+
 public class InnerData {
     int id;
     SimpleProduct product;

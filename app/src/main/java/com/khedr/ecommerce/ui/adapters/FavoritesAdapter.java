@@ -2,6 +2,7 @@ package com.khedr.ecommerce.ui.adapters;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Paint;
 import android.view.LayoutInflater;
@@ -12,7 +13,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.khedr.ecommerce.databinding.ItemProductBinding;
+import com.khedr.ecommerce.pojo.product.Product;
 import com.khedr.ecommerce.pojo.product.favorites.get.InnerData;
+import com.khedr.ecommerce.ui.activities.product.ProductDetailsActivity;
+import com.khedr.ecommerce.ui.activities.splash.SplashActivity;
 import com.khedr.ecommerce.utils.UiUtils;
 
 import org.jetbrains.annotations.NotNull;
@@ -25,7 +29,6 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
 
     List<InnerData> favoritesList = new ArrayList<>();
     Context context;
-    private static final String TAG = "FavoritesAdapter";
     SharedPreferences pref;
 
     public FavoritesAdapter(Context context) {
@@ -50,19 +53,13 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
     public void onBindViewHolder(@NonNull @NotNull FavoritesViewHolder holder, int position) {
         pref = context.getSharedPreferences("logined", 0);
         //set product image
-        UiUtils.getImageViaUrl(context,favoritesList.get(position).getProduct().getImage(), holder.b.ivProduct, holder.b.progressProductIv);
+        UiUtils.getImageViaUrl(context, favoritesList.get(position).getProduct().getImage(), holder.b.ivProduct, holder.b.progressProductIv);
 
 
         //set product name and price;
         holder.b.tvProductPrice.setText("EGP " + favoritesList.get(position).getProduct().getPrice());
         holder.b.tvProductName.setText(favoritesList.get(position).getProduct().getName());
 
-//        holder.btToCart.setOnLongClickListener(v -> {
-//            if (v.getId() == R.id.layout_product_to_cart) {
-//                addProductToFavorite(position);
-//            }
-//            return false;
-//        });
 
         if (favoritesList.get(position).getProduct().getDiscount() > 0) {
 
@@ -75,6 +72,19 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
             holder.b.tvProductOldPrice.setVisibility(View.GONE);
             holder.b.tvProductDiscount.setVisibility(View.GONE);
         }
+        holder.b.layoutProduct.setOnClickListener(v -> {
+
+            int id = favoritesList.get(position).getProduct().getId();
+            for (Product product : SplashActivity.homeResponse.getProducts()) {
+                if (product.getId()==id){
+                Intent intent = new Intent(context, ProductDetailsActivity.class);
+                intent.putExtra("product", product);
+                context.startActivity(intent);
+                break;
+                }
+            }
+        });
+
     }
 
 
@@ -87,6 +97,7 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
     static class FavoritesViewHolder extends RecyclerView.ViewHolder {
 
         ItemProductBinding b;
+
         public FavoritesViewHolder(@NonNull @NotNull ItemProductBinding b) {
             super(b.getRoot());
             this.b = b;

@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.SnapHelper;
 import com.khedr.ecommerce.R;
 import com.khedr.ecommerce.databinding.ActivityProductDetailsBinding;
 import com.khedr.ecommerce.pojo.product.Product;
+import com.khedr.ecommerce.pojo.product.favorites.get.InnerData;
 import com.khedr.ecommerce.ui.activities.cart.CartActivity;
 import com.khedr.ecommerce.ui.activities.favourites.FavouritesViewModel;
 import com.khedr.ecommerce.ui.adapters.ProductImagesAdapter;
@@ -26,7 +27,8 @@ import com.khedr.ecommerce.utils.ProductUtils;
 import com.khedr.ecommerce.utils.UiUtils;
 import com.khedr.ecommerce.utils.UserUtils;
 
-import org.jetbrains.annotations.NotNull ;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -36,22 +38,26 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
 //    private static final String TAG = "ProductDetailsActivity";
 
     SharedPreferences pref;
-    boolean is_favourite ;
+    boolean is_favourite;
 
     ProductImagesAdapter adapter;
     SnapHelper helper = new LinearSnapHelper();
     ArrayList<String> imagesList;
     Product product;
+    InnerData favouriteProduct;
     FavouritesViewModel favouritesViewModel;
+
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         b = DataBindingUtil.setContentView(this, R.layout.activity_product_details);
         pref = UserUtils.getPref(this);
-        favouritesViewModel= new ViewModelProvider(this,ViewModelProvider.AndroidViewModelFactory.getInstance(this.getApplication())).get(FavouritesViewModel.class);
+        favouritesViewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(this.getApplication())).get(FavouritesViewModel.class);
 
-        product= (Product) getIntent().getSerializableExtra("product");
+        product = (Product) getIntent().getSerializableExtra("product");
+
+
         imagesList = product.getImages();
         adapter = new ProductImagesAdapter(this, imagesList);
         b.rvProductDetails.setAdapter(adapter);
@@ -77,11 +83,11 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
             }
         });
 
-        favouritesViewModel.setFavoriteResponseBody.observe(this,postFavoriteResponse -> {
-            if (postFavoriteResponse.isStatus()){
+        favouritesViewModel.setFavoriteResponseBody.observe(this, postFavoriteResponse -> {
+            if (postFavoriteResponse.isStatus()) {
                 is_favourite = !is_favourite;
 
-            }else{
+            } else {
                 UiUtils.shortToast(this, postFavoriteResponse.getMessage());
                 if (is_favourite) {
                     b.ivProductDetailsInFavourite.setImageResource(R.drawable.ic_red_heart);
@@ -108,8 +114,7 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
         } else if (v == b.ivProductDetailsInFavourite) {
 
             addProductToFavorite();
-        }
-        else if (v == b.ivProductDetailsInCart) {
+        } else if (v == b.ivProductDetailsInCart) {
             startActivity(new Intent(ProductDetailsActivity.this, CartActivity.class));
         } else if (v == b.layoutProductDetailsPlus) {
             int oldQ = Integer.parseInt(b.tvProductDetailsEditableQuantity.getText().toString());
@@ -133,7 +138,7 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
         }
     }
 
-    void addProductToFavorite(){
+    void addProductToFavorite() {
         if (UserUtils.isSignedIn(this)) {
 
             if (is_favourite) {
@@ -142,10 +147,9 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
             } else {
                 b.ivProductDetailsInFavourite.setImageResource(R.drawable.ic_red_heart);
             }
-            favouritesViewModel.addProductToFavorite(this,product.getId());
-        }
-        else {
-            UiUtils.shortToast(this,getString(R.string.you_should_login_first));
+            favouritesViewModel.addProductToFavorite(this, product.getId());
+        } else {
+            UiUtils.shortToast(this, getString(R.string.you_should_login_first));
             if (is_favourite) {
                 b.ivProductDetailsInFavourite.setImageResource(R.drawable.ic_red_heart);
 
@@ -176,7 +180,7 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
         }
         b.tvProductDetailsPrice.setText(product.getPrice() + " EGP");
 
-        if ( product.getDiscount()> 0) {
+        if (product.getDiscount() > 0) {
             //old price
             b.tvProductDetailsOldPrice.setPaintFlags(b.tvProductDetailsOldPrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
             b.tvProductDetailsOldPrice.setText(String.valueOf(product.getOld_price()));

@@ -106,7 +106,7 @@ public class CategoryProductsActivity extends AppCompatActivity implements View.
     }
 
     public void getCategoryByName(String categoryName) {
-        String lang=UiUtils.getAppLang(this);
+
 
         Call<GetCategoriesResponse> call = RetrofitInstance.getRetrofitInstance().getCategories(this);
         call.enqueue(new Callback<GetCategoriesResponse>() {

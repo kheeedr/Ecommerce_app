@@ -58,7 +58,7 @@ public interface ApiInterface {
 
     @Headers({ "Content-Type:application/json"})
     @GET("favorites")
-    Call<GetFavoritesResponse> getFavorites(@Header("lang") String lang,@Header("Authorization") String token);
+    Single<GetFavoritesResponse> getFavorites(@Header("lang") String lang,@Header("Authorization") String token);
 
     // cart
     @Headers({ "Content-Type:application/json"})

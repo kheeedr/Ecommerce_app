@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="25dp"
-        tools:context="com.khedr.ecommerce.ui.activities.SearchActivity">
+        tools:context="com.khedr.ecommerce.ui.activities.search.SearchActivity">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layout_search_input"

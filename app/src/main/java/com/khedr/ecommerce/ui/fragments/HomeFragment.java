@@ -19,7 +19,7 @@ import com.khedr.ecommerce.ui.activities.CategoriesActivity;
 import com.khedr.ecommerce.ui.activities.CategoryProductsActivity;
 import com.khedr.ecommerce.ui.activities.ContactUsActivity;
 import com.khedr.ecommerce.ui.activities.favourites.FavoritesActivity;
-import com.khedr.ecommerce.ui.activities.SearchActivity;
+import com.khedr.ecommerce.ui.activities.search.SearchActivity;
 import com.khedr.ecommerce.ui.activities.splash.SplashActivity;
 import com.khedr.ecommerce.ui.activities.splash.SplashViewModel;
 import com.khedr.ecommerce.ui.adapters.BannersAdapter;

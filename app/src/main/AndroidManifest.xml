@@ -22,7 +22,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activities.SearchActivity"
+        <activity android:name=".ui.activities.search.SearchActivity"
             android:screenOrientation="nosensor"
             android:windowSoftInputMode="adjustPan|stateAlwaysVisible"/>
 
