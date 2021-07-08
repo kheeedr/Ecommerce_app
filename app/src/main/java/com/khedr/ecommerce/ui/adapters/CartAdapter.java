@@ -1,8 +1,12 @@
+/*
+ * Copyright (c) 2021.
+ * Created by Mohamed Khedr.
+ */
+
 package com.khedr.ecommerce.ui.adapters;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,40 +15,25 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-
-import com.khedr.ecommerce.databinding.ActivityCartBinding;
 import com.khedr.ecommerce.databinding.ItemCartBinding;
-
 import com.khedr.ecommerce.pojo.product.cart.get.GetCartItems;
-import com.khedr.ecommerce.utils.ProductUtils;
 import com.khedr.ecommerce.utils.UiUtils;
-import com.khedr.ecommerce.utils.UserUtils;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
-//import com.khedr.ecommerce.pojo.product.cart.post.PostCartResponse;
-//import com.khedr.ecommerce.network.ApiInterface;
-//import com.khedr.ecommerce.network.RetrofitInstance;
-//import com.khedr.ecommerce.pojo.product.ProductId;
-//import retrofit2.Call;
-//import retrofit2.Callback;
-//import retrofit2.Response;
-//import com.khedr.ecommerce.R;
-//import static com.khedr.ecommerce.ui.activites.cart.CartActivity.total;
+
 
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder> {
     public static final String TAG = "CartAdapter";
     List<GetCartItems> cartItems = new ArrayList<>();
     Context context;
-    SharedPreferences pref;
-    ActivityCartBinding cartBinding;
+    OnItemClickListener mOnItemClickListener;
 
-    public CartAdapter(Context context, ActivityCartBinding b) {
+    public CartAdapter(Context context) {
         this.context = context;
-        this.cartBinding = b;
-        pref = UserUtils.getPref(context);
+        this.mOnItemClickListener = (OnItemClickListener)context;
     }
 
     @NonNull
@@ -52,7 +41,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
     @Override
     public CartAdapter.CartViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
         return new CartViewHolder(ItemCartBinding
-                .inflate(LayoutInflater.from(parent.getContext()), parent, false));
+                .inflate(LayoutInflater.from(parent.getContext()), parent, false), mOnItemClickListener);
     }
 
     @SuppressLint("SetTextI18n")
@@ -62,7 +51,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         //set product image
         UiUtils.getImageViaUrl(context, cartItems.get(position).getProduct().getImage(), holder.b.ivCartProduct, false);
 
-        //set product name and price;
+        //set product price;
         holder.b.tvCartPrice.setText("EGP " + cartItems.get(position).getProduct().getPrice());
         if (cartItems.get(position).getProduct().getDiscount() > 0) {
             holder.b.tvCartOldPrice.setText(String.valueOf(cartItems.get(position).getProduct().getOld_price()));
@@ -73,102 +62,73 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
             holder.b.tvCartOldPrice.setVisibility(View.GONE);
             holder.b.tvCartDiscount.setVisibility(View.GONE);
         }
+
+        //set product name
         holder.b.tvCartProductName.setText(cartItems.get(position).getProduct().getName());
+        //set product quantity
         holder.b.tvCartEditableQuantity.setText(String.valueOf(cartItems.get(position).getQuantity()));
-//        holder.b.ivCartDelete.setOnClickListener(v -> {
-//            holder.b.ivCartDelete.setVisibility(View.GONE);
-//            holder.b.progressCartDelete.setVisibility(View.VISIBLE);
-//            cartBinding.layoutCartProgressBack.setVisibility(View.VISIBLE);
-//
-//            cartBinding.progressCart.setVisibility(View.VISIBLE);
-//            deleteProductFromCart(position, holder);
-//        });
-        holder.b.layoutCartPlus.setOnClickListener(v -> {
-            int oldQ = Integer.parseInt(holder.b.tvCartEditableQuantity.getText().toString());
-            int newQ = oldQ + 1;
-            holder.b.tvCartEditableQuantity.setText(String.valueOf(newQ));
-            int id = cartItems.get(position).getId();
-            ProductUtils.onClickUpdateQuantity(context, newQ, oldQ, id, holder.b.tvCartEditableQuantity, TAG, cartBinding.tvCartTotal);
-        });
-        holder.b.layoutCartMinus.setOnClickListener(v -> {
-            int oldQ = Integer.parseInt(holder.b.tvCartEditableQuantity.getText().toString());
-            if (oldQ > 1) {
-                int newQ = oldQ - 1;
-                holder.b.tvCartEditableQuantity.setText(String.valueOf(newQ));
-                int id = cartItems.get(position).getId();
-                ProductUtils.onClickUpdateQuantity(context, newQ, oldQ, id, holder.b.tvCartEditableQuantity, TAG, cartBinding.tvCartTotal);
-            }
-        });
 
     }
 
-//
-//    public void deleteProductFromCart(int position, CartViewHolder holder) {
-//        if (UserUtils.isSignedIn(context)) {
-//            int id = cartItems.get(position).getProduct().getId();
-//            ProductId productId = new ProductId(id);
-//            String token = pref.getString(context.getString(R.string.pref_user_token), "");
-//            Call<PostCartResponse> call = RetrofitInstance.getRetrofitInstance()
-//                    .create(ApiInterface.class).addToCart(token, productId);
-//            call.enqueue(new Callback<PostCartResponse>() {
-//                @SuppressLint("SetTextI18n")
-//                @Override
-//                public void onResponse(@NotNull Call<PostCartResponse> call, @NotNull Response<PostCartResponse> response) {
-//                    if (response.body().isStatus()) {
-//                        cartItems.remove(position);
-//                        notifyDataSetChanged();
-//                        if (!cartItems.isEmpty()) {
-//                            setCartItems(cartItems);
-//                            cartBinding.layoutCartFilled.setVisibility(View.VISIBLE);
-//                            cartBinding.layoutCartEmpty.setVisibility(View.GONE);
-//                            total -= (response.body().getData().getQuantity()) * (response.body().getData().getProduct().getPrice());
-//                            cartBinding.tvCartTotal.setText("Total: " + (int) total + " EGP");
-//                        } else {
-//                            cartBinding.layoutCartFilled.setVisibility(View.GONE);
-//                            cartBinding.layoutCartEmpty.setVisibility(View.VISIBLE);
-//                        }
-//                    }
-//                    holder.b.ivCartDelete.setVisibility(View.VISIBLE);
-//                    holder.b.progressCartDelete.setVisibility(View.GONE);
-//                    cartBinding.layoutCartProgressBack.setVisibility(View.GONE);
-//                    cartBinding.progressCart.setVisibility(View.GONE);
-//                    UiUtils.shortToast(context, response.body().getMessage());
-//                }
-//
-//                @Override
-//                public void onFailure(@NotNull Call<PostCartResponse> call, @NotNull Throwable t) {
-//                    UiUtils.shortToast(context, t.getMessage());
-//                    holder.b.ivCartDelete.setVisibility(View.VISIBLE);
-//                    holder.b.progressCartDelete.setVisibility(View.GONE);
-//                    cartBinding.layoutCartProgressBack.setVisibility(View.GONE);
-//                    cartBinding.progressCart.setVisibility(View.GONE);
-//
-//                }
-//            });
-//        } else {
-//            UiUtils.shortToast(context, "you should login first");
-//        }
-//    }
+    public void updateList() {
+        setCartItems(cartItems);
+        notifyDataSetChanged();
+    }
 
+    public List<GetCartItems> getList() {
+        return cartItems;
+    }
 
     public void setCartItems(List<GetCartItems> cartItems) {
         this.cartItems = cartItems;
         notifyDataSetChanged();
     }
+
     @Override
     public int getItemCount() {
         return cartItems.size();
     }
 
-    static class CartViewHolder extends RecyclerView.ViewHolder {
+    public static class CartViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        ItemCartBinding b;
-        public CartViewHolder(@NonNull @NotNull ItemCartBinding b) {
+        public ItemCartBinding b;
+        OnItemClickListener onItemClickListener;
+
+        public CartViewHolder(@NonNull @NotNull ItemCartBinding b, OnItemClickListener onItemClickListener) {
             super(b.getRoot());
             this.b = b;
+            this.onItemClickListener = onItemClickListener;
+            b.ivCartDelete.setOnClickListener(this);
+            b.layoutCartPlus.setOnClickListener(this);
+            b.layoutCartMinus.setOnClickListener(this);
+            b.cartItemParent.setOnClickListener(this);
         }
 
+        @Override
+        public void onClick(View v) {
+            if (v == b.ivCartDelete) {
+                onItemClickListener.onProductDeleteClicked(getAdapterPosition());
+            } else if (v == b.layoutCartPlus) {
+                onItemClickListener.onPlusClicked(getAdapterPosition(), this);
+            } else if (v == b.layoutCartMinus) {
+                onItemClickListener.onMinusClicked(getAdapterPosition(), this);
+            }else if (v==b.cartItemParent){
+                onItemClickListener.onParentClicked(getAdapterPosition());
+            }
+        }
     }
+
+    public interface OnItemClickListener {
+        void onProductDeleteClicked(int position);
+
+        void onPlusClicked(int position, CartViewHolder holder);
+
+        void onMinusClicked(int position, CartViewHolder holder);
+
+        void onParentClicked(int position);
+    }
+
+
 }
 
 

@@ -62,7 +62,8 @@
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:contentDescription="@string/todo" />
+                    android:contentDescription="@string/todo"
+                    tools:ignore="RtlHardcoded,RtlSymmetry" />
 
                 <TextView
                     android:id="@+id/tv_login_khadrawy"
@@ -217,7 +218,7 @@
                     android:text="@string/new_user_sign_up"
                     android:textAllCaps="false"
                     android:textColor="@color/primary"
-                    android:textSize="20sp"
+                    android:textSize="@dimen/_15sdp"
                     app:backgroundTint="#FFFFFF"
                     app:backgroundTintMode="multiply"
                     app:layout_constraintEnd_toEndOf="parent"

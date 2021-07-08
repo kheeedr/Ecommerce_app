@@ -440,7 +440,7 @@
                                     android:paddingTop="@dimen/_1sdp"
                                     android:text="@string/introduce_your_friends_to_join_and_receive_rewards"
                                     android:textColor="@color/natural1"
-                                    android:textSize="@dimen/_10sdp" />
+                                    android:textSize="@dimen/_9sdp" />
                             </LinearLayout>
 
                         </androidx.constraintlayout.widget.ConstraintLayout>

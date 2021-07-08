@@ -7,6 +7,7 @@
         <item name="colorOnPrimary">@color/white</item>
         <item name="fontFamily">@font/medium</item>
         <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
+        <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
 
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
@@ -15,8 +16,18 @@
 
 
     </style>
+
     <style name="tv" parent="TextAppearance.AppCompat">
         <item name="fontFamily">@font/regular</item>
 
+    </style>
+
+
+    <style name="AppBottomSheetDialogTheme" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/AppModalStyle</item>
+    </style>
+
+    <style name="AppModalStyle" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/sheet_back_stroked</item>
     </style>
 </resources>

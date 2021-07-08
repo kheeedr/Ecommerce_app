@@ -2,7 +2,6 @@ package com.khedr.ecommerce.ui.activities.product;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.View;
@@ -19,11 +18,10 @@ import androidx.recyclerview.widget.SnapHelper;
 import com.khedr.ecommerce.R;
 import com.khedr.ecommerce.databinding.ActivityProductDetailsBinding;
 import com.khedr.ecommerce.pojo.product.Product;
-import com.khedr.ecommerce.pojo.product.favorites.get.InnerData;
 import com.khedr.ecommerce.ui.activities.cart.CartActivity;
+import com.khedr.ecommerce.ui.activities.cart.CartViewModel;
 import com.khedr.ecommerce.ui.activities.favourites.FavouritesViewModel;
 import com.khedr.ecommerce.ui.adapters.ProductImagesAdapter;
-import com.khedr.ecommerce.utils.ProductUtils;
 import com.khedr.ecommerce.utils.UiUtils;
 import com.khedr.ecommerce.utils.UserUtils;
 
@@ -32,28 +30,28 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.Objects;
 
-
+@SuppressLint("SetTextI18n")
 public class ProductDetailsActivity extends AppCompatActivity implements View.OnClickListener {
-    public ActivityProductDetailsBinding b;
-//    private static final String TAG = "ProductDetailsActivity";
 
-    SharedPreferences pref;
+    ActivityProductDetailsBinding b;
+
     boolean is_favourite;
-
+    boolean isIn_cart;
     ProductImagesAdapter adapter;
     SnapHelper helper = new LinearSnapHelper();
     ArrayList<String> imagesList;
     Product product;
-    InnerData favouriteProduct;
     FavouritesViewModel favouritesViewModel;
+    CartViewModel cartViewModel;
 
-    @SuppressLint("SetTextI18n")
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         b = DataBindingUtil.setContentView(this, R.layout.activity_product_details);
-        pref = UserUtils.getPref(this);
+
         favouritesViewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(this.getApplication())).get(FavouritesViewModel.class);
+        cartViewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(this.getApplication())).get(CartViewModel.class);
 
         product = (Product) getIntent().getSerializableExtra("product");
 
@@ -69,6 +67,7 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
         b.layoutProductDetailsMinus.setOnClickListener(this);
         b.btProductDetailsToCart.setOnClickListener(this);
 
+        // handles product images recyclerview
         helper.attachToRecyclerView(b.rvProductDetails);
         b.tvProductDetailsImageNum.setText(1 + " / " + imagesList.size());
 
@@ -82,24 +81,14 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
                 }
             }
         });
+        manageProgressbar();
 
-        favouritesViewModel.setFavoriteResponseBody.observe(this, postFavoriteResponse -> {
-            if (postFavoriteResponse.isStatus()) {
-                is_favourite = !is_favourite;
+        observeOnSetFavoriteResponse();
 
-            } else {
-                UiUtils.shortToast(this, postFavoriteResponse.getMessage());
-                if (is_favourite) {
-                    b.ivProductDetailsInFavourite.setImageResource(R.drawable.ic_red_heart);
+        observeOnPostToCart();
 
-                } else {
-                    b.ivProductDetailsInFavourite.setImageResource(R.drawable.ic_outlined_heart);
-                }
-            }
-        });
-
+        observeOnUpdateQuantity();
     }
-
 
     @Override
     protected void onResume() {
@@ -112,55 +101,18 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
         if (v == b.btProductDetailsBack) {
             onBackPressed();
         } else if (v == b.ivProductDetailsInFavourite) {
-
             addProductToFavorite();
         } else if (v == b.ivProductDetailsInCart) {
             startActivity(new Intent(ProductDetailsActivity.this, CartActivity.class));
         } else if (v == b.layoutProductDetailsPlus) {
-            int oldQ = Integer.parseInt(b.tvProductDetailsEditableQuantity.getText().toString());
-            int newQ = oldQ + 1;
-            b.tvProductDetailsEditableQuantity.setText(String.valueOf(newQ));
+            UiUtils.makeTvPlusOne(b.tvProductDetailsEditableQuantity);
         } else if (v == b.layoutProductDetailsMinus) {
-            int oldQ = Integer.parseInt(b.tvProductDetailsEditableQuantity.getText().toString());
-            if (oldQ > 1) {
-                int newQ = oldQ - 1;
-                b.tvProductDetailsEditableQuantity.setText(String.valueOf(newQ));
-            }
+            UiUtils.makeTvMinusOne(b.tvProductDetailsEditableQuantity);
         } else if (v == b.btProductDetailsToCart) {
-            boolean inCart = product.isIn_cart();
-            int productId = product.getId();
-            if (!inCart) {
-                ProductUtils.addProductToCart(this, productId, b.btProductDetailsToCart, b.progressProductDetailsToCart);
-            } else {
-                int newQuantity = Integer.parseInt(b.tvProductDetailsEditableQuantity.getText().toString());
-                ProductUtils.getCartIdAndUpdateQuantity(this, newQuantity, productId, b.btProductDetailsToCart, b.progressProductDetailsToCart);
-            }
+            addToCartOrUpdateQuantity();
         }
     }
 
-    void addProductToFavorite() {
-        if (UserUtils.isSignedIn(this)) {
-
-            if (is_favourite) {
-                b.ivProductDetailsInFavourite.setImageResource(R.drawable.ic_outlined_heart);
-
-            } else {
-                b.ivProductDetailsInFavourite.setImageResource(R.drawable.ic_red_heart);
-            }
-            favouritesViewModel.addProductToFavorite(this, product.getId());
-        } else {
-            UiUtils.shortToast(this, getString(R.string.you_should_login_first));
-            if (is_favourite) {
-                b.ivProductDetailsInFavourite.setImageResource(R.drawable.ic_red_heart);
-
-            } else {
-                b.ivProductDetailsInFavourite.setImageResource(R.drawable.ic_outlined_heart);
-            }
-        }
-
-    }
-
-    @SuppressLint("SetTextI18n")
     public void refreshView() {
 
         b.tvProductDetailsName.setText(product.getName());
@@ -173,10 +125,13 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
             is_favourite = false;
         }
         if (product.isIn_cart()) {
+            isIn_cart = true;
+            b.btProductDetailsToCart.setText(R.string.Update_quantity);
             b.ivProductDetailsInCart.setImageResource(R.drawable.iv_shopping_cart);
         } else {
+            isIn_cart = false;
+            b.btProductDetailsToCart.setText(R.string.add_to_cart);
             b.ivProductDetailsInCart.setImageResource(R.drawable.iv_empty_shopping_cart);
-
         }
         b.tvProductDetailsPrice.setText(product.getPrice() + " EGP");
 
@@ -192,4 +147,98 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
             b.tvProductDetailsOldPrice.setVisibility(View.GONE);
         }
     }
+
+    private void addToCartOrUpdateQuantity() {
+
+        if (UserUtils.isSignedIn(this)) {
+            int productId = product.getId();
+            if (!isIn_cart) {
+                int productQuantity = Integer.parseInt(b.tvProductDetailsEditableQuantity.getText().toString());
+                if (productQuantity == 1) {
+                    cartViewModel.addProductToCart(this, productId);
+                } else if (productQuantity > 1) {
+                    cartViewModel.addMultipleProductsToCart(this, productQuantity, productId);
+                }
+            } else {
+                int newQuantity = Integer.parseInt(b.tvProductDetailsEditableQuantity.getText().toString());
+                cartViewModel.updateQuantityFromProductDetails(this, newQuantity, productId);
+            }
+        } else {
+            UiUtils.shortToast(this, getString(R.string.you_should_login_first));
+        }
+    }
+
+    private void observeOnPostToCart() {
+        cartViewModel.postToCartResponseMLD.observe(this, postCartResponse -> {
+            if (postCartResponse.isStatus()) {
+                isIn_cart = true;
+                b.ivProductDetailsInCart.setImageResource(R.drawable.iv_shopping_cart);
+                b.btProductDetailsToCart.setText(R.string.Update_quantity);
+            }
+            UiUtils.shortToast(this, postCartResponse.getMessage());
+        });
+    }
+
+    private void observeOnUpdateQuantity() {
+        cartViewModel.updateQuantityResponseMLD.observe(this, updateQuantityResponse -> {
+            if (updateQuantityResponse.isStatus()) {
+                b.tvProductDetailsEditableQuantity.setText("1");
+                UiUtils.shortToast(this, getString(R.string.quantity_updated));
+            } else {
+                UiUtils.shortToast(this, updateQuantityResponse.getMessage());
+            }
+        });
+    }
+
+    private void observeOnSetFavoriteResponse() {
+        favouritesViewModel.setFavoriteResponseMTL.observe(this, postFavoriteResponse -> {
+            if (postFavoriteResponse.isStatus()) {
+                is_favourite = !is_favourite;
+            } else {
+                UiUtils.shortToast(this, postFavoriteResponse.getMessage());
+            }
+
+            if (is_favourite) {
+                b.ivProductDetailsInFavourite.setImageResource(R.drawable.ic_red_heart);
+            } else {
+                b.ivProductDetailsInFavourite.setImageResource(R.drawable.ic_outlined_heart);
+            }
+        });
+    }
+
+    void manageProgressbar() {
+
+        favouritesViewModel.isSetFavoriteLoading.observe(this, aBoolean -> {
+            if (aBoolean) {
+                UiUtils.animJumpAndFade(this, b.layoutProductDetailsInFavourite);
+            } else {
+                b.layoutProductDetailsInFavourite.clearAnimation();
+            }
+        });
+        cartViewModel.isPostLoading.observe(this, this::selectBetweenButtonAndProgressbar);
+        cartViewModel.isUpdateFromProductLoading.observe(this, this::selectBetweenButtonAndProgressbar);
+        cartViewModel.isPostMultipleLoading.observe(this, this::selectBetweenButtonAndProgressbar);
+    }
+    void selectBetweenButtonAndProgressbar(boolean isLoading){
+        if (isLoading) {
+            b.btProductDetailsToCart.setVisibility(View.GONE);
+            b.progressProductDetailsToCart.setVisibility(View.VISIBLE);
+            UiUtils.animJumpAndFade(this, b.progressProductDetailsToCart);
+
+        } else {
+            b.progressProductDetailsToCart.clearAnimation();
+            b.progressProductDetailsToCart.setVisibility(View.GONE);
+            b.btProductDetailsToCart.setVisibility(View.VISIBLE);
+        }
+    }
+
+
+    void addProductToFavorite() {
+        if (UserUtils.isSignedIn(this))   favouritesViewModel.addProductToFavorite(this, product.getId());
+
+        else UiUtils.shortToast(this, getString(R.string.you_should_login_first));
+
+    }
+
+
 }

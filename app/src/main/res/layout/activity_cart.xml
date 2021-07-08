@@ -2,13 +2,15 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-
     <androidx.constraintlayout.widget.ConstraintLayout
-
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.khedr.ecommerce.ui.activities.cart.CartActivity">
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="25dp"
-        tools:context="com.khedr.ecommerce.ui.activities.cart.CartActivity">
+        >
 
         <TextView
             android:id="@+id/main_tv_cart"
@@ -55,7 +57,9 @@
                 android:id="@+id/rv_cart"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:fillViewport="true"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:orientation="vertical"
+                app:reverseLayout="false"
                 android:layout_marginHorizontal="@dimen/_10sdp"
                 app:layout_constraintBottom_toTopOf="@id/layout_cart_to_order"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -134,44 +138,45 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <ImageView
-                android:id="@+id/iv_cart_back"
-                android:layout_width="@dimen/_200sdp"
-                android:layout_height="@dimen/_200sdp"
-                android:layout_marginTop="@dimen/_50sdp"
-                android:paddingTop="@dimen/_30sdp"
-                android:src="@drawable/ic_cart_back"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:contentDescription="@string/todo"/>
+<!--            <ImageView-->
+<!--                android:id="@+id/iv_cart_back"-->
+<!--                android:layout_width="@dimen/_200sdp"-->
+<!--                android:layout_height="@dimen/_200sdp"-->
+<!--                android:layout_marginTop="@dimen/_50sdp"-->
+<!--                android:paddingTop="@dimen/_30sdp"-->
+<!--                android:src="@drawable/ic_cart_back"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toTopOf="parent"-->
+<!--                android:contentDescription="@string/todo"/>-->
 
             <ImageView
                 android:id="@+id/iv_cart_bag"
-                android:layout_width="@dimen/_210sdp"
-                android:layout_height="@dimen/_200sdp"
-                android:paddingVertical="@dimen/_30sdp"
-                android:paddingEnd="@dimen/_30sdp"
-                android:src="@drawable/empty_cart"
-                app:layout_constraintBottom_toBottomOf="@+id/iv_cart_back"
+                android:layout_width="@dimen/_230sdp"
+                android:layout_height="@dimen/_230sdp"
+                android:contentDescription="@string/todo"
+                android:src="@drawable/empty_car2"
+                app:layout_constraintBottom_toTopOf="@id/layout_cart_to_shop_now"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:contentDescription="@string/todo" />
+                app:layout_constraintVertical_bias="0.52"
+                tools:ignore="RtlSymmetry" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/layout_cart_to_shop_now"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/_20sdp"
-                android:layout_marginTop="@dimen/_30sdp"
                 android:background="@drawable/rounded_stroke_white"
                 android:elevation="@dimen/_2sdp"
                 android:paddingBottom="@dimen/_10sdp"
                 android:translationZ="@dimen/_4sdp"
+                app:layout_constraintBottom_toTopOf="@+id/view2"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/iv_cart_bag">
+                app:layout_constraintTop_toBottomOf="@id/iv_cart_bag"
+                app:layout_constraintVertical_bias="0.8">
 
                 <TextView
                     android:id="@+id/tv_cart_your_cart"
@@ -221,55 +226,67 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <View
+                android:id="@+id/view2"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_60sdp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/layout_cart_to_shop_now"
-                tools:ignore="UselessLeaf" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/progress_cart"
-            android:layout_width="@dimen/_70sdp"
-            android:layout_height="@dimen/_65sdp"
-            app:layout_constraintVertical_bias="0.55"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingRight="@dimen/_5sdp"
-                android:src="@drawable/moto"
-                android:translationZ="@dimen/_15sdp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:contentDescription="@string/todo"/>
-            <View
-            android:id="@+id/view_cart_under_moto"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_2sdp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:background="@color/secondary"
-            />
-
+                app:layout_constraintTop_toBottomOf="@id/layout_cart_to_shop_now"
+                app:layout_constraintVertical_bias="@integer/material_motion_duration_long_1"
+                tools:ignore="UselessLeaf" />
         </androidx.constraintlayout.widget.ConstraintLayout>
+        <!--  progress moto -->
+<!--        <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--            android:id="@+id/progress_cart"-->
+<!--            android:layout_width="@dimen/_70sdp"-->
+<!--            android:layout_height="@dimen/_65sdp"-->
+<!--            android:visibility="gone"-->
+<!--            android:translationZ="@dimen/_15sdp"-->
+<!--            app:layout_constraintVertical_bias="0.55"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent">-->
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/layout_cart_progress_back"
+<!--            <ImageView-->
+<!--                android:id="@+id/imageView"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:paddingRight="@dimen/_5sdp"-->
+<!--                android:src="@drawable/moto"-->
+<!--                android:translationZ="@dimen/_15sdp"-->
+<!--                app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toTopOf="parent"-->
+<!--                android:contentDescription="@string/todo"-->
+<!--                tools:ignore="RtlHardcoded,RtlSymmetry" />-->
+<!--            <View-->
+<!--            android:id="@+id/view_cart_under_moto"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="@dimen/_2sdp"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            android:background="@color/secondary"-->
+<!--            />-->
+
+<!--        </androidx.constraintlayout.widget.ConstraintLayout>-->
+    </androidx.constraintlayout.widget.ConstraintLayout>
+        <include
+            android:id="@+id/include_progress_cart"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            layout="@layout/include_progress_moto"
+            />
+        <include
+            android:id="@+id/included_alert_dialog"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="@dimen/_8sdp"
-            android:background="#32272459"
-            android:translationZ="@dimen/_8sdp"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/main_tv_cart" />
+            layout="@layout/include_confirmation"
+            app:layout_constraintTop_toTopOf="parent">
+
+        </include>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

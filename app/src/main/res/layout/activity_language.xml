@@ -7,7 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="25dp"
-        tools:context=".ui.activities.LanguageActivity">
+        tools:context=".ui.activities.language.LanguageActivity">
 
         <TextView
             android:id="@+id/main_tv_language"
@@ -62,7 +62,8 @@
                 android:padding="@dimen/_10sdp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="UseCompoundDrawables">
 
                 <ImageView
                     android:id="@+id/iv_system_selected"
@@ -70,7 +71,8 @@
                     android:layout_height="@dimen/_20sdp"
                     android:layout_marginHorizontal="@dimen/_5sdp"
                     android:src="@drawable/ic_checked"
-                    android:visibility="visible" />
+                    android:visibility="visible"
+                    tools:ignore="ContentDescription" />
 
                 <TextView
                     android:id="@+id/tv_language_system"
@@ -105,7 +107,8 @@
                 android:padding="@dimen/_10sdp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/layout_language_system">
+                app:layout_constraintTop_toBottomOf="@id/layout_language_system"
+                tools:ignore="UseCompoundDrawables">
 
                 <ImageView
                     android:id="@+id/iv_english_selected"
@@ -113,7 +116,8 @@
                     android:layout_height="@dimen/_20sdp"
                     android:layout_marginHorizontal="@dimen/_5sdp"
                     android:src="@drawable/ic_checked"
-                    android:visibility="gone" />
+                    android:visibility="gone"
+                    tools:ignore="ContentDescription" />
 
                 <TextView
                     android:id="@+id/tv_language_english"
@@ -148,7 +152,8 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/layout_language_english">
+                app:layout_constraintTop_toBottomOf="@id/layout_language_english"
+                tools:ignore="UseCompoundDrawables">
 
                 <ImageView
                     android:id="@+id/iv_arabic_selected"
@@ -156,7 +161,8 @@
                     android:layout_height="@dimen/_20sdp"
                     android:layout_marginHorizontal="@dimen/_5sdp"
                     android:src="@drawable/ic_checked"
-                    android:visibility="gone" />
+                    android:visibility="gone"
+                    tools:ignore="ContentDescription" />
 
                 <TextView
                     android:id="@+id/tv_language_arabic"

@@ -131,7 +131,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 android:contentDescription="@string/todo"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="RtlHardcoded,RtlSymmetry" />
 
             <View
                 android:id="@+id/v_progress_search"
@@ -176,5 +177,17 @@
                 app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+<!--        <include-->
+<!--            android:id="@+id/included_addToCart"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_width="match_parent"-->
+<!--            layout="@layout/include_add_to_cart"-->
+<!--            android:visibility="gone"/>-->
+        <include
+            android:id="@+id/included_progress_moto"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            layout="@layout/include_progress_moto"
+            android:visibility="gone"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

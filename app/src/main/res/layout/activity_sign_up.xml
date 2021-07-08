@@ -47,14 +47,14 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
+                android:layout_marginHorizontal="@dimen/_25sdp"
                 >
 
                 <RelativeLayout
                     android:id="@+id/iv_sign_user_layout"
-                    android:layout_width="@dimen/_150sdp"
-                    android:layout_height="@dimen/_150sdp"
+                    android:layout_width="@dimen/_100sdp"
+                    android:layout_height="@dimen/_100sdp"
                     android:layout_marginTop="@dimen/_25sdp"
-                    app:layout_constraintBottom_toTopOf="@id/layout_sign_input"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
@@ -67,8 +67,8 @@
                         app:civ_border_color="#00000000" />
 
                     <ImageView
-                        android:layout_width="@dimen/_62sdp"
-                        android:layout_height="@dimen/_62sdp"
+                        android:layout_width="@dimen/_45sdp"
+                        android:layout_height="@dimen/_45sdp"
                         android:layout_alignParentEnd="true"
                         android:layout_alignParentBottom="true"
                         android:background="@drawable/ic_blue_circle"
@@ -76,32 +76,20 @@
                         android:contentDescription="@string/todo" />
                 </RelativeLayout>
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/layout_sign_input"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_20sdp"
-                    android:background="@drawable/et_stroke_white"
-                    android:elevation="1dp"
-                    android:paddingHorizontal="@dimen/_15sdp"
-                    android:translationZ="@dimen/_2sdp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/iv_sign_user_layout">
+
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/et_sign_name_layout"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_20sdp"
+                        android:layout_marginTop="@dimen/_40sdp"
                         app:hintEnabled="false"
-                        app:layout_constraintBottom_toTopOf="@id/et_sign_phone_layout"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
                         app:startIconDrawable="@drawable/ic_person"
-                        app:startIconTint="@color/secondary">
+                        app:startIconTint="@color/secondary"
+                        app:layout_constraintTop_toBottomOf="@id/iv_sign_user_layout">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/et_sign_name"
@@ -124,7 +112,6 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_10sdp"
                         app:hintEnabled="false"
-                        app:layout_constraintBottom_toTopOf="@id/et_sign_email_layout"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/et_sign_name_layout"
@@ -151,7 +138,6 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_10sdp"
                         app:hintEnabled="false"
-                        app:layout_constraintBottom_toTopOf="@id/et_sign_password_layout"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/et_sign_phone_layout"
@@ -180,7 +166,6 @@
                         android:layout_marginTop="@dimen/_10sdp"
                         app:endIconMode="password_toggle"
                         app:hintEnabled="false"
-                        app:layout_constraintBottom_toTopOf="@id/et_sign_repassword_layout"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/et_sign_email_layout"
@@ -209,7 +194,6 @@
                         android:layout_marginTop="@dimen/_10sdp"
                         app:endIconMode="password_toggle"
                         app:hintEnabled="false"
-                        app:layout_constraintBottom_toTopOf="@id/layout_sign_bt"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/et_sign_password_layout"
@@ -235,22 +219,20 @@
                         android:layout_width="0dp"
                         android:layout_height="@dimen/_45sdp"
                         android:layout_marginVertical="@dimen/_20sdp"
-                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.498"
+                        app:layout_constraintVertical_bias="0.1"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/et_sign_repassword_layout">
+                        app:layout_constraintTop_toBottomOf="@id/et_sign_repassword_layout"
+                        app:layout_constraintBottom_toTopOf="@id/layout_under_sign_bt">
 
                         <Button
                             android:id="@+id/bt_sign"
                             style="@style/Widget.MaterialComponents.Button"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-
                             android:background="@drawable/bt_back_filled"
                             android:fontFamily="@font/medium"
                             android:paddingVertical="@dimen/_2sdp"
-
                             android:text="@string/sign_up"
                             android:textAllCaps="false"
                             android:textColor="@color/white"
@@ -272,14 +254,16 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
-                </androidx.constraintlayout.widget.ConstraintLayout>
+
 
                 <LinearLayout
+                    android:id="@+id/layout_under_sign_bt"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_30sdp"
+                    android:orientation="horizontal"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/layout_sign_input"
                     tools:ignore="UselessLeaf" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>

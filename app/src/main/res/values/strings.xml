@@ -62,7 +62,7 @@
 
     <string name="price">price</string>
     <string name="old_price">$10</string>
-    <string name="add_to_cart">add to cart</string>
+    <string name="add_to_cart">Add to cart</string>
     <string name="categories">Categories</string>
     <string name="discount_voucher">Discount Voucher</string>
     <string name="prevent_corona">Prevent Corona</string>
@@ -73,7 +73,7 @@
 
     <string name="about_us_and_our_terms"><![CDATA[About Us & Our terms]]></string>
     <string name="lorem_ipsum_text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</string>
-    <string name="total">Total:</string>
+    <string name="total">Total: </string>
     <string name="cart">Cart</string>
     <string name="order_now">Order now</string>
     <string name="your_cart_is_empty">Your cart is empty</string>
@@ -138,10 +138,18 @@
     <string name="invalid_email">email is not valid</string>
     <string name="short_password">password must be 6 letters at least</string>
     <string name="invalid_repassword">\"re-password is not equal the password \"</string>
-    <string name="wait">Please wait...</string>
-    <string name="total_price">\"Total: \"</string>
+    <string name="wait">Please wait…</string>
     <string name="reconnect">Reconnect</string>
     <string name="splash_intent">from_splash_intent</string>
     <string name="coming_soon">Coming soon</string>
+    <string name="delete">Delete</string>
+    <string name="delete_product">Delete Product</string>
+    <string name="are_you_sure">Are you sure?</string>
+    <string name="add_product_to_cart">Add product to cart</string>
+    <string name="quantity_updated">Quantity updated successfully</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="Update_quantity">Update product quantity</string>
+    <string name="already_in_cart">This Product is already in cart</string>
 
 </resources>

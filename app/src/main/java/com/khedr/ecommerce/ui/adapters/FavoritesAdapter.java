@@ -77,10 +77,12 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
             int id = favoritesList.get(position).getProduct().getId();
             for (Product product : SplashActivity.homeResponse.getProducts()) {
                 if (product.getId()==id){
+
                 Intent intent = new Intent(context, ProductDetailsActivity.class);
                 intent.putExtra("product", product);
                 context.startActivity(intent);
                 break;
+
                 }
             }
         });

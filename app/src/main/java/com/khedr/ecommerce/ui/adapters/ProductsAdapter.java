@@ -10,12 +10,15 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.khedr.ecommerce.databinding.ItemProductBinding;
 import com.khedr.ecommerce.pojo.product.Product;
+import com.khedr.ecommerce.ui.activities.cart.CartViewModel;
+import com.khedr.ecommerce.ui.activities.favourites.FavouritesViewModel;
 import com.khedr.ecommerce.ui.activities.product.ProductDetailsActivity;
-import com.khedr.ecommerce.utils.ProductUtils;
 import com.khedr.ecommerce.utils.UiUtils;
 import com.khedr.ecommerce.utils.UserUtils;
 
@@ -30,24 +33,28 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
     List<Product> productsList = new ArrayList<>();
     Context context;
     SharedPreferences pref;
+    OnItemClickListener mOnItemClickListener;
     public static final String TAG = "ProductsAdapter";
 
     public ProductsAdapter(Context context) {
         this.context = context;
+        this.mOnItemClickListener=(OnItemClickListener)context;
+        pref = UserUtils.getPref(context);
+
+    }
+    public ProductsAdapter(Context context,OnItemClickListener mOnItemClickListener) {
+        this.context = context;
+        this.mOnItemClickListener=mOnItemClickListener;
         pref = UserUtils.getPref(context);
     }
 
-    public void setProductsList(List<Product> productsList) {
-        this.productsList = productsList;
-        notifyDataSetChanged();
-    }
 
     @NonNull
     @NotNull
     @Override
     public ProductsAdapter.ProductsViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
         return new ProductsViewHolder(ItemProductBinding
-                .inflate(LayoutInflater.from(parent.getContext()), parent, false));
+                .inflate(LayoutInflater.from(parent.getContext()), parent, false),mOnItemClickListener);
     }
 
     @SuppressLint("SetTextI18n")
@@ -61,27 +68,16 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
         holder.b.tvProductPrice.setText("EGP " + productsList.get(position).getPrice());
 
         if (productsList.get(position).getDiscount() > 0) {
-            holder.b.tvProductOldPrice.setPaintFlags(holder.b.tvProductOldPrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
             holder.b.tvProductDiscount.setVisibility(View.VISIBLE);
             holder.b.tvProductDiscount.setText((int) productsList.get(position).getDiscount() + "%");
             holder.b.tvProductOldPrice.setText(String.valueOf(productsList.get(position).getOld_price()));
+            holder.b.tvProductOldPrice.setPaintFlags(holder.b.tvProductOldPrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+
         } else {
             holder.b.tvProductOldPrice.setVisibility(View.GONE);
             holder.b.tvProductDiscount.setVisibility(View.GONE);
         }
         holder.b.tvProductName.setText(productsList.get(position).getName());
-     
-
-        holder.b.layoutProductToCart.setOnClickListener(v -> {
-            int id = productsList.get(position).getId();
-            ProductUtils.addProductToCart(context, id, holder.b.layoutProductToCart, holder.b.progressProductAdd);
-        });
-
-        holder.b.layoutProduct.setOnClickListener(v -> {
-            Intent intent = new Intent(context, ProductDetailsActivity.class);
-            intent.putExtra("product", productsList.get(position));
-            context.startActivity(intent);
-        });
 
     }
 
@@ -90,16 +86,38 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
         return productsList.size();
     }
 
+    public List<Product> getProductsList() {
+        return productsList;
+    }
 
-    static class ProductsViewHolder extends RecyclerView.ViewHolder {
+    public void setProductsList(List<Product> productsList) {
+        this.productsList = productsList;
+        notifyDataSetChanged();
+    }
 
+    public static class ProductsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        ItemProductBinding b;
-
-        public ProductsViewHolder(@NonNull @NotNull ItemProductBinding b) {
+        public ItemProductBinding b;
+        OnItemClickListener onItemClickListener;
+        public ProductsViewHolder(@NonNull @NotNull ItemProductBinding b,OnItemClickListener onItemClickListener) {
             super(b.getRoot());
             this.b = b;
+            this.onItemClickListener=onItemClickListener;
+            b.itemProductParent.setOnClickListener(this);
+            b.layoutProductToCart.setOnClickListener(this);
         }
 
+        @Override
+        public void onClick(View v) {
+            if (v==b.itemProductParent){
+                onItemClickListener.onParentClicked(getAdapterPosition());
+            }else if (v==b.layoutProductToCart){
+                onItemClickListener.onItemAddToCartClicked(getAdapterPosition(),this);
+            }
+        }
     }
+     public interface OnItemClickListener{
+        void onParentClicked(int position);
+        void onItemAddToCartClicked(int position,ProductsViewHolder productsViewHolder);
+     }
 }

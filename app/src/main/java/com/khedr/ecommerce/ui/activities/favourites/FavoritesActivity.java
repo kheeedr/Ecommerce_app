@@ -9,7 +9,6 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.khedr.ecommerce.R;
 import com.khedr.ecommerce.databinding.ActivityFavoritesBinding;
-import com.khedr.ecommerce.ui.activities.CategoriesActivity;
 import com.khedr.ecommerce.ui.adapters.FavoritesAdapter;
 import com.khedr.ecommerce.utils.UiUtils;
 import com.khedr.ecommerce.utils.UserUtils;
@@ -19,6 +18,7 @@ public class FavoritesActivity extends AppCompatActivity implements View.OnClick
     ActivityFavoritesBinding b;
     FavoritesAdapter favoritesAdapter;
     FavouritesViewModel favouritesViewModel;
+    int i = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,12 +33,6 @@ public class FavoritesActivity extends AppCompatActivity implements View.OnClick
         b.rvFavorites.setAdapter(favoritesAdapter);
         manageProgressbar();
 
-        if (UserUtils.isSignedIn(this)) {
-            favouritesViewModel.getFavorites(this);
-        } else {
-            UiUtils.shortToast(this, getString(R.string.you_should_login_first));
-        }
-
         favouritesViewModel.getFavoriteResponseBody.observe(this, getFavoritesResponse -> {
             if (getFavoritesResponse.isStatus()) {
                 favoritesAdapter.setFavoritesList(getFavoritesResponse.getData().getData());
@@ -48,16 +42,29 @@ public class FavoritesActivity extends AppCompatActivity implements View.OnClick
         });
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        i++;
+        if (UserUtils.isSignedIn(this)) {
+            favouritesViewModel.getFavorites(this);
+        } else {
+            UiUtils.shortToast(this, getString(R.string.you_should_login_first));
+        }
+
+    }
+
     private void manageProgressbar() {
 
-        favouritesViewModel.isGetLoading.observe(this, aBoolean -> {
-            if (aBoolean) {
-                b.progressFavorites.setVisibility(View.VISIBLE);
-                UiUtils.animJumpAndFade(this, b.progressFavorites);
-                UiUtils.animEndToStart(this, b.viewCategoriesUnderMoto);
-            } else {
-                UiUtils.animCenterToEnd(this, b.progressFavorites);
-
+        favouritesViewModel.isGetFavoriteLoading.observe(this, aBoolean -> {
+            if (i < 2) {
+                if (aBoolean) {
+                    b.progressFavorites.setVisibility(View.VISIBLE);
+                    UiUtils.animJumpAndFade(this, b.progressFavorites);
+                    UiUtils.animEndToStart(this, b.viewCategoriesUnderMoto);
+                } else {
+                    UiUtils.animCenterToEnd(this, b.progressFavorites);
+                }
             }
         });
     }

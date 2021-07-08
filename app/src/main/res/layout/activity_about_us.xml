@@ -57,55 +57,57 @@
                     android:id="@+id/iv_about_mid_back"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
+                    android:contentDescription="@string/todo"
                     android:src="@drawable/mid_background"
                     app:layout_constraintDimensionRatio="1:1"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:contentDescription="@string/todo" />
-
-                <TextView
-                    android:id="@+id/tv_about_khadrawy"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_20sdp"
-                    android:layout_marginEnd="@dimen/_40sdp"
-                    android:fontFamily="@font/medium"
-                    android:text="@string/khadrawy"
-                    android:textColor="@color/secondary"
-                    android:textSize="@dimen/_30sdp"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/_40sdp"
-                    android:fontFamily="@font/montserrat_semi_bold"
-                    android:paddingBottom="@dimen/_3sdp"
-                    android:text="@string/market"
-                    android:textColor="@color/natural1"
-                    android:textSize="@dimen/_12sdp"
-                    app:layout_constraintBottom_toBottomOf="@id/tv_about_khadrawy"
-                    app:layout_constraintStart_toEndOf="@id/tv_about_khadrawy" />
+<!--                <TextView-->
+<!--                    android:id="@+id/tv_about_khadrawy"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="@dimen/_20sdp"-->
+<!--                    android:layout_marginEnd="@dimen/_40sdp"-->
+<!--                    android:fontFamily="@font/medium"-->
+<!--                    android:text="@string/khadrawy"-->
+<!--                    android:textColor="@color/secondary"-->
+<!--                    android:textSize="@dimen/_30sdp"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toTopOf="parent" />-->
+
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginEnd="@dimen/_40sdp"-->
+<!--                    android:fontFamily="@font/montserrat_semi_bold"-->
+<!--                    android:paddingBottom="@dimen/_3sdp"-->
+<!--                    android:text="@string/market"-->
+<!--                    android:textColor="@color/natural1"-->
+<!--                    android:textSize="@dimen/_12sdp"-->
+<!--                    app:layout_constraintBottom_toBottomOf="@id/tv_about_khadrawy"-->
+<!--                    app:layout_constraintStart_toEndOf="@id/tv_about_khadrawy" />-->
 
                 <ImageView
                     android:id="@+id/iv_about_man_with_bag"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/_200sdp"
-                    android:layout_marginTop="@dimen/_25sdp"
-                    android:src="@drawable/man_with_fruits_bag"
+                    android:layout_marginTop="@dimen/_45sdp"
+                    android:layout_marginHorizontal="@dimen/_10sdp"
+                    android:contentDescription="@string/todo"
+                    android:src="@drawable/about_us"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_about_khadrawy"
-                    android:contentDescription="@string/todo"/>
+                    app:layout_constraintTop_toTopOf="@+id/iv_about_mid_back" />
 
                 <TextView
                     android:id="@+id/tv_about_in_mid"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_7sdp"
+                    android:layout_marginTop="@dimen/_40sdp"
                     android:text="@string/about_us_and_our_terms"
                     android:gravity="center"
                     android:textColor="@color/secondary"

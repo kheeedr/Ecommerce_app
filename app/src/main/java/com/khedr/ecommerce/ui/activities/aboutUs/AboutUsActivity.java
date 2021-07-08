@@ -1,4 +1,4 @@
-package com.khedr.ecommerce.ui.activities;
+package com.khedr.ecommerce.ui.activities.aboutUs;
 
 import android.os.Bundle;
 import android.view.View;

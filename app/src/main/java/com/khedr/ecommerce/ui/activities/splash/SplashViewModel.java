@@ -23,9 +23,8 @@ public class SplashViewModel extends ViewModel {
 
     public void getHomeContent(Context context) {
         isLoading.setValue(true);
-        String token = UserUtils.getUserToken(context);
         HomePageApiResponse nullResponse = new HomePageApiResponse(false, context.getString(R.string.connection_error), null);
-        RetrofitInstance.getRetrofitInstance().getHomePage(context, token).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+        RetrofitInstance.getRetrofitInstance().getHomePage(context).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<HomePageApiResponse>() {
 
 

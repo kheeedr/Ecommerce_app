@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2021.
+  ~ Created by Mohamed Khedr.
+  -->
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_addToCart_dialog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="@dimen/_180sdp">
+
+        <TextView
+            android:id="@+id/tv_alert_name"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:gravity="center"
+            android:text="@string/add_product_to_cart"
+            android:textColor="@color/secondary"
+            android:textSize="@dimen/_15sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <include
+            android:id="@+id/include_item_cart"
+            layout="@layout/item_cart"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="@dimen/_10sdp"
+            app:layout_constraintBottom_toTopOf="@+id/layout_selectAction"
+            app:layout_constraintTop_toBottomOf="@+id/tv_alert_name" />
+
+
+        <LinearLayout
+            android:id="@+id/layout_selectAction"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layoutDirection="ltr"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+
+            <Button
+                android:id="@+id/action_add_to_cart"
+                style="@style/Widget.MaterialComponents.Button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_20sdp"
+                android:layout_marginVertical="@dimen/_5sdp"
+                android:background="@drawable/bt_back_filled"
+                android:fontFamily="@font/medium"
+                android:paddingVertical="@dimen/_2sdp"
+                android:text="@string/add_to_cart"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_15sdp"
+
+                />
+
+            <Button
+                android:id="@+id/action_cancel_addToCart"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_20sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:background="@drawable/bt_back"
+                android:fontFamily="@font/medium"
+                android:paddingVertical="@dimen/_2sdp"
+                android:text="@string/cancel"
+                android:textAllCaps="false"
+                android:textColor="@color/primary"
+                android:textSize="@dimen/_15sdp"
+                app:backgroundTint="#FFFFFF"
+                app:backgroundTintMode="multiply"
+                app:rippleColor="@color/primary" />
+
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

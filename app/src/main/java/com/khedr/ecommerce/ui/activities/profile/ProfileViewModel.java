@@ -25,10 +25,8 @@ public class ProfileViewModel extends ViewModel {
     public void logOut(Context context) {
         isLoading.setValue(true);
         UserApiResponse nullResponse = new UserApiResponse(false, context.getString(R.string.connection_error), null);
-        String token = UserUtils.getUserToken(context);
-        TokenModel tokenModel = new TokenModel(token);
 
-        RetrofitInstance.getRetrofitInstance().logOut(context, token, tokenModel).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+        RetrofitInstance.getRetrofitInstance().logOut(context).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
 
                 .subscribe(new SingleObserver<UserApiResponse>() {
 

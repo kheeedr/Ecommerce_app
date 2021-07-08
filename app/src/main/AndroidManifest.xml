@@ -10,8 +10,9 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Ecommerce">
-        <activity android:name=".ui.activities.LanguageActivity"
+        android:theme="@style/Theme.Ecommerce"
+        >
+        <activity android:name=".ui.activities.language.LanguageActivity"
             android:screenOrientation="nosensor"
             android:windowSoftInputMode="adjustPan|stateHidden"/>
         <activity android:name=".ui.activities.splash.SplashActivity"
@@ -26,7 +27,7 @@
             android:screenOrientation="nosensor"
             android:windowSoftInputMode="adjustPan|stateAlwaysVisible"/>
 
-        <activity android:name=".ui.activities.CategoryProductsActivity"
+        <activity android:name=".ui.activities.categories.CategoryProductsActivity"
             android:screenOrientation="nosensor"
             android:windowSoftInputMode="adjustPan|stateAlwaysVisible" />
 
@@ -46,11 +47,11 @@
             android:screenOrientation="nosensor"
             android:windowSoftInputMode="adjustPan|stateAlwaysVisible"/>
 
-        <activity android:name=".ui.activities.CategoriesActivity"
+        <activity android:name=".ui.activities.categories.CategoriesActivity"
             android:screenOrientation="nosensor"
             android:windowSoftInputMode="adjustPan|stateAlwaysVisible"/>
 
-        <activity android:name=".ui.activities.ContactUsActivity"
+        <activity android:name=".ui.activities.contactUs.ContactUsActivity"
             android:screenOrientation="nosensor"
             android:windowSoftInputMode="adjustPan|stateAlwaysVisible"/>
 
@@ -58,7 +59,7 @@
             android:screenOrientation="nosensor"
             android:windowSoftInputMode="adjustPan|stateAlwaysVisible"/>
 
-        <activity android:name=".ui.activities.AboutUsActivity"
+        <activity android:name=".ui.activities.aboutUs.AboutUsActivity"
             android:screenOrientation="nosensor"
             android:windowSoftInputMode="adjustPan|stateAlwaysVisible"/>
 

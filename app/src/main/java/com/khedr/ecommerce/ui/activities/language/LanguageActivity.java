@@ -1,4 +1,9 @@
-package com.khedr.ecommerce.ui.activities;
+/*
+ * Copyright (c) 2021.
+ * Created by Mohamed Khedr.
+ */
+
+package com.khedr.ecommerce.ui.activities.language;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;

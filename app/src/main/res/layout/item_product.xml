@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:id="@+id/item_product_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layout_product"
@@ -43,23 +45,14 @@
 
                 <ImageView
                     android:id="@+id/iv_product_to_cart"
-                    android:layout_width="@dimen/_20sdp"
-                    android:layout_height="@dimen/_20sdp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="34dp"
                     android:layout_gravity="center_vertical"
                     android:contentDescription="@string/todo"
                     android:src="@drawable/ic_add" />
             </LinearLayout>
 
-            <ImageView
-                android:id="@+id/progress_product_add"
-                android:layout_width="@dimen/_40sdp"
-                android:layout_height="@dimen/_40sdp"
-                android:padding="@dimen/_10sdp"
-                android:src="@drawable/ic_primary_hexa_shape"
-                android:visibility="gone"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:contentDescription="@string/todo" />
+
 
             <TextView
                 android:id="@+id/tv_product_price"
@@ -109,10 +102,12 @@
                 android:maxLines="2"
                 android:text="@string/product_name"
                 android:textColor="@color/secondary"
+                android:lineHeight="@dimen/_15sdp"
                 android:textSize="@dimen/_10sdp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/iv_product" />
+                app:layout_constraintTop_toBottomOf="@id/iv_product"
+                tools:targetApi="p" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView

@@ -7,7 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="25dp"
-        tools:context="com.khedr.ecommerce.ui.activities.CategoriesActivity">
+        tools:context="com.khedr.ecommerce.ui.activities.categories.CategoriesActivity">
 
         <TextView
             android:id="@+id/main_tv_categories"
@@ -42,6 +42,10 @@
             android:id="@+id/rv_categories"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:spanCount="2"
+            app:reverseLayout="false"
+            android:orientation="vertical"
             android:layout_marginHorizontal="@dimen/_5sdp"
             android:layout_marginTop="@dimen/_42sdp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -49,37 +53,12 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/progress_categories"
-            android:layout_width="@dimen/_70sdp"
-            android:layout_height="@dimen/_65sdp"
-            android:translationZ="@dimen/_30sdp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.55">
-
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:contentDescription="@string/todo"
-                android:paddingRight="@dimen/_5sdp"
-                android:src="@drawable/moto"
-                android:translationZ="@dimen/_30sdp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <View
-                android:id="@+id/view_categories_under_moto"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_2sdp"
-                android:background="@color/secondary"
-                app:layout_constraintBottom_toBottomOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        <include
+            android:id="@+id/included_progress_categories"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            layout="@layout/include_progress_moto"
+            android:visibility="gone"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

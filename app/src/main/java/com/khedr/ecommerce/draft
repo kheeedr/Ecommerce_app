@@ -1,3 +1,169 @@
+
+        // from product
+    //    public static void updateQuantity(Context context, int newValue, int productId, View btToCart, ImageView progressBar) {
+    //
+    //        btToCart.setVisibility(View.GONE);
+    //        progressBar.setVisibility(View.VISIBLE);
+    //        UiUtils.animJumpAndFade(context, progressBar);
+    //        Quantity quantity = new Quantity(newValue);
+    //
+    //        Call<UpdateQuantityResponse> call = RetrofitInstance.getRetrofitInstance()
+    //                .updateQuantity(context, productId, quantity);
+    //        call.enqueue(new Callback<UpdateQuantityResponse>() {
+    //            @Override
+    //            public void onResponse(@NotNull Call<UpdateQuantityResponse> call, @NotNull Response<UpdateQuantityResponse> response) {
+    //                if (response.body() != null) {
+    //                    if (response.body().isStatus()) {
+    //                        UiUtils.shortToast(context, response.body().getMessage());
+    //
+    //                    } else {
+    //                        UiUtils.shortToast(context, context.getString(R.string.toast_sorry) + response.body().getMessage());
+    //                    }
+    //                } else {
+    //                    UiUtils.shortToast(context, context.getString(R.string.connection_error));
+    //                }
+    //                progressBar.clearAnimation();
+    //                progressBar.setVisibility(View.GONE);
+    //                btToCart.setVisibility(View.VISIBLE);
+    //            }
+    //
+    //            @Override
+    //            public void onFailure(@NotNull Call<UpdateQuantityResponse> call, @NotNull Throwable t) {
+    //                progressBar.clearAnimation();
+    //                progressBar.setVisibility(View.GONE);
+    //                btToCart.setVisibility(View.VISIBLE);
+    //                UiUtils.shortToast(context, t.getMessage());
+    //            }
+    //        });
+    //
+    //    }
+
+    ======================================================================================
+
+    //from cart
+   /* public static void onClickUpdateQuantity(Context context, int newValue, int oldValue, int productId, TextView tvQuantity, String TAG, TextView cartTotal) {
+
+        Quantity quantity = new Quantity(newValue);
+
+        Call<UpdateQuantityResponse> call = RetrofitInstance.getRetrofitInstance()
+                .updateQuantity(context, productId, quantity);
+        call.enqueue(new Callback<UpdateQuantityResponse>() {
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onResponse(@NotNull Call<UpdateQuantityResponse> call, @NotNull Response<UpdateQuantityResponse> response) {
+                if (response.body() != null) {
+                    if (response.body().isStatus()) {
+                        if (TAG.equals(CartAdapter.TAG)) {
+                            total = response.body().getData().getTotal();
+                            cartTotal.setText("Total: " + (int) Math.ceil(total) + " EGP");
+                        }
+                        UiUtils.shortToast(context, response.body().getMessage());
+
+                    } else {
+                        tvQuantity.setText(String.valueOf(oldValue));
+                        UiUtils.shortToast(context, context.getString(R.string.toast_sorry) + response.body().getMessage());
+                    }
+                } else {
+                    UiUtils.shortToast(context, context.getString(R.string.connection_error));
+                }
+            }
+
+            @Override
+            public void onFailure(@NotNull Call<UpdateQuantityResponse> call, @NotNull Throwable t) {
+                tvQuantity.setText(String.valueOf(oldValue));
+                UiUtils.shortToast(context, t.getMessage());
+            }
+        });
+    }
+*/
+======================================================================================
+
+//   public static void getCartIdAndUpdateQuantity(Context context, int newValue, int productId, View btToCart, ImageView progressBar) {
+//
+//        if (UserUtils.isSignedIn(context)) {
+//
+//            Call<GetCartResponse> call = RetrofitInstance.getRetrofitInstance().getCart(context);
+//            call.enqueue(new Callback<GetCartResponse>() {
+//                @Override
+//                public void onResponse(@NotNull Call<GetCartResponse> call, @NotNull Response<GetCartResponse> response) {
+//                    if (response.body() != null) {
+//                        if (response.body().isStatus()) {
+//                            ArrayList<GetCartItems> cartItems = response.body().getData().getCart_items();
+//                            for (GetCartItems item : cartItems) {
+//                                if (item.getProduct().getId() == productId) {
+//                                    int cartId = item.getId();
+//                                    int oldValue = item.getQuantity();
+//                                    int quantity = newValue + oldValue;
+//                                    updateQuantity(context, quantity, cartId, btToCart, progressBar);
+//                                    break;
+//                                }
+//                            }
+//
+//                        } else {
+//                            UiUtils.shortToast(context, context.getString(R.string.toast_sorry) + response.body().getMessage());
+//                        }
+//                    } else {
+//                        UiUtils.shortToast(context, context.getString(R.string.connection_error));
+//                    }
+//
+//                }
+//
+//                @Override
+//                public void onFailure(@NotNull Call<GetCartResponse> call, @NotNull Throwable t) {
+//                    UiUtils.shortToast(context, t.getMessage());
+//                }
+//            });
+//        } else {
+//            UiUtils.shortToast(context, context.getString(R.string.you_should_login_first));
+//        }
+//    }
+ =====================================================================================
+ //    public static void deleteProductFromCart(int position, CartAdapter.CartViewHolder holder) {
+ //
+ //        int id = cartItems.get(position).getProduct().getId();
+ //        ProductId productId = new ProductId(id);
+ //        String token = pref.getString(context.getString(R.string.pref_user_token), "");
+ //        Call<PostCartResponse> call = RetrofitInstance.getRetrofitInstance()
+ //                .create(ApiInterface.class).addToCart(token, productId);
+ //        call.enqueue(new Callback<PostCartResponse>() {
+ //            @SuppressLint("SetTextI18n")
+ //            @Override
+ //            public void onResponse(@NotNull Call<PostCartResponse> call, @NotNull Response<PostCartResponse> response) {
+ //                if (response.body().isStatus()) {
+ //                    cartItems.remove(position);
+ //                    notifyDataSetChanged();
+ //                    if (!cartItems.isEmpty()) {
+ //                        setCartItems(cartItems);
+ //                        cartBinding.layoutCartFilled.setVisibility(View.VISIBLE);
+ //                        cartBinding.layoutCartEmpty.setVisibility(View.GONE);
+ //                        total -= (response.body().getData().getQuantity()) * (response.body().getData().getProduct().getPrice());
+ //                        cartBinding.tvCartTotal.setText("Total: " + (int) total + " EGP");
+ //                    } else {
+ //                        cartBinding.layoutCartFilled.setVisibility(View.GONE);
+ //                        cartBinding.layoutCartEmpty.setVisibility(View.VISIBLE);
+ //                    }
+ //                }
+ //                holder.b.ivCartDelete.setVisibility(View.VISIBLE);
+ //                holder.b.progressCartDelete.setVisibility(View.GONE);
+ //                cartBinding.layoutCartProgressBack.setVisibility(View.GONE);
+ //                cartBinding.progressCart.setVisibility(View.GONE);
+ //                UiUtils.shortToast(context, response.body().getMessage());
+ //            }
+ //
+ //            @Override
+ //            public void onFailure(@NotNull Call<PostCartResponse> call, @NotNull Throwable t) {
+ //                UiUtils.shortToast(context, t.getMessage());
+ //                holder.b.ivCartDelete.setVisibility(View.VISIBLE);
+ //                holder.b.progressCartDelete.setVisibility(View.GONE);
+ //                cartBinding.layoutCartProgressBack.setVisibility(View.GONE);
+ //                cartBinding.progressCart.setVisibility(View.GONE);
+ //            }
+ //        });
+ //
+ //    }
+
+
+============================================================================================
  /**
      public void postNewUser(UserDataForRegisterRequest user) {
 
@@ -30,3 +196,81 @@
     });
      }
      */
+==================================================================================================
+
+  public static void addProductToCart(Context context, int productId, View btToCart, ImageView progressBar) {
+//        if (UserUtils.isSignedIn(context)) {
+//            progressBar.setVisibility(View.VISIBLE);
+//            UiUtils.animJumpAndFade(context, progressBar);
+//            btToCart.setVisibility(View.GONE);
+//
+//            String lang=UiUtils.getAppLang(context);
+//
+//            Call<PostCartResponse> call = RetrofitInstance.getRetrofitInstance().addToCart(context,token, id);
+//            call.enqueue(new Callback<PostCartResponse>() {
+//                @Override
+//                public void onResponse(@NotNull Call<PostCartResponse> call, @NotNull Response<PostCartResponse> response) {
+//                    progressBar.clearAnimation();
+//                    progressBar.setVisibility(View.GONE);
+//                    btToCart.setVisibility(View.VISIBLE);
+//
+//                    if (response.body() != null) {
+//                        UiUtils.shortToast(context, response.body().getMessage());
+//                    } else {
+//                        UiUtils.shortToast(context,  context.getString(R.string.connection_error));
+//                    }
+//                }
+//
+//                @Override
+//                public void onFailure(@NotNull Call<PostCartResponse> call, @NotNull Throwable t) {
+//                    progressBar.clearAnimation();
+//                    progressBar.setVisibility(View.GONE);
+//                    btToCart.setVisibility(View.VISIBLE);
+//                    UiUtils.shortToast(context, context.getString(R.string.connection_error));
+//                }
+//            });
+//        } else {
+//            UiUtils.shortToast(context, context.getString(R.string.you_should_login_first));
+//            progressBar.setVisibility(View.GONE);
+//            btToCart.setVisibility(View.VISIBLE);
+//        }
+//    }
+
+==================================================================================================
+//    public void getCartProducts() {
+//        if (UserUtils.isSignedIn(this)) {
+//            Call<GetCartResponse> call = RetrofitInstance.getRetrofitInstance().getCart(this);
+//            call.enqueue(new Callback<GetCartResponse>() {
+//                @SuppressLint("SetTextI18n")
+//                @Override
+//                public void onResponse(@NotNull Call<GetCartResponse> call, @NotNull Response<GetCartResponse> response) {
+//                    UiUtils.animCenterToEnd(CartActivity.this, b.progressCart);
+//                    if (response.body() != null) {
+//                        if (response.body().isStatus()) {
+//                            ArrayList<GetCartItems> cartItems = response.body().getData().getCart_items();
+//                            total = response.body().getData().getTotal();
+//                            b.tvCartTotal.setText(getString(R.string.total) + (int) Math.ceil(total) + " EGP");
+//                            if (!cartItems.isEmpty()) {
+//                                cartAdapter.setCartItems(cartItems);
+//                                b.layoutCartFilled.setVisibility(View.VISIBLE);
+//                                b.layoutCartEmpty.setVisibility(View.GONE);
+//                            } else {
+//                                b.layoutCartFilled.setVisibility(View.GONE);
+//                                b.layoutCartEmpty.setVisibility(View.VISIBLE);
+//                            }
+//                        } else {
+//                            Toast.makeText(CartActivity.this, response.body().getMessage(), Toast.LENGTH_LONG).show();
+//                        }
+//                    } else {
+//                        Toast.makeText(CartActivity.this, "connection error...", Toast.LENGTH_LONG).show();
+//                    }
+//                }
+//
+//                @Override
+//                public void onFailure(@NotNull Call<GetCartResponse> call, @NotNull Throwable t) {
+//                    Toast.makeText(CartActivity.this, "connection error...", Toast.LENGTH_LONG).show();
+//                    UiUtils.animCenterToEnd(CartActivity.this, b.progressCart);
+//                }
+//            });
+//        }
+//    }

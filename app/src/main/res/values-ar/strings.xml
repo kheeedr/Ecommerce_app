@@ -40,7 +40,7 @@
     <string name="todo">TODO</string>
     <string name="referral_code">كود التحويل:</string>
     <string name="_00000000">00000000</string>
-    <string name="introduce_your_friends_to_join_and_receive_rewards">ارسله الى اصدقائك لكي ينضمو  واحصل هدايا</string>
+    <string name="introduce_your_friends_to_join_and_receive_rewards">ارسله الى اصدقائك لكي ينضمو واحصل على هدايا</string>
 
     <string name="tap_to_view_contact_information">اضغط لعرض معلومات التواصل</string>
     <string name="about_us">من نحن ؟</string>
@@ -74,11 +74,11 @@
 
     <string name="about_us_and_our_terms"><![CDATA[من نحن  & شروط الاستخدام ]]></string>
     <string name="lorem_ipsum_text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</string>
-    <string name="total">المبلغ الكلي:</string>
+    <string name="total">المبلغ الكلي: </string>
     <string name="cart">عربة التسوق</string>
     <string name="order_now">اطلب الان</string>
     <string name="your_cart_is_empty">عربة التسوق فارغه</string>
-    <string name="looks_like_you_haven_t_add_any_item_yet">لم تقم باضفة منتجات الى عربة التسوق بعد</string>
+    <string name="looks_like_you_haven_t_add_any_item_yet">لم تقم باضافة منتجات الى عربة التسوق بعد</string>
     <string name="shop_now">تسوق الان</string>
     <string name="no_products_found">لاتوجد منتجات</string>
     <string name="contact_us">"اتصل بنا "</string>
@@ -134,15 +134,22 @@
     <string name="notify">الاشعارات</string>
     <string name="order">الطلبات</string>
     <string name="you_can_login_now">" يمكنك تسجيل الدخول "</string>
-    <string name="enter_full_name">please enter full name</string>
-    <string name="max_words_4">sorry max words allowed is 4</string>
-    <string name="Invalid_phone">phone is not valid</string>
-    <string name="invalid_email">email is not valid</string>
-    <string name="short_password">password must be 6 letters at least</string>
-    <string name="invalid_repassword">\"re-password is not equal the password \"</string>
-    <string name="wait">Please wait...</string>
-    <string name="total_price">\"Total: \"</string>
+    <string name="enter_full_name">من فضلك ادخل الاسم بالكامل</string>
+    <string name="max_words_4">للاسف اطول حد مسموح به هو 4 كلمات </string>
+    <string name="Invalid_phone">رقم الهاتف غير صالح</string>
+    <string name="invalid_email">البريد الالكتروني غير صالح</string>
+    <string name="short_password">كلمة المرور يجب ان تكون 6 ارقام على الاقل</string>
+    <string name="invalid_repassword">كلمتا السر غير متطابقتان</string>
+    <string name="wait">برجاء الانتظار</string>
     <string name="reconnect">اعادة الاتصال</string>
     <string name="splash_intent">from_splash_intent</string>
     <string name="coming_soon">سيتوفر قريبا</string>
+    <string name="delete">حذف</string>
+    <string name="delete_product">حذف المنتج</string>
+    <string name="are_you_sure">هل انت متاكد؟</string>
+    <string name="add_product_to_cart">اضافة الى عربة التسوق</string>
+    <string name="quantity_updated">َتم تعديل الكميه بنجاح</string>
+    <string name="Update_quantity">تحديث الكميه</string>
+    <string name="already_in_cart">هذا المنتج موجود في عربة التسوق</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

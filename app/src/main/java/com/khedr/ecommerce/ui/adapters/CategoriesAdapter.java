@@ -3,13 +3,14 @@ package com.khedr.ecommerce.ui.adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.khedr.ecommerce.R;
 import com.khedr.ecommerce.databinding.ItemCategoriesBinding;
 import com.khedr.ecommerce.pojo.categories.GetCategoriesInnerData;
-import com.khedr.ecommerce.ui.activities.CategoryProductsActivity;
+import com.khedr.ecommerce.ui.activities.categories.CategoryProductsActivity;
 import com.khedr.ecommerce.utils.UiUtils;
 import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
@@ -17,10 +18,11 @@ import java.util.ArrayList;
 public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.CategoriesViewHolder> {
     Context context;
     ArrayList<GetCategoriesInnerData> categoriesList = new ArrayList<>();
-
+    OnItemClickListener mOnItemClickListener;
 
     public CategoriesAdapter(Context context) {
         this.context = context;
+        this.mOnItemClickListener=(OnItemClickListener)context;
     }
 
     @NonNull
@@ -28,7 +30,7 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
     @Override
     public CategoriesAdapter.CategoriesViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
         return new CategoriesViewHolder(ItemCategoriesBinding
-                .inflate(LayoutInflater.from(parent.getContext()), parent, false));
+                .inflate(LayoutInflater.from(parent.getContext()), parent, false),mOnItemClickListener);
     }
 
     @Override
@@ -36,12 +38,6 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
 
         UiUtils.getImageViaUrl(context, categoriesList.get(position).getImage(), holder.b.ivCategory, holder.b.progressCategories);
         holder.b.tvCategoryName.setText(categoriesList.get(position).getName());
-        holder.b.layoutCategory.setOnClickListener(v -> {
-            Intent intent = new Intent(context, CategoryProductsActivity.class);
-            intent.putExtra(context.getString(R.string.category_name), categoriesList.get(position).getName());
-            intent.putExtra(context.getString(R.string.category_id), categoriesList.get(position).getId());
-            context.startActivity(intent);
-        });
 
     }
 
@@ -50,17 +46,31 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
         notifyDataSetChanged();
     }
 
+    public ArrayList<GetCategoriesInnerData> getList() {
+        return categoriesList;
+    }
+
     @Override
     public int getItemCount() {
         return categoriesList.size();
     }
 
-    public static class CategoriesViewHolder extends RecyclerView.ViewHolder {
+    public static class CategoriesViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         ItemCategoriesBinding b;
-
-        public CategoriesViewHolder(@NonNull @NotNull ItemCategoriesBinding b) {
+        OnItemClickListener onItemClickListener;
+        public CategoriesViewHolder(@NonNull @NotNull ItemCategoriesBinding b, OnItemClickListener onItemClickListener) {
             super(b.getRoot());
             this.b = b;
+            this.onItemClickListener=onItemClickListener;
+            b.itemCategoryParent.setOnClickListener(this);
         }
+
+        @Override
+        public void onClick(View v) {
+            onItemClickListener.onItemClick(getAdapterPosition());
+        }
+    }
+    public interface OnItemClickListener{
+        void onItemClick(int position);
     }
 }
