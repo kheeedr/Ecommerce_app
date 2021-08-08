@@ -5,6 +5,7 @@ import android.content.Context;
 import com.khedr.ecommerce.pojo.categories.GetCategoriesResponse;
 import com.khedr.ecommerce.pojo.categories.item.GetCategoryItemsResponse;
 import com.khedr.ecommerce.pojo.homeapi.HomePageApiResponse;
+import com.khedr.ecommerce.pojo.product.ProductDetailsResponse;
 import com.khedr.ecommerce.pojo.product.ProductId;
 import com.khedr.ecommerce.pojo.product.cart.delete.DeleteFromCartResponse;
 import com.khedr.ecommerce.pojo.product.cart.get.GetCartResponse;
@@ -112,9 +113,10 @@ public final class RetrofitInstance {
         return apiInterface.getCategoryItems(getLang(context), getToken(context), id);
     }
 
-
-
     public Single<SearchResponse> getSearchProducts(Context context, SearchRequest searchRequest) {
         return apiInterface.getSearchProducts(getLang(context), getToken(context), searchRequest);
+    }
+    public Single<ProductDetailsResponse> getProductDetails(Context context, int id) {
+        return apiInterface.getProductDetails(getLang(context), getToken(context), id);
     }
 }

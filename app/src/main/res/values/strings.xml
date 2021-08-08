@@ -151,5 +151,14 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="Update_quantity">Update product quantity</string>
     <string name="already_in_cart">This Product is already in cart</string>
+    <string name="recently_viewed">Recently viewed</string>
+    <string name="view_all">View all</string>
+    <string name="products_intent">products_intent</string>
+    <string name="best_brands">Best Brands</string>
+    <string name="apple">Apple</string>
+    <string name="samsung">Samsung</string>
+    <string name="xiaomi">Xiaomi</string>
+    <string name="nike">Nike</string>
+    <string name="sony">Sony</string>
 
 </resources>

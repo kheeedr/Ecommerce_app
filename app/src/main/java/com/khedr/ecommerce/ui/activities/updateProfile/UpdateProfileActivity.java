@@ -32,8 +32,7 @@ import java.io.IOException;
 import java.util.Objects;
 
 public class UpdateProfileActivity extends AppCompatActivity implements View.OnClickListener {
-    private static final int REQ_CODE = 102;
-    private static final String TAG = "UpdateProfileActivity";
+
     ActivityUpdateProfileBinding b;
     SharedPreferences pref;
     UpdateProfileViewModel viewModel;
@@ -61,6 +60,7 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
         b.etUpdatePhone.setText(pref.getString(getString(R.string.pref_user_phone), null));
         // set email
         b.etUpdateEmail.setText(pref.getString(getString(R.string.pref_user_email), null));
+
         viewModel.responseBody.observe(this, userApiResponse -> {
 
             UiUtils.shortToast(UpdateProfileActivity.this, userApiResponse.getMessage());

@@ -22,7 +22,9 @@ import com.khedr.ecommerce.R;
 import com.khedr.ecommerce.databinding.FragmentAddToCartBinding;
 import com.khedr.ecommerce.pojo.product.Product;
 import com.khedr.ecommerce.ui.activities.cart.CartViewModel;
+import com.khedr.ecommerce.ui.activities.product.ProductDetailsViewModel;
 import com.khedr.ecommerce.utils.UiUtils;
+import com.khedr.ecommerce.utils.UserUtils;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -33,6 +35,7 @@ public class AddToCartBottomSheetFragment extends BottomSheetDialogFragment impl
     Drawable productImage;
     boolean isIn_cart;
     CartViewModel cartViewModel;
+    ProductDetailsViewModel productViewModel;
 
     public AddToCartBottomSheetFragment(CartViewModel cartViewModel, Product product, Drawable productImage) {
         this.cartViewModel = cartViewModel;
@@ -47,6 +50,10 @@ public class AddToCartBottomSheetFragment extends BottomSheetDialogFragment impl
         super.setupDialog(dialog, style);
         b = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.fragment_add_to_cart, null, false);
         dialog.setContentView(b.getRoot());
+        productViewModel=new ViewModelProvider(this,ViewModelProvider.AndroidViewModelFactory
+                .getInstance(requireActivity().getApplication())).get(ProductDetailsViewModel.class);
+
+        productViewModel.addRecentProduct(requireContext(),product);
 
         setView();
         b.actionCancelAddToCart.setOnClickListener(this);
@@ -70,7 +77,7 @@ public class AddToCartBottomSheetFragment extends BottomSheetDialogFragment impl
             b.includeItemCart.tvCartOldPrice.setVisibility(View.GONE);
             b.includeItemCart.tvCartDiscount.setVisibility(View.GONE);
         }
-        if (product.isIn_cart()){
+        if (product.isIn_cart()) {
             b.tvAlertName.setText(R.string.already_in_cart);
             b.actionAddToCart.setText(R.string.Update_quantity);
         }
@@ -82,7 +89,12 @@ public class AddToCartBottomSheetFragment extends BottomSheetDialogFragment impl
         if (v == b.actionCancelAddToCart) {
             dismiss();
         } else if (v == b.actionAddToCart) {
-            addToCartOrUpdateQuantity();
+            if (UserUtils.isSignedIn(requireContext())) {
+                addToCartOrUpdateQuantity();
+            } else {
+                UiUtils.shortToast(requireContext(), getString(R.string.you_should_login_first));
+            }
+
             dismiss();
         } else if (v == b.includeItemCart.layoutCartPlus) {
             UiUtils.makeTvPlusOne(b.includeItemCart.tvCartEditableQuantity);

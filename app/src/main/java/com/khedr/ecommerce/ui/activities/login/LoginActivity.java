@@ -14,6 +14,7 @@ import com.khedr.ecommerce.R;
 import com.khedr.ecommerce.databinding.ActivityLoginBinding;
 import com.khedr.ecommerce.pojo.user.UserDataForLoginRequest;
 import com.khedr.ecommerce.ui.activities.signUp.SignUpActivity;
+import com.khedr.ecommerce.utils.MyTextWatcher;
 import com.khedr.ecommerce.utils.UiUtils;
 import com.khedr.ecommerce.utils.UserUtils;
 
@@ -32,6 +33,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         b.btLogin.setOnClickListener(this);
         b.btToSignup.setOnClickListener(this);
         b.btLoginBack.setOnClickListener(this);
+
+        handlingInputLayoutError();
+
         manageProgressbar();
 
         viewModel.responseBody.observe(this, userApiResponse -> {
@@ -43,6 +47,23 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             }
         });
 
+    }
+
+    private void handlingInputLayoutError() {
+        b.etLoginEmail.addTextChangedListener(new MyTextWatcher() {
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                super.onTextChanged(s, start, before, count);
+                b.etLoginEmailLayout.setErrorEnabled(false);
+            }
+        });
+        b.etLoginPassword.addTextChangedListener(new MyTextWatcher() {
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                super.onTextChanged(s, start, before, count);
+                b.etLoginPasswordLayout.setErrorEnabled(false);
+            }
+        });
     }
 
     private void manageProgressbar() {
@@ -80,10 +101,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         String email = Objects.requireNonNull(b.etLoginEmail.getText()).toString();
         String password = Objects.requireNonNull(b.etLoginPassword.getText()).toString();
         if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            UiUtils.textError(b.etLoginEmail, getString(R.string.invalid_email));
+            UiUtils.textError(b.etLoginEmailLayout, getString(R.string.invalid_email));
             return nullUser;
         } else if (password.length() < 6) {
-            UiUtils.textError(b.etLoginPassword, getString(R.string.short_password));
+            UiUtils.textError(b.etLoginPasswordLayout, getString(R.string.short_password));
             return nullUser;
         } else {
             UserDataForLoginRequest user = new UserDataForLoginRequest(email, password);

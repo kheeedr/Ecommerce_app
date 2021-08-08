@@ -1,5 +1,6 @@
 package com.khedr.ecommerce.ui.activities.signUp;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -23,13 +24,13 @@ import com.khedr.ecommerce.R;
 import com.khedr.ecommerce.database.Converters;
 import com.khedr.ecommerce.databinding.ActivitySignUpBinding;
 import com.khedr.ecommerce.pojo.user.UserDataForRegisterRequest;
+import com.khedr.ecommerce.utils.MyTextWatcher;
 import com.khedr.ecommerce.utils.UiUtils;
 
 import java.io.IOException;
 import java.util.Objects;
 
 public class SignUpActivity extends AppCompatActivity implements View.OnClickListener {
-    private static final String TAG = "SignUpActivity";
 
     ActivitySignUpBinding b;
     SignUpViewModel viewModel;
@@ -44,6 +45,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         b.ivSignUserLayout.setOnClickListener(this);
         b.btSignBack.setOnClickListener(this);
 
+        handlingInputLayoutError();
         manageProgressbar();
 
         viewModel.responseBody.observe(this, userApiResponse -> {
@@ -57,16 +59,16 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
     }
 
+
     @Override
     public void onClick(View v) {
-        int id = v.getId();
-        if (id == R.id.iv_sign_user_layout) {
+        if (v == b.ivSignUserLayout) {
             chooseImageIntent();
-        } else if (id == R.id.bt_sign) {
+        } else if (v == b.btSign) {
             if (isValidUser().first) {
                 viewModel.postNewUser(this, isValidUser().second);
             }
-        } else if (id == R.id.bt_sign_back) {
+        } else if (v == b.btSignBack) {
             finish();
         }
     }
@@ -97,27 +99,27 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         String image = Converters.fromBitmapToString(((BitmapDrawable) b.ivAddUser.getDrawable()).getBitmap());
 
         if (UiUtils.countWordsUsingSplit(name) < 2) {
-            UiUtils.textError(b.etSignName, getString(R.string.enter_full_name));
+            UiUtils.textError(b.etSignNameLayout, getString(R.string.enter_full_name));
             return nullUser;
 
         } else if (UiUtils.countWordsUsingSplit(name) > 4) {
-            UiUtils.textError(b.etSignName, getString(R.string.max_words_4));
+            UiUtils.textError(b.etSignNameLayout, getString(R.string.max_words_4));
             return nullUser;
 
         } else if (!Patterns.PHONE.matcher(phone).matches()) {
-            UiUtils.textError(b.etSignPhone, getString(R.string.Invalid_phone));
+            UiUtils.textError(b.etSignPhoneLayout, getString(R.string.Invalid_phone));
             return nullUser;
 
         } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            UiUtils.textError(b.etSignEmail, getString(R.string.invalid_email));
+            UiUtils.textError(b.etSignEmailLayout, getString(R.string.invalid_email));
             return nullUser;
 
         } else if (password.length() < 6) {
-            UiUtils.textError(b.etSignPassword, getString(R.string.short_password));
+            UiUtils.textError(b.etSignPasswordLayout, getString(R.string.short_password));
             return nullUser;
 
         } else if (!password.equals(rePassword)) {
-            UiUtils.textError(b.etSignRepassword, getString(R.string.invalid_repassword));
+            UiUtils.textError(b.etSignRepasswordLayout, getString(R.string.invalid_repassword));
             return nullUser;
 
         } else {
@@ -155,5 +157,48 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         someActivityResultLauncher.launch(Intent.createChooser(intent, getString(R.string.select_profile_image)));
     }
 
+    @SuppressLint("ClickableViewAccessibility")
+    private void handlingInputLayoutError() {
+        b.etSignName.addTextChangedListener(new MyTextWatcher() {
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                super.onTextChanged(s, start, before, count);
+                b.etSignNameLayout.setErrorEnabled(false);
+            }
+        });
 
+        b.etSignEmail.addTextChangedListener(new MyTextWatcher() {
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                super.onTextChanged(s, start, before, count);
+                b.etSignEmailLayout.setErrorEnabled(false);
+            }
+        });
+
+        b.etSignPhone.addTextChangedListener(new MyTextWatcher() {
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                super.onTextChanged(s, start, before, count);
+                b.etSignPhoneLayout.setErrorEnabled(false);
+            }
+        });
+
+        b.etSignPassword.addTextChangedListener(new MyTextWatcher() {
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                super.onTextChanged(s, start, before, count);
+                b.etSignPasswordLayout.setErrorEnabled(false);
+            }
+        });
+
+        b.etSignRepassword.addTextChangedListener(new MyTextWatcher() {
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                super.onTextChanged(s, start, before, count);
+                b.etSignRepasswordLayout.setErrorEnabled(false);
+            }
+        });
+
+
+    }
 }

@@ -55,7 +55,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/coming_soon"
                 android:textAlignment="center"
-                android:textSize="40sp"
+                android:textSize="@dimen/_40sdp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

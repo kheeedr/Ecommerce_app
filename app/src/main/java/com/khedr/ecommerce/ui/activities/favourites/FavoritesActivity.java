@@ -1,5 +1,6 @@
 package com.khedr.ecommerce.ui.activities.favourites;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -9,16 +10,23 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.khedr.ecommerce.R;
 import com.khedr.ecommerce.databinding.ActivityFavoritesBinding;
-import com.khedr.ecommerce.ui.adapters.FavoritesAdapter;
+import com.khedr.ecommerce.pojo.product.Product;
+import com.khedr.ecommerce.ui.activities.cart.CartViewModel;
+import com.khedr.ecommerce.ui.activities.product.ProductDetailsActivity;
+import com.khedr.ecommerce.ui.activities.splash.SplashActivity;
+import com.khedr.ecommerce.ui.adapters.ProductsAdapter;
+import com.khedr.ecommerce.ui.fragments.AddToCartBottomSheetFragment;
 import com.khedr.ecommerce.utils.UiUtils;
 import com.khedr.ecommerce.utils.UserUtils;
 
-public class FavoritesActivity extends AppCompatActivity implements View.OnClickListener {
+public class FavoritesActivity extends AppCompatActivity implements View.OnClickListener,ProductsAdapter.OnItemClickListener {
 
     ActivityFavoritesBinding b;
-    FavoritesAdapter favoritesAdapter;
+    ProductsAdapter productsAdapter;
     FavouritesViewModel favouritesViewModel;
     int i = 0;
+    private int adapterPosition;
+    private CartViewModel cartViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,20 +34,22 @@ public class FavoritesActivity extends AppCompatActivity implements View.OnClick
 
         b = DataBindingUtil.setContentView(this, R.layout.activity_favorites);
         favouritesViewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(this.getApplication())).get(FavouritesViewModel.class);
+        cartViewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(this.getApplication())).get(CartViewModel.class);
 
         b.btFavoritesBack.setOnClickListener(this);
 
-        favoritesAdapter = new FavoritesAdapter(this);
-        b.rvFavorites.setAdapter(favoritesAdapter);
+        productsAdapter = new ProductsAdapter(this);
+        b.rvFavorites.setAdapter(productsAdapter);
         manageProgressbar();
-
+        observeOnPostToCart();
         favouritesViewModel.getFavoriteResponseBody.observe(this, getFavoritesResponse -> {
-            if (getFavoritesResponse.isStatus()) {
-                favoritesAdapter.setFavoritesList(getFavoritesResponse.getData().getData());
+            if (getFavoritesResponse != null) {
+                productsAdapter.setProductsList(getFavoritesResponse);
             } else {
-                UiUtils.shortToast(this, getFavoritesResponse.getMessage());
+                UiUtils.shortToast(this, getString(R.string.connection_error));
             }
         });
+
     }
 
     @Override
@@ -53,7 +63,16 @@ public class FavoritesActivity extends AppCompatActivity implements View.OnClick
         }
 
     }
+    private void observeOnPostToCart() {
+        cartViewModel.postToCartResponseMLD.observe(this, postCartResponse -> {
+            if (postCartResponse.isStatus()) {
+                productsAdapter.getProductsList().get(adapterPosition).setIn_cart(true);
+                productsAdapter.notifyItemChanged(adapterPosition);
+            }
 
+            UiUtils.shortToast(this, postCartResponse.getMessage());
+        });
+    }
     private void manageProgressbar() {
 
         favouritesViewModel.isGetFavoriteLoading.observe(this, aBoolean -> {
@@ -77,5 +96,23 @@ public class FavoritesActivity extends AppCompatActivity implements View.OnClick
     }
 
 
+    @Override
+    public void onParentClicked(int position) {
+
+        Intent intent = new Intent(this, ProductDetailsActivity.class);
+        intent.putExtra("product", productsAdapter.getProductsList().get(position));
+        startActivity(intent);
+    }
+
+    @Override
+    public void onItemAddToCartClicked(int position, ProductsAdapter.ProductsViewHolder productsViewHolder) {
+        AddToCartBottomSheetFragment fragment =
+                new AddToCartBottomSheetFragment(
+                        cartViewModel,
+                        productsAdapter.getProductsList().get(position),
+                        productsViewHolder.b.ivProduct.getDrawable());
+        fragment.show(getSupportFragmentManager(), "TAG");
+        adapterPosition = position;
+    }
 }
 

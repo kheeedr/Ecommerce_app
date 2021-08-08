@@ -45,6 +45,7 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
         pref = UserUtils.getPref(this);
         b.btCartShopNow.setOnClickListener(this);
         b.btCartBack.setOnClickListener(this);
+        b.btCartOrderNow.setOnClickListener(this);
         b.includedAlertDialog.layoutAlertDialogParent.setOnClickListener(this);
         b.includedAlertDialog.layoutAlertDialog.setOnClickListener(this);
         b.includedAlertDialog.actionSure.setOnClickListener(this);
@@ -68,7 +69,7 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
         if (UserUtils.isSignedIn(this)) {
             cartViewModel.getCartProducts(this);
         } else {
-            UiUtils.shortToast(this, "you should login first");
+            UiUtils.shortToast(this, getString(R.string.you_should_login_first));
         }
     }
 
@@ -91,6 +92,8 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
         }
         else if (v== b.includeProgressCart.getRoot()){
             UiUtils.shortToast(this, getString(R.string.wait));
+        } else if (v == b.btCartOrderNow) {
+            UiUtils.shortToast(this, getString(R.string.coming_soon));
         }
 
     }

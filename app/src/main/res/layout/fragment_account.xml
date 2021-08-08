@@ -632,6 +632,7 @@
                         android:src="@drawable/dotted_divider" />
 
                     <LinearLayout
+                        android:id="@+id/layout_account_to_faq"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"

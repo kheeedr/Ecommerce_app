@@ -19,8 +19,8 @@ import io.reactivex.schedulers.Schedulers;
 
 public class SearchViewModel extends ViewModel {
 
-    MutableLiveData<Boolean> isSearchLoading = new MutableLiveData<>();
-    MutableLiveData<SearchResponse> searchResponseMLD = new MutableLiveData<>();
+    public MutableLiveData<Boolean> isSearchLoading = new MutableLiveData<>();
+    public MutableLiveData<SearchResponse> searchResponseMLD = new MutableLiveData<>();
 
     public void performSearch(Context context, String searchText) {
         isSearchLoading.postValue(true);

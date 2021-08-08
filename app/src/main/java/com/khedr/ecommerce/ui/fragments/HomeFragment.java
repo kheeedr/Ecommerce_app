@@ -1,7 +1,6 @@
 package com.khedr.ecommerce.ui.fragments;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,69 +12,64 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.khedr.ecommerce.R;
+import com.khedr.ecommerce.database.Converters;
 import com.khedr.ecommerce.databinding.FragmentHomeBinding;
 import com.khedr.ecommerce.pojo.homeapi.BannersAndProductsModel;
+import com.khedr.ecommerce.pojo.product.Product;
+import com.khedr.ecommerce.ui.activities.cart.CartViewModel;
 import com.khedr.ecommerce.ui.activities.categories.CategoriesActivity;
 import com.khedr.ecommerce.ui.activities.categories.CategoryProductsActivity;
 import com.khedr.ecommerce.ui.activities.contactUs.ContactUsActivity;
-import com.khedr.ecommerce.ui.activities.cart.CartViewModel;
 import com.khedr.ecommerce.ui.activities.favourites.FavoritesActivity;
 import com.khedr.ecommerce.ui.activities.product.ProductDetailsActivity;
+import com.khedr.ecommerce.ui.activities.product.ProductDetailsViewModel;
 import com.khedr.ecommerce.ui.activities.search.SearchActivity;
 import com.khedr.ecommerce.ui.activities.splash.SplashActivity;
-import com.khedr.ecommerce.ui.activities.splash.SplashViewModel;
 import com.khedr.ecommerce.ui.adapters.BannersAdapter;
-import com.khedr.ecommerce.ui.adapters.ProductsAdapter;
-import com.khedr.ecommerce.utils.UserUtils;
+import com.khedr.ecommerce.ui.adapters.RecentlyViewedAdapter;
+import com.khedr.ecommerce.utils.UiUtils;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Collections;
+import java.util.ArrayList;
 
-public class HomeFragment extends Fragment implements View.OnClickListener, ProductsAdapter.OnItemClickListener {
+public class HomeFragment extends Fragment implements View.OnClickListener, RecentlyViewedAdapter.OnItemClickListener {
 
     private static final String TAG = "HomeFragment";
     public static BannersAndProductsModel homeResponse;
     FragmentHomeBinding b;
     BannersAdapter bannersAdapter;
-    ProductsAdapter productsAdapter;
-    SharedPreferences pref;
-    SplashViewModel splashViewModel;
+    RecentlyViewedAdapter recentProductsAdapter;
     CartViewModel cartViewModel;
-
+    ProductDetailsViewModel productViewModel;
+    private int adapterPosition;
+    ArrayList<Product> recentProducts = new ArrayList<>();
 
     public HomeFragment() {
         // Required empty public constructor
     }
 
-
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
-    @Override
-    public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         b = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false);
-        pref = UserUtils.getPref(requireContext());
+
+        productViewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().getApplication())).get(ProductDetailsViewModel.class);
+        cartViewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().getApplication())).get(CartViewModel.class);
 
         b.ivHomeFavorite.setOnClickListener(this);
         b.layoutHomeToCategories.setOnClickListener(this);
         b.layoutHomeToContactUs.setOnClickListener(this);
         b.layoutHomeToPreventCorona.setOnClickListener(this);
+        b.tvHomeViewAllRecentViewed.setOnClickListener(this);
+        b.layoutHomeToChatSupport.setOnClickListener(this);
+        b.layoutHomeToDiscountVoucher.setOnClickListener(this);
+        b.qrHome.setOnClickListener(this);
         b.svHome.setOnClickListener(this);
-
-        // add to cart dialog click listeners
-//        b.includedAddToCart.layoutAddToCartDialogParent.setOnClickListener(this);
-//        b.includedAddToCart.layoutAddToCartDialog.setOnClickListener(this);
-//        b.includedAddToCart.actionSure.setOnClickListener(this);
-//        b.includedAddToCart.actionCancel.setOnClickListener(this);
-//        b.includedAddToCart.includeItemCart.layoutCartMinus.setOnClickListener(this);
-//        b.includedAddToCart.includeItemCart.layoutCartPlus.setOnClickListener(this);
-//        //hide delete item button
-//        b.includedAddToCart.includeItemCart.ivCartDelete.setVisibility(View.GONE);
-
+        b.layoutBrandApple.setOnClickListener(this);
+        b.layoutBrandSamsung.setOnClickListener(this);
+        b.layoutBrandXiaomi.setOnClickListener(this);
+        b.layoutBrandNike.setOnClickListener(this);
+        b.layoutBrandSony.setOnClickListener(this);
 
         homeResponse = SplashActivity.homeResponse;
 
@@ -83,24 +77,33 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Prod
         bannersAdapter = new BannersAdapter(getContext());
         bannersAdapter.setBannersList(homeResponse.getBanners());
         b.rvHomeBanners.setAdapter(bannersAdapter);
-        cartViewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().getApplication())).get(CartViewModel.class);
 
-        //products recycler view
-        productsAdapter = new ProductsAdapter(getContext(),this);
-        productsAdapter.setProductsList(homeResponse.getProducts());
-        b.rvHomeProducts.setAdapter(productsAdapter);
+        //Recent products recycler view
+        recentProductsAdapter = new RecentlyViewedAdapter(getContext(), this);
+        b.rvHomeRecentlyViewed.setAdapter(recentProductsAdapter);
 
-        splashViewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(this.requireActivity().getApplication())).get(SplashViewModel.class);
-        splashViewModel.responseBody.observe(this.requireActivity(), homePageApiResponse -> {
-            if (homePageApiResponse.isStatus()) {
-                homeResponse = homePageApiResponse.getData();
-                Collections.reverse(homeResponse.getProducts());
-                if (productsAdapter.getProductsList() != homeResponse.getProducts())
-                    productsAdapter.setProductsList(homeResponse.getProducts());
+        productViewModel.recentProductsMTL.observe(getViewLifecycleOwner(), products -> {
+            recentProducts = (ArrayList<Product>) products;
+            ArrayList<Product> sixProducts = new ArrayList<>();
+            for (int i = 0; (i < products.size() && i < 6); i++) {
+                sixProducts.add(products.get(i));
+            }
+            recentProductsAdapter.setProductsList(sixProducts);
+
+            if (recentProductsAdapter.getProductsList().isEmpty()) {
+                b.layoutRecentlyViewed.setVisibility(View.GONE);
+            } else {
+                b.layoutRecentlyViewed.setVisibility(View.VISIBLE);
             }
         });
 
-        Log.d(TAG, "mkhedr: onCreateView");
+        cartViewModel.postToCartResponseMLD.observe(requireActivity(), postCartResponse -> {
+            if (postCartResponse.isStatus()) {
+                recentProductsAdapter.getProductsList().get(adapterPosition).setIn_cart(true);
+                recentProductsAdapter.notifyItemChanged(adapterPosition);
+            }
+            UiUtils.shortToast(requireContext(), postCartResponse.getMessage());
+        });
 
 
         return b.getRoot();
@@ -109,39 +112,73 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Prod
     @Override
     public void onResume() {
         super.onResume();
-        splashViewModel.getHomeContent(requireContext());
-        Log.d(TAG, "mkhedr: contentRestart");
-
+        productViewModel.getRecentProducts(requireContext());
+        b.rvHomeRecentlyViewed.scrollToPosition(0);
     }
 
     @Override
     public void onClick(View v) {
         if (v == b.ivHomeFavorite) {
-            startActivity(new Intent(getContext(), FavoritesActivity.class));
+            startActivity(new Intent(requireContext(), FavoritesActivity.class));
         } else if (v == b.layoutHomeToCategories) {
-            startActivity(new Intent(getContext(), CategoriesActivity.class));
+            startActivity(new Intent(requireContext(), CategoriesActivity.class));
         } else if (v == b.layoutHomeToContactUs) {
-            startActivity(new Intent(getContext(), ContactUsActivity.class));
-        } else if (v == b.layoutHomeToPreventCorona) {
-            Intent intent = new Intent(getContext(), CategoryProductsActivity.class);
-            intent.putExtra(requireContext().getString(R.string.category_name), getString(R.string.prevent_corona));
-            startActivity(intent);
+            startActivity(new Intent(requireContext(), ContactUsActivity.class));
         } else if (v == b.svHome) {
-            startActivity(new Intent(getContext(), SearchActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
+            startActivity(new Intent(requireContext(), SearchActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
+        } else if (v == b.tvHomeViewAllRecentViewed) {
+            intentToRecentlyViewedProduct();
+        } else if (v == b.layoutHomeToPreventCorona) {
+            intentToBrandProducts(getString(R.string.prevent_corona));
+        } else if (v == b.layoutBrandApple) {
+            intentToBrandProducts(getString(R.string.apple));
+        } else if (v == b.layoutBrandSamsung) {
+            intentToBrandProducts(getString(R.string.samsung));
+        } else if (v == b.layoutBrandXiaomi) {
+            intentToBrandProducts(getString(R.string.xiaomi));
+        } else if (v == b.layoutBrandNike) {
+            intentToBrandProducts(getString(R.string.nike));
+        } else if (v == b.layoutBrandSony) {
+            intentToBrandProducts(getString(R.string.sony));
+        } else if (v == b.qrHome || v == b.layoutHomeToDiscountVoucher || v == b.layoutHomeToChatSupport) {
+            UiUtils.shortToast(requireContext(), getString(R.string.coming_soon));
         }
+
+    }
+
+    private void intentToRecentlyViewedProduct() {
+        Intent intent = new Intent(requireContext(), CategoryProductsActivity.class);
+        intent.putExtra(getString(R.string.category_id), -1);
+        intent.putExtra(requireContext().getString(R.string.category_name), getString(R.string.recently_viewed));
+        intent.putExtra(getString(R.string.products_intent), Converters.fromProductArrayListToString(recentProducts));
+        startActivity(intent);
+    }
+
+    private void intentToBrandProducts(String brandName) {
+        Intent intent = new Intent(requireContext(), CategoryProductsActivity.class);
+        intent.putExtra(getString(R.string.category_id), -2);
+        intent.putExtra(requireContext().getString(R.string.category_name), brandName);
+        startActivity(intent);
     }
 
     //on recycler view item clicked
     @Override
     public void onParentClicked(int position) {
         Intent intent = new Intent(requireContext(), ProductDetailsActivity.class);
-        intent.putExtra("product", productsAdapter.getProductsList().get(position));
+        intent.putExtra("product", recentProductsAdapter.getProductsList().get(position));
         requireActivity().startActivity(intent);
     }
 
     @Override
-    public void onItemAddToCartClicked(int position, ProductsAdapter.ProductsViewHolder productsViewHolder) {
-        
+    public void onItemAddToCartClicked(int position, RecentlyViewedAdapter.ProductsViewHolder productsViewHolder) {
+
+        AddToCartBottomSheetFragment fragment =
+                new AddToCartBottomSheetFragment(
+                        cartViewModel
+                        , recentProductsAdapter.getProductsList().get(position)
+                        , productsViewHolder.b.ivProduct.getDrawable());
+        fragment.show(requireActivity().getSupportFragmentManager(), "TAG");
+        adapterPosition = position;
     }
 
 }

@@ -2,7 +2,6 @@ package com.khedr.ecommerce.ui.activities.splash;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -35,7 +34,7 @@ public class SplashActivity extends AppCompatActivity implements View.OnClickLis
 
         viewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(this.getApplication())).get(SplashViewModel.class);
         viewModel.getHomeContent(this);
-        UiUtils.animJumpAndFade(this, b.progressSplash);
+
         manageProgressbar();
 
         viewModel.responseBody.observe(this, homePageApiResponse -> {
@@ -52,25 +51,25 @@ public class SplashActivity extends AppCompatActivity implements View.OnClickLis
         });
 
     }
-
-    private void manageProgressbar() {
-
-        viewModel.isLoading.observe(this, aBoolean -> {
-            if (aBoolean) {
-                b.btTryAgainSplash.setVisibility(View.GONE);
-                b.progressSplash.setVisibility(View.VISIBLE);
-                UiUtils.animJumpAndFade(this, b.progressSplash);
-            } else {
-                b.progressSplash.clearAnimation();
-                b.progressSplash.setVisibility(View.GONE);
-            }
-        });
-    }
-
     @Override
     public void onClick(View v) {
         if (v == b.btTryAgainSplash) {
             viewModel.getHomeContent(this);
         }
     }
+    private void manageProgressbar() {
+
+        viewModel.isLoading.observe(this, aBoolean -> {
+            if (aBoolean) {
+                b.btTryAgainSplash.setVisibility(View.GONE);
+                b.progressSplash.setVisibility(View.VISIBLE);
+            }
+            else {
+                b.progressSplash.setVisibility(View.GONE);
+         }
+        });
+
+    }
+
+
 }

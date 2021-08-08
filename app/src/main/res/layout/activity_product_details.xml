@@ -223,8 +223,9 @@
 
                     <ImageView
                         android:layout_width="@dimen/_20sdp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="@dimen/_20sdp"
                         android:layout_gravity="center_vertical"
+                        android:paddingHorizontal="@dimen/_2sdp"
                         android:contentDescription="@string/todo"
                         android:src="@drawable/ic_blue_negative" />
 
@@ -312,7 +313,7 @@
 
                     android:textAllCaps="false"
                     android:textColor="@color/white"
-                    android:textSize="20sp"
+                    android:textSize="@dimen/_16sdp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />

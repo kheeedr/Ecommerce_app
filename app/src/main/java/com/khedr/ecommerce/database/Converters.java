@@ -6,10 +6,53 @@ import android.util.Base64;
 
 import androidx.room.TypeConverter;
 
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.khedr.ecommerce.pojo.ProductDB;
+import com.khedr.ecommerce.pojo.product.Product;
+
 import java.io.ByteArrayOutputStream;
+import java.util.ArrayList;
+
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Converters {
-@TypeConverter
+    @TypeConverter
+    public String fromProductDBToString(ProductDB product){
+        return new Gson().toJson(product);
+    }
+    @TypeConverter
+    public ProductDB fromStringToProductDB(String product){
+        return new Gson().fromJson(product,ProductDB.class);
+    }
+    @TypeConverter
+    public String fromStringArrayListToString(ArrayList<String> arrayList){
+        return new Gson().toJson(arrayList);
+    }
+    @TypeConverter
+    public ArrayList<String> fromStringToStringArrayList(String images){
+        return new Gson().fromJson(images, new TypeToken<ArrayList<String>>(){}.getType());
+    }
+    @TypeConverter
+    public static String fromProductArrayListToString(ArrayList<Product> arrayList){
+        return new Gson().toJson(arrayList);
+    }
+    @TypeConverter
+    public static ArrayList<Product> fromStringToProductArrayList(String images){
+        return new Gson().fromJson(images, new TypeToken<ArrayList<Product>>(){}.getType());
+    }
+    @TypeConverter
+    public String fromProductToString(Product product){
+        return new Gson().toJson(product);
+    }
+    @TypeConverter
+    public Product fromStringToProduct(String product){
+        return new Gson().fromJson(product,Product.class);
+    }
+
+
+    @TypeConverter
     public static String fromBitmapToString(Bitmap bitmapPicture) {
         final int COMPRESSION_QUALITY = 50;
         String encodedImage;
@@ -21,9 +64,9 @@ public class Converters {
         return encodedImage;
     }
 
-@TypeConverter
+    @TypeConverter
     public static Bitmap fromStringToBitmap(String stringPicture) {
         byte[] decodedString = Base64.decode(stringPicture, Base64.DEFAULT);
-    return BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+        return BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
     }
 }

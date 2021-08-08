@@ -7,8 +7,6 @@ import android.content.res.Resources;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
-
-import android.view.Gravity;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -24,6 +22,7 @@ import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
+import com.google.android.material.textfield.TextInputLayout;
 import com.khedr.ecommerce.R;
 import com.khedr.ecommerce.database.Converters;
 
@@ -113,7 +112,8 @@ public abstract class UiUtils {
         motoLayout.setVisibility(View.VISIBLE);
         animJumpAndFade(context, motoLayout);
         animEndToStart(context, ground);
-    } public static void motoJumpAndFade(Context context, View motoLayout, View ground,View back) {
+    }
+    public static void motoJumpAndFade(Context context, View motoLayout, View ground,View back) {
         motoLayout.setVisibility(View.VISIBLE);
         animJumpAndFade(context, motoLayout);
         animEndToStart(context, ground);
@@ -212,6 +212,10 @@ public abstract class UiUtils {
     public static void textError(EditText editText, String errorMessage) {
         editText.setError(errorMessage);
         editText.requestFocus();
+    } public static void textError(TextInputLayout editText, String errorMessage) {
+
+        editText.setError(errorMessage);
+
     }
     public static void makeTvPlusOne(TextView textView){
         int oldQ = Integer.parseInt(textView.getText().toString());

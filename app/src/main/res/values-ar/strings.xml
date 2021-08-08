@@ -152,4 +152,13 @@
     <string name="Update_quantity">تحديث الكميه</string>
     <string name="already_in_cart">هذا المنتج موجود في عربة التسوق</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="recently_viewed">تمت مشاهدته مؤخرا</string>
+    <string name="view_all">مشاهدة الكل</string>
+    <string name="products_intent">products_intent</string>
+    <string name="best_brands">افضل الماركات</string>
+    <string name="apple">Apple</string>
+    <string name="samsung">Samsung</string>
+    <string name="xiaomi">Xiaomi</string>
+    <string name="nike">Nike</string>
+    <string name="sony">Sony</string>
 </resources>

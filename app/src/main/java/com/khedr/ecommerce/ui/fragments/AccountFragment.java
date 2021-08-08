@@ -37,19 +37,6 @@ public class AccountFragment extends Fragment implements View.OnClickListener {
         // Required empty public constructor
     }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        Log.d(TAG, "mkhedr: onStart");
-        refreshView();
-    }
-
 
     @Override
     public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -64,33 +51,41 @@ public class AccountFragment extends Fragment implements View.OnClickListener {
         b.layoutAccountToContact.setOnClickListener(this);
         b.layoutAccountToLanguage.setOnClickListener(this);
         b.btAccountBack.setOnClickListener(this);
-
-        //reactive view
-
+        b.layoutAccountToFaq.setOnClickListener(this);
 
         return b.getRoot();
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        Log.d(TAG, "mkhedr: onStart");
+        //reactive view
+        refreshView();
+    }
 
     @Override
     public void onClick(View v) {
 
         if (v == b.layoutAccountToProfile) {
-            if (UserUtils.isSignedIn(this.getActivity())) {
+            if (UserUtils.isSignedIn(requireContext())) {
                 //to profile
-                startActivity(new Intent(v.getContext(), ProfileActivity.class));
+                startActivity(new Intent(requireContext(), ProfileActivity.class));
             } else {
-                //log in
-                startActivity(new Intent(v.getContext(), LoginActivity.class));
+                //to login
+                startActivity(new Intent(requireContext(), LoginActivity.class));
             }
         } else if (v == b.layoutAccountToAbout) {
-            startActivity(new Intent(v.getContext(), AboutUsActivity.class));
+            startActivity(new Intent(requireContext(), AboutUsActivity.class));
         } else if (v == b.layoutAccountToContact) {
-            startActivity(new Intent(v.getContext(), ContactUsActivity.class));
+            startActivity(new Intent(requireContext(), ContactUsActivity.class));
         } else if (v == b.layoutAccountToLanguage) {
-            startActivity(new Intent(v.getContext(), LanguageActivity.class));
+            startActivity(new Intent(requireContext(), LanguageActivity.class));
         } else if (v == b.btAccountBack) {
             requireActivity().onBackPressed();
+        }
+        else if (v==b.layoutAccountToFaq){
+            UiUtils.shortToast(requireContext(), getString(R.string.coming_soon));
         }
 
 

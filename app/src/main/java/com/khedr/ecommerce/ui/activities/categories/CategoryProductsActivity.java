@@ -14,10 +14,12 @@ import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.khedr.ecommerce.R;
+import com.khedr.ecommerce.database.Converters;
 import com.khedr.ecommerce.databinding.ActivityCategoryItemsBinding;
 import com.khedr.ecommerce.pojo.product.Product;
 import com.khedr.ecommerce.ui.activities.cart.CartViewModel;
 import com.khedr.ecommerce.ui.activities.product.ProductDetailsActivity;
+import com.khedr.ecommerce.ui.activities.search.SearchViewModel;
 import com.khedr.ecommerce.ui.adapters.ProductsAdapter;
 import com.khedr.ecommerce.ui.fragments.AddToCartBottomSheetFragment;
 import com.khedr.ecommerce.utils.UiUtils;
@@ -31,7 +33,10 @@ public class CategoryProductsActivity extends AppCompatActivity implements View.
     ProductsAdapter productsAdapter;
     CartViewModel cartViewModel;
     CategoriesViewModel categoriesViewModel;
+    SearchViewModel searchViewModel;
     int adapterPosition;
+    Intent intent;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +44,8 @@ public class CategoryProductsActivity extends AppCompatActivity implements View.
         b = DataBindingUtil.setContentView(this, R.layout.activity_category_items);
 
         cartViewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication())).get(CartViewModel.class);
-        categoriesViewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(this.getApplication())).get(CategoriesViewModel.class);
+        categoriesViewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication())).get(CategoriesViewModel.class);
+        searchViewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication())).get(SearchViewModel.class);
 
         productsAdapter = new ProductsAdapter(this);
 
@@ -47,19 +53,59 @@ public class CategoryProductsActivity extends AppCompatActivity implements View.
 
         b.rvCategoryProducts.setAdapter(productsAdapter);
 
-        Intent intent = getIntent();
+        intent = getIntent();
         b.mainTvCategoryProducts.setText(intent.getStringExtra(getString(R.string.category_name)));
-        if (intent.getStringExtra(getString(R.string.category_name)).equals(getString(R.string.prevent_corona))) {
-            categoriesViewModel.getCategoryProductsByName(this, getString(R.string.prevent_corona));
-        } else {
-            categoriesViewModel.getCategoryProducts(this, intent.getIntExtra(getString(R.string.category_id), 0));
+
+        if (intent.getIntExtra(getString(R.string.category_id), 0) > -1) {
+            categoriesViewModel.getCategoryProducts(this,
+                    intent.getIntExtra(getString(R.string.category_id), 0));
+
+        } else if (intent.getIntExtra(getString(R.string.category_id), 0) == -1) {
+            ArrayList<Product> products = Converters.fromStringToProductArrayList(
+                    intent.getStringExtra(getString(R.string.products_intent)));
+
+            productsAdapter.setProductsList(products);
+        } else if (intent.getIntExtra(getString(R.string.category_id), 0) == -2) {
+            searchViewModel.performSearch(this, intent.getStringExtra(getString(R.string.category_name)));
         }
+
         observeOnGetCategoryProducts();
+
+        observeOnGetSearchProducts();
 
         observeOnPostToCart();
 
         observeOnUpdateQuantity();
+
         manageProgressbar();
+    }
+
+
+    @Override
+    public void onClick(View v) {
+        if (v == b.btCategoryProductsBack) {
+            onBackPressed();
+        }
+    }
+
+    @Override
+    public void onParentClicked(int position) {
+
+        Intent intent = new Intent(this, ProductDetailsActivity.class);
+        intent.putExtra("product", productsAdapter.getProductsList().get(position));
+        startActivity(intent);
+    }
+
+    @Override
+    public void onItemAddToCartClicked(int position, ProductsAdapter.ProductsViewHolder productsViewHolder) {
+
+        AddToCartBottomSheetFragment fragment =
+                new AddToCartBottomSheetFragment(
+                        cartViewModel,
+                        productsAdapter.getProductsList().get(position),
+                        productsViewHolder.b.ivProduct.getDrawable());
+        fragment.show(getSupportFragmentManager(), "TAG");
+        adapterPosition = position;
     }
 
     private void observeOnPostToCart() {
@@ -92,6 +138,8 @@ public class CategoryProductsActivity extends AppCompatActivity implements View.
         cartViewModel.isUpdateFromProductLoading.observe(this, this::showOrHideMotoProgressbar);
 
         cartViewModel.isPostMultipleLoading.observe(this, this::showOrHideMotoProgressbar);
+
+        searchViewModel.isSearchLoading.observe(this, this::showOrHideMotoProgressbar);
     }
 
     void showOrHideMotoProgressbar(boolean isLoading) {
@@ -120,32 +168,21 @@ public class CategoryProductsActivity extends AppCompatActivity implements View.
         });
     }
 
-    @Override
-    public void onClick(View v) {
-        if (v == b.btCategoryProductsBack) {
-            onBackPressed();
-        }
+    private void observeOnGetSearchProducts() {
+        searchViewModel.searchResponseMLD.observe(this, searchResponse -> {
+            if (searchResponse.isStatus()) {
+                if (searchResponse.getData().getData().isEmpty()) {
+                    UiUtils.animFadeIn(this, b.layoutCategoryProductsProductNotFound);
+                } else {
+                    ArrayList<Product> products = searchResponse.getData().getData();
+                    Collections.reverse(products);
+                    productsAdapter.setProductsList(products);
+                    UiUtils.animFadeIn(this, b.rvCategoryProducts);
+                }
+            } else {
+                UiUtils.shortToast(this, searchResponse.getMessage());
+            }
+        });
     }
-
-    @Override
-    public void onParentClicked(int position) {
-
-        Intent intent = new Intent(this, ProductDetailsActivity.class);
-        intent.putExtra("product", productsAdapter.getProductsList().get(position));
-        startActivity(intent);
-    }
-
-    @Override
-    public void onItemAddToCartClicked(int position, ProductsAdapter.ProductsViewHolder productsViewHolder) {
-
-        AddToCartBottomSheetFragment fragment =
-                new AddToCartBottomSheetFragment(
-                        cartViewModel,
-                        productsAdapter.getProductsList().get(position),
-                        productsViewHolder.b.ivProduct.getDrawable());
-        fragment.show(getSupportFragmentManager(), "TAG");
-        adapterPosition = position;
-    }
-
 
 }

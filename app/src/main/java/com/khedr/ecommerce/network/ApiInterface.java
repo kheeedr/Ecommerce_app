@@ -3,6 +3,7 @@ package com.khedr.ecommerce.network;
 import com.khedr.ecommerce.pojo.categories.GetCategoriesResponse;
 import com.khedr.ecommerce.pojo.categories.item.GetCategoryItemsResponse;
 import com.khedr.ecommerce.pojo.homeapi.HomePageApiResponse;
+import com.khedr.ecommerce.pojo.product.ProductDetailsResponse;
 import com.khedr.ecommerce.pojo.product.ProductId;
 import com.khedr.ecommerce.pojo.product.cart.delete.DeleteFromCartResponse;
 import com.khedr.ecommerce.pojo.product.cart.get.GetCartResponse;
@@ -87,13 +88,21 @@ public interface ApiInterface {
     Single<GetCategoriesResponse> getCategories(@Header("lang") String lang);
     //items by category
     @Headers({ "Content-Type:application/json"})
-    @GET("categories/{product_id}")
+    @GET("categories/{category_id}")
     Single<GetCategoryItemsResponse> getCategoryItems(@Header("lang") String lang,@Header("Authorization") String token
-            , @Path("product_id") int product_id);
+            , @Path("category_id") int category_id);
 
     // search
     @Headers({ "Content-Type:application/json"})
     @POST("products/search")
     Single<SearchResponse> getSearchProducts(@Header("lang") String lang,@Header("Authorization") String token
             , @Body SearchRequest searchRequest);
+    //product details
+    @Headers({ "Content-Type:application/json"})
+    @GET("products/{product_id}")
+    Single<ProductDetailsResponse> getProductDetails(@Header("lang") String lang, @Header("Authorization") String token
+            , @Path("product_id") int product_id);
+
+
+
 }

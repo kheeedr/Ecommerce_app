@@ -36,19 +36,18 @@
             android:rotation="180"
             android:src="@drawable/ic_blue_right_arrow"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:fillViewport="true"
-            android:layout_marginTop="@dimen/_42sdp">
+            android:layout_marginTop="@dimen/_42sdp"
+            android:fillViewport="true">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_marginHorizontal="@dimen/_25sdp"
-                >
+                android:layout_marginHorizontal="@dimen/_25sdp">
 
                 <RelativeLayout
                     android:id="@+id/iv_sign_user_layout"
@@ -72,188 +71,189 @@
                         android:layout_alignParentEnd="true"
                         android:layout_alignParentBottom="true"
                         android:background="@drawable/ic_blue_circle"
-                        android:src="@drawable/ic_add_circle"
-                        android:contentDescription="@string/todo" />
+                        android:contentDescription="@string/todo"
+                        android:src="@drawable/ic_add_circle" />
                 </RelativeLayout>
 
 
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/et_sign_name_layout"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_40sdp"
+                    app:hintEnabled="false"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/iv_sign_user_layout"
+                    app:startIconDrawable="@drawable/ic_person"
+                    app:startIconTint="@color/secondary">
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/et_sign_name_layout"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_sign_name"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_40sdp"
-                        app:hintEnabled="false"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:startIconDrawable="@drawable/ic_person"
-                        app:startIconTint="@color/secondary"
-                        app:layout_constraintTop_toBottomOf="@id/iv_sign_user_layout">
+                        android:layout_height="@dimen/_40sdp"
+                        android:background="@drawable/et_stroke"
+                        android:fontFamily="@font/medium"
+                        android:hint="@string/name"
+                        android:inputType="textPersonName"
+                        android:textAlignment="viewStart"
+                        android:textColor="@color/secondary"
+                        android:textSize="@dimen/_12sdp" />
 
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/et_sign_name"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/et_stroke"
-                            android:fontFamily="@font/medium"
-                            android:textAlignment="viewStart"
-                            android:hint="@string/name"
-                            android:inputType="textPersonName"
-                            android:textColor="@color/secondary"
-                            android:textSize="@dimen/_12sdp" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-                    </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/et_sign_phone_layout"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    app:hintEnabled="false"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/et_sign_name_layout"
+                    app:startIconDrawable="@drawable/ic_phone"
+                    app:startIconTint="@color/secondary">
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/et_sign_phone_layout"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_sign_phone"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_10sdp"
-                        app:hintEnabled="false"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/et_sign_name_layout"
-                        app:startIconDrawable="@drawable/ic_phone"
-                        app:startIconTint="@color/secondary">
+                        android:layout_height="@dimen/_40sdp"
+                        android:background="@drawable/et_stroke"
+                        android:fontFamily="@font/medium"
+                        android:hint="@string/phone"
+                        android:inputType="phone"
+                        android:textAlignment="viewStart"
+                        android:textColor="@color/secondary"
+                        android:textSize="@dimen/_12sdp" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/et_sign_phone"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/et_stroke"
-                            android:fontFamily="@font/medium"
-                            android:textAlignment="viewStart"
-                            android:hint="@string/phone"
-                            android:inputType="phone"
-                            android:textColor="@color/secondary"
-                            android:textSize="@dimen/_12sdp" />
-                    </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/et_sign_email_layout"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    app:hintEnabled="false"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/et_sign_phone_layout"
+                    app:startIconDrawable="@drawable/ic_email"
+                    app:startIconTint="@color/secondary">
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/et_sign_email_layout"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_sign_email"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_10sdp"
-                        app:hintEnabled="false"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/et_sign_phone_layout"
-                        app:startIconDrawable="@drawable/ic_email"
-                        app:startIconTint="@color/secondary">
+                        android:layout_height="@dimen/_40sdp"
+                        android:background="@drawable/et_stroke"
+                        android:fontFamily="@font/medium"
+                        android:hint="@string/e_mail"
+                        android:inputType="textEmailAddress"
+                        android:textAlignment="viewStart"
+                        android:textColor="@color/secondary"
+                        android:textSize="@dimen/_12sdp" />
 
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/et_sign_email"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/et_stroke"
-                            android:fontFamily="@font/medium"
-                            android:textAlignment="viewStart"
-                            android:hint="@string/e_mail"
-                            android:inputType="textEmailAddress"
-                            android:textColor="@color/secondary"
-                            android:textSize="@dimen/_12sdp" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-                    </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/et_sign_password_layout"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    app:endIconMode="password_toggle"
+                    app:errorIconDrawable="@null"
+                    app:hintEnabled="false"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/et_sign_email_layout"
+                    app:startIconDrawable="@drawable/ic_lock"
+                    app:startIconTint="@color/secondary">
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/et_sign_password_layout"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_sign_password"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_10sdp"
-                        app:endIconMode="password_toggle"
-                        app:hintEnabled="false"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/et_sign_email_layout"
-                        app:startIconDrawable="@drawable/ic_lock"
-                        app:startIconTint="@color/secondary">
+                        android:layout_height="@dimen/_40sdp"
+                        android:background="@drawable/et_stroke"
+                        android:fontFamily="@font/medium"
+                        android:hint="@string/password"
+                        android:inputType="textPassword"
+                        android:textAlignment="viewStart"
+                        android:textColor="@color/secondary"
+                        android:textSize="@dimen/_12sdp" />
 
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/et_sign_password"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/et_stroke"
-                            android:fontFamily="@font/medium"
-                            android:textAlignment="viewStart"
-                            android:hint="@string/password"
-                            android:inputType="textPassword"
-                            android:textColor="@color/secondary"
-                            android:textSize="@dimen/_12sdp" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-                    </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/et_sign_repassword_layout"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    app:endIconMode="password_toggle"
+                    app:errorIconDrawable="@null"
+                    app:hintEnabled="false"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/et_sign_password_layout"
+                    app:startIconDrawable="@drawable/ic_lock"
+                    app:startIconTint="@color/secondary">
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/et_sign_repassword_layout"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_sign_repassword"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_10sdp"
-                        app:endIconMode="password_toggle"
-                        app:hintEnabled="false"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/et_sign_password_layout"
-                        app:startIconDrawable="@drawable/ic_lock"
-                        app:startIconTint="@color/secondary">
+                        android:layout_height="@dimen/_40sdp"
+                        android:background="@drawable/et_stroke"
+                        android:fontFamily="@font/medium"
+                        android:hint="@string/re_password"
+                        android:inputType="textPassword"
+                        android:textAlignment="viewStart"
+                        android:textColor="@color/secondary"
+                        android:textSize="@dimen/_12sdp" />
 
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/et_sign_repassword"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:background="@drawable/et_stroke"
-                            android:fontFamily="@font/medium"
-                            android:textAlignment="viewStart"
-                            android:hint="@string/re_password"
-                            android:inputType="textPassword"
-                            android:textColor="@color/secondary"
-                            android:textSize="@dimen/_12sdp" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-                    </com.google.android.material.textfield.TextInputLayout>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layout_sign_bt"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_45sdp"
+                    android:layout_marginVertical="@dimen/_20sdp"
+                    app:layout_constraintBottom_toTopOf="@id/layout_under_sign_bt"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/et_sign_repassword_layout"
+                    app:layout_constraintVertical_bias="0.1">
 
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/layout_sign_bt"
+                    <Button
+                        android:id="@+id/bt_sign"
+                        style="@style/Widget.MaterialComponents.Button"
                         android:layout_width="0dp"
-                        android:layout_height="@dimen/_45sdp"
-                        android:layout_marginVertical="@dimen/_20sdp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bt_back_filled"
+                        android:fontFamily="@font/medium"
+                        android:paddingVertical="@dimen/_2sdp"
+                        android:text="@string/sign_up"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_15sdp"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintVertical_bias="0.1"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/et_sign_repassword_layout"
-                        app:layout_constraintBottom_toTopOf="@id/layout_under_sign_bt">
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                        <Button
-                            android:id="@+id/bt_sign"
-                            style="@style/Widget.MaterialComponents.Button"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/bt_back_filled"
-                            android:fontFamily="@font/medium"
-                            android:paddingVertical="@dimen/_2sdp"
-                            android:text="@string/sign_up"
-                            android:textAllCaps="false"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/_15sdp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <ImageView
-                            android:id="@+id/progress_sign"
-                            android:layout_width="@dimen/_30sdp"
-                            android:layout_height="@dimen/_30sdp"
-                            android:contentDescription="@string/todo"
-                            android:visibility="invisible"
-                            android:src="@drawable/ic_primary_hexa_shape"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-                    </androidx.constraintlayout.widget.ConstraintLayout>
+                    <ImageView
+                        android:id="@+id/progress_sign"
+                        android:layout_width="@dimen/_30sdp"
+                        android:layout_height="@dimen/_30sdp"
+                        android:contentDescription="@string/todo"
+                        android:src="@drawable/ic_primary_hexa_shape"
+                        android:visibility="invisible"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
 
                 <LinearLayout

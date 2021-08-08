@@ -1,10 +1,14 @@
 package com.khedr.ecommerce.pojo.product;
 
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
+@Entity(tableName = "p_table")
 public class Product implements Serializable {
-
+    @PrimaryKey
     int id;
     double price;
     double old_price;

@@ -21,7 +21,8 @@
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="RtlHardcoded"/>
 
         <ImageView
             android:id="@+id/iv_splash_right_back"
@@ -34,7 +35,8 @@
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/iv_splash_left_back" />
+            app:layout_constraintTop_toBottomOf="@+id/iv_splash_left_back"
+            tools:ignore="RtlHardcoded" />
 
         <TextView
             android:id="@+id/tv_splash_khadrawy"
@@ -92,12 +94,13 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/iv_splash_man" />
 
-        <ImageView
+        <ProgressBar
             android:id="@+id/progress_splash"
             android:layout_width="@dimen/_40sdp"
             android:layout_height="@dimen/_40sdp"
-            android:contentDescription="@string/todo"
-            android:src="@drawable/ic_primary_hexa_shape"
+            android:indeterminate="true"
+            android:indeterminateTintMode="src_atop"
+            android:indeterminateTint="@color/primary"
             android:translationZ="@dimen/_30sdp"
             android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"

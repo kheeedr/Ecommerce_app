@@ -36,14 +36,13 @@
             android:rotation="180"
             android:src="@drawable/ic_blue_right_arrow"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="@dimen/_42sdp"
-            android:fillViewport="true"
-            >
+            android:fillViewport="true">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -55,6 +54,7 @@
                     android:id="@+id/iv_login_left_back"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
+                    android:contentDescription="@string/todo"
                     android:paddingLeft="@dimen/_40sdp"
                     android:src="@drawable/right_back"
                     app:layout_constraintDimensionRatio="1:1"
@@ -62,7 +62,6 @@
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:contentDescription="@string/todo"
                     tools:ignore="RtlHardcoded,RtlSymmetry" />
 
                 <TextView
@@ -96,12 +95,12 @@
                     android:layout_width="@dimen/_250sdp"
                     android:layout_height="@dimen/_250sdp"
                     android:layout_marginTop="@dimen/_85sdp"
+                    android:contentDescription="@string/todo"
                     android:src="@drawable/iv_girl"
                     app:layout_constraintBottom_toTopOf="@id/et_login_email_layout"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:contentDescription="@string/todo"/>
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/et_login_email_layout"
@@ -122,14 +121,16 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/et_login_email"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="@dimen/_40sdp"
+
                         android:autofillHints="email"
                         android:background="@drawable/et_stroke"
                         android:fontFamily="@font/medium"
-                        android:textAlignment="viewStart"
                         android:hint="@string/e_mail"
                         android:inputType="textEmailAddress"
-                        android:textColor="@color/secondary" />
+                        android:textAlignment="viewStart"
+                        android:textColor="@color/secondary"
+                        android:textSize="@dimen/_12sdp" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -142,6 +143,7 @@
                     android:layout_marginTop="@dimen/_10sdp"
                     android:layout_marginEnd="@dimen/_20sdp"
                     app:endIconMode="password_toggle"
+                    app:errorIconDrawable="@null"
                     app:hintEnabled="false"
                     app:layout_constraintBottom_toTopOf="@id/layout_login_bt"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -153,12 +155,12 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/et_login_password"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="@dimen/_40sdp"
                         android:background="@drawable/et_stroke"
                         android:fontFamily="@font/medium"
-                        android:textAlignment="viewStart"
                         android:hint="@string/password"
                         android:inputType="textPassword"
+                        android:textAlignment="viewStart"
                         android:textColor="@color/secondary"
                         android:textSize="@dimen/_12sdp" />
 
@@ -198,8 +200,8 @@
                         android:layout_width="@dimen/_30sdp"
                         android:layout_height="@dimen/_30sdp"
                         android:contentDescription="@string/todo"
-                        android:visibility="invisible"
                         android:src="@drawable/ic_primary_hexa_shape"
+                        android:visibility="invisible"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -222,7 +224,6 @@
                     app:backgroundTint="#FFFFFF"
                     app:backgroundTintMode="multiply"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.498"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/layout_login_bt"
                     app:rippleColor="@color/primary" />
@@ -235,7 +236,6 @@
                     app:layout_constraintTop_toBottomOf="@id/bt_to_signup"
                     tools:ignore="UselessLeaf" />
             </androidx.constraintlayout.widget.ConstraintLayout>
-
 
         </ScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>

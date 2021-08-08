@@ -43,6 +43,7 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
     Product product;
     FavouritesViewModel favouritesViewModel;
     CartViewModel cartViewModel;
+    ProductDetailsViewModel productViewModel;
 
 
     @Override
@@ -50,11 +51,11 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
         super.onCreate(savedInstanceState);
         b = DataBindingUtil.setContentView(this, R.layout.activity_product_details);
 
-        favouritesViewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(this.getApplication())).get(FavouritesViewModel.class);
-        cartViewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(this.getApplication())).get(CartViewModel.class);
-
+        favouritesViewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication())).get(FavouritesViewModel.class);
+        cartViewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication())).get(CartViewModel.class);
+        productViewModel=new ViewModelProvider(this,ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication())).get(ProductDetailsViewModel.class);
         product = (Product) getIntent().getSerializableExtra("product");
-
+        productViewModel.addRecentProduct(this,product);
 
         imagesList = product.getImages();
         adapter = new ProductImagesAdapter(this, imagesList);
