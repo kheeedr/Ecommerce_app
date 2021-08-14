@@ -2,7 +2,6 @@ package com.khedr.ecommerce.ui.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +15,7 @@ import com.khedr.ecommerce.database.Converters;
 import com.khedr.ecommerce.databinding.FragmentHomeBinding;
 import com.khedr.ecommerce.pojo.homeapi.BannersAndProductsModel;
 import com.khedr.ecommerce.pojo.product.Product;
+import com.khedr.ecommerce.ui.activities.Address.AddAddressActivity;
 import com.khedr.ecommerce.ui.activities.cart.CartViewModel;
 import com.khedr.ecommerce.ui.activities.categories.CategoriesActivity;
 import com.khedr.ecommerce.ui.activities.categories.CategoryProductsActivity;
@@ -35,7 +35,7 @@ import java.util.ArrayList;
 
 public class HomeFragment extends Fragment implements View.OnClickListener, RecentlyViewedAdapter.OnItemClickListener {
 
-    private static final String TAG = "HomeFragment";
+
     public static BannersAndProductsModel homeResponse;
     FragmentHomeBinding b;
     BannersAdapter bannersAdapter;
@@ -97,13 +97,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Rece
             }
         });
 
-        cartViewModel.postToCartResponseMLD.observe(requireActivity(), postCartResponse -> {
-            if (postCartResponse.isStatus()) {
-                recentProductsAdapter.getProductsList().get(adapterPosition).setIn_cart(true);
-                recentProductsAdapter.notifyItemChanged(adapterPosition);
-            }
-            UiUtils.shortToast(requireContext(), postCartResponse.getMessage());
-        });
+        observeOnAddProductToCart();
+        observeOnUpdateQuantity();
 
 
         return b.getRoot();
@@ -125,7 +120,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Rece
         } else if (v == b.layoutHomeToContactUs) {
             startActivity(new Intent(requireContext(), ContactUsActivity.class));
         } else if (v == b.svHome) {
-            startActivity(new Intent(requireContext(), SearchActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
+            startActivity(new Intent(requireContext(), SearchActivity.class)
+                    .addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
         } else if (v == b.tvHomeViewAllRecentViewed) {
             intentToRecentlyViewedProduct();
         } else if (v == b.layoutHomeToPreventCorona) {
@@ -144,6 +140,28 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Rece
             UiUtils.shortToast(requireContext(), getString(R.string.coming_soon));
         }
 
+    }
+    private void  observeOnAddProductToCart (){
+        cartViewModel.postToCartResponseMLD.observe(getViewLifecycleOwner(), postCartResponse -> {
+            if (postCartResponse.isStatus()) {
+                if (adapterPosition < recentProductsAdapter.getProductsList().size()) {
+                    recentProductsAdapter.getProductsList().get(adapterPosition).setIn_cart(true);
+                    recentProductsAdapter.notifyItemChanged(adapterPosition);
+                }
+            }
+            if (getActivity() != null) {
+                UiUtils.shortToast(requireContext(), postCartResponse.getMessage());
+            }
+        });
+    }
+    private void observeOnUpdateQuantity() {
+        cartViewModel.updateQuantityResponseMLD.observe(getViewLifecycleOwner(), updateQuantityResponse -> {
+            if (updateQuantityResponse.isStatus()) {
+                UiUtils.shortToast(requireContext(), getString(R.string.quantity_updated));
+            } else {
+                UiUtils.shortToast(requireContext(), updateQuantityResponse.getMessage());
+            }
+        });
     }
 
     private void intentToRecentlyViewedProduct() {

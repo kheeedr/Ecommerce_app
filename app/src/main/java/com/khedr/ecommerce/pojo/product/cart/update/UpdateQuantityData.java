@@ -2,7 +2,7 @@ package com.khedr.ecommerce.pojo.product.cart.update;
 
 public class UpdateQuantityData {
     UpdateQuantityCart cart;
-    double sub_total,total;
+    double sub_total, total;
 
     public UpdateQuantityData(UpdateQuantityCart cart, double sub_total, double total) {
         this.cart = cart;

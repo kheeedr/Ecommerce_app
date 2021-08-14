@@ -36,9 +36,6 @@ public class UserDataForLoginRequest {
     }
 
 
-
-
-
     public String getPassword() {
         return password;
     }

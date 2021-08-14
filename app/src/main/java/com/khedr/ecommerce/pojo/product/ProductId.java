@@ -1,4 +1,5 @@
 package com.khedr.ecommerce.pojo.product;
+
 // for set favorite
 public class ProductId {
     int product_id;

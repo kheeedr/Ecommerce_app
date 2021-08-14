@@ -9,7 +9,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/progress_back"
-    android:id="@+id/progress_parent">
+    android:id="@+id/progress_parent"
+    android:elevation="@dimen/_5sdp"
+    android:translationZ="@dimen/_10sdp">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/progress_moto"
         android:layout_width="@dimen/_70sdp"

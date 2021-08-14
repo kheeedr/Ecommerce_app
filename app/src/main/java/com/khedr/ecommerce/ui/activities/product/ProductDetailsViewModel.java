@@ -29,8 +29,7 @@ import io.reactivex.schedulers.Schedulers;
 public class ProductDetailsViewModel extends ViewModel {
 
     private static final String TAG = "ProductDetailsViewModel";
-    public MutableLiveData<List<Product>> recentProductsMTL =new MutableLiveData<>();
-
+    public MutableLiveData<List<Product>> recentProductsMTL = new MutableLiveData<>();
 
 
     public void addRecentProduct(Context context, Product product) {
@@ -43,19 +42,19 @@ public class ProductDetailsViewModel extends ViewModel {
 
             @Override
             public void onComplete() {
-                Log.d(TAG,"product added successfully");
+                Log.d(TAG, "product added successfully");
                 AppDatabase.getInstance(context).deleteDuplicates();
             }
 
             @Override
             public void onError(@NotNull Throwable e) {
-                Log.d(TAG,"Error: "+e.getMessage());
+                Log.d(TAG, "Error: " + e.getMessage());
 
             }
         });
     }
 
-    public void getRecentProducts(Context context){
+    public void getRecentProducts(Context context) {
 
         AppDatabase.getInstance(context).getRecentProducts().subscribeOn(Schedulers.computation()).observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<List<ProductDB>>() {
@@ -66,9 +65,9 @@ public class ProductDetailsViewModel extends ViewModel {
 
                     @Override
                     public void onSuccess(@NotNull List<ProductDB> productDBS) {
-                        ArrayList<Product> products=new ArrayList<>();
-                        for (ProductDB item:productDBS){
-                            products.add(0,item.getProduct());
+                        ArrayList<Product> products = new ArrayList<>();
+                        for (ProductDB item : productDBS) {
+                            products.add(0, item.getProduct());
                         }
 
                         recentProductsMTL.setValue(products);
@@ -76,10 +75,11 @@ public class ProductDetailsViewModel extends ViewModel {
 
                     @Override
                     public void onError(@NotNull Throwable e) {
-                    Log.d(TAG,"Error: "+e.getMessage());
+                        Log.d(TAG, "Error: " + e.getMessage());
                     }
                 });
 
     }
+
 
 }

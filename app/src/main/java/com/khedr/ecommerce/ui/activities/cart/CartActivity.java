@@ -16,6 +16,7 @@ import com.khedr.ecommerce.R;
 import com.khedr.ecommerce.databinding.ActivityCartBinding;
 import com.khedr.ecommerce.pojo.product.cart.get.GetCartItems;
 import com.khedr.ecommerce.ui.activities.MainPage.MainPageActivity;
+import com.khedr.ecommerce.ui.activities.order.OrderActivity;
 import com.khedr.ecommerce.ui.activities.product.ProductDetailsActivity;
 import com.khedr.ecommerce.ui.adapters.CartAdapter;
 import com.khedr.ecommerce.utils.UiUtils;
@@ -93,7 +94,14 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
         else if (v== b.includeProgressCart.getRoot()){
             UiUtils.shortToast(this, getString(R.string.wait));
         } else if (v == b.btCartOrderNow) {
-            UiUtils.shortToast(this, getString(R.string.coming_soon));
+            if (UserUtils.isSignedIn(this)){
+                Intent intent=new Intent(this, OrderActivity.class);
+                intent.putExtra(getString(R.string.order_total),(int) Math.ceil(total));
+                startActivity(intent);
+            }else {
+                UiUtils.shortToast(this, getString(R.string.you_should_login_first));
+            }
+
         }
 
     }

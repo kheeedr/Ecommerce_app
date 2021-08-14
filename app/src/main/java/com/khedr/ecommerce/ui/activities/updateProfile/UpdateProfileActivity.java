@@ -61,7 +61,7 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
         // set email
         b.etUpdateEmail.setText(pref.getString(getString(R.string.pref_user_email), null));
 
-        viewModel.responseBody.observe(this, userApiResponse -> {
+        viewModel.profileResponseMLD.observe(this, userApiResponse -> {
 
             UiUtils.shortToast(UpdateProfileActivity.this, userApiResponse.getMessage());
 

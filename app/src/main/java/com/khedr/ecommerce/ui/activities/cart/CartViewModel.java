@@ -1,12 +1,14 @@
 package com.khedr.ecommerce.ui.activities.cart;
 
 import android.content.Context;
+import android.util.Log;
 
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.khedr.ecommerce.R;
+import com.khedr.ecommerce.database.AppDatabase;
 import com.khedr.ecommerce.network.RetrofitInstance;
 import com.khedr.ecommerce.pojo.product.ProductId;
 import com.khedr.ecommerce.pojo.product.cart.delete.DeleteFromCartResponse;
@@ -75,6 +77,7 @@ public class CartViewModel extends ViewModel {
                         if (!postMultipleLoading()) {
                             isPostLoading.setValue(false);
                         }
+                        AppDatabase.getInstance(context).updateProduct(productId, true);
                         postToCartResponseMLD.setValue(postCartResponse);
                     }
 
@@ -214,6 +217,8 @@ public class CartViewModel extends ViewModel {
                     @Override
                     public void onSuccess(@NotNull DeleteFromCartResponse deleteFromCartResponse) {
                         isDeleteLoading.setValue(false);
+                        AppDatabase.getInstance(context).updateProduct(deleteFromCartResponse.getData().getCart().getProduct().getId(), false);
+                        Log.d("medo",""+deleteFromCartResponse.getData().getCart().getId());
                         deleteProductResponseMLD.setValue(deleteFromCartResponse);
                     }
 

@@ -48,7 +48,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#ffffff"
-                tools:context="com.khedr.ecommerce.com.khedr.loginwithapi.ui.LoginActivity">
+                >
 
                 <ImageView
                     android:id="@+id/iv_login_left_back"

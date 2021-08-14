@@ -1,7 +1,7 @@
 package com.khedr.ecommerce.pojo.product;
 
 
-public class SimpleProduct  {
+public class SimpleProduct {
     int id;
     double price;
     double old_price;

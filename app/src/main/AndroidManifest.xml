@@ -10,70 +10,79 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Ecommerce"
-        >
-        <activity android:name=".ui.activities.language.LanguageActivity"
+        android:theme="@style/Theme.Ecommerce">
+        <activity
+            android:name=".ui.activities.Address.AddAddressActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.activities.order.OrderActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.activities.language.LanguageActivity"
             android:screenOrientation="nosensor"
-            android:windowSoftInputMode="adjustPan|stateHidden"/>
-        <activity android:name=".ui.activities.splash.SplashActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity
+            android:name=".ui.activities.splash.SplashActivity"
             android:screenOrientation="nosensor"
             android:windowSoftInputMode="adjustPan|stateHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activities.search.SearchActivity"
-            android:screenOrientation="nosensor"
-            android:windowSoftInputMode="adjustPan|stateAlwaysVisible"/>
-
-        <activity android:name=".ui.activities.categories.CategoryProductsActivity"
+        <activity
+            android:name=".ui.activities.search.SearchActivity"
             android:screenOrientation="nosensor"
             android:windowSoftInputMode="adjustPan|stateAlwaysVisible" />
-
-        <activity android:name=".ui.activities.favourites.FavoritesActivity"
+        <activity
+            android:name=".ui.activities.categories.CategoryProductsActivity"
             android:screenOrientation="nosensor"
             android:windowSoftInputMode="adjustPan|stateAlwaysVisible" />
-
-        <activity android:name=".ui.activities.cart.CartActivity"
+        <activity
+            android:name=".ui.activities.favourites.FavoritesActivity"
             android:screenOrientation="nosensor"
-            android:windowSoftInputMode="adjustPan|stateAlwaysVisible"/>
-
-        <activity android:name=".ui.activities.MainPage.MainPageActivity"
+            android:windowSoftInputMode="adjustPan|stateAlwaysVisible" />
+        <activity
+            android:name=".ui.activities.cart.CartActivity"
             android:screenOrientation="nosensor"
-            android:windowSoftInputMode="adjustPan|stateAlwaysVisible"/>
-
-        <activity android:name=".ui.activities.product.ProductDetailsActivity"
+            android:windowSoftInputMode="adjustPan|stateAlwaysVisible" />
+        <activity
+            android:name=".ui.activities.MainPage.MainPageActivity"
             android:screenOrientation="nosensor"
-            android:windowSoftInputMode="adjustPan|stateAlwaysVisible"/>
-
-        <activity android:name=".ui.activities.categories.CategoriesActivity"
+            android:windowSoftInputMode="adjustPan|stateAlwaysVisible" />
+        <activity
+            android:name=".ui.activities.product.ProductDetailsActivity"
             android:screenOrientation="nosensor"
-            android:windowSoftInputMode="adjustPan|stateAlwaysVisible"/>
-
-        <activity android:name=".ui.activities.contactUs.ContactUsActivity"
+            android:windowSoftInputMode="adjustPan|stateAlwaysVisible" />
+        <activity
+            android:name=".ui.activities.categories.CategoriesActivity"
             android:screenOrientation="nosensor"
-            android:windowSoftInputMode="adjustPan|stateAlwaysVisible"/>
-
-        <activity android:name=".ui.activities.login.LoginActivity"
+            android:windowSoftInputMode="adjustPan|stateAlwaysVisible" />
+        <activity
+            android:name=".ui.activities.contactUs.ContactUsActivity"
             android:screenOrientation="nosensor"
-            android:windowSoftInputMode="adjustPan|stateAlwaysVisible"/>
-
-        <activity android:name=".ui.activities.aboutUs.AboutUsActivity"
+            android:windowSoftInputMode="adjustPan|stateAlwaysVisible" />
+        <activity
+            android:name=".ui.activities.login.LoginActivity"
             android:screenOrientation="nosensor"
-            android:windowSoftInputMode="adjustPan|stateAlwaysVisible"/>
-
-        <activity android:name=".ui.activities.updateProfile.UpdateProfileActivity"
+            android:windowSoftInputMode="adjustPan|stateAlwaysVisible" />
+        <activity
+            android:name=".ui.activities.aboutUs.AboutUsActivity"
             android:screenOrientation="nosensor"
-            android:windowSoftInputMode="adjustPan|stateAlwaysVisible"/>
-
-        <activity android:name=".ui.activities.profile.ProfileActivity"
+            android:windowSoftInputMode="adjustPan|stateAlwaysVisible" />
+        <activity
+            android:name=".ui.activities.updateProfile.UpdateProfileActivity"
             android:screenOrientation="nosensor"
-            android:windowSoftInputMode="adjustPan|stateAlwaysVisible"/>
-
-        <activity android:name=".ui.activities.signUp.SignUpActivity"
+            android:windowSoftInputMode="adjustPan|stateAlwaysVisible" />
+        <activity
+            android:name=".ui.activities.profile.ProfileActivity"
             android:screenOrientation="nosensor"
-            android:windowSoftInputMode="adjustPan|stateAlwaysVisible"/>
+            android:windowSoftInputMode="adjustPan|stateAlwaysVisible" />
+        <activity
+            android:name=".ui.activities.signUp.SignUpActivity"
+            android:screenOrientation="nosensor"
+            android:windowSoftInputMode="adjustPan|stateAlwaysVisible" />
     </application>
 
 </manifest>

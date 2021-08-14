@@ -3,6 +3,7 @@ package com.khedr.ecommerce.database;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import com.khedr.ecommerce.pojo.ProductDB;
 import com.khedr.ecommerce.pojo.product.Product;
@@ -24,5 +25,10 @@ public interface AppDao {
             " where  id  in (select id from products_table order by primaryKey desc limit 1) " +
             " and primaryKey not in( select primaryKey from products_table order by primaryKey desc limit 1)")
     void deleteDuplicates();
+
+    @Query("UPDATE products_table SET in_cart = :inCart WHERE id = :id")
+    void updateProduct(int id, boolean inCart);
+    @Query("UPDATE products_table SET in_cart = 0")
+    void updateAllProducts();
 
 }

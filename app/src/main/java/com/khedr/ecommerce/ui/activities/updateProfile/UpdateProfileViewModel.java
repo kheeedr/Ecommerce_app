@@ -9,11 +9,9 @@ import com.khedr.ecommerce.R;
 import com.khedr.ecommerce.network.RetrofitInstance;
 import com.khedr.ecommerce.pojo.user.UserApiResponse;
 import com.khedr.ecommerce.pojo.user.UserDataForRegisterRequest;
-import com.khedr.ecommerce.utils.UserUtils;
 
 import org.jetbrains.annotations.NotNull;
 
-import io.reactivex.Single;
 import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -22,7 +20,7 @@ import io.reactivex.schedulers.Schedulers;
 public class UpdateProfileViewModel extends ViewModel {
 
     MutableLiveData<Boolean> isLoading = new MutableLiveData<>();
-    MutableLiveData<UserApiResponse> responseBody = new MutableLiveData<>();
+    MutableLiveData<UserApiResponse> profileResponseMLD = new MutableLiveData<>();
 
 
     public void updateUserInfo(Context context, UserDataForRegisterRequest user) {
@@ -36,16 +34,17 @@ public class UpdateProfileViewModel extends ViewModel {
             @Override
             public void onSuccess(@NotNull UserApiResponse userApiResponse) {
                 isLoading.setValue(false);
-                responseBody.setValue(userApiResponse);
+                profileResponseMLD.setValue(userApiResponse);
             }
 
             @Override
             public void onError(@NotNull Throwable e) {
                 isLoading.setValue(false);
-                responseBody.setValue(nullResponse);
+                profileResponseMLD.setValue(nullResponse);
             }
         });
     }
+
 }
 
 

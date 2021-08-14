@@ -2,9 +2,14 @@ package com.khedr.ecommerce.network;
 
 import android.content.Context;
 
+import com.khedr.ecommerce.pojo.Address.AddAddressResponse;
+import com.khedr.ecommerce.pojo.Address.AddressData;
+import com.khedr.ecommerce.pojo.Address.GetAddressesResponse;
 import com.khedr.ecommerce.pojo.categories.GetCategoriesResponse;
 import com.khedr.ecommerce.pojo.categories.item.GetCategoryItemsResponse;
 import com.khedr.ecommerce.pojo.homeapi.HomePageApiResponse;
+import com.khedr.ecommerce.pojo.order.AddOrderRequest;
+import com.khedr.ecommerce.pojo.order.AddOrderResponse;
 import com.khedr.ecommerce.pojo.product.ProductDetailsResponse;
 import com.khedr.ecommerce.pojo.product.ProductId;
 import com.khedr.ecommerce.pojo.product.cart.delete.DeleteFromCartResponse;
@@ -60,7 +65,6 @@ public final class RetrofitInstance {
     }
 
 
-
     public Single<UserApiResponse> register(Context context, UserDataForRegisterRequest user) {
 
         return apiInterface.register(getLang(context), user);
@@ -76,6 +80,10 @@ public final class RetrofitInstance {
 
     public Single<UserApiResponse> updateProfile(Context context, UserDataForRegisterRequest user) {
         return apiInterface.updateProfile(getLang(context), getToken(context), user);
+    }
+
+    public Single<UserApiResponse> getProfile(Context context) {
+        return apiInterface.getProfile(getLang(context), getToken(context));
     }
 
     public Single<HomePageApiResponse> getHomePage(Context context) {
@@ -101,6 +109,7 @@ public final class RetrofitInstance {
     public Single<UpdateQuantityResponse> updateQuantity(Context context, int product_id, Quantity quantity) {
         return apiInterface.updateQuantity(getLang(context), getToken(context), product_id, quantity);
     }
+
     public Single<DeleteFromCartResponse> deleteFromCart(Context context, int product_id) {
         return apiInterface.deleteFromCart(getLang(context), getToken(context), product_id);
     }
@@ -116,7 +125,29 @@ public final class RetrofitInstance {
     public Single<SearchResponse> getSearchProducts(Context context, SearchRequest searchRequest) {
         return apiInterface.getSearchProducts(getLang(context), getToken(context), searchRequest);
     }
+
     public Single<ProductDetailsResponse> getProductDetails(Context context, int id) {
         return apiInterface.getProductDetails(getLang(context), getToken(context), id);
     }
+
+    public Single<AddOrderResponse> addOrder(Context context, AddOrderRequest orderRequest) {
+        return apiInterface.addOrder(getLang(context), getToken(context), orderRequest);
+    }
+
+    public Single<GetAddressesResponse> getAddresses(Context context) {
+        return apiInterface.getAddresses(getLang(context), getToken(context));
+    }
+
+    public Single<AddAddressResponse> addAddress(Context context, AddressData addressData) {
+        return apiInterface.addAddress(getLang(context), getToken(context), addressData);
+    }
+
+    public Single<AddAddressResponse> updateAddress(Context context, int id, AddressData addressData) {
+        return apiInterface.updateAddress(getLang(context), getToken(context), id, addressData);
+    }
+
+    public Single<AddAddressResponse> deleteAddress(Context context, int id) {
+        return apiInterface.deleteAddress(getLang(context), getToken(context), id);
+    }
+
 }

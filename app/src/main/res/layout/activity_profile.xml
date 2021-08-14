@@ -43,21 +43,21 @@
             android:layout_width="@dimen/_45sdp"
             android:layout_height="@dimen/_40sdp"
             android:layout_marginEnd="@dimen/_10sdp"
+            android:contentDescription="@string/todo"
             android:paddingStart="@dimen/_10sdp"
             android:paddingTop="@dimen/_12sdp"
             android:paddingEnd="@dimen/_10sdp"
             android:paddingBottom="@dimen/_8sdp"
             android:src="@drawable/ic_account_edit"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:contentDescription="@string/todo"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="@dimen/_42sdp"
-            android:orientation="vertical"
             android:fillViewport="true"
+            android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -65,17 +65,17 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_20sdp">
 
                 <LinearLayout
                     android:id="@+id/layout_profile_user_info"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/_20sdp"
-                    android:background="@drawable/et_stroke_white"
                     android:elevation="@dimen/_1sdp"
                     android:orientation="vertical"
-                    android:padding="@dimen/_15sdp"
+                    android:padding="@dimen/_5sdp"
                     android:translationZ="@dimen/_2sdp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -108,13 +108,13 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/et_stroke"
+                        android:drawablePadding="@dimen/_5sdp"
                         android:padding="@dimen/_10sdp"
                         android:text="@string/mohamed_khedr"
+                        android:textAlignment="viewStart"
                         android:textColor="@color/secondary"
                         android:textSize="@dimen/_12sdp"
-                        android:textAlignment="viewStart"
-                        app:drawableStartCompat="@drawable/ic_blue_person"
-                        android:drawablePadding="@dimen/_5sdp"/>
+                        app:drawableStartCompat="@drawable/ic_blue_person" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -131,13 +131,13 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/et_stroke"
+                        android:drawablePadding="@dimen/_5sdp"
                         android:padding="@dimen/_10sdp"
                         android:text="@string/_01026730615"
+                        android:textAlignment="viewStart"
                         android:textColor="@color/secondary"
                         android:textSize="@dimen/_12sdp"
-                        android:textAlignment="viewStart"
-                        app:drawableStartCompat="@drawable/ic_blue_phone"
-                        android:drawablePadding="@dimen/_5sdp" />
+                        app:drawableStartCompat="@drawable/ic_blue_phone" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -154,13 +154,13 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/et_stroke"
+                        android:drawablePadding="@dimen/_5sdp"
                         android:padding="@dimen/_10sdp"
                         android:text="@string/mkheeedr_gmail_com"
-                        android:textColor="@color/secondary"
                         android:textAlignment="viewStart"
+                        android:textColor="@color/secondary"
                         android:textSize="@dimen/_12sdp"
-                        app:drawableStartCompat="@drawable/ic_blue_email"
-                        android:drawablePadding="@dimen/_5sdp"/>
+                        app:drawableStartCompat="@drawable/ic_blue_email" />
 
 
                 </LinearLayout>
@@ -180,68 +180,46 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/layout_profile_user_info">
 
-                    <ImageView
-                        android:id="@+id/iv_profile_remove_address"
-                        android:layout_width="@dimen/_20sdp"
-                        android:layout_height="@dimen/_20sdp"
-                        android:layout_marginTop="@dimen/_5sdp"
-                        android:src="@drawable/ic_primary_pin"
-                        android:visibility="gone"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        android:contentDescription="@string/todo"/>
-
-                    <ImageView
-                        android:id="@+id/iv_profile_edit_address"
-                        android:layout_width="@dimen/_20sdp"
-                        android:layout_height="@dimen/_20sdp"
-                        android:layout_marginTop="@dimen/_5sdp"
-                        android:layout_marginEnd="@dimen/_10sdp"
-                        android:src="@drawable/ic_pen"
-                        android:visibility="gone"
-                        app:layout_constraintEnd_toStartOf="@id/iv_profile_remove_address"
-                        app:layout_constraintTop_toTopOf="parent"
-                        android:contentDescription="@string/todo" />
 
                     <TextView
                         android:id="@+id/tv_profile_address_word"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5sdp"
                         android:padding="@dimen/_5sdp"
-                        android:text="@string/address"
+                        android:text="@string/my_addresses"
                         android:textColor="@color/natural1"
                         android:textSize="@dimen/_15sdp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <TextView
-                        android:id="@+id/tv_profile_address"
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_profile_addresses"
                         android:layout_width="match_parent"
+                        app:layout_constraintHeight_max="@dimen/_170sdp"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/et_stroke"
-                        android:padding="@dimen/_10sdp"
-                        android:text="@string/mansoura_adaqahlya"
-                        android:textColor="@color/secondary"
-                        android:textSize="@dimen/_12sdp"
+                        android:orientation="vertical"
                         android:visibility="visible"
-                        android:textAlignment="viewStart"
-                        app:drawableStartCompat="@drawable/ic_location"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/tv_profile_address_word"
-                        android:drawablePadding="@dimen/_5sdp"/>
+                        app:layout_constraintTop_toBottomOf="@+id/tv_profile_address_word" />
 
-                    <ImageView
-                        android:id="@+id/iv_profile_new_address"
+                    <TextView
+                        android:id="@+id/tv_profile_new_address"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/_45sdp"
-                        android:layout_margin="0dp"
-                        android:src="@drawable/new_address"
-                        android:visibility="gone"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:contentDescription="@string/todo"
+                        android:text="@string/add_new_address"
+                        android:textColor="@color/natural3"
+                        android:gravity="center"
+                        android:textSize="@dimen/_13sdp"
+                        android:background="@drawable/dotted_stroke"
+                        android:visibility="visible"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/tv_profile_address_word"
-                        android:contentDescription="@string/todo"/>
+                        app:layout_constraintTop_toBottomOf="@+id/rv_profile_addresses" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -264,10 +242,10 @@
                         android:drawableEnd="@drawable/ic_arrow_right"
                         android:elevation="@dimen/_1sdp"
                         android:fontFamily="@font/montserrat_semi_bold"
+                        android:gravity="start"
                         android:paddingHorizontal="@dimen/_15sdp"
                         android:paddingVertical="@dimen/_5sdp"
                         android:text="@string/sign_out"
-                        android:gravity="start"
                         android:textAllCaps="false"
                         android:textColor="@color/primary"
                         android:textSize="@dimen/_15sdp"
@@ -289,7 +267,16 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
+
+
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
+
+        <include
+            android:id="@+id/included_progress_profile"
+            layout="@layout/include_progress_moto"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

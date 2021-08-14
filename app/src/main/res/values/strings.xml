@@ -160,5 +160,29 @@
     <string name="xiaomi">Xiaomi</string>
     <string name="nike">Nike</string>
     <string name="sony">Sony</string>
+    <string name="add_order">Add Order</string>
+    <string name="select_a_payment_method">Select a payment method</string>
+    <string name="cash_on_delivery">Cash on delivery</string>
+    <string name="online_payment">Online payment</string>
+    <string name="pay_online_description">We will call you back to confirm the order. After confirmation, we will proceed to pick up, pack, issue bills and will notify the actual bill for you to transfer.</string>
+    <string name="cash_payment_description">The delivery staff goes to your door, you give the money according to the value of the application and delivery fees for employees.</string>
+    <string name="credit_card_number">**** **** **** </string>
+    <string name="complete_order">Complete order</string>
+    <string name="order_total">order_total</string>
+    <string name="add_new_address">Add new address</string>
+    <string name="city">City</string>
+    <string name="address_details">Address details</string>
+    <string name="region">Region</string>
+    <string name="address_name">Address name</string>
+    <string name="notes_about_address">Notes about Address</string>
+    <string name="add_address">Add Address</string>
+    <string name="my_addresses">My Addresses</string>
+    <string name="edit_address">Edit Address</string>
+    <string name="update_address">Update address</string>
+    <string name="delete_address">Delete address</string>
+    <string name="city_name_error_message">please insert city name</string>
+    <string name="region_name_error_message">please insert region name</string>
+    <string name="address_details_error_message">please insert address details</string>
+    <string name="address_name_error_message">please insert address name</string>
 
 </resources>

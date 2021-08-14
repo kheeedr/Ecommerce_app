@@ -1,8 +1,8 @@
 package com.khedr.ecommerce.pojo;
 
 public class MultiplePagesDetails {
-    int current_page,from,last_page,per_page,to,total;
-    String first_page_url,last_page_url,next_page_url,path,prev_page_url;
+    int current_page, from, last_page, per_page, to, total;
+    String first_page_url, last_page_url, next_page_url, path, prev_page_url;
 
     public MultiplePagesDetails(int current_page, int from, int last_page, int per_page, int to, int total, String first_page_url, String last_page_url, String next_page_url, String path, String prev_page_url) {
         this.current_page = current_page;

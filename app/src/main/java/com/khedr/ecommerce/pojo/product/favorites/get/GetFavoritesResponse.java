@@ -1,7 +1,7 @@
 package com.khedr.ecommerce.pojo.product.favorites.get;
 
 public class GetFavoritesResponse {
-    boolean status ;
+    boolean status;
     String message;
     OuterData data;
 

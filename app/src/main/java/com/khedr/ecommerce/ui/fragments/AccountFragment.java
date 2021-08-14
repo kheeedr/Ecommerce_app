@@ -11,15 +11,20 @@ import android.view.ViewGroup;
 
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.khedr.ecommerce.R;
 import com.khedr.ecommerce.database.Converters;
 import com.khedr.ecommerce.databinding.FragmentAccountBinding;
+import com.khedr.ecommerce.pojo.user.UserApiResponse;
+import com.khedr.ecommerce.ui.activities.MainPage.MainPageActivity;
 import com.khedr.ecommerce.ui.activities.aboutUs.AboutUsActivity;
 import com.khedr.ecommerce.ui.activities.contactUs.ContactUsActivity;
 import com.khedr.ecommerce.ui.activities.language.LanguageActivity;
 import com.khedr.ecommerce.ui.activities.login.LoginActivity;
 import com.khedr.ecommerce.ui.activities.profile.ProfileActivity;
+import com.khedr.ecommerce.ui.activities.profile.ProfileViewModel;
 import com.khedr.ecommerce.utils.UiUtils;
 import com.khedr.ecommerce.utils.UserUtils;
 
@@ -29,8 +34,9 @@ import org.jetbrains.annotations.NotNull;
 public class AccountFragment extends Fragment implements View.OnClickListener {
 
     FragmentAccountBinding b;
-
+    ProfileViewModel profileViewModel;
     SharedPreferences pref;
+
     private static final String TAG = "AccountFragment";
 
     public AccountFragment() {
@@ -40,10 +46,11 @@ public class AccountFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
         b = DataBindingUtil.inflate(inflater, R.layout.fragment_account, container, false);
 
-        pref = UserUtils.getPref(this.requireActivity());
+        profileViewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory
+                .getInstance(requireActivity().getApplication())).get(ProfileViewModel.class);
+        pref = UserUtils.getPref(requireContext());
 
 
         b.layoutAccountToProfile.setOnClickListener(this);
@@ -53,16 +60,34 @@ public class AccountFragment extends Fragment implements View.OnClickListener {
         b.btAccountBack.setOnClickListener(this);
         b.layoutAccountToFaq.setOnClickListener(this);
 
+
+        observeOnUserDataChanged();
+
         return b.getRoot();
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        Log.d(TAG, "mkhedr: onStart");
-        //reactive view
-        refreshView();
+    private void observeOnUserDataChanged() {
+
+        profileViewModel.profileResponseMLD.observe(requireActivity(), response -> {
+            if (getActivity() != null) {
+                if (response.isStatus()) {
+                    refreshView();
+                } else {
+                    UiUtils.shortToast(requireContext(), response.getMessage());
+                }
+            }
+        });
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.d(TAG, "mkhedr: onResume");
+        //reactivate view
+        refreshView();
+        profileViewModel.getUserInfo(requireContext());
+    }
+
 
     @Override
     public void onClick(View v) {
@@ -83,8 +108,7 @@ public class AccountFragment extends Fragment implements View.OnClickListener {
             startActivity(new Intent(requireContext(), LanguageActivity.class));
         } else if (v == b.btAccountBack) {
             requireActivity().onBackPressed();
-        }
-        else if (v==b.layoutAccountToFaq){
+        } else if (v == b.layoutAccountToFaq) {
             UiUtils.shortToast(requireContext(), getString(R.string.coming_soon));
         }
 
@@ -95,7 +119,7 @@ public class AccountFragment extends Fragment implements View.OnClickListener {
     @SuppressLint("SetTextI18n")
     public void refreshView() {
         // when refresh view
-        if (UserUtils.isSignedIn(this.getActivity())) {
+        if (UserUtils.isSignedIn(requireContext())) {
             //update username and phone
             b.tvAccountUsername.setText(pref.getString(getString(R.string.pref_user_name), "error name"));
             b.tvAccountUserPhone.setText(pref.getString(getString(R.string.pref_user_phone), "error phone"));
@@ -111,7 +135,7 @@ public class AccountFragment extends Fragment implements View.OnClickListener {
             }
 
             //update points
-            int points = (pref.getInt(getString(R.string.pref_user_points), 0));
+            int points = pref.getInt(getString(R.string.pref_user_points), 0);
             b.tvAccountNumberOfPoints.setText(String.valueOf(points));
 
             //update cash

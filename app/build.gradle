@@ -8,7 +8,7 @@ android {
 
     defaultConfig {
         applicationId "com.khedr.ecommerce"
-        minSdkVersion 22
+        minSdkVersion 23
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -79,8 +79,17 @@ dependencies {
 
     // glide
     implementation 'com.github.bumptech.glide:glide:4.12.0'
+//
+//    // google play services
+//    implementation 'com.google.android.gms:play-services-location:18.0.0'
+
+
     // auto image slider
-    implementation 'com.github.smarteist:autoimageslider:1.4.0'
+    //implementation 'com.github.smarteist:autoimageslider:1.4.0'
+    // lottie animation
+//    def lottieVersion="4.0.0"
+//    implementation "com.airbnb.android:lottie:$lottieVersion"
+
 
 
 }

@@ -36,20 +36,20 @@ public class ProductDB {
     public boolean in_cart;
 
     public ProductDB(Product product) {
-        id=product.getId();
-        price=product.getPrice();
-        old_price=product.getOld_price();
-        discount=product.getDiscount();
-        image=product.getImage();
-        name=product.getName();
-        description=product.getDescription();
-        images=product.getImages();
-        in_favorites=product.isIn_favorites();
-        in_cart=product.isIn_cart();
+        id = product.getId();
+        price = product.getPrice();
+        old_price = product.getOld_price();
+        discount = product.getDiscount();
+        image = product.getImage();
+        name = product.getName();
+        description = product.getDescription();
+        images = product.getImages();
+        in_favorites = product.isIn_favorites();
+        in_cart = product.isIn_cart();
     }
 
     public Product getProduct() {
-        return new Product(id,price,old_price,discount,image,name,description,images,in_favorites,in_cart);
+        return new Product(id, price, old_price, discount, image, name, description, images, in_favorites, in_cart);
     }
 
 }

@@ -6,9 +6,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class BannersAndProductsModel {
-        ArrayList<Banner> banners;
-        ArrayList<Product> products;
-        String ad ;
+    ArrayList<Banner> banners;
+    ArrayList<Product> products;
+    String ad;
 
     public BannersAndProductsModel(ArrayList<Banner> banners, ArrayList<Product> products, String ad) {
         this.banners = banners;

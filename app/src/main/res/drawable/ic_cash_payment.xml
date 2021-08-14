@@ -1,0 +1,30 @@
+<!--
+  ~ Copyright (c) 2021.
+  ~ Created by Mohamed Khedr.
+  -->
+
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="512dp"
+    android:height="512dp"
+    android:viewportWidth="512"
+    android:viewportHeight="512"
+    android:autoMirrored="true">
+  <path
+      android:pathData="m43.31,409.1 l-10.36,-33.1 -8.95,-28.6l0,-150.21l93.26,-29.19 306.74,-96 30.05,96 32.08,102.5 -337.07,105.5z"
+      android:fillColor="#379a6b"/>
+  <path
+      android:pathData="m80.027,338.929 l-22.904,7.168 -28.675,-91.617 22.905,-7.169 -7.169,-22.904 335.931,-105.141 7.168,22.904 22.905,-7.168 28.674,91.617 -22.904,7.169 7.169,22.904 -335.931,105.141z"
+      android:fillColor="#44c086"/>
+  <path
+      android:pathData="m488,168l-0,208l-464,-0l0,-208z"
+      android:fillColor="#3ba673"/>
+  <path
+      android:pathData="m80,320l-24,-0l0,-96l24,0l0,-24l352,0l-0,24l24,0l-0,96l-24,-0l-0,24l-352,-0z"
+      android:fillColor="#44c086"/>
+  <path
+      android:pathData="M256,272m0,-40a40,40 0,1 1,-0 80a40,40 0,1 1,0 -80"
+      android:fillColor="#3ba673"/>
+  <path
+      android:pathData="m216,440l-192,-0l0,-56a80,80 0,0 1,80 -80l-0,0.16l76.805,-51.9a32,32 0,0 1,44.43 8.6,32 32,0 0,1 -8.6,44.43l-64.635,46.71l-0,24l192,0l-112.941,60.235a32,32 0,0 1,-15.059 3.765z"
+      android:fillColor="#f5cbaa"/>
+</vector>

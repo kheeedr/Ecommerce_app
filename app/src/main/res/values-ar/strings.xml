@@ -161,4 +161,30 @@
     <string name="xiaomi">Xiaomi</string>
     <string name="nike">Nike</string>
     <string name="sony">Sony</string>
+    <string name="add_order">اضافة طلب</string>
+    <string name="select_a_payment_method">اختر طريقة الدفع</string>
+    <string name="cash_on_delivery">دفع عند الاستلام</string>
+    <string name="online_payment">دفع اونلاين</string>
+    <string name="pay_online_description">سوف نتصل بك مرة أخرى لتأكيد الطلب. و بعد التأكيد سنبدأ في استلام الفواتير وتعبئتها وإصدارها وسنخطرك بالفاتورة الفعلية لنقلها.</string>
+    <string name="cash_payment_description">يذهب موظفو التوصيل إلى باب منزلك ، وتقوم بإعطاء المال حسب قيمة الطلب ورسوم التوصيل للموظفين.</string>
+    <string name="complete_order">اتمام الطلب</string>
+    <string name="order_total">order_total</string>
+    <string name="credit_card_number">**** **** **** </string>
+    <string name="add_new_address">اضافة عنوان جديد</string>
+    <string name="city">المدينه</string>
+    <string name="address_details">تفاصيل العنوان</string>
+    <string name="region">المنطقه</string>
+    <string name="address_name">اسم العنوان</string>
+    <string name="notes_about_address">ملاحظات حول هذا العنوان</string>
+    <string name="add_address">اضافة العنوان</string>
+    <string name="my_addresses">عناويني</string>
+    <string name="edit_address">تعديل العنوان</string>
+    <string name="update_address">تحديث العنوان</string>
+    <string name="delete_address">حذف العنوان</string>
+    <string name="city_name_error_message">من فضلك ادخل اسم المدينه</string>
+    <string name="region_name_error_message">من فضلك ادخل اسم المنطقه</string>
+    <string name="address_details_error_message">من فضلك ادخل تفاصيل العنوان</string>
+    <string name="address_name_error_message">من فضلك ادخل اسم العنوان</string>
+
+
 </resources>

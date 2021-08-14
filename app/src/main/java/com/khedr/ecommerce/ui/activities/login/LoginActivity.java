@@ -40,7 +40,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         viewModel.responseBody.observe(this, userApiResponse -> {
             if (userApiResponse.isStatus()) {
-                UserUtils.saveUserProfileToShared(userApiResponse, LoginActivity.this, null);
+                UserUtils.saveUserProfileToShared(userApiResponse, this, null);
                 finish();
             } else {
                 UiUtils.shortToast(this, userApiResponse.getMessage());

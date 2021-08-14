@@ -6,15 +6,21 @@ import android.content.SharedPreferences;
 import com.khedr.ecommerce.R;
 import com.khedr.ecommerce.pojo.user.UserApiResponse;
 
-public abstract class UserUtils {
+import java.util.Locale;
 
+public abstract class UserUtils {
+    static SharedPreferences pref;
 
     public static boolean isSignedIn(Context context) {
         return getPref(context).getBoolean(context.getString(R.string.pref_status), false);
     }
 
-    public synchronized static SharedPreferences getPref(Context context){
-        return context.getSharedPreferences("logined", 0);
+    public  static SharedPreferences getPref(Context context){
+        if (pref==null) {
+            pref = context.getSharedPreferences("logined", 0);
+        }
+        return pref;
+
     }
     public static String getUserToken(Context context){
 
@@ -35,9 +41,25 @@ public abstract class UserUtils {
         pen.putString(context.getString(R.string.pref_user_image), image);
         pen.putString(context.getString(R.string.pref_user_image_url), response.getData().getImage());
         pen.putInt(context.getString(R.string.pref_user_points), response.getData().getPoints());
-        pen.putString(context.getString(R.string.pref_user_credit), String.valueOf(response.getData().getCredit()));
+        pen.putString(context.getString(R.string.pref_user_credit), String.format(Locale.US,"%.2f",response.getData().getCredit()));
         pen.putString(context.getString(R.string.pref_user_token), response.getData().getToken());
 
         pen.apply();
+    }
+    public static String getUserName(Context context){
+        if (isSignedIn(context)) {
+            return getPref(context).getString(context.getString(R.string.pref_user_name), "null");
+        }
+        else {
+            return "You should login first";
+        }
+    }
+    public static String getUserPhone(Context context){
+        if (isSignedIn(context)) {
+            return getPref(context).getString(context.getString(R.string.pref_user_phone), "null");
+        }
+        else {
+            return "You should login first";
+        }
     }
 }

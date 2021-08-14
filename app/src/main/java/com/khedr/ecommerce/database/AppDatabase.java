@@ -43,5 +43,11 @@ public abstract class AppDatabase extends RoomDatabase {
     public void deleteDuplicates(){
          appDao().deleteDuplicates();
     }
+    public void updateProduct(int id,boolean inCart){
+        appDao().updateProduct(id,inCart);
+    }
+    public void updateAllProducts(){
+        appDao().updateAllProducts();
+    }
 
 }

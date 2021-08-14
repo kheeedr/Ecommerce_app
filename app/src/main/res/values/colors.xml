@@ -5,6 +5,8 @@
     <color name="natural1">#6A6A93</color>
     <color name="natural2">#BBAFFE</color>
     <color name="natural3">#C8C8D3</color>
+    <color name="natural4">#777790</color>
+
 
     <color name="et_back">#F0F1F5</color>
     <color name="teal_200">@color/primary</color>
