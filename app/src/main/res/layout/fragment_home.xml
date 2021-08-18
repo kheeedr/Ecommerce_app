@@ -6,6 +6,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        tools:ignore="UseCompoundDrawables"
         tools:context="com.khedr.ecommerce.ui.fragments.HomeFragment">
 
         <androidx.core.widget.NestedScrollView
@@ -255,7 +256,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_15sdp"
-                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_5sdp"
                         android:text="@string/best_brands"
                         android:textColor="@color/secondary"
                         android:textSize="@dimen/_14sdp"
@@ -283,7 +284,8 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:orientation="vertical"
-                                android:paddingTop="@dimen/_3sdp">
+                                android:paddingTop="@dimen/_3sdp"
+                                >
 
 
                                 <ImageView
@@ -449,7 +451,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_15sdp"
-                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_5sdp"
                         android:text="@string/recently_viewed"
                         android:textColor="@color/secondary"
                         android:textSize="@dimen/_14sdp"

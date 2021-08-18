@@ -7,15 +7,14 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 
-import com.khedr.ecommerce.pojo.ProductDB;
-import com.khedr.ecommerce.pojo.product.Product;
+import com.khedr.ecommerce.database.entities.ProductsEntity;
 
 import java.util.List;
 
 import io.reactivex.Completable;
 import io.reactivex.Single;
 
-@Database(entities ={ProductDB.class,Product.class} , version = 1)
+@Database(entities = {ProductsEntity.class}, version = 1)
 @TypeConverters(Converters.class)
 public abstract class AppDatabase extends RoomDatabase {
 
@@ -34,20 +33,24 @@ public abstract class AppDatabase extends RoomDatabase {
         return instance;
     }
 
-    public Completable insert(ProductDB product) {
+    public Completable insert(ProductsEntity product) {
         return appDao().insert(product);
     }
-    public Single<List<ProductDB>> getRecentProducts(){
+
+    public Single<List<ProductsEntity>> getRecentProducts() {
         return appDao().getRecentProducts();
     }
-    public void deleteDuplicates(){
-         appDao().deleteDuplicates();
+
+    public void deleteDuplicates() {
+        appDao().deleteDuplicates();
     }
-    public void updateProduct(int id,boolean inCart){
-        appDao().updateProduct(id,inCart);
+
+    public void updateProduct(int id, boolean inCart) {
+        appDao().updateProduct(id, inCart);
     }
-    public void updateAllProducts(){
-        appDao().updateAllProducts();
+
+    public void removeAllRecentProductFromCart() {
+        appDao().removeAllRecentProductFromCart();
     }
 
 }

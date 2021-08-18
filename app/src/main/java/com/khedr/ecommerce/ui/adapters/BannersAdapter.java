@@ -1,5 +1,6 @@
 package com.khedr.ecommerce.ui.adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -7,6 +8,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.khedr.ecommerce.R;
 import com.khedr.ecommerce.databinding.ItemBannerBinding;
 import com.khedr.ecommerce.pojo.homeapi.Banner;
 import com.khedr.ecommerce.utils.UiUtils;
@@ -25,6 +27,7 @@ public class BannersAdapter extends RecyclerView.Adapter<BannersAdapter.BannersV
         this.context = context;
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     public void setBannersList(List<Banner> bannersList) {
         this.bannersList = bannersList;
         notifyDataSetChanged();
@@ -42,7 +45,7 @@ public class BannersAdapter extends RecyclerView.Adapter<BannersAdapter.BannersV
     public void onBindViewHolder(@NonNull @NotNull BannersAdapter.BannersViewHolder holder, int position) {
 
         UiUtils.getImageViaUrl(context,bannersList.get(position).getImage(), holder.b.ivBannerItem, holder.b.progressBannerIv);
-
+        holder.b.getRoot().setOnClickListener(v ->UiUtils.shortToast(context,context.getString(R.string.coming_soon)));
     }
 
     @Override

@@ -1,5 +1,7 @@
 package com.khedr.ecommerce.ui.activities.MainPage;
 
+import static androidx.navigation.fragment.NavHostFragment.findNavController;
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -24,6 +26,7 @@ public class MainPageActivity extends AppCompatActivity implements View.OnClickL
     SharedPreferences pref;
 
     private static final String TAG = "MainPageActivity";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,18 +41,23 @@ public class MainPageActivity extends AppCompatActivity implements View.OnClickL
         b.bottomNavigationMainPage.setTranslationY(0);
         b.bottomNavigationMainPage.setTranslationX(0);
 
+
         NavController navController = Navigation.findNavController(this, R.id.fragmentContainerView);
         NavigationUI.setupWithNavController(b.bottomNavigationMainPage, navController);
 
         b.fabMainPage.setOnClickListener(this);
 
+        Intent intent=getIntent();
+        if (intent.getStringExtra(getString(R.string.intent_name)).equals(getString(R.string.intent_to_orders))){
+            b.bottomNavigationMainPage.setSelectedItemId(R.id.order_option);
+        }
 
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        Log.d(TAG,"mkhedr:onResume");
+        Log.d(TAG, "mkhedr:onResume");
 
     }
 

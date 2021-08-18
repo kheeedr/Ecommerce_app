@@ -185,6 +185,34 @@
     <string name="region_name_error_message">من فضلك ادخل اسم المنطقه</string>
     <string name="address_details_error_message">من فضلك ادخل تفاصيل العنوان</string>
     <string name="address_name_error_message">من فضلك ادخل اسم العنوان</string>
+    <string name="expanded_city">المدينه:</string>
+    <string name="expanded_region">المنطقه:</string>
+    <string name="expanded_details">التفاصيل:</string>
+    <string name="select_shipping_address">اختر عنوان التوصيل</string>
+    <string name="do_you_want_to_use_discount_points">هل تريد استخدام نقاط الخصم؟</string>
+    <string name="no">لا</string>
+    <string name="yes">نعم</string>
+    <string name="cost">التكلفه: </string>
+    <string name="vat">الضريبه: </string>
+    <string name="points_discount">خصم النقاط: </string>
+    <string name="voucher_discount">خصم القسائم: </string>
+    <string name="show_details">عرض التفاصيل</string>
+    <string name="hide_details">اخفاء التفاصيل</string>
+    <string name="do_you_want_to_use_a_discount_voucher">هل تريد استخدام قسيمة خصم؟</string>
+    <string name="enter_promo_code">ادخل كود الخصم</string>
+    <string name="check">تاكيد</string>
+    <string name="shipping_expenses_free">مصاريف الشحن: مجاناً</string>
+    <string name="empty_promo_code">يجب الا يكون كود الخصم فارغا</string>
+    <string name="valided_promo_code">كود خصم صالح ✔ </string>
+    <string name="please_select_payment_method">اختر طريقة الدفع اولا </string>
+    <string name="please_select_shipping_address">اختر عنوان التوصيل اولا </string>
+    <string name="order_successful">تم الطلب بنجاح</string>
+    <string name="order_successful2">تم طلب المنتجات بنجاح!</string>
+    <string name="your_order_will_be_delivered_on_time_n_thank_you">سيتم توصيل  طلبك ف المعاد المحدد \n شكرا لك </string>
+    <string name="view_orders">عرض الطلبات</string>
+    <string name="continue_shopping">الاستمرار ف التسوق</string>
+    <string name="intent_name">intent_name</string>
+    <string name="intent_to_orders">to_orders</string>
 
 
 </resources>

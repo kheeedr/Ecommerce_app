@@ -16,7 +16,7 @@ import com.khedr.ecommerce.R;
 import com.khedr.ecommerce.databinding.ActivityCartBinding;
 import com.khedr.ecommerce.pojo.product.cart.get.GetCartItems;
 import com.khedr.ecommerce.ui.activities.MainPage.MainPageActivity;
-import com.khedr.ecommerce.ui.activities.order.OrderActivity;
+import com.khedr.ecommerce.ui.activities.order.AddOrderActivity;
 import com.khedr.ecommerce.ui.activities.product.ProductDetailsActivity;
 import com.khedr.ecommerce.ui.adapters.CartAdapter;
 import com.khedr.ecommerce.utils.UiUtils;
@@ -79,7 +79,7 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
         if (v == b.btCartBack) {
             onBackPressed();
         } else if (v == b.btCartShopNow) {
-            IntentToMainPage();
+            intentToMainPage();
         } else if (v == b.includedAlertDialog.actionCancel) {
             hideDeletingDialog();
         } else if (v == b.includedAlertDialog.layoutAlertDialogParent) {
@@ -95,7 +95,7 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
             UiUtils.shortToast(this, getString(R.string.wait));
         } else if (v == b.btCartOrderNow) {
             if (UserUtils.isSignedIn(this)){
-                Intent intent=new Intent(this, OrderActivity.class);
+                Intent intent=new Intent(this, AddOrderActivity.class);
                 intent.putExtra(getString(R.string.order_total),(int) Math.ceil(total));
                 startActivity(intent);
             }else {
@@ -148,7 +148,7 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
             if (getCartResponse.isStatus()) {
                 ArrayList<GetCartItems> cartItems = getCartResponse.getData().getCart_items();
                 total = getCartResponse.getData().getTotal();
-                b.tvCartTotal.setText(getString(R.string.total) + (int) Math.ceil(total) + " EGP");
+                b.tvCartTotal.setText(getString(R.string.total) +" "+ (int) Math.ceil(total) + " EGP");
                 if (cartItems.isEmpty()) {
                     b.layoutCartEmpty.setVisibility(View.VISIBLE);
                     b.layoutCartFilled.setVisibility(View.GONE);
@@ -169,7 +169,7 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
 
             if (deleteProductResponse.isStatus()) {
                 total = deleteProductResponse.getData().getTotal();
-                b.tvCartTotal.setText(getString(R.string.total) + (int) Math.ceil(total) + " EGP");
+                b.tvCartTotal.setText(getString(R.string.total) +" "+ (int) Math.ceil(total) + " EGP");
                 List<GetCartItems> items = cartAdapter.getList();
                 items.remove(deletedPosition);
                 cartAdapter.setCartItems(items);
@@ -186,7 +186,7 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
         cartViewModel.updateQuantityResponseMLD.observe(this, updateQuantityResponse -> {
             if (updateQuantityResponse.isStatus()) {
                 total = updateQuantityResponse.getData().getTotal();
-                b.tvCartTotal.setText(getString(R.string.total) + (int) Math.ceil(total) + " EGP");
+                b.tvCartTotal.setText(getString(R.string.total) +" "+ (int) Math.ceil(total) + " EGP");
                 List<GetCartItems> items = cartAdapter.getList();
                 for (GetCartItems item : items) {
                     if (updateQuantityResponse.getData().getCart().getId() == item.getId()) {
@@ -205,8 +205,9 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
 
     // Ui control Functions
 
-    private void IntentToMainPage() {
+    private void intentToMainPage() {
         Intent intent = new Intent(CartActivity.this, MainPageActivity.class);
+        intent .putExtra(getString(R.string.intent_name),"null");
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         finishAffinity();
         startActivity(intent);

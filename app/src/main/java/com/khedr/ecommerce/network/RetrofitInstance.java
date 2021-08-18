@@ -10,6 +10,8 @@ import com.khedr.ecommerce.pojo.categories.item.GetCategoryItemsResponse;
 import com.khedr.ecommerce.pojo.homeapi.HomePageApiResponse;
 import com.khedr.ecommerce.pojo.order.AddOrderRequest;
 import com.khedr.ecommerce.pojo.order.AddOrderResponse;
+import com.khedr.ecommerce.pojo.order.EstimateOrderRequest;
+import com.khedr.ecommerce.pojo.order.EstimateOrderResponse;
 import com.khedr.ecommerce.pojo.product.ProductDetailsResponse;
 import com.khedr.ecommerce.pojo.product.ProductId;
 import com.khedr.ecommerce.pojo.product.cart.delete.DeleteFromCartResponse;
@@ -21,6 +23,8 @@ import com.khedr.ecommerce.pojo.product.favorites.get.GetFavoritesResponse;
 import com.khedr.ecommerce.pojo.product.favorites.post.PostFavoriteResponse;
 import com.khedr.ecommerce.pojo.product.search.SearchRequest;
 import com.khedr.ecommerce.pojo.product.search.SearchResponse;
+import com.khedr.ecommerce.pojo.promocode.PromoCodeRequest;
+import com.khedr.ecommerce.pojo.promocode.PromoCodeResponse;
 import com.khedr.ecommerce.pojo.user.TokenModel;
 import com.khedr.ecommerce.pojo.user.UserApiResponse;
 import com.khedr.ecommerce.pojo.user.UserDataForLoginRequest;
@@ -134,6 +138,10 @@ public final class RetrofitInstance {
         return apiInterface.addOrder(getLang(context), getToken(context), orderRequest);
     }
 
+    public Single<EstimateOrderResponse> estimateOrder(Context context, EstimateOrderRequest estimateOrderRequest) {
+        return apiInterface.estimateOrder(getLang(context), getToken(context), estimateOrderRequest);
+    }
+
     public Single<GetAddressesResponse> getAddresses(Context context) {
         return apiInterface.getAddresses(getLang(context), getToken(context));
     }
@@ -150,4 +158,8 @@ public final class RetrofitInstance {
         return apiInterface.deleteAddress(getLang(context), getToken(context), id);
     }
 
+    // validate promo code
+    public Single<PromoCodeResponse> validatePromoCode(Context context, PromoCodeRequest promoCodeRequest){
+        return apiInterface.validatePromoCode(getLang(context), getToken(context),promoCodeRequest);
+    }
 }

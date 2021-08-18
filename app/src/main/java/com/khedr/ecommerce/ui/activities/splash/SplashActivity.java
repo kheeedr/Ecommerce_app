@@ -41,7 +41,8 @@ public class SplashActivity extends AppCompatActivity implements View.OnClickLis
             if (homePageApiResponse.isStatus()) {
                 homeResponse = homePageApiResponse.getData();
                 Collections.reverse(homeResponse.getProducts());
-                startActivity(new Intent(SplashActivity.this, MainPageActivity.class));
+                startActivity(new Intent(SplashActivity.this, MainPageActivity.class)
+                        .putExtra(getString(R.string.intent_name),"null"));
                 finish();
 
             } else {

@@ -9,7 +9,11 @@
         android:id="@+id/home_option"
         android:name="com.khedr.ecommerce.ui.fragments.HomeFragment"
         android:label="fragment_home2"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_home_option_to_order_option"
+            app:destination="@id/order_option" />
+    </fragment>
     <fragment
         android:id="@+id/notifications_option"
         android:name="com.khedr.ecommerce.ui.fragments.NotificationsFragment"

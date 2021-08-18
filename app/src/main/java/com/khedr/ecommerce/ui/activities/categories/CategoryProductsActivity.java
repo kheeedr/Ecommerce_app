@@ -7,6 +7,7 @@ package com.khedr.ecommerce.ui.activities.categories;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;

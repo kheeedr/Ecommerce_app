@@ -12,7 +12,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.khedr.ecommerce.database.AppDatabase;
-import com.khedr.ecommerce.pojo.ProductDB;
+import com.khedr.ecommerce.database.entities.ProductsEntity;
 import com.khedr.ecommerce.pojo.product.Product;
 
 import org.jetbrains.annotations.NotNull;
@@ -33,7 +33,7 @@ public class ProductDetailsViewModel extends ViewModel {
 
 
     public void addRecentProduct(Context context, Product product) {
-        AppDatabase.getInstance(context).insert(new ProductDB(product))
+        AppDatabase.getInstance(context).insert(new ProductsEntity(product))
                 .subscribeOn(Schedulers.computation()).observeOn(AndroidSchedulers.mainThread()).subscribe(new CompletableObserver() {
             @Override
             public void onSubscribe(@NotNull Disposable d) {
@@ -57,16 +57,16 @@ public class ProductDetailsViewModel extends ViewModel {
     public void getRecentProducts(Context context) {
 
         AppDatabase.getInstance(context).getRecentProducts().subscribeOn(Schedulers.computation()).observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new SingleObserver<List<ProductDB>>() {
+                .subscribe(new SingleObserver<List<ProductsEntity>>() {
                     @Override
                     public void onSubscribe(@NotNull Disposable d) {
 
                     }
 
                     @Override
-                    public void onSuccess(@NotNull List<ProductDB> productDBS) {
+                    public void onSuccess(@NotNull List<ProductsEntity> productDBS) {
                         ArrayList<Product> products = new ArrayList<>();
-                        for (ProductDB item : productDBS) {
+                        for (ProductsEntity item : productDBS) {
                             products.add(0, item.getProduct());
                         }
 

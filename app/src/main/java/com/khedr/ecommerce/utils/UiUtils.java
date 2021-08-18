@@ -59,13 +59,13 @@ public abstract class UiUtils {
         }, zoomOut.getDuration());
 
     }
-
     public static void animZoomIn(Context context, View view) {
         view.setVisibility(View.VISIBLE);
         Animation zoomIn = AnimationUtils.loadAnimation(context, R.anim.zoomin);
         view.startAnimation(zoomIn);
         new Handler().postDelayed(view::clearAnimation, zoomIn.getDuration());
     }
+
 
     public static void animFadeIn(Context context, View view) {
         view.setVisibility(View.VISIBLE);

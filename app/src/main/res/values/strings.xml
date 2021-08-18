@@ -184,5 +184,33 @@
     <string name="region_name_error_message">please insert region name</string>
     <string name="address_details_error_message">please insert address details</string>
     <string name="address_name_error_message">please insert address name</string>
+    <string name="expanded_city">City:</string>
+    <string name="expanded_region">Region:</string>
+    <string name="expanded_details">Details:</string>
+    <string name="select_shipping_address">Select shipping Address</string>
+    <string name="do_you_want_to_use_discount_points">Do you want to use discount points?</string>
+    <string name="no">No</string>
+    <string name="yes">Yes</string>
+    <string name="cost">Cost:</string>
+    <string name="vat">Vat:</string>
+    <string name="points_discount">Points discount:</string>
+    <string name="voucher_discount">Voucher discount:</string>
+    <string name="show_details">Show details</string>
+    <string name="hide_details">Hide details</string>
+    <string name="do_you_want_to_use_a_discount_voucher">Do you want to use a discount voucher?</string>
+    <string name="enter_promo_code">Enter promo code</string>
+    <string name="check">Check</string>
+    <string name="shipping_expenses_free">Shipping expenses: Free</string>
+    <string name="empty_promo_code">promo code shouldn\'t be empty</string>
+    <string name="valided_promo_code">Valid promo code ✔</string>
+    <string name="please_select_payment_method">Please select payment method</string>
+    <string name="please_select_shipping_address">Please select a shipping address</string>
+    <string name="order_successful">Order successful</string>
+    <string name="order_successful2">Order successful!</string>
+    <string name="your_order_will_be_delivered_on_time_n_thank_you">Your order will be delivered on time.\n Thank you!</string>
+    <string name="view_orders">View orders</string>
+    <string name="continue_shopping">Continue shopping</string>
+    <string name="intent_name">intent_name</string>
+    <string name="intent_to_orders">to_orders</string>
 
 </resources>

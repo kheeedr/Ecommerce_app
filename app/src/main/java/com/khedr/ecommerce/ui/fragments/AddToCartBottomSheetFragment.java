@@ -49,11 +49,12 @@ public class AddToCartBottomSheetFragment extends BottomSheetDialogFragment impl
     public void setupDialog(@NonNull @NotNull Dialog dialog, int style) {
         super.setupDialog(dialog, style);
         b = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.fragment_add_to_cart, null, false);
+
         dialog.setContentView(b.getRoot());
-        productViewModel=new ViewModelProvider(this,ViewModelProvider.AndroidViewModelFactory
+        productViewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory
                 .getInstance(requireActivity().getApplication())).get(ProductDetailsViewModel.class);
 
-        productViewModel.addRecentProduct(requireContext(),product);
+        productViewModel.addRecentProduct(requireContext(), product);
 
         setView();
         b.actionCancelAddToCart.setOnClickListener(this);

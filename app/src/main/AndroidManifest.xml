@@ -12,10 +12,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Ecommerce">
         <activity
+            android:name=".ui.activities.order.OrderCompletedActivity"
+            android:exported="true" />
+        <activity
             android:name=".ui.activities.Address.AddAddressActivity"
             android:exported="true" />
         <activity
-            android:name=".ui.activities.order.OrderActivity"
+            android:name=".ui.activities.order.AddOrderActivity"
             android:exported="true" />
         <activity
             android:name=".ui.activities.language.LanguageActivity"

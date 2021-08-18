@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_selectAddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="@dimen/_3sdp"
+        android:background="@drawable/et_stroke">
+
+        <LinearLayout
+            android:id="@+id/layout_selectAddress_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <ImageView
+                android:id="@+id/iv_selectAddress_expand"
+                android:layout_width="@dimen/_40sdp"
+                android:layout_height="@dimen/_40sdp"
+                android:contentDescription="@string/todo"
+                android:padding="@dimen/_12sdp"
+                android:rotation="90"
+                android:src="@drawable/ic_expand_arrow"
+                android:visibility="visible" />
+
+            <TextView
+                android:id="@+id/tv_selectAddress_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/_7sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_weight="1"
+                android:paddingHorizontal="@dimen/_5sdp"
+                android:text="@string/my_addresses"
+                android:textColor="@color/secondary"
+                android:textSize="@dimen/_15sdp" />
+
+            <ImageView
+                android:id="@+id/iv_selectAddress_selected"
+                android:layout_width="@dimen/_40sdp"
+                android:layout_height="@dimen/_40sdp"
+                android:contentDescription="@string/todo"
+                android:padding="@dimen/_12sdp"
+                android:src="@drawable/ic_empty_circle"
+                android:visibility="visible" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/expandable_layout_select_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="@dimen/_40sdp"
+            android:paddingBottom="@dimen/_5sdp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layout_selectAddress_name">
+
+            <TextView
+                android:id="@+id/tv_expanded_city_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/_3sdp"
+                android:text="@string/expanded_city" />
+
+            <TextView
+                android:id="@+id/tv_expanded_region_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/_3sdp"
+                android:text="@string/expanded_region" />
+
+            <TextView
+                android:id="@+id/tv_expanded_address_details"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/_3sdp"
+                android:text="@string/expanded_details" />
+
+
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

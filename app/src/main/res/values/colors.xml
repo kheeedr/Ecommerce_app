@@ -11,6 +11,8 @@
     <color name="et_back">#F0F1F5</color>
     <color name="teal_200">@color/primary</color>
     <color name="black">#FF000000</color>
+    <color name="red">#FF0000</color>
+    <color name="green">#64DD17</color>
     <color name="white">#FFFFFF</color>
     <color name="trans">#00FFFFFF</color>
     <color name="mtrl_textinput_default_box_stroke_color" tools:override="true">#00FFFFFF</color>

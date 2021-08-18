@@ -4,44 +4,31 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_address_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/et_stroke"
-        android:layout_marginVertical="@dimen/_3sdp">
+        android:layout_marginVertical="@dimen/_3sdp"
+        android:background="@drawable/et_stroke">
 
-        <LinearLayout
-            android:id="@+id/layout_address"
-            android:layout_width="match_parent"
+
+        <TextView
+            android:id="@+id/tv_address_name"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
+            android:layout_marginHorizontal="@dimen/_10sdp"
+            android:layout_marginVertical="@dimen/_7sdp"
+            android:layout_weight="1"
+            android:paddingHorizontal="@dimen/_5sdp"
+            android:text="@string/my_addresses"
+            android:textColor="@color/secondary"
+            android:textSize="@dimen/_15sdp"
+
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/tv_address_name"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/_10sdp"
-                android:layout_marginVertical="@dimen/_7sdp"
-                android:paddingHorizontal="@dimen/_5sdp"
-                android:layout_weight="1"
-                android:text="@string/my_addresses"
-                android:textColor="@color/secondary"
-                android:textSize="@dimen/_15sdp" />
 
-            <ImageView
-                android:id="@+id/iv_address_selected"
-                android:layout_width="@dimen/_40sdp"
-                android:layout_height="@dimen/_40sdp"
-                android:contentDescription="@string/todo"
-                android:padding="@dimen/_12sdp"
-                android:src="@drawable/ic_true"
-                android:visibility="gone"
-                />
-        </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

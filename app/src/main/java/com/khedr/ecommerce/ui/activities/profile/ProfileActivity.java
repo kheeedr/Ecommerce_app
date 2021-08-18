@@ -15,18 +15,17 @@ import com.khedr.ecommerce.database.Converters;
 import com.khedr.ecommerce.databinding.ActivityProfileBinding;
 import com.khedr.ecommerce.ui.activities.Address.AddAddressActivity;
 import com.khedr.ecommerce.ui.activities.Address.AddressViewModel;
-import com.khedr.ecommerce.ui.activities.product.ProductDetailsActivity;
 import com.khedr.ecommerce.ui.activities.updateProfile.UpdateProfileActivity;
-import com.khedr.ecommerce.ui.adapters.AddressesAdapter;
+import com.khedr.ecommerce.ui.adapters.ShowAddressesAdapter;
 import com.khedr.ecommerce.utils.UiUtils;
 import com.khedr.ecommerce.utils.UserUtils;
 
-public class ProfileActivity extends AppCompatActivity implements View.OnClickListener, AddressesAdapter.OnItemClickListener {
+public class ProfileActivity extends AppCompatActivity implements View.OnClickListener, ShowAddressesAdapter.OnItemClickListener {
     ActivityProfileBinding b;
     SharedPreferences pref;
     ProfileViewModel profileViewModel;
     AddressViewModel addressViewModel;
-    AddressesAdapter addressesAdapter;
+    ShowAddressesAdapter addressesAdapter;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -37,7 +36,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
         profileViewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(this.getApplication())).get(ProfileViewModel.class);
         addressViewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(this.getApplication())).get(AddressViewModel.class);
-        addressesAdapter = new AddressesAdapter(this);
+        addressesAdapter = new ShowAddressesAdapter(this);
 
         b.btProfileLogout.setOnClickListener(this);
         b.btProfileBack.setOnClickListener(this);

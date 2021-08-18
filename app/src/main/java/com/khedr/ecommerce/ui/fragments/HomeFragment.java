@@ -195,7 +195,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Rece
                         cartViewModel
                         , recentProductsAdapter.getProductsList().get(position)
                         , productsViewHolder.b.ivProduct.getDrawable());
+
         fragment.show(requireActivity().getSupportFragmentManager(), "TAG");
+
         adapterPosition = position;
     }
 

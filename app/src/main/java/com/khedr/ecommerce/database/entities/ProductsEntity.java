@@ -3,7 +3,7 @@
  * Created by Mohamed Khedr.
  */
 
-package com.khedr.ecommerce.pojo;
+package com.khedr.ecommerce.database.entities;
 
 import androidx.room.Entity;
 import androidx.room.Ignore;
@@ -15,8 +15,8 @@ import java.util.ArrayList;
 
 
 @Entity(tableName = "products_table")
-public class ProductDB {
-    public ProductDB() {
+public class ProductsEntity {
+    public ProductsEntity() {
     }
 
     @PrimaryKey(autoGenerate = true)
@@ -35,7 +35,7 @@ public class ProductDB {
     public boolean in_favorites;
     public boolean in_cart;
 
-    public ProductDB(Product product) {
+    public ProductsEntity(Product product) {
         id = product.getId();
         price = product.getPrice();
         old_price = product.getOld_price();

@@ -9,6 +9,8 @@ import com.khedr.ecommerce.pojo.categories.item.GetCategoryItemsResponse;
 import com.khedr.ecommerce.pojo.homeapi.HomePageApiResponse;
 import com.khedr.ecommerce.pojo.order.AddOrderRequest;
 import com.khedr.ecommerce.pojo.order.AddOrderResponse;
+import com.khedr.ecommerce.pojo.order.EstimateOrderRequest;
+import com.khedr.ecommerce.pojo.order.EstimateOrderResponse;
 import com.khedr.ecommerce.pojo.product.ProductDetailsResponse;
 import com.khedr.ecommerce.pojo.product.ProductId;
 import com.khedr.ecommerce.pojo.product.cart.delete.DeleteFromCartResponse;
@@ -20,6 +22,8 @@ import com.khedr.ecommerce.pojo.product.favorites.get.GetFavoritesResponse;
 import com.khedr.ecommerce.pojo.product.favorites.post.PostFavoriteResponse;
 import com.khedr.ecommerce.pojo.product.search.SearchRequest;
 import com.khedr.ecommerce.pojo.product.search.SearchResponse;
+import com.khedr.ecommerce.pojo.promocode.PromoCodeRequest;
+import com.khedr.ecommerce.pojo.promocode.PromoCodeResponse;
 import com.khedr.ecommerce.pojo.user.TokenModel;
 import com.khedr.ecommerce.pojo.user.UserApiResponse;
 import com.khedr.ecommerce.pojo.user.UserDataForLoginRequest;
@@ -123,6 +127,12 @@ public interface ApiInterface {
     Single<AddOrderResponse> addOrder(@Header("lang") String lang, @Header("Authorization") String token
             , @Body AddOrderRequest orderRequest);
 
+    // estimate order
+    @Headers({"Content-Type:application/json"})
+    @POST("estimate-order")
+    Single<EstimateOrderResponse> estimateOrder(@Header("lang") String lang, @Header("Authorization") String token
+            , @Body EstimateOrderRequest estimateOrderRequest);
+
     // get Addresses
     @Headers({"Content-Type:application/json"})
     @GET("addresses")
@@ -143,5 +153,12 @@ public interface ApiInterface {
     // delete Address
     @Headers({"Content-Type:application/json"})
     @DELETE("addresses/{id}")
-    Single<AddAddressResponse> deleteAddress(@Header("lang") String lang, @Header("Authorization") String token, @Path("id") int id );
+    Single<AddAddressResponse> deleteAddress(@Header("lang") String lang, @Header("Authorization") String token, @Path("id") int id);
+
+    // validate promo code
+    @Headers({"Content-Type:application/json"})
+    @POST("promo-codes/validate")
+    Single<PromoCodeResponse> validatePromoCode(@Header("lang") String lang, @Header("Authorization") String token
+            , @Body PromoCodeRequest promoCodeRequest);
+
 }

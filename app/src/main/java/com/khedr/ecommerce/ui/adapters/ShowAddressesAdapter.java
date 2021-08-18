@@ -17,7 +17,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AddressesAdapter extends RecyclerView.Adapter<AddressesAdapter.AddressesViewHolder> {
+public class ShowAddressesAdapter extends RecyclerView.Adapter<ShowAddressesAdapter.AddressesViewHolder> {
     Context context;
 
     public List<GetAddressData> getAddressesList() {
@@ -27,14 +27,14 @@ public class AddressesAdapter extends RecyclerView.Adapter<AddressesAdapter.Addr
     List<GetAddressData> AddressesList = new ArrayList<>();
     OnItemClickListener onItemClickListener;
 
-    public AddressesAdapter(Context context) {
+    public ShowAddressesAdapter(Context context) {
         this.context = context;
         this.onItemClickListener = (OnItemClickListener)context;
     }
 
     @SuppressLint("SetTextI18n")
     @Override
-    public void onBindViewHolder(@NonNull @NotNull AddressesAdapter.AddressesViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull @NotNull ShowAddressesAdapter.AddressesViewHolder holder, int position) {
         holder.b.tvAddressName.setText(AddressesList.get(position).getName());
 
 
@@ -68,7 +68,7 @@ public class AddressesAdapter extends RecyclerView.Adapter<AddressesAdapter.Addr
             super(b.getRoot());
             this.b = b;
             this.onItemClickListener = onItemClickListener;
-            b.layoutAddress.setOnClickListener(this);
+            b.layoutAddressName.setOnClickListener(this);
         }
 
 

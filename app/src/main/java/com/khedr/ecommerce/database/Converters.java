@@ -9,22 +9,20 @@ import androidx.room.TypeConverter;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.khedr.ecommerce.pojo.ProductDB;
+import com.khedr.ecommerce.database.entities.ProductsEntity;
 import com.khedr.ecommerce.pojo.product.Product;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
-import retrofit2.converter.gson.GsonConverterFactory;
-
 public class Converters {
     @TypeConverter
-    public String fromProductDBToString(ProductDB product){
+    public String fromProductDBToString(ProductsEntity product){
         return new Gson().toJson(product);
     }
     @TypeConverter
-    public ProductDB fromStringToProductDB(String product){
-        return new Gson().fromJson(product,ProductDB.class);
+    public ProductsEntity fromStringToProductDB(String product){
+        return new Gson().fromJson(product, ProductsEntity.class);
     }
     @TypeConverter
     public String fromStringArrayListToString(ArrayList<String> arrayList){
