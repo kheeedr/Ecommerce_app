@@ -14,7 +14,7 @@
     <string name="login">Login</string>
     <string name="new_user_sign_up">New user? Sign Up</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="sign_out">sign out</string>
+    <string name="sign_out">Sign out</string>
     <string name="pref_status">status</string>
     <string name="pref_user_name">pref_use_name</string>
     <string name="pref_user_token">pref_user_token</string>
@@ -212,5 +212,11 @@
     <string name="continue_shopping">Continue shopping</string>
     <string name="intent_name">intent_name</string>
     <string name="intent_to_orders">to_orders</string>
+    <string name="order_number">Order no:</string>
+    <string name="status">Status:</string>
+    <string name="payment_method">Payment method:</string>
+    <string name="order_details">Order details</string>
+    <string name="cancel_order">Cancel order</string>
+    <string name="order_canceled_successfully">Order canceled successfully</string>
 
 </resources>

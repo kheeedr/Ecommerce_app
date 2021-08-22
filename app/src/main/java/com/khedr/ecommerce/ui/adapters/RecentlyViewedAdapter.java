@@ -17,7 +17,6 @@ import com.khedr.ecommerce.utils.UiUtils;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class RecentlyViewedAdapter extends RecyclerView.Adapter<RecentlyViewedAdapter.ProductsViewHolder> {
@@ -26,12 +25,6 @@ public class RecentlyViewedAdapter extends RecyclerView.Adapter<RecentlyViewedAd
     Context context;
     OnItemClickListener mOnItemClickListener;
 
-//    public RecentlyViewedAdapter(Context context) {
-//        this.context = context;
-//        this.mOnItemClickListener=(OnItemClickListener)context;
-//        pref = UserUtils.getPref(context);
-//
-//    }
     public RecentlyViewedAdapter(Context context, OnItemClickListener mOnItemClickListener) {
         this.context = context;
         this.mOnItemClickListener=mOnItemClickListener;
@@ -43,7 +36,7 @@ public class RecentlyViewedAdapter extends RecyclerView.Adapter<RecentlyViewedAd
     @Override
     public RecentlyViewedAdapter.ProductsViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
         return new ProductsViewHolder(ItemHorizintalProductBinding
-                .inflate(LayoutInflater.from(parent.getContext()), parent, false),mOnItemClickListener);
+                .inflate(LayoutInflater.from(parent.getContext()), parent, false), mOnItemClickListener);
     }
 
     @SuppressLint("SetTextI18n")
@@ -68,6 +61,7 @@ public class RecentlyViewedAdapter extends RecyclerView.Adapter<RecentlyViewedAd
         }
         holder.b.tvProductName.setText(productsList.get(position).getName());
 
+
     }
 
     @Override
@@ -79,6 +73,7 @@ public class RecentlyViewedAdapter extends RecyclerView.Adapter<RecentlyViewedAd
         return productsList;
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     public void setProductsList(ArrayList<Product> productsList) {
         this.productsList = productsList;
         notifyDataSetChanged();
@@ -88,25 +83,28 @@ public class RecentlyViewedAdapter extends RecyclerView.Adapter<RecentlyViewedAd
 
         public ItemHorizintalProductBinding b;
         OnItemClickListener onItemClickListener;
-        public ProductsViewHolder(@NonNull @NotNull ItemHorizintalProductBinding b,OnItemClickListener onItemClickListener) {
+
+        public ProductsViewHolder(@NonNull @NotNull ItemHorizintalProductBinding b, OnItemClickListener onItemClickListener) {
             super(b.getRoot());
             this.b = b;
-            this.onItemClickListener=onItemClickListener;
+            this.onItemClickListener = onItemClickListener;
             b.itemProductParent.setOnClickListener(this);
             b.layoutProductToCart.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
-            if (v==b.itemProductParent){
+            if (v == b.itemProductParent) {
                 onItemClickListener.onParentClicked(getAdapterPosition());
-            }else if (v==b.layoutProductToCart){
-                onItemClickListener.onItemAddToCartClicked(getAdapterPosition(),this);
+            } else if (v == b.layoutProductToCart) {
+                onItemClickListener.onItemAddToCartClicked(getAdapterPosition(), this);
             }
         }
     }
-     public interface OnItemClickListener{
+
+    public interface OnItemClickListener {
         void onParentClicked(int position);
-        void onItemAddToCartClicked(int position,ProductsViewHolder productsViewHolder);
-     }
+
+        void onItemAddToCartClicked(int position, ProductsViewHolder productsViewHolder);
+    }
 }

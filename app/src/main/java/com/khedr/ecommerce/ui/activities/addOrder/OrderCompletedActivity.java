@@ -3,7 +3,7 @@
  * Created by Mohamed Khedr.
  */
 
-package com.khedr.ecommerce.ui.activities.order;
+package com.khedr.ecommerce.ui.activities.addOrder;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;

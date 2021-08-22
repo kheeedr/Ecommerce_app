@@ -1,4 +1,9 @@
-package com.khedr.ecommerce.ui.fragments;
+/*
+ * Copyright (c) 2021.
+ * Created by Mohamed Khedr.
+ */
+
+package com.khedr.ecommerce.ui.fragments.account;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -8,17 +13,16 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ScrollView;
 
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.khedr.ecommerce.R;
+import com.khedr.ecommerce.database.AppDatabase;
 import com.khedr.ecommerce.database.Converters;
 import com.khedr.ecommerce.databinding.FragmentAccountBinding;
-import com.khedr.ecommerce.pojo.user.UserApiResponse;
-import com.khedr.ecommerce.ui.activities.MainPage.MainPageActivity;
 import com.khedr.ecommerce.ui.activities.aboutUs.AboutUsActivity;
 import com.khedr.ecommerce.ui.activities.contactUs.ContactUsActivity;
 import com.khedr.ecommerce.ui.activities.language.LanguageActivity;
@@ -36,7 +40,7 @@ public class AccountFragment extends Fragment implements View.OnClickListener {
     FragmentAccountBinding b;
     ProfileViewModel profileViewModel;
     SharedPreferences pref;
-
+    AccountFragmentViewModel accountViewModel;
     private static final String TAG = "AccountFragment";
 
     public AccountFragment() {
@@ -48,8 +52,12 @@ public class AccountFragment extends Fragment implements View.OnClickListener {
     public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         b = DataBindingUtil.inflate(inflater, R.layout.fragment_account, container, false);
 
+
         profileViewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory
                 .getInstance(requireActivity().getApplication())).get(ProfileViewModel.class);
+        accountViewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory
+                .getInstance(requireActivity().getApplication())).get(AccountFragmentViewModel.class);
+
         pref = UserUtils.getPref(requireContext());
 
 
@@ -59,22 +67,62 @@ public class AccountFragment extends Fragment implements View.OnClickListener {
         b.layoutAccountToLanguage.setOnClickListener(this);
         b.btAccountBack.setOnClickListener(this);
         b.layoutAccountToFaq.setOnClickListener(this);
+        b.btLogout.setOnClickListener(this);
 
 
-        observeOnUserDataChanged();
+        observers();
+        progressbar();
 
         return b.getRoot();
     }
 
-    private void observeOnUserDataChanged() {
+
+    private void observers() {
 
         profileViewModel.profileResponseMLD.observe(requireActivity(), response -> {
             if (getActivity() != null) {
                 if (response.isStatus()) {
+
                     refreshView();
+
                 } else {
                     UiUtils.shortToast(requireContext(), response.getMessage());
                 }
+            }
+        });
+
+        accountViewModel.logoutResponseMLD.observe(requireActivity(), userApiResponse -> {
+
+            if (userApiResponse.isStatus()) {
+                AppDatabase.getInstance(requireContext()).removeAllRecentProduct();
+                SharedPreferences.Editor pen = pref.edit();
+                pen.putBoolean(getString(R.string.pref_status), false);
+                pen.putBoolean(getString(R.string.pref_is_image_ready), false);
+                pen.putString(getString(R.string.pref_user_token), "");
+                pen.apply();
+
+                UiUtils.shortToast(requireContext(), userApiResponse.getMessage());
+                b.scrollAccount.post(() -> b.scrollAccount.smoothScrollTo(0, (b.layoutAccountToProfile.getTop())));
+                refreshView();
+            } else {
+                UiUtils.shortToast(requireContext(), userApiResponse.getMessage());
+            }
+        });
+
+    }
+
+    private void progressbar() {
+
+        accountViewModel.isLoading.observe(requireActivity(), aBoolean -> {
+            if (aBoolean) {
+                b.btLogout.setVisibility(View.GONE);
+                b.progressLogout.setVisibility(View.VISIBLE);
+                UiUtils.animJumpAndFade(requireContext(), b.progressLogout);
+
+            } else {
+                b.btLogout.setVisibility(View.VISIBLE);
+                b.progressLogout.clearAnimation();
+                b.progressLogout.setVisibility(View.INVISIBLE);
             }
         });
     }
@@ -110,6 +158,8 @@ public class AccountFragment extends Fragment implements View.OnClickListener {
             requireActivity().onBackPressed();
         } else if (v == b.layoutAccountToFaq) {
             UiUtils.shortToast(requireContext(), getString(R.string.coming_soon));
+        } else if (v == b.btLogout) {
+            accountViewModel.logOut(requireContext());
         }
 
 
@@ -145,7 +195,8 @@ public class AccountFragment extends Fragment implements View.OnClickListener {
             //update referral code
             int code = pref.getInt(getString(R.string.pref_user_id), 0);
             b.tvReferralCode.setText("000" + code);
-
+            // make logout button gone
+            b.layoutLogoutButton.setVisibility(View.VISIBLE);
         } else {
             // if not signed in
             b.tvAccountUsername.setText(getString(R.string.login_now));
@@ -155,6 +206,8 @@ public class AccountFragment extends Fragment implements View.OnClickListener {
             b.tvAccountNumberOfPoints.setText("0");
             b.tvAccountNumberOfCash.setText("0.00");
             b.tvReferralCode.setText("0000000");
+            // make logout button visible
+            b.layoutLogoutButton.setVisibility(View.GONE);
         }
 
     }

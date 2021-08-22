@@ -1,10 +1,13 @@
 package com.khedr.ecommerce.ui.activities.login;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Pair;
 import android.util.Patterns;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -35,9 +38,28 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         b.btLoginBack.setOnClickListener(this);
 
         handlingInputLayoutError();
+        manageKeyboardButtonDone();
 
         manageProgressbar();
 
+        observers();
+
+    }
+
+
+    @Override
+    public void onClick(View v) {
+
+        if (v == b.btToSignup) {
+            startActivity(new Intent(LoginActivity.this, SignUpActivity.class));
+        } else if (v == b.btLogin) {
+            validateAndPostUser();
+        } else if (v == b.btLoginBack) {
+            onBackPressed();
+        }
+    }
+
+    private void observers() {
         viewModel.responseBody.observe(this, userApiResponse -> {
             if (userApiResponse.isStatus()) {
                 UserUtils.saveUserProfileToShared(userApiResponse, this, null);
@@ -46,7 +68,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 UiUtils.shortToast(this, userApiResponse.getMessage());
             }
         });
-
     }
 
     private void handlingInputLayoutError() {
@@ -66,49 +87,48 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         });
     }
 
+    private void manageKeyboardButtonDone() {
+
+        b.etLoginPassword.setOnEditorActionListener((v, actionId, event) -> {
+
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                InputMethodManager inputManager = (InputMethodManager) this.getSystemService(Context.INPUT_METHOD_SERVICE);
+                inputManager.hideSoftInputFromWindow(this.getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+                onClick(b.btLogin);
+                return true;
+            }
+            return false;
+        });
+    }
+
     private void manageProgressbar() {
 
         viewModel.isLoading.observe(this, aBoolean -> {
             if (aBoolean) {
-                b.btLogin.setVisibility(View.GONE);
+                b.layoutLoginButtons.setVisibility(View.INVISIBLE);
                 b.progressLogin.setVisibility(View.VISIBLE);
                 UiUtils.animJumpAndFade(this, b.progressLogin);
             } else {
-                b.btLogin.setVisibility(View.VISIBLE);
+                b.layoutLoginButtons.setVisibility(View.VISIBLE);
                 b.progressLogin.clearAnimation();
                 b.progressLogin.setVisibility(View.INVISIBLE);
             }
         });
     }
 
-    @Override
-    public void onClick(View v) {
-        int id = v.getId();
-        if (id == R.id.bt_to_signup) {
-            startActivity(new Intent(LoginActivity.this, SignUpActivity.class));
-        } else if (id == R.id.bt_login) {
-            if (isValidUser().first) {
-                viewModel.userLogin(this, isValidUser().second);
-            }
-        } else if (id == R.id.bt_login_back) {
-            onBackPressed();
-        }
-    }
 
-    public Pair<Boolean, UserDataForLoginRequest> isValidUser() {
-        Pair<Boolean, UserDataForLoginRequest> nullUser = new Pair<>(false, null);
+    public void validateAndPostUser() {
 
         String email = Objects.requireNonNull(b.etLoginEmail.getText()).toString();
         String password = Objects.requireNonNull(b.etLoginPassword.getText()).toString();
+
         if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             UiUtils.textError(b.etLoginEmailLayout, getString(R.string.invalid_email));
-            return nullUser;
         } else if (password.length() < 6) {
             UiUtils.textError(b.etLoginPasswordLayout, getString(R.string.short_password));
-            return nullUser;
+
         } else {
-            UserDataForLoginRequest user = new UserDataForLoginRequest(email, password);
-            return new Pair<>(true, user);
+            viewModel.userLogin(this, new UserDataForLoginRequest(email, password));
         }
 
     }

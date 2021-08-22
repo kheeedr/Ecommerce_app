@@ -12,6 +12,8 @@ import com.khedr.ecommerce.pojo.order.AddOrderRequest;
 import com.khedr.ecommerce.pojo.order.AddOrderResponse;
 import com.khedr.ecommerce.pojo.order.EstimateOrderRequest;
 import com.khedr.ecommerce.pojo.order.EstimateOrderResponse;
+import com.khedr.ecommerce.pojo.order.GetAllOrdersResponse;
+import com.khedr.ecommerce.pojo.order.GetOrderDetailsResponse;
 import com.khedr.ecommerce.pojo.product.ProductDetailsResponse;
 import com.khedr.ecommerce.pojo.product.ProductId;
 import com.khedr.ecommerce.pojo.product.cart.delete.DeleteFromCartResponse;
@@ -29,11 +31,11 @@ import com.khedr.ecommerce.pojo.user.TokenModel;
 import com.khedr.ecommerce.pojo.user.UserApiResponse;
 import com.khedr.ecommerce.pojo.user.UserDataForLoginRequest;
 import com.khedr.ecommerce.pojo.user.UserDataForRegisterRequest;
+import com.khedr.ecommerce.pojo.order.CancelOrderResponse;
 import com.khedr.ecommerce.utils.UiUtils;
 import com.khedr.ecommerce.utils.UserUtils;
 
 import io.reactivex.Single;
-import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -159,7 +161,17 @@ public final class RetrofitInstance {
     }
 
     // validate promo code
-    public Single<PromoCodeResponse> validatePromoCode(Context context, PromoCodeRequest promoCodeRequest){
-        return apiInterface.validatePromoCode(getLang(context), getToken(context),promoCodeRequest);
+    public Single<PromoCodeResponse> validatePromoCode(Context context, PromoCodeRequest promoCodeRequest) {
+        return apiInterface.validatePromoCode(getLang(context), getToken(context), promoCodeRequest);
+    }
+
+    public Single<GetAllOrdersResponse> getAllOrders(Context context) {
+        return apiInterface.getAllOrders(getLang(context), getToken(context));
+    }
+    public Single<GetOrderDetailsResponse> getOrderDetails(Context context, int  id){
+        return apiInterface.getOrderDetails(getLang(context), getToken(context),id);
+    }
+    public Single<CancelOrderResponse> cancelOrder(Context context, int  id){
+        return apiInterface.cancelOrder(getLang(context), getToken(context),id);
     }
 }

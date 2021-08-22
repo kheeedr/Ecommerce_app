@@ -14,8 +14,8 @@ public class AddressData  implements Serializable {
     String region;
     String details;
     String notes;
-    int latitude = 0;
-    int longitude = 0;
+    double latitude = 0;
+    double longitude = 0;
 
     public AddressData(String name, String city, String region, String details, String notes) {
         this.name = name;

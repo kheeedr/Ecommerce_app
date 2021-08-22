@@ -33,7 +33,7 @@ public class LanguageActivity extends AppCompatActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         b = DataBindingUtil.setContentView(this, R.layout.activity_language);
         pref = UserUtils.getPref(this);
-        String appLang = pref.getString(getString(R.string.pref_app_language), "");
+        String appLang = pref.getString(getString(R.string.pref_app_language), "ar");
         refreshSelection(appLang);
 
         b.btLanguageBack.setOnClickListener(this);
@@ -58,7 +58,8 @@ public class LanguageActivity extends AppCompatActivity implements View.OnClickL
             Locale defaultLocale = Resources.getSystem().getConfiguration().locale;
             if (!UiUtils.getAppLang(this).equals(defaultLocale.getLanguage())) {
                 RestartApp();
-            }changeLanguage("");
+            }
+            changeLanguage("");
         } else if (v == b.layoutLanguageEnglish) {
 
             if (!UiUtils.getAppLang(this).equals("en")) {
@@ -94,27 +95,23 @@ public class LanguageActivity extends AppCompatActivity implements View.OnClickL
         startActivity(i);
         finish();
 
-
-//        Intent intent = new Intent(this, SplashActivity.class);
-//        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//        startActivity(intent);
     }
 
     public void refreshSelection(String lang) {
         if (!lang.equals("")) {
             if (lang.equals("en")) {
-                b.ivSystemSelected.setVisibility(View.GONE);
-                b.ivEnglishSelected.setVisibility(View.VISIBLE);
-                b.ivArabicSelected.setVisibility(View.GONE);
+                b.ivSystemSelected.setImageResource(R.drawable.ic_empty_circle);
+                b.ivEnglishSelected.setImageResource(R.drawable.ic_true);
+                b.ivArabicSelected.setImageResource(R.drawable.ic_empty_circle);
             } else if (lang.equals("ar")) {
-                b.ivSystemSelected.setVisibility(View.GONE);
-                b.ivEnglishSelected.setVisibility(View.GONE);
-                b.ivArabicSelected.setVisibility(View.VISIBLE);
+                b.ivSystemSelected.setImageResource(R.drawable.ic_empty_circle);
+                b.ivEnglishSelected.setImageResource(R.drawable.ic_empty_circle);
+                b.ivArabicSelected.setImageResource(R.drawable.ic_true);
             }
         } else {
-            b.ivSystemSelected.setVisibility(View.VISIBLE);
-            b.ivEnglishSelected.setVisibility(View.GONE);
-            b.ivArabicSelected.setVisibility(View.GONE);
+            b.ivSystemSelected.setImageResource(R.drawable.ic_true);
+            b.ivEnglishSelected.setImageResource(R.drawable.ic_empty_circle);
+            b.ivArabicSelected.setImageResource(R.drawable.ic_empty_circle);
         }
     }
 }

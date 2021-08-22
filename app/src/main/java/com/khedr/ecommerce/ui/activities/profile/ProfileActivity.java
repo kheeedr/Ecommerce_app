@@ -38,7 +38,6 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         addressViewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(this.getApplication())).get(AddressViewModel.class);
         addressesAdapter = new ShowAddressesAdapter(this);
 
-        b.btProfileLogout.setOnClickListener(this);
         b.btProfileBack.setOnClickListener(this);
         b.btProfileEditUserInfo.setOnClickListener(this);
         b.tvProfileNewAddress.setOnClickListener(this);
@@ -59,7 +58,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
 
         manageProgressbar();
-        observeOnLogout();
+
         observeOnGetAddresses();
 
 
@@ -78,9 +77,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         }else if (v==b.includedProgressProfile.getRoot()){
             UiUtils.shortToast(this,getString(R.string.wait));
         }
-        else if (v == b.btProfileLogout) {
-            profileViewModel.logOut(this);
-        } else if (v == b.btProfileEditUserInfo) {
+        else if (v == b.btProfileEditUserInfo) {
             startActivity(new Intent(v.getContext(), UpdateProfileActivity.class));
             finish();
         } else if (v == b.tvProfileNewAddress) {
@@ -99,37 +96,9 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         });
     }
 
-    private void observeOnLogout() {
-        profileViewModel.logoutResponseMLD.observe(this, userApiResponse -> {
 
-            if (userApiResponse.isStatus()) {
-                SharedPreferences.Editor pen = pref.edit();
-                pen.putBoolean(getString(R.string.pref_status), false);
-                pen.putBoolean(getString(R.string.pref_is_image_ready), false);
-                pen.putString(getString(R.string.pref_user_token), "");
-                pen.apply();
-                UiUtils.shortToast(this, userApiResponse.getMessage());
-
-                finish();
-            } else {
-                UiUtils.shortToast(ProfileActivity.this, userApiResponse.getMessage());
-            }
-        });
-    }
 
     private void manageProgressbar() {
-        profileViewModel.isLoading.observe(this, aBoolean -> {
-            if (aBoolean) {
-                b.btProfileLogout.setVisibility(View.GONE);
-                b.progressLogout.setVisibility(View.VISIBLE);
-                UiUtils.animJumpAndFade(this, b.progressLogout);
-
-            } else {
-                b.btProfileLogout.setVisibility(View.VISIBLE);
-                b.progressLogout.clearAnimation();
-                b.progressLogout.setVisibility(View.INVISIBLE);
-            }
-        });
         addressViewModel.isGetAddressesLoading.observe(this, this::showOrHideMotoProgressbar);
 
     }

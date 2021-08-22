@@ -7,7 +7,6 @@ package com.khedr.ecommerce.ui.activities.categories;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,8 +17,8 @@ import com.khedr.ecommerce.R;
 import com.khedr.ecommerce.database.Converters;
 import com.khedr.ecommerce.databinding.ActivityCategoryItemsBinding;
 import com.khedr.ecommerce.pojo.product.Product;
-import com.khedr.ecommerce.ui.activities.cart.CartViewModel;
 import com.khedr.ecommerce.ui.activities.product.ProductDetailsActivity;
+import com.khedr.ecommerce.ui.activities.product.ProductDetailsViewModel;
 import com.khedr.ecommerce.ui.activities.search.SearchViewModel;
 import com.khedr.ecommerce.ui.adapters.ProductsAdapter;
 import com.khedr.ecommerce.ui.fragments.AddToCartBottomSheetFragment;
@@ -30,13 +29,12 @@ import java.util.Collections;
 
 public class CategoryProductsActivity extends AppCompatActivity implements View.OnClickListener, ProductsAdapter.OnItemClickListener {
     ActivityCategoryItemsBinding b;
-
+    ProductDetailsViewModel productViewModel;
     ProductsAdapter productsAdapter;
-    CartViewModel cartViewModel;
     CategoriesViewModel categoriesViewModel;
     SearchViewModel searchViewModel;
-    int adapterPosition;
     Intent intent;
+
 
 
     @Override
@@ -44,9 +42,9 @@ public class CategoryProductsActivity extends AppCompatActivity implements View.
         super.onCreate(savedInstanceState);
         b = DataBindingUtil.setContentView(this, R.layout.activity_category_items);
 
-        cartViewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication())).get(CartViewModel.class);
         categoriesViewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication())).get(CategoriesViewModel.class);
         searchViewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication())).get(SearchViewModel.class);
+        productViewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication())).get(ProductDetailsViewModel.class);
 
         productsAdapter = new ProductsAdapter(this);
 
@@ -69,15 +67,7 @@ public class CategoryProductsActivity extends AppCompatActivity implements View.
         } else if (intent.getIntExtra(getString(R.string.category_id), 0) == -2) {
             searchViewModel.performSearch(this, intent.getStringExtra(getString(R.string.category_name)));
         }
-
-        observeOnGetCategoryProducts();
-
-        observeOnGetSearchProducts();
-
-        observeOnPostToCart();
-
-        observeOnUpdateQuantity();
-
+        observers();
         manageProgressbar();
     }
 
@@ -91,7 +81,6 @@ public class CategoryProductsActivity extends AppCompatActivity implements View.
 
     @Override
     public void onParentClicked(int position) {
-
         Intent intent = new Intent(this, ProductDetailsActivity.class);
         intent.putExtra("product", productsAdapter.getProductsList().get(position));
         startActivity(intent);
@@ -100,59 +89,19 @@ public class CategoryProductsActivity extends AppCompatActivity implements View.
     @Override
     public void onItemAddToCartClicked(int position, ProductsAdapter.ProductsViewHolder productsViewHolder) {
 
-        AddToCartBottomSheetFragment fragment =
-                new AddToCartBottomSheetFragment(
-                        cartViewModel,
-                        productsAdapter.getProductsList().get(position),
-                        productsViewHolder.b.ivProduct.getDrawable());
-        fragment.show(getSupportFragmentManager(), "TAG");
-        adapterPosition = position;
-    }
+        AddToCartBottomSheetFragment bottomSheetFragment = new AddToCartBottomSheetFragment(
+                productsAdapter,
+                position,
+                productsViewHolder.b.ivProduct.getDrawable());
 
-    private void observeOnPostToCart() {
-        cartViewModel.postToCartResponseMLD.observe(this, postCartResponse -> {
-            if (postCartResponse.isStatus()) {
-                productsAdapter.getProductsList().get(adapterPosition).setIn_cart(true);
-                productsAdapter.notifyItemChanged(adapterPosition);
-            }
-
-            UiUtils.shortToast(this, postCartResponse.getMessage());
-        });
-    }
-
-    private void observeOnUpdateQuantity() {
-        cartViewModel.updateQuantityResponseMLD.observe(this, updateQuantityResponse -> {
-            if (updateQuantityResponse.isStatus()) {
-                UiUtils.shortToast(this, getString(R.string.quantity_updated));
-            } else {
-                UiUtils.shortToast(this, updateQuantityResponse.getMessage());
-            }
-        });
-    }
-
-    private void manageProgressbar() {
-
-        categoriesViewModel.isGetCategoryProductsLoading.observe(this, this::showOrHideMotoProgressbar);
-
-        cartViewModel.isPostLoading.observe(this, this::showOrHideMotoProgressbar);
-
-        cartViewModel.isUpdateFromProductLoading.observe(this, this::showOrHideMotoProgressbar);
-
-        cartViewModel.isPostMultipleLoading.observe(this, this::showOrHideMotoProgressbar);
-
-        searchViewModel.isSearchLoading.observe(this, this::showOrHideMotoProgressbar);
-    }
-
-    void showOrHideMotoProgressbar(boolean isLoading) {
-        UiUtils.motoProgressbar(
-                this, isLoading,
-                b.includedProgressCategoryProducts.progressMoto,
-                b.includedProgressCategoryProducts.viewUnderMoto,
-                b.includedProgressCategoryProducts.getRoot());
+        bottomSheetFragment.show(getSupportFragmentManager(), "TAG");
+        getSupportFragmentManager().executePendingTransactions();
 
     }
 
-    private void observeOnGetCategoryProducts() {
+
+    private void observers() {
+
         categoriesViewModel.getCategoryItemsResponseMLD.observe(this, getCategoryItemsResponse -> {
             if (getCategoryItemsResponse.isStatus()) {
                 if (getCategoryItemsResponse.getData().getData().isEmpty()) {
@@ -167,9 +116,6 @@ public class CategoryProductsActivity extends AppCompatActivity implements View.
                 UiUtils.shortToast(this, getCategoryItemsResponse.getMessage());
             }
         });
-    }
-
-    private void observeOnGetSearchProducts() {
         searchViewModel.searchResponseMLD.observe(this, searchResponse -> {
             if (searchResponse.isStatus()) {
                 if (searchResponse.getData().getData().isEmpty()) {
@@ -185,5 +131,22 @@ public class CategoryProductsActivity extends AppCompatActivity implements View.
             }
         });
     }
+
+    private void manageProgressbar() {
+
+        categoriesViewModel.isGetCategoryProductsLoading.observe(this, this::showOrHideMotoProgressbar);
+
+        searchViewModel.isSearchLoading.observe(this, this::showOrHideMotoProgressbar);
+    }
+
+    void showOrHideMotoProgressbar(boolean isLoading) {
+        UiUtils.motoProgressbar(
+                this, isLoading,
+                b.includedProgressCategoryProducts.progressMoto,
+                b.includedProgressCategoryProducts.viewUnderMoto,
+                b.includedProgressCategoryProducts.getRoot());
+
+    }
+
 
 }

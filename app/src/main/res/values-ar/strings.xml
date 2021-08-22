@@ -210,9 +210,15 @@
     <string name="order_successful2">تم طلب المنتجات بنجاح!</string>
     <string name="your_order_will_be_delivered_on_time_n_thank_you">سيتم توصيل  طلبك ف المعاد المحدد \n شكرا لك </string>
     <string name="view_orders">عرض الطلبات</string>
-    <string name="continue_shopping">الاستمرار ف التسوق</string>
+    <string name="continue_shopping">الاستمرار في التسوق</string>
     <string name="intent_name">intent_name</string>
     <string name="intent_to_orders">to_orders</string>
+    <string name="order_number">رقم الطلب :</string>
+    <string name="status">حالة الطلب: </string>
+    <string name="payment_method">طريقة الدفع:</string>
+    <string name="order_details">تفاصيل الطلب</string>
+    <string name="cancel_order">الغاء الطلب</string>
+    <string name="order_canceled_successfully">تم الغاء الطلب بنجاح</string>
 
 
 </resources>

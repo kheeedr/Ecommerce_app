@@ -196,7 +196,7 @@ public abstract class UiUtils {
     }
 
     public static String getAppLang(Context context) {
-        String appLang = UserUtils.getPref(context).getString(context.getString(R.string.pref_app_language), "");
+        String appLang = UserUtils.getPref(context).getString(context.getString(R.string.pref_app_language), "ar");
         if (!appLang.equals("")) {
             return appLang;
         } else {

@@ -67,12 +67,15 @@ public class CategoriesActivity extends AppCompatActivity implements View.OnClic
     }
 
     private void mangeProgressbar() {
-        categoriesViewModel.isGetCategoriesLoading.observe(this, aBoolean -> UiUtils.motoProgressbar(
-                this, aBoolean,
-                b.includedProgressCategories.progressMoto,
-                b.includedProgressCategories.viewUnderMoto,
-                b.includedProgressCategories.getRoot()));
+        categoriesViewModel.isGetCategoriesLoading.observe(this, this::showOrHideProgressMoto);
     }
 
+    void showOrHideProgressMoto(boolean isLoading) {
+        UiUtils.motoProgressbar(
+                this, isLoading,
+                b.includedProgressCategories.progressMoto,
+                b.includedProgressCategories.viewUnderMoto,
+                b.includedProgressCategories.getRoot());
+    }
 
 }

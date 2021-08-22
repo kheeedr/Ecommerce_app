@@ -26,23 +26,23 @@ public class EstimateOrderResponse extends StatusAndMessage {
     }
 
     public static class EstimateOrderData{
-        int sub_total;
+        double sub_total;
         double discount;
         double points;
         double total;
 
-        public EstimateOrderData(int sub_total, double discount, double points, double total) {
+        public EstimateOrderData(double sub_total, double discount, double points, double total) {
             this.sub_total = sub_total;
             this.discount = discount;
             this.points = points;
             this.total = total;
         }
 
-        public int getSub_total() {
+        public double getSub_total() {
             return sub_total;
         }
 
-        public void setSub_total(int sub_total) {
+        public void setSub_total(double sub_total) {
             this.sub_total = sub_total;
         }
 

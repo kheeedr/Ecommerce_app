@@ -21,12 +21,12 @@
         tools:layout="@layout/fragment_notifications" />
     <fragment
         android:id="@+id/order_option"
-        android:name="com.khedr.ecommerce.ui.fragments.OrdersFragment"
+        android:name="com.khedr.ecommerce.ui.fragments.orders.OrdersFragment"
         android:label="fragment_orders"
         tools:layout="@layout/fragment_orders" />
     <fragment
         android:id="@+id/account_option"
-        android:name="com.khedr.ecommerce.ui.fragments.AccountFragment"
+        android:name="com.khedr.ecommerce.ui.fragments.account.AccountFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_account" />
 </navigation>

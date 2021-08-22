@@ -12,6 +12,7 @@
         <entry key="..\:/Users/YourPc/AndroidStudioProjects/Ecommerce/app/src/main/res/drawable/ic_blue_trash.xml" value="0.24397394136807818" />
         <entry key="..\:/Users/YourPc/AndroidStudioProjects/Ecommerce/app/src/main/res/drawable/ic_card_payment.xml" value="0.24397394136807818" />
         <entry key="..\:/Users/YourPc/AndroidStudioProjects/Ecommerce/app/src/main/res/drawable/ic_cash_payment.xml" value="0.24397394136807818" />
+        <entry key="..\:/Users/YourPc/AndroidStudioProjects/Ecommerce/app/src/main/res/drawable/ic_combined_shape.xml" value="0.17980456026058633" />
         <entry key="..\:/Users/YourPc/AndroidStudioProjects/Ecommerce/app/src/main/res/drawable/ic_completed_order.xml" value="0.3242424242424242" />
         <entry key="..\:/Users/YourPc/AndroidStudioProjects/Ecommerce/app/src/main/res/drawable/ic_debit_card.xml" value="0.24397394136807818" />
         <entry key="..\:/Users/YourPc/AndroidStudioProjects/Ecommerce/app/src/main/res/drawable/ic_dotted_stroke.xml" value="0.24638157894736842" />
@@ -25,26 +26,36 @@
         <entry key="..\:/Users/YourPc/AndroidStudioProjects/Ecommerce/app/src/main/res/drawable/sheet_back_stroked.xml" value="0.24397394136807818" />
         <entry key="..\:/Users/YourPc/AndroidStudioProjects/Ecommerce/app/src/main/res/layout-v28/activity_order.xml" value="0.37395833333333334" />
         <entry key="..\:/Users/YourPc/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/activity_add_address.xml" value="0.2361842105263158" />
-        <entry key="..\:/Users/YourPc/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/activity_add_order.xml" value="0.33" />
+        <entry key="..\:/Users/YourPc/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/activity_add_order.xml" value="0.22" />
         <entry key="..\:/Users/YourPc/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/activity_cart.xml" value="0.25" />
         <entry key="..\:/Users/YourPc/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/activity_category_items.xml" value="0.19166666666666668" />
-        <entry key="..\:/Users/YourPc/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/activity_login.xml" value="0.25" />
-        <entry key="..\:/Users/YourPc/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/activity_main_page.xml" value="0.23387622149837134" />
+        <entry key="..\:/Users/YourPc/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/activity_favorites.xml" value="0.1951388888888889" />
+        <entry key="..\:/Users/YourPc/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/activity_language.xml" value="0.22" />
+        <entry key="..\:/Users/YourPc/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/activity_login.xml" value="0.22" />
+        <entry key="..\:/Users/YourPc/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/activity_main_page.xml" value="0.16" />
         <entry key="..\:/Users/YourPc/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/activity_order.xml" value="0.33" />
         <entry key="..\:/Users/YourPc/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/activity_order_completed.xml" value="0.25" />
+        <entry key="..\:/Users/YourPc/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/activity_order_details.xml" value="0.25" />
         <entry key="..\:/Users/YourPc/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/activity_product_details.xml" value="0.25" />
-        <entry key="..\:/Users/YourPc/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/activity_profile.xml" value="0.22" />
+        <entry key="..\:/Users/YourPc/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/activity_profile.xml" value="0.2" />
         <entry key="..\:/Users/YourPc/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/activity_search.xml" value="0.22996742671009773" />
         <entry key="..\:/Users/YourPc/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/activity_sign_up.xml" value="0.33" />
         <entry key="..\:/Users/YourPc/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/activity_splash.xml" value="0.25" />
         <entry key="..\:/Users/YourPc/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/activity_update_profile.xml" value="0.23387622149837134" />
+        <entry key="..\:/Users/YourPc/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/fragment_account.xml" value="0.23387622149837134" />
         <entry key="..\:/Users/YourPc/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/fragment_add_to_cart.xml" value="0.23387622149837134" />
         <entry key="..\:/Users/YourPc/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/fragment_home.xml" value="0.25" />
         <entry key="..\:/Users/YourPc/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/fragment_order_completed.xml" value="0.22" />
+        <entry key="..\:/Users/YourPc/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/fragment_orders.xml" value="0.23387622149837134" />
         <entry key="..\:/Users/YourPc/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/include_confirmation.xml" value="0.23387622149837134" />
         <entry key="..\:/Users/YourPc/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/include_progress_moto.xml" value="0.22996742671009773" />
         <entry key="..\:/Users/YourPc/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/item_banner.xml" value="0.22996742671009773" />
         <entry key="..\:/Users/YourPc/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/item_cart.xml" value="0.22996742671009773" />
+        <entry key="..\:/Users/YourPc/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/item_margin_bottom.xml" value="0.2361842105263158" />
+        <entry key="..\:/Users/YourPc/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/item_order_status.xml" value="0.2355263157894737" />
+        <entry key="..\:/Users/YourPc/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/item_orderd_product.xml" value="0.2361842105263158" />
+        <entry key="..\:/Users/YourPc/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/item_ordered_product.xml" value="0.2361842105263158" />
+        <entry key="..\:/Users/YourPc/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/item_product.xml" value="0.23387622149837134" />
         <entry key="..\:/Users/YourPc/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/item_search_suggestion.xml" value="0.11052631578947368" />
         <entry key="..\:/Users/YourPc/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/item_select_address.xml" value="0.23421052631578948" />
         <entry key="..\:/Users/YourPc/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/item_show_adresses.xml" value="0.2355263157894737" />

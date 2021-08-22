@@ -102,7 +102,7 @@ public class CartViewModel extends ViewModel {
         addProductToCart(context, productId);
         postToCartResponseMLD.observe((LifecycleOwner) context, postCartResponse -> {
             if (postCartResponse.isStatus()) {
-                updateQuantityFromCart(context, productQuantity - 1, postCartResponse.getData().getId());
+                updateQuantityFromCart(context, productQuantity, postCartResponse.getData().getId());
             }
         });
 
@@ -218,7 +218,6 @@ public class CartViewModel extends ViewModel {
                     public void onSuccess(@NotNull DeleteFromCartResponse deleteFromCartResponse) {
                         isDeleteLoading.setValue(false);
                         AppDatabase.getInstance(context).updateProduct(deleteFromCartResponse.getData().getCart().getProduct().getId(), false);
-                        Log.d("medo",""+deleteFromCartResponse.getData().getCart().getId());
                         deleteProductResponseMLD.setValue(deleteFromCartResponse);
                     }
 

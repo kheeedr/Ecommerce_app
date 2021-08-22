@@ -3,7 +3,7 @@
  * Created by Mohamed Khedr.
  */
 
-package com.khedr.ecommerce.ui.activities.order;
+package com.khedr.ecommerce.ui.activities.addOrder;
 
 import android.content.Context;
 import android.util.Log;
@@ -27,7 +27,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
-public class OrderViewModel extends ViewModel {
+public class AddOrderViewModel extends ViewModel {
 
     public MutableLiveData<Boolean> isAddOrderLoading = new MutableLiveData<>();
     public MutableLiveData<AddOrderResponse> addOrderResponseMLD = new MutableLiveData<>();

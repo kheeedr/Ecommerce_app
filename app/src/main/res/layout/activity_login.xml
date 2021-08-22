@@ -55,7 +55,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:contentDescription="@string/todo"
-                    android:paddingLeft="@dimen/_40sdp"
+                    android:paddingLeft="@dimen/_60sdp"
                     android:src="@drawable/right_back"
                     app:layout_constraintDimensionRatio="1:1"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -92,8 +92,8 @@
 
                 <ImageView
                     android:id="@+id/iv_login_cart"
-                    android:layout_width="@dimen/_250sdp"
-                    android:layout_height="@dimen/_250sdp"
+                    android:layout_width="@dimen/_220sdp"
+                    android:layout_height="@dimen/_220sdp"
                     android:layout_marginTop="@dimen/_85sdp"
                     android:contentDescription="@string/todo"
                     android:src="@drawable/iv_girl"
@@ -145,7 +145,7 @@
                     app:endIconMode="password_toggle"
                     app:errorIconDrawable="@null"
                     app:hintEnabled="false"
-                    app:layout_constraintBottom_toTopOf="@id/layout_login_bt"
+                    app:layout_constraintBottom_toTopOf="@id/layout_login_buttons"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/et_login_email_layout"
@@ -158,6 +158,7 @@
                         android:layout_height="@dimen/_40sdp"
                         android:background="@drawable/et_stroke"
                         android:fontFamily="@font/medium"
+                        android:imeOptions="actionDone"
                         android:hint="@string/password"
                         android:inputType="textPassword"
                         android:textAlignment="viewStart"
@@ -167,13 +168,12 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/layout_login_bt"
+                    android:id="@+id/layout_login_buttons"
                     android:layout_width="0dp"
-                    android:layout_height="@dimen/_45sdp"
+                    android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/_20sdp"
                     android:layout_marginTop="@dimen/_15sdp"
                     android:layout_marginBottom="@dimen/_5sdp"
-                    app:layout_constraintBottom_toTopOf="@id/bt_to_signup"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/et_login_password_layout">
@@ -190,50 +190,49 @@
                         android:textAllCaps="false"
                         android:textColor="@color/white"
                         android:textSize="@dimen/_15sdp"
-                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <ImageView
-                        android:id="@+id/progress_login"
-                        android:layout_width="@dimen/_30sdp"
-                        android:layout_height="@dimen/_30sdp"
-                        android:contentDescription="@string/todo"
-                        android:src="@drawable/ic_primary_hexa_shape"
-                        android:visibility="invisible"
-                        app:layout_constraintBottom_toBottomOf="parent"
+
+                    <Button
+                        android:id="@+id/bt_to_signup"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:background="@drawable/bt_back"
+                        android:fontFamily="@font/medium"
+                        android:paddingVertical="@dimen/_2sdp"
+                        android:text="@string/new_user_sign_up"
+                        android:textAllCaps="false"
+                        android:textColor="@color/primary"
+                        android:textSize="@dimen/_15sdp"
+                        app:backgroundTint="#FFFFFF"
+                        app:backgroundTintMode="multiply"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toBottomOf="@id/bt_login"
+                        app:rippleColor="@color/primary" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <Button
-                    android:id="@+id/bt_to_signup"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/_20sdp"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:background="@drawable/bt_back"
-                    android:fontFamily="@font/medium"
-                    android:paddingVertical="@dimen/_2sdp"
-                    android:text="@string/new_user_sign_up"
-                    android:textAllCaps="false"
-                    android:textColor="@color/primary"
-                    android:textSize="@dimen/_15sdp"
-                    app:backgroundTint="#FFFFFF"
-                    app:backgroundTintMode="multiply"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/layout_login_bt"
-                    app:rippleColor="@color/primary" />
+                <ImageView
+                    android:id="@+id/progress_login"
+                    android:layout_width="@dimen/_40sdp"
+                    android:layout_height="@dimen/_40sdp"
+                    android:contentDescription="@string/todo"
+                    android:src="@drawable/ic_primary_hexa_shape"
+                    android:visibility="invisible"
+                    app:layout_constraintBottom_toBottomOf="@id/layout_login_buttons"
+                    app:layout_constraintEnd_toEndOf="@id/layout_login_buttons"
+                    app:layout_constraintStart_toStartOf="@id/layout_login_buttons"
+                    app:layout_constraintTop_toTopOf="@id/layout_login_buttons" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_30sdp"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/bt_to_signup"
+                    app:layout_constraintTop_toBottomOf="@id/layout_login_buttons"
                     tools:ignore="UselessLeaf" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 

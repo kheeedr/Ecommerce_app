@@ -9,13 +9,13 @@ public class AddOrderRequest {
     int address_id;
     int payment_method;
     boolean use_points;
-    String promo_code;
+    Integer promo_code_id;
 
-    public AddOrderRequest(int address_id, int payment_method, boolean use_points, String promo_code) {
+    public AddOrderRequest(int address_id, int payment_method, boolean use_points,  Integer promo_code_id) {
         this.address_id = address_id;
         this.payment_method = payment_method;
         this.use_points = use_points;
-        this.promo_code = promo_code;
+        this.promo_code_id = promo_code_id;
     }
 
     public int getAddress_id() {
@@ -42,12 +42,12 @@ public class AddOrderRequest {
         this.use_points = use_points;
     }
 
-    public String getPromo_code() {
-        return promo_code;
+    public Integer getPromo_code_id() {
+        return promo_code_id;
     }
 
-    public void setPromo_code(String promo_code) {
-        this.promo_code = promo_code;
+    public void setPromo_code_id( Integer promo_code_id) {
+        this.promo_code_id = promo_code_id;
     }
 
 

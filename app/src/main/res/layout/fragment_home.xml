@@ -6,8 +6,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:ignore="UseCompoundDrawables"
-        tools:context="com.khedr.ecommerce.ui.fragments.HomeFragment">
+        tools:context="com.khedr.ecommerce.ui.fragments.HomeFragment"
+        tools:ignore="UseCompoundDrawables">
 
         <androidx.core.widget.NestedScrollView
             android:id="@+id/scroll_home"
@@ -16,10 +16,8 @@
             android:foregroundTint="#00FFFFFF"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0">
+            app:layout_constraintTop_toTopOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -71,9 +69,9 @@
                                 android:layout_marginVertical="@dimen/_2sdp"
                                 android:background="@drawable/et_stroke_white_small"
                                 android:backgroundTint="@color/natural1"
-                                android:gravity="center_horizontal"
                                 android:elevation="@dimen/_2sdp"
-                                android:translationZ="@dimen/_4sdp" >
+                                android:gravity="center_horizontal"
+                                android:translationZ="@dimen/_4sdp">
 
                                 <ImageView
                                     android:layout_width="@dimen/_35sdp"
@@ -107,9 +105,9 @@
                                 android:layout_marginVertical="@dimen/_2sdp"
                                 android:background="@drawable/et_stroke_white_small"
                                 android:backgroundTint="#F7D96F"
-                                android:gravity="center_horizontal"
                                 android:elevation="@dimen/_2sdp"
-                                android:translationZ="@dimen/_4sdp" >
+                                android:gravity="center_horizontal"
+                                android:translationZ="@dimen/_4sdp">
 
                                 <ImageView
                                     android:layout_width="@dimen/_30sdp"
@@ -143,9 +141,9 @@
                                 android:layout_marginVertical="@dimen/_2sdp"
                                 android:background="@drawable/et_stroke_white_small"
                                 android:backgroundTint="#89E2FE"
-                                android:gravity="center_horizontal"
                                 android:elevation="@dimen/_2sdp"
-                                android:translationZ="@dimen/_4sdp" >
+                                android:gravity="center_horizontal"
+                                android:translationZ="@dimen/_4sdp">
 
                                 <ImageView
                                     android:layout_width="@dimen/_30sdp"
@@ -180,9 +178,9 @@
                                 android:layout_marginVertical="@dimen/_2sdp"
                                 android:background="@drawable/et_stroke_white_small"
                                 android:backgroundTint="#F6BDAC"
-                                android:gravity="center_horizontal"
                                 android:elevation="@dimen/_2sdp"
-                                android:translationZ="@dimen/_4sdp" >
+                                android:gravity="center_horizontal"
+                                android:translationZ="@dimen/_4sdp">
 
                                 <ImageView
                                     android:layout_width="@dimen/_30sdp"
@@ -217,9 +215,9 @@
                                 android:layout_marginVertical="@dimen/_2sdp"
                                 android:background="@drawable/et_stroke_white_small"
                                 android:backgroundTint="#F5B888"
-                                android:gravity="center_horizontal"
                                 android:elevation="@dimen/_2sdp"
-                                android:translationZ="@dimen/_4sdp" >
+                                android:gravity="center_horizontal"
+                                android:translationZ="@dimen/_4sdp">
 
                                 <ImageView
                                     android:layout_width="@dimen/_30sdp"
@@ -284,8 +282,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:orientation="vertical"
-                                android:paddingTop="@dimen/_3sdp"
-                                >
+                                android:paddingTop="@dimen/_3sdp">
 
 
                                 <ImageView
@@ -296,9 +293,9 @@
                                     android:layout_marginVertical="@dimen/_2sdp"
                                     android:background="@drawable/et_stroke_white_small"
                                     android:contentDescription="@string/todo"
+                                    android:elevation="@dimen/_2sdp"
                                     android:padding="@dimen/_12sdp"
                                     android:src="@drawable/ic_apple"
-                                    android:elevation="@dimen/_2sdp"
                                     android:translationZ="@dimen/_4sdp" />
 
 

@@ -6,6 +6,7 @@
     android:id="@+id/cart_item_parent"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    tools:ignore="ContentDescription"
     >
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -197,7 +198,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:contentDescription="@string/todo" />
+       />
     </androidx.constraintlayout.widget.ConstraintLayout>
     <TextView
         android:id="@+id/tv_cart_discount"

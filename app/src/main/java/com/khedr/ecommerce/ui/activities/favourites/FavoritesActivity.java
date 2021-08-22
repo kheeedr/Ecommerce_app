@@ -10,52 +10,40 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.khedr.ecommerce.R;
 import com.khedr.ecommerce.databinding.ActivityFavoritesBinding;
-import com.khedr.ecommerce.pojo.product.Product;
-import com.khedr.ecommerce.ui.activities.cart.CartViewModel;
 import com.khedr.ecommerce.ui.activities.product.ProductDetailsActivity;
-import com.khedr.ecommerce.ui.activities.splash.SplashActivity;
 import com.khedr.ecommerce.ui.adapters.ProductsAdapter;
 import com.khedr.ecommerce.ui.fragments.AddToCartBottomSheetFragment;
 import com.khedr.ecommerce.utils.UiUtils;
 import com.khedr.ecommerce.utils.UserUtils;
 
-public class FavoritesActivity extends AppCompatActivity implements View.OnClickListener,ProductsAdapter.OnItemClickListener {
+public class FavoritesActivity extends AppCompatActivity implements View.OnClickListener, ProductsAdapter.OnItemClickListener {
 
     ActivityFavoritesBinding b;
     ProductsAdapter productsAdapter;
     FavouritesViewModel favouritesViewModel;
-    int i = 0;
-    private int adapterPosition;
-    private CartViewModel cartViewModel;
+
+    boolean isFirstResume = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         b = DataBindingUtil.setContentView(this, R.layout.activity_favorites);
-        favouritesViewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(this.getApplication())).get(FavouritesViewModel.class);
-        cartViewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(this.getApplication())).get(CartViewModel.class);
+        favouritesViewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication())).get(FavouritesViewModel.class);
 
         b.btFavoritesBack.setOnClickListener(this);
 
         productsAdapter = new ProductsAdapter(this);
         b.rvFavorites.setAdapter(productsAdapter);
         manageProgressbar();
-        observeOnPostToCart();
-        favouritesViewModel.getFavoriteResponseBody.observe(this, getFavoritesResponse -> {
-            if (getFavoritesResponse != null) {
-                productsAdapter.setProductsList(getFavoritesResponse);
-            } else {
-                UiUtils.shortToast(this, getString(R.string.connection_error));
-            }
-        });
+        observers();
+
 
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        i++;
         if (UserUtils.isSignedIn(this)) {
             favouritesViewModel.getFavorites(this);
         } else {
@@ -63,29 +51,38 @@ public class FavoritesActivity extends AppCompatActivity implements View.OnClick
         }
 
     }
-    private void observeOnPostToCart() {
-        cartViewModel.postToCartResponseMLD.observe(this, postCartResponse -> {
-            if (postCartResponse.isStatus()) {
-                productsAdapter.getProductsList().get(adapterPosition).setIn_cart(true);
-                productsAdapter.notifyItemChanged(adapterPosition);
-            }
 
-            UiUtils.shortToast(this, postCartResponse.getMessage());
+    @Override
+    protected void onPause() {
+        super.onPause();
+        isFirstResume = false;
+    }
+
+    private void observers() {
+        favouritesViewModel.getFavoriteResponseBody.observe(this, getFavoritesResponse -> {
+            if (getFavoritesResponse != null) {
+                productsAdapter.setProductsList(getFavoritesResponse);
+            } else {
+                UiUtils.shortToast(this, getString(R.string.connection_error));
+            }
         });
     }
+
     private void manageProgressbar() {
 
-        favouritesViewModel.isGetFavoriteLoading.observe(this, aBoolean -> {
-            if (i < 2) {
-                if (aBoolean) {
-                    b.progressFavorites.setVisibility(View.VISIBLE);
-                    UiUtils.animJumpAndFade(this, b.progressFavorites);
-                    UiUtils.animEndToStart(this, b.viewCategoriesUnderMoto);
-                } else {
-                    UiUtils.animCenterToEnd(this, b.progressFavorites);
-                }
+        favouritesViewModel.isGetFavoriteLoading.observe(this, isLoading -> {
+            if (isFirstResume) {
+                showOrHideProgressMoto(isLoading);
             }
         });
+    }
+
+    void showOrHideProgressMoto(boolean isLoading) {
+        UiUtils.motoProgressbar(
+                this, isLoading,
+                b.includedProgressFavorites.progressMoto,
+                b.includedProgressFavorites.viewUnderMoto,
+                b.includedProgressFavorites.getRoot());
     }
 
     @Override
@@ -106,13 +103,14 @@ public class FavoritesActivity extends AppCompatActivity implements View.OnClick
 
     @Override
     public void onItemAddToCartClicked(int position, ProductsAdapter.ProductsViewHolder productsViewHolder) {
-        AddToCartBottomSheetFragment fragment =
-                new AddToCartBottomSheetFragment(
-                        cartViewModel,
-                        productsAdapter.getProductsList().get(position),
-                        productsViewHolder.b.ivProduct.getDrawable());
-        fragment.show(getSupportFragmentManager(), "TAG");
-        adapterPosition = position;
+
+        AddToCartBottomSheetFragment bottomSheetFragment = new AddToCartBottomSheetFragment(
+                productsAdapter,
+                position,
+                productsViewHolder.b.ivProduct.getDrawable());
+
+        bottomSheetFragment.show(getSupportFragmentManager(), "TAG");
+        getSupportFragmentManager().executePendingTransactions();
     }
 }
 

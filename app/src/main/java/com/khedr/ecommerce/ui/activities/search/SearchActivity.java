@@ -15,11 +15,12 @@ import androidx.lifecycle.ViewModelProvider;
 import com.khedr.ecommerce.R;
 import com.khedr.ecommerce.databinding.ActivitySearchBinding;
 import com.khedr.ecommerce.pojo.product.Product;
-import com.khedr.ecommerce.ui.activities.cart.CartViewModel;
 import com.khedr.ecommerce.ui.activities.product.ProductDetailsActivity;
+import com.khedr.ecommerce.ui.activities.product.ProductDetailsViewModel;
 import com.khedr.ecommerce.ui.activities.splash.SplashActivity;
 import com.khedr.ecommerce.ui.adapters.ProductsAdapter;
 import com.khedr.ecommerce.ui.adapters.SearchSuggestionsAdapter;
+import com.khedr.ecommerce.ui.fragments.AddToCartBottomSheetFragment;
 import com.khedr.ecommerce.utils.MyTextWatcher;
 import com.khedr.ecommerce.utils.UiUtils;
 
@@ -30,8 +31,8 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
     ActivitySearchBinding b;
     SearchSuggestionsAdapter suggestionsAdapter;
     ProductsAdapter productsAdapter;
-    CartViewModel cartViewModel;
     SearchViewModel searchViewModel;
+    ProductDetailsViewModel productViewModel;
 
 
     @Override
@@ -40,8 +41,8 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
         b = DataBindingUtil.setContentView(this, R.layout.activity_search);
         b.btSearchCancel.setOnClickListener(this);
         suggestionsAdapter = new SearchSuggestionsAdapter(this);
-        cartViewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication())).get(CartViewModel.class);
         searchViewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication())).get(SearchViewModel.class);
+        productViewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication())).get(ProductDetailsViewModel.class);
 
         productsAdapter = new ProductsAdapter(this);
         b.rvSearchSuggestion.setAdapter(suggestionsAdapter);
@@ -50,7 +51,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
 
         manageSearchKeyboardButton();
 
-        observeOnSearchResponse();
+        observers();
 
         manageProgressbar();
 
@@ -89,9 +90,16 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     public void onItemAddToCartClicked(int position, ProductsAdapter.ProductsViewHolder productsViewHolder) {
 
+        AddToCartBottomSheetFragment bottomSheetFragment = new AddToCartBottomSheetFragment(
+                productsAdapter,
+                position,
+                productsViewHolder.b.ivProduct.getDrawable());
+
+        bottomSheetFragment.show(getSupportFragmentManager(), "TAG");
+        getSupportFragmentManager().executePendingTransactions();
     }
 
-    private void observeOnSearchResponse() {
+    private void observers() {
         searchViewModel.searchResponseMLD.observe(this, searchResponse -> {
             if (searchResponse.isStatus()) {
                 if (searchResponse.getData().getData().isEmpty()) {
@@ -101,12 +109,15 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
                     productsAdapter.setProductsList(searchResponse.getData().getData());
                     b.rvSearchProducts.setVisibility(View.VISIBLE);
                     b.layoutSearchProductNotFound.setVisibility(View.GONE);
+                    b.rvSearchSuggestion.setVisibility(View.GONE);
                 }
             } else {
                 UiUtils.shortToast(this, searchResponse.getMessage());
             }
         });
+
     }
+
     private void setSuggestionsListener() {
         b.svSearchEt.addTextChangedListener(new MyTextWatcher() {
             @Override
@@ -126,22 +137,20 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private void manageProgressbar() {
-        searchViewModel.isSearchLoading.observe(this, aBoolean -> {
-            if (aBoolean) {
-                b.progressSearch.setVisibility(View.VISIBLE);
-                b.rvSearchSuggestion.setVisibility(View.GONE);
-                b.rvSearchProducts.setVisibility(View.GONE);
-                UiUtils.motoJumpAndFade(this, b.progressSearch, b.vProgressSearch);
-
-            } else {
-                UiUtils.animCenterToEnd(this, b.progressSearch);
-            }
-        });
+        searchViewModel.isSearchLoading.observe(this, this::showOrHideProgressMoto);
     }
 
+    void showOrHideProgressMoto(boolean isLoading) {
+        UiUtils.motoProgressbar(
+                this, isLoading,
+                b.includedProgressSearch.progressMoto,
+                b.includedProgressSearch.viewUnderMoto,
+                b.includedProgressSearch.getRoot());
+    }
 
     private void manageSearchKeyboardButton() {
         b.svSearchEt.requestFocus();
+
         b.svSearchEt.setOnEditorActionListener((v, actionId, event) -> {
 
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {

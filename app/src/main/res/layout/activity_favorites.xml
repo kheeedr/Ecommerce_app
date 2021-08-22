@@ -38,39 +38,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-      <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/progress_favorites"
-            android:layout_width="@dimen/_70sdp"
-            android:layout_height="@dimen/_65sdp"
-            android:translationZ="@dimen/_30sdp"
-          android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.55">
-
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:contentDescription="@string/todo"
-                android:paddingRight="@dimen/_5sdp"
-                android:src="@drawable/moto"
-                android:translationZ="@dimen/_30sdp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="RtlHardcoded,RtlSymmetry" />
-
-            <View
-                android:id="@+id/view_categories_under_moto"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_2sdp"
-                android:background="@color/secondary"
-                app:layout_constraintBottom_toBottomOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_favorites"
@@ -91,6 +58,12 @@
             app:spanCount="2">
 
         </androidx.recyclerview.widget.RecyclerView>
+        <include
+            android:id="@+id/included_progress_favorites"
+            layout="@layout/include_progress_moto"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

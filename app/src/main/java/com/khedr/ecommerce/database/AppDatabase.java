@@ -7,14 +7,14 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 
-import com.khedr.ecommerce.database.entities.ProductsEntity;
+import com.khedr.ecommerce.database.entities.RecentlyViewedEntity;
 
 import java.util.List;
 
 import io.reactivex.Completable;
 import io.reactivex.Single;
 
-@Database(entities = {ProductsEntity.class}, version = 1)
+@Database(entities = {RecentlyViewedEntity.class}, version = 1,exportSchema = false)
 @TypeConverters(Converters.class)
 public abstract class AppDatabase extends RoomDatabase {
 
@@ -33,11 +33,11 @@ public abstract class AppDatabase extends RoomDatabase {
         return instance;
     }
 
-    public Completable insert(ProductsEntity product) {
+    public Completable insert(RecentlyViewedEntity product) {
         return appDao().insert(product);
     }
 
-    public Single<List<ProductsEntity>> getRecentProducts() {
+    public Single<List<RecentlyViewedEntity>> getRecentProducts() {
         return appDao().getRecentProducts();
     }
 
@@ -51,6 +51,12 @@ public abstract class AppDatabase extends RoomDatabase {
 
     public void removeAllRecentProductFromCart() {
         appDao().removeAllRecentProductFromCart();
+    }
+    public void removeAllRecentProduct() {
+        appDao().removeAllRecentProduct();
+    }
+    public Single<RecentlyViewedEntity> getProductById(int id){
+        return appDao().getProductById(id);
     }
 
 }

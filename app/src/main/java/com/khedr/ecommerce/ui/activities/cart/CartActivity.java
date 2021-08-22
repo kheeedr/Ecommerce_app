@@ -16,13 +16,14 @@ import com.khedr.ecommerce.R;
 import com.khedr.ecommerce.databinding.ActivityCartBinding;
 import com.khedr.ecommerce.pojo.product.cart.get.GetCartItems;
 import com.khedr.ecommerce.ui.activities.MainPage.MainPageActivity;
-import com.khedr.ecommerce.ui.activities.order.AddOrderActivity;
+import com.khedr.ecommerce.ui.activities.addOrder.AddOrderActivity;
 import com.khedr.ecommerce.ui.activities.product.ProductDetailsActivity;
 import com.khedr.ecommerce.ui.adapters.CartAdapter;
 import com.khedr.ecommerce.utils.UiUtils;
 import com.khedr.ecommerce.utils.UserUtils;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @SuppressLint("SetTextI18n")
@@ -31,9 +32,9 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
     ActivityCartBinding b;
     CartAdapter cartAdapter;
     CartViewModel cartViewModel;
-    SharedPreferences pref;
-    public static double total;
+    public double total;
     int deletedPosition;
+    boolean isFirstResume = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +44,7 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
         cartViewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory
                 .getInstance(this.getApplication())).get(CartViewModel.class);
 
-        pref = UserUtils.getPref(this);
+
         b.btCartShopNow.setOnClickListener(this);
         b.btCartBack.setOnClickListener(this);
         b.btCartOrderNow.setOnClickListener(this);
@@ -52,26 +53,31 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
         b.includedAlertDialog.actionSure.setOnClickListener(this);
         b.includedAlertDialog.actionCancel.setOnClickListener(this);
         b.includeProgressCart.getRoot().setOnClickListener(this);
-
+        b.layoutCartFilled.setVisibility(View.INVISIBLE);
         cartAdapter = new CartAdapter(this);
         b.rvCart.setAdapter(cartAdapter);
 
         manageProgressbar();
-        observeOnCartResponse();
-        observeOnUpdateQuantityResponse();
-        ObserveOnDeleteProductResponse();
+
+        observers();
 
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
-        b.layoutCartFilled.setVisibility(View.INVISIBLE);
+    protected void onResume() {
+        super.onResume();
+
         if (UserUtils.isSignedIn(this)) {
             cartViewModel.getCartProducts(this);
         } else {
             UiUtils.shortToast(this, getString(R.string.you_should_login_first));
         }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        isFirstResume = false;
     }
 
     @Override
@@ -90,15 +96,14 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
             b.includedAlertDialog.getRoot().setVisibility(View.GONE);
             // calling delete function from the viewModel
             cartViewModel.deleteCartProduct(this, cartAdapter.getList().get(deletedPosition).getId());
-        }
-        else if (v== b.includeProgressCart.getRoot()){
+        } else if (v == b.includeProgressCart.getRoot()) {
             UiUtils.shortToast(this, getString(R.string.wait));
         } else if (v == b.btCartOrderNow) {
-            if (UserUtils.isSignedIn(this)){
-                Intent intent=new Intent(this, AddOrderActivity.class);
-                intent.putExtra(getString(R.string.order_total),(int) Math.ceil(total));
+            if (UserUtils.isSignedIn(this)) {
+                Intent intent = new Intent(this, AddOrderActivity.class);
+                intent.putExtra(getString(R.string.order_total), (int) Math.ceil(total));
                 startActivity(intent);
-            }else {
+            } else {
                 UiUtils.shortToast(this, getString(R.string.you_should_login_first));
             }
 
@@ -142,51 +147,34 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
         startActivity(intent);
     }
 
-    // Observes
-    private void observeOnCartResponse() {
+    // Observers
+    private void observers() {
         cartViewModel.getCartResponseMLD.observe(this, getCartResponse -> {
             if (getCartResponse.isStatus()) {
                 ArrayList<GetCartItems> cartItems = getCartResponse.getData().getCart_items();
                 total = getCartResponse.getData().getTotal();
-                b.tvCartTotal.setText(getString(R.string.total) +" "+ (int) Math.ceil(total) + " EGP");
+                b.tvCartTotal.setText(getString(R.string.total) + " " + (int) Math.ceil(total) + " EGP");
                 if (cartItems.isEmpty()) {
-                    b.layoutCartEmpty.setVisibility(View.VISIBLE);
+                    UiUtils.animFadeIn(this,b.layoutCartEmpty);
                     b.layoutCartFilled.setVisibility(View.GONE);
                 } else {
+                    Collections.reverse(cartItems);
                     cartAdapter.setCartItems(cartItems);
                     b.layoutCartFilled.setVisibility(View.VISIBLE);
-                    UiUtils.animFadeIn(this, b.layoutCartFilled);
                     b.layoutCartEmpty.setVisibility(View.GONE);
+                    if (isFirstResume) {
+                        UiUtils.animFadeIn(this, b.layoutCartFilled);
+                    }
                 }
             } else {
                 UiUtils.shortToast(this, getCartResponse.getMessage());
             }
         });
-    }
 
-    private void ObserveOnDeleteProductResponse() {
-        cartViewModel.deleteProductResponseMLD.observe(this, deleteProductResponse -> {
-
-            if (deleteProductResponse.isStatus()) {
-                total = deleteProductResponse.getData().getTotal();
-                b.tvCartTotal.setText(getString(R.string.total) +" "+ (int) Math.ceil(total) + " EGP");
-                List<GetCartItems> items = cartAdapter.getList();
-                items.remove(deletedPosition);
-                cartAdapter.setCartItems(items);
-                if (items.isEmpty()) {
-                    b.layoutCartEmpty.setVisibility(View.VISIBLE);
-                    b.layoutCartFilled.setVisibility(View.GONE);
-                }
-            }
-            UiUtils.shortToast(this, deleteProductResponse.getMessage());
-        });
-    }
-
-    private void observeOnUpdateQuantityResponse() {
         cartViewModel.updateQuantityResponseMLD.observe(this, updateQuantityResponse -> {
             if (updateQuantityResponse.isStatus()) {
                 total = updateQuantityResponse.getData().getTotal();
-                b.tvCartTotal.setText(getString(R.string.total) +" "+ (int) Math.ceil(total) + " EGP");
+                b.tvCartTotal.setText(getString(R.string.total) + " " + (int) Math.ceil(total) + " EGP");
                 List<GetCartItems> items = cartAdapter.getList();
                 for (GetCartItems item : items) {
                     if (updateQuantityResponse.getData().getCart().getId() == item.getId()) {
@@ -194,20 +182,37 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
                         break;
                     }
                 }
-                UiUtils.shortToast(this,getString(R.string.quantity_updated) );
+                UiUtils.shortToast(this, getString(R.string.quantity_updated));
             } else {
                 cartAdapter.updateList();
                 UiUtils.shortToast(this, updateQuantityResponse.getMessage());
             }
 
         });
+
+        cartViewModel.deleteProductResponseMLD.observe(this, deleteProductResponse -> {
+
+            if (deleteProductResponse.isStatus()) {
+                total = deleteProductResponse.getData().getTotal();
+                b.tvCartTotal.setText(getString(R.string.total) + " " + (int) Math.ceil(total) + " EGP");
+                cartAdapter.getList().remove(deletedPosition);
+                cartAdapter.notifyItemRemoved(deletedPosition);
+                if (cartAdapter.getList().isEmpty()) {
+                    UiUtils.animFadeOut(this, b.layoutCartFilled);
+                    UiUtils.animFadeIn(this,b.layoutCartEmpty);
+                }
+            }
+            UiUtils.shortToast(this, deleteProductResponse.getMessage());
+        });
+
     }
+
 
     // Ui control Functions
 
     private void intentToMainPage() {
         Intent intent = new Intent(CartActivity.this, MainPageActivity.class);
-        intent .putExtra(getString(R.string.intent_name),"null");
+        intent.putExtra(getString(R.string.intent_name), "null");
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         finishAffinity();
         startActivity(intent);
@@ -228,24 +233,18 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     void manageProgressbar() {
-        cartViewModel.isGetLoading.observe(this, aBoolean -> {
-            if (aBoolean) {
-                b.includeProgressCart.getRoot().setVisibility(View.VISIBLE);
-                UiUtils.animJumpAndFade(this,b.includeProgressCart.progressMoto);
-                UiUtils.animEndToStart(this, b.includeProgressCart.viewUnderMoto);
-            } else {
-                UiUtils.animMotoGone(this, b.includeProgressCart.progressMoto,b.includeProgressCart.getRoot());
-            }
+        cartViewModel.isGetLoading.observe(this, isLoading -> {
+            if (isFirstResume) showOrHideProgressMoto(isLoading);
         });
-        cartViewModel.isDeleteLoading.observe(this, aBoolean -> {
-            if (aBoolean) {
-                b.includeProgressCart.getRoot().setVisibility(View.VISIBLE);
-                UiUtils.animJumpAndFade(this, b.includeProgressCart.progressMoto);
-                UiUtils.animEndToStart(this, b.includeProgressCart.viewUnderMoto);
-            } else {
-                UiUtils.animMotoGone(this, b.includeProgressCart.progressMoto,b.includeProgressCart.getRoot());
-            }
-        });
+        cartViewModel.isDeleteLoading.observe(this, this::showOrHideProgressMoto);
+    }
+
+    void showOrHideProgressMoto(boolean isLoading) {
+        UiUtils.motoProgressbar(
+                this, isLoading,
+                b.includeProgressCart.progressMoto,
+                b.includeProgressCart.viewUnderMoto,
+                b.includeProgressCart.getRoot());
     }
 
 }

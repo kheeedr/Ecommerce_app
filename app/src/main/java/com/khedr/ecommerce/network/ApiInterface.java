@@ -2,7 +2,6 @@ package com.khedr.ecommerce.network;
 
 import com.khedr.ecommerce.pojo.Address.AddAddressResponse;
 import com.khedr.ecommerce.pojo.Address.AddressData;
-import com.khedr.ecommerce.pojo.Address.GetAddressData;
 import com.khedr.ecommerce.pojo.Address.GetAddressesResponse;
 import com.khedr.ecommerce.pojo.categories.GetCategoriesResponse;
 import com.khedr.ecommerce.pojo.categories.item.GetCategoryItemsResponse;
@@ -11,6 +10,8 @@ import com.khedr.ecommerce.pojo.order.AddOrderRequest;
 import com.khedr.ecommerce.pojo.order.AddOrderResponse;
 import com.khedr.ecommerce.pojo.order.EstimateOrderRequest;
 import com.khedr.ecommerce.pojo.order.EstimateOrderResponse;
+import com.khedr.ecommerce.pojo.order.GetAllOrdersResponse;
+import com.khedr.ecommerce.pojo.order.GetOrderDetailsResponse;
 import com.khedr.ecommerce.pojo.product.ProductDetailsResponse;
 import com.khedr.ecommerce.pojo.product.ProductId;
 import com.khedr.ecommerce.pojo.product.cart.delete.DeleteFromCartResponse;
@@ -28,6 +29,7 @@ import com.khedr.ecommerce.pojo.user.TokenModel;
 import com.khedr.ecommerce.pojo.user.UserApiResponse;
 import com.khedr.ecommerce.pojo.user.UserDataForLoginRequest;
 import com.khedr.ecommerce.pojo.user.UserDataForRegisterRequest;
+import com.khedr.ecommerce.pojo.order.CancelOrderResponse;
 
 import io.reactivex.Single;
 
@@ -121,17 +123,6 @@ public interface ApiInterface {
     Single<ProductDetailsResponse> getProductDetails(@Header("lang") String lang, @Header("Authorization") String token
             , @Path("product_id") int product_id);
 
-    // Add Order
-    @Headers({"Content-Type:application/json"})
-    @POST("orders")
-    Single<AddOrderResponse> addOrder(@Header("lang") String lang, @Header("Authorization") String token
-            , @Body AddOrderRequest orderRequest);
-
-    // estimate order
-    @Headers({"Content-Type:application/json"})
-    @POST("estimate-order")
-    Single<EstimateOrderResponse> estimateOrder(@Header("lang") String lang, @Header("Authorization") String token
-            , @Body EstimateOrderRequest estimateOrderRequest);
 
     // get Addresses
     @Headers({"Content-Type:application/json"})
@@ -160,5 +151,34 @@ public interface ApiInterface {
     @POST("promo-codes/validate")
     Single<PromoCodeResponse> validatePromoCode(@Header("lang") String lang, @Header("Authorization") String token
             , @Body PromoCodeRequest promoCodeRequest);
+
+    // Add Order
+    @Headers({"Content-Type:application/json"})
+    @POST("orders")
+    Single<AddOrderResponse> addOrder(@Header("lang") String lang, @Header("Authorization") String token
+            , @Body AddOrderRequest orderRequest);
+
+    // estimate order
+    @Headers({"Content-Type:application/json"})
+    @POST("estimate-order")
+    Single<EstimateOrderResponse> estimateOrder(@Header("lang") String lang, @Header("Authorization") String token
+            , @Body EstimateOrderRequest estimateOrderRequest);
+
+    //get all orders
+
+    @Headers({"Content-Type:application/json"})
+    @GET("orders")
+    Single<GetAllOrdersResponse> getAllOrders(@Header("lang") String lang, @Header("Authorization") String token);
+
+    //get order details
+    @Headers({"Content-Type:application/json"})
+    @GET("orders/{id}")
+    Single<GetOrderDetailsResponse> getOrderDetails(@Header("lang") String lang, @Header("Authorization") String token, @Path("id") int id);
+
+    //cancel order
+    @Headers({"Content-Type:application/json"})
+    @GET("orders/{id}/cancel")
+    Single<CancelOrderResponse> cancelOrder(@Header("lang") String lang, @Header("Authorization") String token, @Path("id") int id);
+
 
 }

@@ -13,7 +13,7 @@
         android:background="@color/white"
         android:layout_marginTop="25dp"
         tools:ignore="ContentDescription"
-        tools:context=".ui.activities.order.OrderCompletedActivity">
+        tools:context=".ui.activities.addOrder.OrderCompletedActivity">
 
         <TextView
             android:id="@+id/tv_orderCompleted_main"

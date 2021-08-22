@@ -14,9 +14,9 @@ import com.khedr.ecommerce.pojo.product.Product;
 import java.util.ArrayList;
 
 
-@Entity(tableName = "products_table")
-public class ProductsEntity {
-    public ProductsEntity() {
+@Entity(tableName = "recently_viewed_table")
+public class RecentlyViewedEntity {
+    public RecentlyViewedEntity() {
     }
 
     @PrimaryKey(autoGenerate = true)
@@ -35,7 +35,7 @@ public class ProductsEntity {
     public boolean in_favorites;
     public boolean in_cart;
 
-    public ProductsEntity(Product product) {
+    public RecentlyViewedEntity(Product product) {
         id = product.getId();
         price = product.getPrice();
         old_price = product.getOld_price();

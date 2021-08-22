@@ -45,6 +45,7 @@
             android:layout_marginTop="@dimen/_30sdp"
             android:background="@drawable/et_stroke_white"
             android:elevation="@dimen/_1sdp"
+            android:layoutDirection="ltr"
             android:paddingVertical="@dimen/_5sdp"
             android:translationZ="@dimen/_2sdp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -56,10 +57,13 @@
                 android:id="@+id/layout_language_system"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/_10sdp"
+                android:layout_marginHorizontal="@dimen/_20sdp"
+                android:layout_marginVertical="@dimen/_15sdp"
+                android:background="@drawable/et_stroke"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:padding="@dimen/_10sdp"
+                android:paddingHorizontal="@dimen/_5sdp"
+                android:paddingVertical="@dimen/_10sdp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -67,10 +71,10 @@
 
                 <ImageView
                     android:id="@+id/iv_system_selected"
-                    android:layout_width="@dimen/_20sdp"
-                    android:layout_height="@dimen/_20sdp"
+                    android:layout_width="@dimen/_15sdp"
+                    android:layout_height="@dimen/_15sdp"
                     android:layout_marginHorizontal="@dimen/_5sdp"
-                    android:src="@drawable/ic_checked"
+                    android:src="@drawable/ic_empty_circle"
                     android:visibility="visible"
                     tools:ignore="ContentDescription" />
 
@@ -79,32 +83,26 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:maxLines="1"
                     android:fontFamily="@font/regular"
+                    android:layout_marginHorizontal="@dimen/_10sdp"
+                    android:maxLines="1"
                     android:text="@string/system_default"
                     android:textColor="@color/secondary"
                     android:textSize="@dimen/_16sdp" />
             </LinearLayout>
 
 
-            <View
-                android:id="@+id/divider_under_system"
-                android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:layout_marginHorizontal="@dimen/_20sdp"
-                android:background="@color/secondary"
-                app:layout_constraintBottom_toTopOf="@id/layout_language_english"
-                app:layout_constraintTop_toBottomOf="@id/layout_language_system"
-                 />
-
             <LinearLayout
                 android:id="@+id/layout_language_english"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/_10sdp"
+                android:layout_marginHorizontal="@dimen/_20sdp"
+                android:layout_marginVertical="@dimen/_15sdp"
+                android:background="@drawable/et_stroke"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:padding="@dimen/_10sdp"
+                android:paddingHorizontal="@dimen/_5sdp"
+                android:paddingVertical="@dimen/_10sdp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/layout_language_system"
@@ -112,17 +110,18 @@
 
                 <ImageView
                     android:id="@+id/iv_english_selected"
-                    android:layout_width="@dimen/_20sdp"
-                    android:layout_height="@dimen/_20sdp"
+                    android:layout_width="@dimen/_15sdp"
+                    android:layout_height="@dimen/_15sdp"
                     android:layout_marginHorizontal="@dimen/_5sdp"
-                    android:src="@drawable/ic_checked"
-                    android:visibility="gone"
+                    android:src="@drawable/ic_empty_circle"
+                    android:visibility="visible"
                     tools:ignore="ContentDescription" />
 
                 <TextView
                     android:id="@+id/tv_language_english"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_10sdp"
                     android:layout_weight="1"
                     android:maxLines="1"
                     android:text="@string/english_lang"
@@ -131,24 +130,17 @@
             </LinearLayout>
 
 
-            <View
-                android:id="@+id/divider_under_english"
-                android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:layout_marginHorizontal="@dimen/_20sdp"
-                android:background="@color/secondary"
-                app:layout_constraintBottom_toTopOf="@id/layout_language_arabic"
-                app:layout_constraintTop_toBottomOf="@id/layout_language_english"
-                tools:layout_editor_absoluteX="26dp" />
-
             <LinearLayout
                 android:id="@+id/layout_language_arabic"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/_10sdp"
+                android:layout_marginHorizontal="@dimen/_20sdp"
+                android:layout_marginVertical="@dimen/_15sdp"
+                android:background="@drawable/et_stroke"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:padding="@dimen/_10sdp"
+                android:paddingHorizontal="@dimen/_5sdp"
+                android:paddingVertical="@dimen/_10sdp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -157,23 +149,24 @@
 
                 <ImageView
                     android:id="@+id/iv_arabic_selected"
-                    android:layout_width="@dimen/_20sdp"
-                    android:layout_height="@dimen/_20sdp"
+                    android:layout_width="@dimen/_15sdp"
+                    android:layout_height="@dimen/_15sdp"
                     android:layout_marginHorizontal="@dimen/_5sdp"
-                    android:src="@drawable/ic_checked"
-                    android:visibility="gone"
+                    android:src="@drawable/ic_true"
+                    android:visibility="visible"
                     tools:ignore="ContentDescription" />
 
                 <TextView
                     android:id="@+id/tv_language_arabic"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_10sdp"
                     android:layout_weight="1"
                     android:fontFamily="@font/regular"
                     android:maxLines="1"
                     android:text="@string/arabic_lang"
                     android:textColor="@color/secondary"
-                    android:textSize="@dimen/_16sdp" />
+                    android:textSize="@dimen/_18sdp" />
 
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>

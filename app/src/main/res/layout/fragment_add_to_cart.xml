@@ -2,14 +2,15 @@
   ~ Copyright (c) 2021.
   ~ Created by Mohamed Khedr.
   -->
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layout_addToCart_dialog"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        tools:ignore="ContentDescription"
         android:minHeight="@dimen/_180sdp">
 
         <TextView
@@ -32,16 +33,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginVertical="@dimen/_10sdp"
-            app:layout_constraintBottom_toTopOf="@+id/layout_selectAction"
+            app:layout_constraintBottom_toTopOf="@+id/layout_addToCartFragment_selectAction"
             app:layout_constraintTop_toBottomOf="@+id/tv_alert_name" />
 
 
         <LinearLayout
-            android:id="@+id/layout_selectAction"
+            android:id="@+id/layout_addToCartFragment_selectAction"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layoutDirection="ltr"
             android:orientation="vertical"
+            android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
@@ -82,5 +83,18 @@
                 app:rippleColor="@color/primary" />
 
         </LinearLayout>
+
+        <ImageView
+            android:id="@+id/progress_fragment_addToCart"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:src="@drawable/ic_primary_hexa_shape"
+            android:visibility="gone"
+
+            app:layout_constraintBottom_toBottomOf="@id/layout_addToCartFragment_selectAction"
+            app:layout_constraintEnd_toEndOf="@id/layout_addToCartFragment_selectAction"
+            app:layout_constraintStart_toStartOf="@id/layout_addToCartFragment_selectAction"
+            app:layout_constraintTop_toTopOf="@id/layout_addToCartFragment_selectAction"
+     />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -13,7 +13,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_10sdp"
-            android:layout_marginBottom="@dimen/_5sdp"
             android:fontFamily="@font/montserrat_semi_bold"
             android:text="@string/orders"
             android:textColor="@color/secondary"
@@ -35,26 +34,26 @@
             android:rotation="180"
             android:src="@drawable/ic_blue_right_arrow"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <!--  when layout is empty -->
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_orders_fragment_empty"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="@dimen/_42sdp"
-            android:visibility="visible">
+            android:visibility="gone">
 
             <ImageView
                 android:id="@+id/iv_orders_bag"
                 android:layout_width="@dimen/_260sdp"
                 android:layout_height="@dimen/_200sdp"
                 android:layout_marginTop="@dimen/_50sdp"
+                android:contentDescription="@string/todo"
                 android:src="@drawable/empty_orders_bag"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:contentDescription="@string/todo"/>
+                app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/layout_orders_to_shop_now"
@@ -87,9 +86,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginVertical="@dimen/_10sdp"
+                    android:gravity="center"
                     android:paddingHorizontal="@dimen/_30sdp"
                     android:text="@string/looks_like_you_haven_t_made_your_order_yet"
-                    android:gravity="center"
                     android:textColor="@color/natural1"
                     android:textSize="@dimen/_12sdp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -117,14 +116,41 @@
                     app:layout_constraintTop_toBottomOf="@id/tv_order_under_your_cart" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <View
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/_42sdp"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_ordersData"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_60sdp"
+                android:layout_height="0dp"
+                android:orientation="vertical"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/layout_orders_to_shop_now"
-                tools:ignore="UselessLeaf" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_wrapBehaviorInParent="vertical_only"
+                app:reverseLayout="false" />
+
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <include
+            android:id="@+id/included_progress_orders"
+            layout="@layout/include_progress_moto"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

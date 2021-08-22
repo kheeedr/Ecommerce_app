@@ -6,7 +6,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.khedr.ecommerce.ui.fragments.AccountFragment">
+        tools:context="com.khedr.ecommerce.ui.fragments.account.AccountFragment">
 
         <TextView
             android:id="@+id/main_tv_account"
@@ -38,6 +38,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ScrollView
+            android:id="@+id/scroll_account"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="@dimen/_42sdp"
@@ -162,8 +163,7 @@
                         android:layout_width="@dimen/_15sdp"
                         android:layout_height="match_parent"
                         android:contentDescription="@string/todo"
-                        android:src="@drawable/ic_blue_right_arrow"
-                        />
+                        android:src="@drawable/ic_blue_right_arrow" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -249,7 +249,8 @@
                                 android:paddingStart="@dimen/_2sdp"
                                 android:text="@string/points"
                                 android:textColor="@color/primary"
-                                android:textSize="@dimen/_12sdp" />
+                                android:textSize="@dimen/_12sdp"
+                                tools:ignore="RtlSymmetry" />
                         </LinearLayout>
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -799,12 +800,61 @@
 
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_60sdp"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layout_logout_button"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_65sdp"
+                    android:layout_marginHorizontal="@dimen/_10sdp"
+                    android:layout_marginVertical="@dimen/_5sdp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/layout_our_info"
+                    app:layout_constraintTop_toBottomOf="@id/layout_our_info">
+
+                    <TextView
+                        android:id="@+id/bt_logout"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/_10sdp"
+                        android:background="@drawable/et_stroke"
+                        android:elevation="@dimen/_1sdp"
+                        android:fontFamily="@font/medium"
+                        android:gravity="start"
+                        android:paddingStart="@dimen/_15sdp"
+                        android:paddingEnd="@dimen/_5sdp"
+                        android:paddingVertical="@dimen/_12sdp"
+                        android:text="@string/sign_out"
+                        android:textAllCaps="false"
+                        android:textColor="@color/primary"
+                        android:textSize="@dimen/_15sdp"
+                        android:translationZ="@dimen/_2sdp"
+                        app:backgroundTint="@color/white"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="RtlSymmetry,TooManyViews"
+                        app:drawableEndCompat="@drawable/ic_blue_right_arrow"
+                        app:drawableTint="@color/primary" />
+
+                    <ImageView
+                        android:id="@+id/progress_logout"
+                        android:layout_width="@dimen/_30sdp"
+                        android:layout_height="@dimen/_30sdp"
+                        android:contentDescription="@string/todo"
+                        android:src="@drawable/ic_primary_hexa_shape"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/layout_logout_button"
                     tools:ignore="UselessLeaf" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>

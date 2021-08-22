@@ -9,7 +9,7 @@ import androidx.room.TypeConverter;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.khedr.ecommerce.database.entities.ProductsEntity;
+import com.khedr.ecommerce.database.entities.RecentlyViewedEntity;
 import com.khedr.ecommerce.pojo.product.Product;
 
 import java.io.ByteArrayOutputStream;
@@ -17,12 +17,12 @@ import java.util.ArrayList;
 
 public class Converters {
     @TypeConverter
-    public String fromProductDBToString(ProductsEntity product){
+    public String fromProductDBToString(RecentlyViewedEntity product){
         return new Gson().toJson(product);
     }
     @TypeConverter
-    public ProductsEntity fromStringToProductDB(String product){
-        return new Gson().fromJson(product, ProductsEntity.class);
+    public RecentlyViewedEntity fromStringToProductDB(String product){
+        return new Gson().fromJson(product, RecentlyViewedEntity.class);
     }
     @TypeConverter
     public String fromStringArrayListToString(ArrayList<String> arrayList){

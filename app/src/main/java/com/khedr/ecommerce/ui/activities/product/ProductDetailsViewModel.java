@@ -12,7 +12,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.khedr.ecommerce.database.AppDatabase;
-import com.khedr.ecommerce.database.entities.ProductsEntity;
+import com.khedr.ecommerce.database.entities.RecentlyViewedEntity;
 import com.khedr.ecommerce.pojo.product.Product;
 
 import org.jetbrains.annotations.NotNull;
@@ -29,11 +29,12 @@ import io.reactivex.schedulers.Schedulers;
 public class ProductDetailsViewModel extends ViewModel {
 
     private static final String TAG = "ProductDetailsViewModel";
-    public MutableLiveData<List<Product>> recentProductsMTL = new MutableLiveData<>();
+    public MutableLiveData<List<Product>> recentProductsMLD = new MutableLiveData<>();
+    public MutableLiveData<Product> productMLD = new MutableLiveData<>();
 
 
     public void addRecentProduct(Context context, Product product) {
-        AppDatabase.getInstance(context).insert(new ProductsEntity(product))
+        AppDatabase.getInstance(context).insert(new RecentlyViewedEntity(product))
                 .subscribeOn(Schedulers.computation()).observeOn(AndroidSchedulers.mainThread()).subscribe(new CompletableObserver() {
             @Override
             public void onSubscribe(@NotNull Disposable d) {
@@ -57,20 +58,20 @@ public class ProductDetailsViewModel extends ViewModel {
     public void getRecentProducts(Context context) {
 
         AppDatabase.getInstance(context).getRecentProducts().subscribeOn(Schedulers.computation()).observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new SingleObserver<List<ProductsEntity>>() {
+                .subscribe(new SingleObserver<List<RecentlyViewedEntity>>() {
                     @Override
                     public void onSubscribe(@NotNull Disposable d) {
 
                     }
 
                     @Override
-                    public void onSuccess(@NotNull List<ProductsEntity> productDBS) {
+                    public void onSuccess(@NotNull List<RecentlyViewedEntity> productDBS) {
                         ArrayList<Product> products = new ArrayList<>();
-                        for (ProductsEntity item : productDBS) {
+                        for (RecentlyViewedEntity item : productDBS) {
                             products.add(0, item.getProduct());
                         }
 
-                        recentProductsMTL.setValue(products);
+                        recentProductsMLD.setValue(products);
                     }
 
                     @Override
@@ -79,6 +80,26 @@ public class ProductDetailsViewModel extends ViewModel {
                     }
                 });
 
+    }
+
+    public void getProductById(Context context, int id) {
+        AppDatabase.getInstance(context).getProductById(id).subscribeOn(Schedulers.computation()).observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<RecentlyViewedEntity>() {
+                    @Override
+                    public void onSubscribe(@NotNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onSuccess(@NotNull RecentlyViewedEntity productDBS) {
+                        productMLD.setValue(productDBS.getProduct());
+                    }
+
+                    @Override
+                    public void onError(@NotNull Throwable e) {
+                        Log.d(TAG, "Error: " + e.getMessage());
+                    }
+                });
     }
 
 

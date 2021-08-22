@@ -3,12 +3,13 @@
  * Created by Mohamed Khedr.
  */
 
-package com.khedr.ecommerce.ui.activities.order;
+package com.khedr.ecommerce.ui.activities.addOrder;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -23,7 +24,6 @@ import com.khedr.ecommerce.pojo.order.AddOrderRequest;
 import com.khedr.ecommerce.pojo.order.EstimateOrderRequest;
 import com.khedr.ecommerce.ui.activities.Address.AddAddressActivity;
 import com.khedr.ecommerce.ui.activities.Address.AddressViewModel;
-import com.khedr.ecommerce.ui.activities.MainPage.MainPageActivity;
 import com.khedr.ecommerce.ui.adapters.SelectAddressAdapter;
 import com.khedr.ecommerce.utils.MyTextWatcher;
 import com.khedr.ecommerce.utils.UiUtils;
@@ -35,7 +35,7 @@ import java.util.Objects;
 public class AddOrderActivity extends AppCompatActivity implements View.OnClickListener, SelectAddressAdapter.OnItemClickListener {
 
     ActivityAddOrderBinding b;
-    OrderViewModel orderViewModel;
+    AddOrderViewModel addOrderViewModel;
     AddressViewModel addressViewModel;
     SelectAddressAdapter addressAdapter;
     String total;
@@ -53,7 +53,7 @@ public class AddOrderActivity extends AppCompatActivity implements View.OnClickL
 
         b = DataBindingUtil.setContentView(this, R.layout.activity_add_order);
 
-        orderViewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication())).get(OrderViewModel.class);
+        addOrderViewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication())).get(AddOrderViewModel.class);
         addressViewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication())).get(AddressViewModel.class);
 
         addressAdapter = new SelectAddressAdapter(this);
@@ -117,7 +117,7 @@ public class AddOrderActivity extends AppCompatActivity implements View.OnClickL
     protected void onResume() {
         super.onResume();
         addressViewModel.getAddresses(this);
-        orderViewModel.estimateOrder(this, new EstimateOrderRequest(isUsePoints(), getValidVoucherId()));
+        addOrderViewModel.estimateOrder(this, new EstimateOrderRequest(isUsePoints(), getValidVoucherId()));
 
     }
 
@@ -144,13 +144,13 @@ public class AddOrderActivity extends AppCompatActivity implements View.OnClickL
         } else if (v == b.btCompleteOrder) {
             if (isOrderReady()) {
                 int shippingAddressId = addressAdapter.getAddressesList().get(getSelectedAddress()).getId();
-                String promoCode;
-                if (getValidVoucherId() != null) {
-                    promoCode = Objects.requireNonNull(b.etCheckVoucher.getText()).toString();
-                } else {
-                    promoCode = null;
-                }
-                orderViewModel.addOrder(this, new AddOrderRequest(shippingAddressId, getPaymentMethod(), isUsePoints(), promoCode));
+
+                addOrderViewModel.addOrder(this,
+                        new AddOrderRequest(shippingAddressId,
+                                getPaymentMethod(),
+                                isUsePoints(),
+                                getValidVoucherId()));
+
             } else {
                 setUncompletedOrderDataError();
             }
@@ -171,7 +171,7 @@ public class AddOrderActivity extends AppCompatActivity implements View.OnClickL
                 UiUtils.textError(b.etCheckVoucherLayout, getString(R.string.empty_promo_code));
                 b.btCheckVoucher.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, b.etCheckVoucher.getHeight()));
             } else {
-                orderViewModel.validatePromoCode(this, promoCode);
+                addOrderViewModel.validatePromoCode(this, promoCode);
             }
         }
 
@@ -217,16 +217,16 @@ public class AddOrderActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void manageProgressbar() {
-        orderViewModel.isAddOrderLoading.observe(this, this::showOrHideProgressMoto);
+        addOrderViewModel.isAddOrderLoading.observe(this, this::showOrHideProgressMoto);
         addressViewModel.isGetAddressesLoading.observe(this, this::showOrHideProgressMoto);
-        orderViewModel.isEstimateLoading.observe(this, isLoading -> {
+        addOrderViewModel.isEstimateLoading.observe(this, isLoading -> {
             if (isLoading) {
                 b.progressEstimateOrder.setVisibility(View.VISIBLE);
             } else {
                 b.progressEstimateOrder.setVisibility(View.GONE);
             }
         });
-        orderViewModel.isValidateLoading.observe(this, isLoading -> {
+        addOrderViewModel.isValidateLoading.observe(this, isLoading -> {
             if (isLoading) {
                 b.progressCheckVoucher.setVisibility(View.VISIBLE);
                 b.ivValidVoucher.setVisibility(View.GONE);
@@ -247,7 +247,7 @@ public class AddOrderActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void observers() {
-        orderViewModel.addOrderResponseMLD.observe(this, addOrderResponse ->
+        addOrderViewModel.addOrderResponseMLD.observe(this, addOrderResponse ->
         {
             if (addOrderResponse.isStatus()) {
                 intentToOrderCompleted();
@@ -265,7 +265,7 @@ public class AddOrderActivity extends AppCompatActivity implements View.OnClickL
             }
         });
 
-        orderViewModel.estimateOrderResponseMLD.observe(this, estimateOrderResponse -> {
+        addOrderViewModel.estimateOrderResponseMLD.observe(this, estimateOrderResponse -> {
             if (estimateOrderResponse.isStatus()) {
 
                 int newTotal = (int) Math.ceil(estimateOrderResponse.getData().getTotal());
@@ -296,7 +296,7 @@ public class AddOrderActivity extends AppCompatActivity implements View.OnClickL
             }
         });
 
-        orderViewModel.validatePromoCodeResponseMLD.observe(this, promoCodeResponse -> {
+        addOrderViewModel.validatePromoCodeResponseMLD.observe(this, promoCodeResponse -> {
             if (promoCodeResponse.isStatus()) {
                 setValidVoucherId(promoCodeResponse.getData().getId());
                 b.ivValidVoucher.setVisibility(View.VISIBLE);
@@ -380,7 +380,7 @@ public class AddOrderActivity extends AppCompatActivity implements View.OnClickL
 
     public void setValidVoucherId(Integer validVoucherId) {
         this.validVoucherId = validVoucherId;
-        orderViewModel.estimateOrder(this, new EstimateOrderRequest(isUsePoints(), validVoucherId));
+        addOrderViewModel.estimateOrder(this, new EstimateOrderRequest(isUsePoints(), validVoucherId));
     }
 
     public boolean isCostDetailsVisible() {
@@ -427,7 +427,7 @@ public class AddOrderActivity extends AppCompatActivity implements View.OnClickL
             b.btUseVoucherFalse.setTextColor(getColor(R.color.white));
             UiUtils.animZoomOut(this, b.layoutCheckVoucher);
             b.etCheckVoucher.setText("");
-            orderViewModel.estimateOrder(this, new EstimateOrderRequest(isUsePoints(), null));
+            addOrderViewModel.estimateOrder(this, new EstimateOrderRequest(isUsePoints(), null));
         }
 
     }
@@ -443,14 +443,14 @@ public class AddOrderActivity extends AppCompatActivity implements View.OnClickL
             b.btUsePointsTrue.setTextColor(getColor(R.color.white));
             b.btUsePointsFalse.setBackgroundResource(R.color.trans);
             b.btUsePointsFalse.setTextColor(getColor(R.color.secondary));
-            orderViewModel.estimateOrder(this, new EstimateOrderRequest(true, getValidVoucherId()));
+            addOrderViewModel.estimateOrder(this, new EstimateOrderRequest(true, getValidVoucherId()));
 
         } else {
             b.btUsePointsTrue.setBackgroundResource(R.color.trans);
             b.btUsePointsTrue.setTextColor(getColor(R.color.secondary));
             b.btUsePointsFalse.setBackgroundResource(R.drawable.bt_back_filled);
             b.btUsePointsFalse.setTextColor(getColor(R.color.white));
-            orderViewModel.estimateOrder(this, new EstimateOrderRequest(false, getValidVoucherId()));
+            addOrderViewModel.estimateOrder(this, new EstimateOrderRequest(false, getValidVoucherId()));
         }
     }
 }
