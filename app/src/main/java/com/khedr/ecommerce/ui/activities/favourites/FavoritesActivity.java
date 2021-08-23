@@ -2,6 +2,7 @@ package com.khedr.ecommerce.ui.activities.favourites;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -102,6 +103,7 @@ public class FavoritesActivity extends AppCompatActivity implements View.OnClick
 
         Intent intent = new Intent(this, ProductDetailsActivity.class);
         intent.putExtra("product", productsAdapter.getProductsList().get(position));
+        Log.d("medo fav",""+productsAdapter.getProductsList().get(position).isIn_cart());
         startActivity(intent);
     }
 

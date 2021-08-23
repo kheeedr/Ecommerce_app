@@ -49,10 +49,9 @@ public class ToLoginBottomSheetFragment extends BottomSheetDialogFragment implem
         }
         dialog.setOnShowListener(dialog1 -> {
             BottomSheetDialog d = (BottomSheetDialog) dialog1;
-            FrameLayout bottomSheet = (FrameLayout) d.findViewById(R.id.design_bottom_sheet);
+            FrameLayout bottomSheet = (FrameLayout) d.findViewById(com.google.android.material.R.id.design_bottom_sheet);
             assert bottomSheet != null;
-            BottomSheetBehavior.from(bottomSheet)
-                    .setState(BottomSheetBehavior.STATE_EXPANDED);
+            BottomSheetBehavior.from(bottomSheet).setState(BottomSheetBehavior.STATE_EXPANDED);
         });
 
         dialog.setContentView(b.getRoot());
