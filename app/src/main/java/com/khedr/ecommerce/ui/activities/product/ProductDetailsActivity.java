@@ -1,10 +1,10 @@
 package com.khedr.ecommerce.ui.activities.product;
 
+
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -23,6 +23,8 @@ import com.khedr.ecommerce.ui.activities.cart.CartActivity;
 import com.khedr.ecommerce.ui.activities.cart.CartViewModel;
 import com.khedr.ecommerce.ui.activities.favourites.FavouritesViewModel;
 import com.khedr.ecommerce.ui.adapters.ProductImagesAdapter;
+
+import com.khedr.ecommerce.utils.Anim;
 import com.khedr.ecommerce.utils.UiUtils;
 import com.khedr.ecommerce.utils.UserUtils;
 
@@ -34,12 +36,13 @@ import java.util.Objects;
 @SuppressLint("SetTextI18n")
 public class ProductDetailsActivity extends AppCompatActivity implements View.OnClickListener {
 
+    public static final String TAG = "ProductDetailsActivity";
     ActivityProductDetailsBinding b;
 
     boolean is_favourite;
     boolean isIn_cart;
     ProductImagesAdapter adapter;
-    SnapHelper helper = new LinearSnapHelper();
+    SnapHelper helper;
     ArrayList<String> imagesList;
     Product product;
     FavouritesViewModel favouritesViewModel;
@@ -54,11 +57,13 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
 
         favouritesViewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication())).get(FavouritesViewModel.class);
         cartViewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication())).get(CartViewModel.class);
-        productViewModel=new ViewModelProvider(this,ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication())).get(ProductDetailsViewModel.class);
-        product = (Product) getIntent().getSerializableExtra("product");
-        productViewModel.addRecentProduct(this,product);
+        productViewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication())).get(ProductDetailsViewModel.class);
 
+        product = (Product) getIntent().getSerializableExtra("product");
         imagesList = product.getImages();
+
+        productViewModel.addRecentProduct(this, product);
+
         adapter = new ProductImagesAdapter(this, imagesList);
         b.rvProductDetails.setAdapter(adapter);
 
@@ -70,26 +75,25 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
         b.btProductDetailsToCart.setOnClickListener(this);
 
         // handles product images recyclerview
+        helper = new LinearSnapHelper();
         helper.attachToRecyclerView(b.rvProductDetails);
-        b.tvProductDetailsImageNum.setText(1 + " / " + imagesList.size());
 
+        b.tvProductDetailsImageNum.setText(1 + " / " + imagesList.size());
         b.rvProductDetails.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(@NonNull @NotNull RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
                 if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-                    int position = ((LinearLayoutManager) Objects.requireNonNull(b.rvProductDetails.getLayoutManager())).findFirstVisibleItemPosition();
+                    int position = ((LinearLayoutManager) Objects.requireNonNull(b.rvProductDetails.getLayoutManager()))
+                            .findFirstVisibleItemPosition();
                     b.tvProductDetailsImageNum.setText((position + 1) + " / " + imagesList.size());
                 }
             }
         });
+
+        observers();
         manageProgressbar();
 
-        observeOnSetFavoriteResponse();
-
-        observeOnPostToCart();
-
-        observeOnUpdateQuantity();
     }
 
     @Override
@@ -105,7 +109,7 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
         } else if (v == b.ivProductDetailsInFavourite) {
             addProductToFavorite();
         } else if (v == b.ivProductDetailsInCart) {
-            startActivity(new Intent(ProductDetailsActivity.this, CartActivity.class));
+            startActivity(new Intent(this, CartActivity.class));
         } else if (v == b.layoutProductDetailsPlus) {
             UiUtils.makeTvPlusOne(b.tvProductDetailsEditableQuantity);
         } else if (v == b.layoutProductDetailsMinus) {
@@ -166,11 +170,11 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
                 cartViewModel.updateQuantityFromProductDetails(this, newQuantity, productId);
             }
         } else {
-            UiUtils.shortToast(this, getString(R.string.you_should_login_first));
+            UiUtils.showLoginFragment(this, TAG);
         }
     }
 
-    private void observeOnPostToCart() {
+    private void observers() {
         cartViewModel.postToCartResponseMLD.observe(this, postCartResponse -> {
             if (postCartResponse.isStatus()) {
                 isIn_cart = true;
@@ -179,9 +183,7 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
             }
             UiUtils.shortToast(this, postCartResponse.getMessage());
         });
-    }
 
-    private void observeOnUpdateQuantity() {
         cartViewModel.updateQuantityResponseMLD.observe(this, updateQuantityResponse -> {
             if (updateQuantityResponse.isStatus()) {
                 b.tvProductDetailsEditableQuantity.setText("1");
@@ -190,9 +192,7 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
                 UiUtils.shortToast(this, updateQuantityResponse.getMessage());
             }
         });
-    }
 
-    private void observeOnSetFavoriteResponse() {
         favouritesViewModel.setFavoriteResponseMTL.observe(this, postFavoriteResponse -> {
             if (postFavoriteResponse.isStatus()) {
                 is_favourite = !is_favourite;
@@ -206,26 +206,29 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
                 b.ivProductDetailsInFavourite.setImageResource(R.drawable.ic_outlined_heart);
             }
         });
+
     }
+
 
     void manageProgressbar() {
 
         favouritesViewModel.isSetFavoriteLoading.observe(this, aBoolean -> {
             if (aBoolean) {
-                UiUtils.animJumpAndFade(this, b.layoutProductDetailsInFavourite);
+                Anim.animJumpAndFade(this, b.layoutProductDetailsInFavourite);
             } else {
                 b.layoutProductDetailsInFavourite.clearAnimation();
             }
         });
-        cartViewModel.isPostLoading.observe(this, this::selectBetweenButtonAndProgressbar);
-        cartViewModel.isUpdateFromProductLoading.observe(this, this::selectBetweenButtonAndProgressbar);
-        cartViewModel.isPostMultipleLoading.observe(this, this::selectBetweenButtonAndProgressbar);
+        cartViewModel.isPostLoading.observe(this, this::showButtonOrProgressbar);
+        cartViewModel.isUpdateFromProductLoading.observe(this, this::showButtonOrProgressbar);
+        cartViewModel.isPostMultipleLoading.observe(this, this::showButtonOrProgressbar);
     }
-    void selectBetweenButtonAndProgressbar(boolean isLoading){
+
+    void showButtonOrProgressbar(boolean isLoading) {
         if (isLoading) {
             b.btProductDetailsToCart.setVisibility(View.GONE);
             b.progressProductDetailsToCart.setVisibility(View.VISIBLE);
-            UiUtils.animJumpAndFade(this, b.progressProductDetailsToCart);
+            Anim.animJumpAndFade(this, b.progressProductDetailsToCart);
 
         } else {
             b.progressProductDetailsToCart.clearAnimation();
@@ -236,10 +239,9 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
 
 
     void addProductToFavorite() {
-        if (UserUtils.isSignedIn(this))   favouritesViewModel.addProductToFavorite(this, product.getId());
-
-        else UiUtils.shortToast(this, getString(R.string.you_should_login_first));
-
+        if (UserUtils.isSignedIn(this)) {
+            favouritesViewModel.addProductToFavorite(this, product.getId());
+        } else UiUtils.showLoginFragment(this, TAG);
     }
 
 

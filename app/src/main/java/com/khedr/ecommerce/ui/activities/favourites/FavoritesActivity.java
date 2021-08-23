@@ -13,10 +13,14 @@ import com.khedr.ecommerce.databinding.ActivityFavoritesBinding;
 import com.khedr.ecommerce.ui.activities.product.ProductDetailsActivity;
 import com.khedr.ecommerce.ui.adapters.ProductsAdapter;
 import com.khedr.ecommerce.ui.fragments.AddToCartBottomSheetFragment;
+import com.khedr.ecommerce.ui.fragments.ToLoginBottomSheetFragment;
+import com.khedr.ecommerce.utils.Anim;
 import com.khedr.ecommerce.utils.UiUtils;
 import com.khedr.ecommerce.utils.UserUtils;
 
 public class FavoritesActivity extends AppCompatActivity implements View.OnClickListener, ProductsAdapter.OnItemClickListener {
+
+    public static final String TAG = "FavoritesActivity";
 
     ActivityFavoritesBinding b;
     ProductsAdapter productsAdapter;
@@ -47,7 +51,7 @@ public class FavoritesActivity extends AppCompatActivity implements View.OnClick
         if (UserUtils.isSignedIn(this)) {
             favouritesViewModel.getFavorites(this);
         } else {
-            UiUtils.shortToast(this, getString(R.string.you_should_login_first));
+            UiUtils.showLoginFragment(this, TAG);
         }
 
     }
@@ -55,7 +59,7 @@ public class FavoritesActivity extends AppCompatActivity implements View.OnClick
     @Override
     protected void onPause() {
         super.onPause();
-        isFirstResume = false;
+        if (UserUtils.isSignedIn(this)) isFirstResume = false;
     }
 
     private void observers() {
@@ -78,7 +82,7 @@ public class FavoritesActivity extends AppCompatActivity implements View.OnClick
     }
 
     void showOrHideProgressMoto(boolean isLoading) {
-        UiUtils.motoProgressbar(
+        Anim.motoProgressbar(
                 this, isLoading,
                 b.includedProgressFavorites.progressMoto,
                 b.includedProgressFavorites.viewUnderMoto,

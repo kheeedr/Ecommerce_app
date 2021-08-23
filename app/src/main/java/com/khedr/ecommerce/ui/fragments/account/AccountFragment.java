@@ -13,7 +13,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ScrollView;
 
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
@@ -29,6 +28,7 @@ import com.khedr.ecommerce.ui.activities.language.LanguageActivity;
 import com.khedr.ecommerce.ui.activities.login.LoginActivity;
 import com.khedr.ecommerce.ui.activities.profile.ProfileActivity;
 import com.khedr.ecommerce.ui.activities.profile.ProfileViewModel;
+import com.khedr.ecommerce.utils.Anim;
 import com.khedr.ecommerce.utils.UiUtils;
 import com.khedr.ecommerce.utils.UserUtils;
 
@@ -117,7 +117,7 @@ public class AccountFragment extends Fragment implements View.OnClickListener {
             if (aBoolean) {
                 b.btLogout.setVisibility(View.GONE);
                 b.progressLogout.setVisibility(View.VISIBLE);
-                UiUtils.animJumpAndFade(requireContext(), b.progressLogout);
+                Anim.animJumpAndFade(requireContext(), b.progressLogout);
 
             } else {
                 b.btLogout.setVisibility(View.VISIBLE);

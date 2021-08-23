@@ -23,6 +23,7 @@ import com.khedr.ecommerce.databinding.FragmentOrdersBinding;
 import com.khedr.ecommerce.ui.activities.cart.CartActivity;
 import com.khedr.ecommerce.ui.activities.orderDetails.OrderDetailsActivity;
 import com.khedr.ecommerce.ui.adapters.OrdersAdapter;
+import com.khedr.ecommerce.utils.Anim;
 import com.khedr.ecommerce.utils.UiUtils;
 import com.khedr.ecommerce.utils.UserUtils;
 
@@ -32,6 +33,7 @@ public class OrdersFragment extends Fragment implements View.OnClickListener, Or
     OrdersAdapter ordersAdapter;
     OrdersViewModel ordersViewModel;
     boolean isFirstResume = true;
+    public static final String TAG = "OrdersFragment";
 
     public OrdersFragment() {
         // Required empty public constructor
@@ -63,7 +65,7 @@ public class OrdersFragment extends Fragment implements View.OnClickListener, Or
         if (UserUtils.isSignedIn(requireContext())) {
             ordersViewModel.getOrders(requireContext());
         } else {
-            UiUtils.shortToast(requireContext(), getString(R.string.you_should_login_first));
+            UiUtils.showLoginFragment(requireActivity(), TAG);
         }
 
     }
@@ -71,7 +73,7 @@ public class OrdersFragment extends Fragment implements View.OnClickListener, Or
     @Override
     public void onPause() {
         super.onPause();
-        isFirstResume = false;
+        if (UserUtils.isSignedIn(requireContext())) isFirstResume = false;
     }
 
     @Override
@@ -97,12 +99,12 @@ public class OrdersFragment extends Fragment implements View.OnClickListener, Or
                     if (!getAllOrdersResponse.getData().getData().isEmpty()) {
                         ordersAdapter.setOrdersData(getAllOrdersResponse.getData().getData());
                         if (isFirstResume) {
-                            UiUtils.animFadeIn(requireContext(), b.rvOrdersData);
-                            UiUtils.animFadeOut(requireContext(), b.layoutOrdersFragmentEmpty);
+                            Anim.animFadeIn(requireContext(), b.rvOrdersData);
+                            Anim.animFadeOut(requireContext(), b.layoutOrdersFragmentEmpty);
                         }
                     } else {
-                        UiUtils.animFadeIn(requireContext(), b.layoutOrdersFragmentEmpty);
-                        UiUtils.animFadeOut(requireContext(), b.rvOrdersData);
+                        Anim.animFadeIn(requireContext(), b.layoutOrdersFragmentEmpty);
+                        Anim.animFadeOut(requireContext(), b.rvOrdersData);
                     }
                 } else {
                     UiUtils.shortToast(requireContext(), getAllOrdersResponse.getMessage());
@@ -119,13 +121,11 @@ public class OrdersFragment extends Fragment implements View.OnClickListener, Or
 
     void showOrHideProgressMoto(boolean isLoading) {
         if (getActivity() != null) {
-            UiUtils.motoProgressbar(
+            Anim.motoProgressbar(
                     requireContext(), isLoading,
                     b.includedProgressOrders.progressMoto,
                     b.includedProgressOrders.viewUnderMoto,
                     b.includedProgressOrders.getRoot());
         }
-
-
     }
 }

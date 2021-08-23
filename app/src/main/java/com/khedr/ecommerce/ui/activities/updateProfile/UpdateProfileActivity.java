@@ -25,6 +25,7 @@ import com.khedr.ecommerce.database.Converters;
 import com.khedr.ecommerce.databinding.ActivityUpdateProfileBinding;
 import com.khedr.ecommerce.pojo.user.UserDataForRegisterRequest;
 import com.khedr.ecommerce.ui.activities.profile.ProfileActivity;
+import com.khedr.ecommerce.utils.Anim;
 import com.khedr.ecommerce.utils.UiUtils;
 import com.khedr.ecommerce.utils.UserUtils;
 
@@ -78,7 +79,7 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
             if (aBoolean) {
                 b.btUpdateProfileSubmit.setVisibility(View.GONE);
                 b.progressUpdateProfile.setVisibility(View.VISIBLE);
-                UiUtils.animJumpAndFade(this, b.progressUpdateProfile);
+                Anim.animJumpAndFade(this, b.progressUpdateProfile);
             } else {
                 b.btUpdateProfileSubmit.setVisibility(View.VISIBLE);
                 b.progressUpdateProfile.clearAnimation();

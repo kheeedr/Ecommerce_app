@@ -22,19 +22,21 @@ import com.khedr.ecommerce.ui.activities.product.ProductDetailsViewModel;
 import com.khedr.ecommerce.ui.activities.search.SearchViewModel;
 import com.khedr.ecommerce.ui.adapters.ProductsAdapter;
 import com.khedr.ecommerce.ui.fragments.AddToCartBottomSheetFragment;
+import com.khedr.ecommerce.utils.Anim;
 import com.khedr.ecommerce.utils.UiUtils;
+import com.khedr.ecommerce.utils.UserUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
 public class CategoryProductsActivity extends AppCompatActivity implements View.OnClickListener, ProductsAdapter.OnItemClickListener {
+    static final String TAG = "CategoryProductsActivity";
     ActivityCategoryItemsBinding b;
     ProductDetailsViewModel productViewModel;
     ProductsAdapter productsAdapter;
     CategoriesViewModel categoriesViewModel;
     SearchViewModel searchViewModel;
     Intent intent;
-
 
 
     @Override
@@ -88,14 +90,17 @@ public class CategoryProductsActivity extends AppCompatActivity implements View.
 
     @Override
     public void onItemAddToCartClicked(int position, ProductsAdapter.ProductsViewHolder productsViewHolder) {
+        if (UserUtils.isSignedIn(this)) {
+            AddToCartBottomSheetFragment bottomSheetFragment = new AddToCartBottomSheetFragment(
+                    productsAdapter,
+                    position,
+                    productsViewHolder.b.ivProduct.getDrawable());
 
-        AddToCartBottomSheetFragment bottomSheetFragment = new AddToCartBottomSheetFragment(
-                productsAdapter,
-                position,
-                productsViewHolder.b.ivProduct.getDrawable());
-
-        bottomSheetFragment.show(getSupportFragmentManager(), "TAG");
-        getSupportFragmentManager().executePendingTransactions();
+            bottomSheetFragment.show(getSupportFragmentManager(), "TAG");
+            getSupportFragmentManager().executePendingTransactions();
+        } else {
+            UiUtils.showLoginFragment(this, TAG);
+        }
 
     }
 
@@ -105,12 +110,12 @@ public class CategoryProductsActivity extends AppCompatActivity implements View.
         categoriesViewModel.getCategoryItemsResponseMLD.observe(this, getCategoryItemsResponse -> {
             if (getCategoryItemsResponse.isStatus()) {
                 if (getCategoryItemsResponse.getData().getData().isEmpty()) {
-                    UiUtils.animFadeIn(this, b.layoutCategoryProductsProductNotFound);
+                    Anim.animFadeIn(this, b.layoutCategoryProductsProductNotFound);
                 } else {
                     ArrayList<Product> products = getCategoryItemsResponse.getData().getData();
                     Collections.reverse(products);
                     productsAdapter.setProductsList(products);
-                    UiUtils.animFadeIn(this, b.rvCategoryProducts);
+                    Anim.animFadeIn(this, b.rvCategoryProducts);
                 }
             } else {
                 UiUtils.shortToast(this, getCategoryItemsResponse.getMessage());
@@ -119,12 +124,12 @@ public class CategoryProductsActivity extends AppCompatActivity implements View.
         searchViewModel.searchResponseMLD.observe(this, searchResponse -> {
             if (searchResponse.isStatus()) {
                 if (searchResponse.getData().getData().isEmpty()) {
-                    UiUtils.animFadeIn(this, b.layoutCategoryProductsProductNotFound);
+                    Anim.animFadeIn(this, b.layoutCategoryProductsProductNotFound);
                 } else {
                     ArrayList<Product> products = searchResponse.getData().getData();
                     Collections.reverse(products);
                     productsAdapter.setProductsList(products);
-                    UiUtils.animFadeIn(this, b.rvCategoryProducts);
+                    Anim.animFadeIn(this, b.rvCategoryProducts);
                 }
             } else {
                 UiUtils.shortToast(this, searchResponse.getMessage());
@@ -140,7 +145,7 @@ public class CategoryProductsActivity extends AppCompatActivity implements View.
     }
 
     void showOrHideMotoProgressbar(boolean isLoading) {
-        UiUtils.motoProgressbar(
+        Anim.motoProgressbar(
                 this, isLoading,
                 b.includedProgressCategoryProducts.progressMoto,
                 b.includedProgressCategoryProducts.viewUnderMoto,

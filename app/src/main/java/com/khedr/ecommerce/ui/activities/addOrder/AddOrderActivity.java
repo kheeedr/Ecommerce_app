@@ -9,7 +9,6 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -25,6 +24,7 @@ import com.khedr.ecommerce.pojo.order.EstimateOrderRequest;
 import com.khedr.ecommerce.ui.activities.Address.AddAddressActivity;
 import com.khedr.ecommerce.ui.activities.Address.AddressViewModel;
 import com.khedr.ecommerce.ui.adapters.SelectAddressAdapter;
+import com.khedr.ecommerce.utils.Anim;
 import com.khedr.ecommerce.utils.MyTextWatcher;
 import com.khedr.ecommerce.utils.UiUtils;
 import com.khedr.ecommerce.utils.UserUtils;
@@ -204,12 +204,12 @@ public class AddOrderActivity extends AppCompatActivity implements View.OnClickL
 
         if (addressAdapter.getAddressesList().get(position).isExpanded()) {
 
-            UiUtils.animZoomOut(this, holder.b.expandableLayoutSelectAddress);
+            Anim.animZoomOut(this, holder.b.expandableLayoutSelectAddress);
             addressAdapter.getAddressesList().get(position).setExpanded(false);
 
 
         } else {
-            UiUtils.animZoomIn(this, holder.b.expandableLayoutSelectAddress);
+            Anim.animZoomIn(this, holder.b.expandableLayoutSelectAddress);
             addressAdapter.getAddressesList().get(position).setExpanded(true);
             b.rvAddOrderSelectAddress.scrollToPosition(position);
         }
@@ -239,7 +239,7 @@ public class AddOrderActivity extends AppCompatActivity implements View.OnClickL
     }
 
     void showOrHideProgressMoto(boolean isLoading) {
-        UiUtils.motoProgressbar(
+        Anim.motoProgressbar(
                 this, isLoading,
                 b.includedProgressMotoAddOrder.progressMoto,
                 b.includedProgressMotoAddOrder.viewUnderMoto,
@@ -419,13 +419,13 @@ public class AddOrderActivity extends AppCompatActivity implements View.OnClickL
             b.btUseVoucherTrue.setTextColor(getColor(R.color.white));
             b.btUseVoucherFalse.setBackgroundResource(R.color.trans);
             b.btUseVoucherFalse.setTextColor(getColor(R.color.secondary));
-            UiUtils.animZoomIn(this, b.layoutCheckVoucher);
+            Anim.animZoomIn(this, b.layoutCheckVoucher);
         } else {
             b.btUseVoucherTrue.setBackgroundResource(R.color.trans);
             b.btUseVoucherTrue.setTextColor(getColor(R.color.secondary));
             b.btUseVoucherFalse.setBackgroundResource(R.drawable.bt_back_filled);
             b.btUseVoucherFalse.setTextColor(getColor(R.color.white));
-            UiUtils.animZoomOut(this, b.layoutCheckVoucher);
+            Anim.animZoomOut(this, b.layoutCheckVoucher);
             b.etCheckVoucher.setText("");
             addOrderViewModel.estimateOrder(this, new EstimateOrderRequest(isUsePoints(), null));
         }

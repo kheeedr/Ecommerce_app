@@ -26,12 +26,16 @@ import com.khedr.ecommerce.ui.activities.splash.SplashActivity;
 import com.khedr.ecommerce.ui.adapters.BannersAdapter;
 import com.khedr.ecommerce.ui.adapters.RecentlyViewedAdapter;
 import com.khedr.ecommerce.utils.UiUtils;
+import com.khedr.ecommerce.utils.UserUtils;
+
 import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 
 public class HomeFragment extends Fragment implements View.OnClickListener, RecentlyViewedAdapter.OnItemClickListener {
 
 
+    public static final String TAG = "HomeFragment";
     public static BannersAndProductsModel homeResponse;
     FragmentHomeBinding b;
     BannersAdapter bannersAdapter;
@@ -171,13 +175,17 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Rece
 
     @Override
     public void onItemAddToCartClicked(int position, RecentlyViewedAdapter.ProductsViewHolder productsViewHolder) {
+        if (UserUtils.isSignedIn(requireContext())) {
+            AddToCartBottomSheetFragment bottomSheetFragment = new AddToCartBottomSheetFragment(
+                    recentProductsAdapter,
+                    position,
+                    productsViewHolder.b.ivProduct.getDrawable());
+            bottomSheetFragment.show(requireActivity().getSupportFragmentManager(), "RecentlyViewed");
+            requireActivity().getSupportFragmentManager().executePendingTransactions();
 
-        AddToCartBottomSheetFragment bottomSheetFragment = new AddToCartBottomSheetFragment(
-                recentProductsAdapter,
-                position,
-                productsViewHolder.b.ivProduct.getDrawable());
-        bottomSheetFragment.show(requireActivity().getSupportFragmentManager(), "RecentlyViewed");
-        requireActivity().getSupportFragmentManager().executePendingTransactions();
+        } else {
+            UiUtils.showLoginFragment(requireActivity(), TAG);
+        }
 
     }
 

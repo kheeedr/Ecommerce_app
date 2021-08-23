@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2021.
+  ~ Created by Mohamed Khedr.
+  -->
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="ContentDescription">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_toLogin_dialog"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_alert_name"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginVertical="@dimen/_10sdp"
+            android:gravity="center"
+            android:text="@string/you_should_login_first"
+            android:textColor="@color/secondary"
+            android:textSize="@dimen/_15sdp"
+            app:layout_constraintBottom_toTopOf="@id/iv_toLogin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/iv_toLogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_50sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_login"
+            app:layout_constraintBottom_toTopOf="@+id/layout_toLoginFragment_selectAction" />
+
+
+        <LinearLayout
+            android:id="@+id/layout_toLoginFragment_selectAction"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+
+            <Button
+                android:id="@+id/action_toLogin"
+                style="@style/Widget.MaterialComponents.Button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_20sdp"
+                android:layout_marginVertical="@dimen/_5sdp"
+                android:background="@drawable/bt_back_filled"
+                android:fontFamily="@font/medium"
+                android:paddingVertical="@dimen/_2sdp"
+                android:text="@string/login_now"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_15sdp"
+
+                />
+
+            <Button
+                android:id="@+id/action_cancel_toLogin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_20sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:background="@drawable/bt_back"
+                android:fontFamily="@font/medium"
+                android:paddingVertical="@dimen/_2sdp"
+                android:text="@string/cancel"
+                android:textAllCaps="false"
+                android:textColor="@color/primary"
+                android:textSize="@dimen/_15sdp"
+                app:backgroundTint="#FFFFFF"
+                app:backgroundTintMode="multiply"
+                app:rippleColor="@color/primary" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

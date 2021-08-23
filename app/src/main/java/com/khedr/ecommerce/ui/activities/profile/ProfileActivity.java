@@ -17,6 +17,7 @@ import com.khedr.ecommerce.ui.activities.Address.AddAddressActivity;
 import com.khedr.ecommerce.ui.activities.Address.AddressViewModel;
 import com.khedr.ecommerce.ui.activities.updateProfile.UpdateProfileActivity;
 import com.khedr.ecommerce.ui.adapters.ShowAddressesAdapter;
+import com.khedr.ecommerce.utils.Anim;
 import com.khedr.ecommerce.utils.UiUtils;
 import com.khedr.ecommerce.utils.UserUtils;
 
@@ -104,7 +105,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     void showOrHideMotoProgressbar(boolean isLoading) {
-        UiUtils.motoProgressbar(
+        Anim.motoProgressbar(
                 this, isLoading,
                 b.includedProgressProfile.progressMoto,
                 b.includedProgressProfile.viewUnderMoto,

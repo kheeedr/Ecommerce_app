@@ -26,6 +26,7 @@ import com.khedr.ecommerce.ui.activities.cart.CartViewModel;
 import com.khedr.ecommerce.ui.activities.product.ProductDetailsViewModel;
 import com.khedr.ecommerce.ui.adapters.ProductsAdapter;
 import com.khedr.ecommerce.ui.adapters.RecentlyViewedAdapter;
+import com.khedr.ecommerce.utils.Anim;
 import com.khedr.ecommerce.utils.UiUtils;
 import com.khedr.ecommerce.utils.UserUtils;
 
@@ -94,7 +95,7 @@ public class AddToCartBottomSheetFragment extends BottomSheetDialogFragment impl
         if (isLoading) {
             b.layoutAddToCartFragmentSelectAction.setVisibility(View.INVISIBLE);
             b.progressFragmentAddToCart.setVisibility(View.VISIBLE);
-            UiUtils.animJumpAndFade(requireContext(),b.progressFragmentAddToCart);
+            Anim.animJumpAndFade(requireContext(),b.progressFragmentAddToCart);
         } else {
             b.layoutAddToCartFragmentSelectAction.setVisibility(View.VISIBLE);
             b.progressFragmentAddToCart.clearAnimation();

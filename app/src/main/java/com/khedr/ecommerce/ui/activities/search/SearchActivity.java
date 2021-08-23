@@ -21,13 +21,16 @@ import com.khedr.ecommerce.ui.activities.splash.SplashActivity;
 import com.khedr.ecommerce.ui.adapters.ProductsAdapter;
 import com.khedr.ecommerce.ui.adapters.SearchSuggestionsAdapter;
 import com.khedr.ecommerce.ui.fragments.AddToCartBottomSheetFragment;
+import com.khedr.ecommerce.utils.Anim;
 import com.khedr.ecommerce.utils.MyTextWatcher;
 import com.khedr.ecommerce.utils.UiUtils;
+import com.khedr.ecommerce.utils.UserUtils;
 
 import java.util.ArrayList;
 
 
 public class SearchActivity extends AppCompatActivity implements View.OnClickListener, ProductsAdapter.OnItemClickListener {
+    private static final String TAG ="SearchActivity" ;
     ActivitySearchBinding b;
     SearchSuggestionsAdapter suggestionsAdapter;
     ProductsAdapter productsAdapter;
@@ -89,14 +92,17 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
 
     @Override
     public void onItemAddToCartClicked(int position, ProductsAdapter.ProductsViewHolder productsViewHolder) {
+        if (UserUtils.isSignedIn(this)) {
+            AddToCartBottomSheetFragment bottomSheetFragment = new AddToCartBottomSheetFragment(
+                    productsAdapter,
+                    position,
+                    productsViewHolder.b.ivProduct.getDrawable());
 
-        AddToCartBottomSheetFragment bottomSheetFragment = new AddToCartBottomSheetFragment(
-                productsAdapter,
-                position,
-                productsViewHolder.b.ivProduct.getDrawable());
-
-        bottomSheetFragment.show(getSupportFragmentManager(), "TAG");
-        getSupportFragmentManager().executePendingTransactions();
+            bottomSheetFragment.show(getSupportFragmentManager(), "TAG");
+            getSupportFragmentManager().executePendingTransactions();
+        } else {
+            UiUtils.showLoginFragment(this, TAG);
+        }
     }
 
     private void observers() {
@@ -141,7 +147,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     void showOrHideProgressMoto(boolean isLoading) {
-        UiUtils.motoProgressbar(
+        Anim.motoProgressbar(
                 this, isLoading,
                 b.includedProgressSearch.progressMoto,
                 b.includedProgressSearch.viewUnderMoto,

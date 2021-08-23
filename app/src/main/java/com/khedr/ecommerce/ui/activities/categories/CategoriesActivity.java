@@ -17,6 +17,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.khedr.ecommerce.R;
 import com.khedr.ecommerce.databinding.ActivityCategoriesBinding;
 import com.khedr.ecommerce.ui.adapters.CategoriesAdapter;
+import com.khedr.ecommerce.utils.Anim;
 import com.khedr.ecommerce.utils.UiUtils;
 
 public class CategoriesActivity extends AppCompatActivity implements View.OnClickListener, CategoriesAdapter.OnItemClickListener {
@@ -59,7 +60,7 @@ public class CategoriesActivity extends AppCompatActivity implements View.OnClic
         categoriesViewModel.getCategoriesResponseMLD.observe(this, getCategoriesResponse -> {
             if (getCategoriesResponse.isStatus()) {
                 categoriesAdapter.setCategoriesList(getCategoriesResponse.getData().getData());
-                UiUtils.animFadeIn(this, b.rvCategories);
+                Anim.animFadeIn(this, b.rvCategories);
             } else {
                 UiUtils.shortToast(this, getCategoriesResponse.getMessage());
             }
@@ -71,7 +72,7 @@ public class CategoriesActivity extends AppCompatActivity implements View.OnClic
     }
 
     void showOrHideProgressMoto(boolean isLoading) {
-        UiUtils.motoProgressbar(
+        Anim.motoProgressbar(
                 this, isLoading,
                 b.includedProgressCategories.progressMoto,
                 b.includedProgressCategories.viewUnderMoto,

@@ -3,7 +3,6 @@ package com.khedr.ecommerce.ui.activities.cart;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -19,6 +18,8 @@ import com.khedr.ecommerce.ui.activities.MainPage.MainPageActivity;
 import com.khedr.ecommerce.ui.activities.addOrder.AddOrderActivity;
 import com.khedr.ecommerce.ui.activities.product.ProductDetailsActivity;
 import com.khedr.ecommerce.ui.adapters.CartAdapter;
+import com.khedr.ecommerce.ui.fragments.ToLoginBottomSheetFragment;
+import com.khedr.ecommerce.utils.Anim;
 import com.khedr.ecommerce.utils.UiUtils;
 import com.khedr.ecommerce.utils.UserUtils;
 
@@ -28,7 +29,7 @@ import java.util.List;
 
 @SuppressLint("SetTextI18n")
 public class CartActivity extends AppCompatActivity implements View.OnClickListener, CartAdapter.OnItemClickListener {
-
+    public static final String TAG = "CartActivity";
     ActivityCartBinding b;
     CartAdapter cartAdapter;
     CartViewModel cartViewModel;
@@ -70,14 +71,14 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
         if (UserUtils.isSignedIn(this)) {
             cartViewModel.getCartProducts(this);
         } else {
-            UiUtils.shortToast(this, getString(R.string.you_should_login_first));
+            UiUtils.showLoginFragment(this, TAG);
         }
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        isFirstResume = false;
+        if (UserUtils.isSignedIn(this)) isFirstResume = false;
     }
 
     @Override
@@ -92,7 +93,7 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
             hideDeletingDialog();
         } else if (v == b.includedAlertDialog.actionSure) {
             // hide deleting dialog and the background
-            UiUtils.animZoomOut(this, b.includedAlertDialog.layoutAlertDialog);
+            Anim.animZoomOut(this, b.includedAlertDialog.layoutAlertDialog);
             b.includedAlertDialog.getRoot().setVisibility(View.GONE);
             // calling delete function from the viewModel
             cartViewModel.deleteCartProduct(this, cartAdapter.getList().get(deletedPosition).getId());
@@ -155,7 +156,7 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
                 total = getCartResponse.getData().getTotal();
                 b.tvCartTotal.setText(getString(R.string.total) + " " + (int) Math.ceil(total) + " EGP");
                 if (cartItems.isEmpty()) {
-                    UiUtils.animFadeIn(this,b.layoutCartEmpty);
+                    Anim.animFadeIn(this, b.layoutCartEmpty);
                     b.layoutCartFilled.setVisibility(View.GONE);
                 } else {
                     Collections.reverse(cartItems);
@@ -163,7 +164,7 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
                     b.layoutCartFilled.setVisibility(View.VISIBLE);
                     b.layoutCartEmpty.setVisibility(View.GONE);
                     if (isFirstResume) {
-                        UiUtils.animFadeIn(this, b.layoutCartFilled);
+                        Anim.animFadeIn(this, b.layoutCartFilled);
                     }
                 }
             } else {
@@ -198,8 +199,8 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
                 cartAdapter.getList().remove(deletedPosition);
                 cartAdapter.notifyItemRemoved(deletedPosition);
                 if (cartAdapter.getList().isEmpty()) {
-                    UiUtils.animFadeOut(this, b.layoutCartFilled);
-                    UiUtils.animFadeIn(this,b.layoutCartEmpty);
+                    Anim.animFadeOut(this, b.layoutCartFilled);
+                    Anim.animFadeIn(this, b.layoutCartEmpty);
                 }
             }
             UiUtils.shortToast(this, deleteProductResponse.getMessage());
@@ -221,15 +222,15 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
 
 
     void showDeletingDialog() {
-        UiUtils.animFadeIn(this, b.includedAlertDialog.getRoot(), 500);
+        Anim.animFadeIn(this, b.includedAlertDialog.getRoot(), 500);
         new Handler().postDelayed(() -> b.includedAlertDialog.getRoot().setClickable(true), 500);
-        UiUtils.animZoomIn(this, b.includedAlertDialog.layoutAlertDialog);
+        Anim.animZoomIn(this, b.includedAlertDialog.layoutAlertDialog);
     }
 
     void hideDeletingDialog() {
         b.includedAlertDialog.getRoot().setClickable(false);
-        UiUtils.animZoomOut(this, b.includedAlertDialog.layoutAlertDialog);
-        UiUtils.animFadeOut(this, b.includedAlertDialog.getRoot());
+        Anim.animZoomOut(this, b.includedAlertDialog.layoutAlertDialog);
+        Anim.animFadeOut(this, b.includedAlertDialog.getRoot());
     }
 
     void manageProgressbar() {
@@ -240,7 +241,7 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     void showOrHideProgressMoto(boolean isLoading) {
-        UiUtils.motoProgressbar(
+        Anim.motoProgressbar(
                 this, isLoading,
                 b.includeProgressCart.progressMoto,
                 b.includeProgressCart.viewUnderMoto,

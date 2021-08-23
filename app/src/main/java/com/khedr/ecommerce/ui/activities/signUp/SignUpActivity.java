@@ -24,6 +24,7 @@ import com.khedr.ecommerce.R;
 import com.khedr.ecommerce.database.Converters;
 import com.khedr.ecommerce.databinding.ActivitySignUpBinding;
 import com.khedr.ecommerce.pojo.user.UserDataForRegisterRequest;
+import com.khedr.ecommerce.utils.Anim;
 import com.khedr.ecommerce.utils.MyTextWatcher;
 import com.khedr.ecommerce.utils.UiUtils;
 
@@ -78,7 +79,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             if (aBoolean) {
                 b.btSign.setVisibility(View.GONE);
                 b.progressSign.setVisibility(View.VISIBLE);
-                UiUtils.animJumpAndFade(this, b.progressSign);
+                Anim.animJumpAndFade(this, b.progressSign);
             } else {
                 b.btSign.setVisibility(View.VISIBLE);
                 b.progressSign.clearAnimation();

@@ -16,6 +16,7 @@ import android.view.View;
 import com.khedr.ecommerce.R;
 import com.khedr.ecommerce.databinding.ActivityOrderDetailsBinding;
 import com.khedr.ecommerce.ui.adapters.OrderedProductsAdapter;
+import com.khedr.ecommerce.utils.Anim;
 import com.khedr.ecommerce.utils.UiUtils;
 
 public class OrderDetailsActivity extends AppCompatActivity implements View.OnClickListener {
@@ -114,7 +115,7 @@ public class OrderDetailsActivity extends AppCompatActivity implements View.OnCl
     }
 
     void showOrHideProgressMoto(boolean isLoading) {
-        UiUtils.motoProgressbar(
+        Anim.motoProgressbar(
                 this, isLoading,
                 b.includedProgressOrderDetails.progressMoto,
                 b.includedProgressOrderDetails.viewUnderMoto,
@@ -130,10 +131,10 @@ public class OrderDetailsActivity extends AppCompatActivity implements View.OnCl
         this.addressExpanded = addressExpanded;
 
         if (!addressExpanded) {
-            UiUtils.animZoomOut(this, b.expandableLayoutOrderDetails);
+            Anim.animZoomOut(this, b.expandableLayoutOrderDetails);
             b.ivOrderDetailsExpandAddress.setRotation(90);
         } else {
-            UiUtils.animZoomIn(this, b.expandableLayoutOrderDetails);
+            Anim.animZoomIn(this, b.expandableLayoutOrderDetails);
             b.ivOrderDetailsExpandAddress.setRotation(270);
         }
 

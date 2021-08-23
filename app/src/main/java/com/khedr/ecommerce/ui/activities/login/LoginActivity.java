@@ -3,7 +3,6 @@ package com.khedr.ecommerce.ui.activities.login;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Pair;
 import android.util.Patterns;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -17,6 +16,7 @@ import com.khedr.ecommerce.R;
 import com.khedr.ecommerce.databinding.ActivityLoginBinding;
 import com.khedr.ecommerce.pojo.user.UserDataForLoginRequest;
 import com.khedr.ecommerce.ui.activities.signUp.SignUpActivity;
+import com.khedr.ecommerce.utils.Anim;
 import com.khedr.ecommerce.utils.MyTextWatcher;
 import com.khedr.ecommerce.utils.UiUtils;
 import com.khedr.ecommerce.utils.UserUtils;
@@ -107,7 +107,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             if (aBoolean) {
                 b.layoutLoginButtons.setVisibility(View.INVISIBLE);
                 b.progressLogin.setVisibility(View.VISIBLE);
-                UiUtils.animJumpAndFade(this, b.progressLogin);
+                Anim.animJumpAndFade(this, b.progressLogin);
             } else {
                 b.layoutLoginButtons.setVisibility(View.VISIBLE);
                 b.progressLogin.clearAnimation();

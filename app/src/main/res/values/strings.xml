@@ -123,7 +123,7 @@
     <string name="arabic_lang">عربي</string>
     <string name="connection_error">Sorry, connection error</string>
     <string name="select_profile_image">please select a profile Image</string>
-    <string name="you_should_login_first">you should login first</string>
+    <string name="you_should_login_first">You should login first</string>
     <string name="failed_to_load_image">failed to load image</string>
     <string name="toast_sorry">Sorry, </string>
     <string name="system_default">System default</string>
@@ -218,5 +218,6 @@
     <string name="order_details">Order details</string>
     <string name="cancel_order">Cancel order</string>
     <string name="order_canceled_successfully">Order canceled successfully</string>
+    <string name="you_are_not_logged_in_yet">You are not logged in yet</string>
 
 </resources>

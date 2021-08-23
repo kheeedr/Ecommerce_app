@@ -27,6 +27,8 @@ public abstract class UserUtils {
         return getPref(context).getString(context.getString(R.string.pref_user_token), "");
     }
 
+
+
     public static void saveUserProfileToShared(UserApiResponse response, Context context, String image) {
 
         SharedPreferences pref = getPref(context);

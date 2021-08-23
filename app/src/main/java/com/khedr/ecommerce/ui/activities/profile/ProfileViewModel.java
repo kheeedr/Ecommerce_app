@@ -2,19 +2,16 @@ package com.khedr.ecommerce.ui.activities.profile;
 
 import android.content.Context;
 
-import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.khedr.ecommerce.R;
 import com.khedr.ecommerce.network.RetrofitInstance;
-import com.khedr.ecommerce.pojo.Address.GetAddressesResponse;
 import com.khedr.ecommerce.pojo.user.UserApiResponse;
 import com.khedr.ecommerce.utils.UserUtils;
 
 import org.jetbrains.annotations.NotNull;
 
-import io.reactivex.Single;
 import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;

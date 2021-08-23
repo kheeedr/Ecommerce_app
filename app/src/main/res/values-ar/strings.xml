@@ -219,6 +219,7 @@
     <string name="order_details">تفاصيل الطلب</string>
     <string name="cancel_order">الغاء الطلب</string>
     <string name="order_canceled_successfully">تم الغاء الطلب بنجاح</string>
+    <string name="you_are_not_logged_in_yet">لم تقم بتسجيل الدخول </string>
 
 
 </resources>

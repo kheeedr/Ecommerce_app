@@ -17,6 +17,7 @@ import com.khedr.ecommerce.R;
 import com.khedr.ecommerce.databinding.ActivityAddAddressBinding;
 import com.khedr.ecommerce.pojo.Address.AddressData;
 import com.khedr.ecommerce.pojo.Address.GetAddressData;
+import com.khedr.ecommerce.utils.Anim;
 import com.khedr.ecommerce.utils.MyTextWatcher;
 import com.khedr.ecommerce.utils.UiUtils;
 
@@ -161,7 +162,7 @@ public class AddAddressActivity extends AppCompatActivity implements View.OnClic
     }
 
     void showOrHideMotoProgressbar(boolean isLoading) {
-        UiUtils.motoProgressbar(
+        Anim.motoProgressbar(
                 this, isLoading,
                 b.includedProgressAddAddress.progressMoto,
                 b.includedProgressAddAddress.viewUnderMoto,
