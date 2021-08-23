@@ -15,10 +15,12 @@ import android.view.View;
 
 import com.khedr.ecommerce.R;
 import com.khedr.ecommerce.databinding.ActivityOrderDetailsBinding;
+import com.khedr.ecommerce.pojo.order.GetOrderDetailsResponse;
 import com.khedr.ecommerce.ui.adapters.OrderedProductsAdapter;
 import com.khedr.ecommerce.utils.Anim;
 import com.khedr.ecommerce.utils.UiUtils;
 
+@SuppressLint("SetTextI18n")
 public class OrderDetailsActivity extends AppCompatActivity implements View.OnClickListener {
     ActivityOrderDetailsBinding b;
     OrderDetailsViewModel orderDetailsViewModel;
@@ -56,41 +58,10 @@ public class OrderDetailsActivity extends AppCompatActivity implements View.OnCl
         }
     }
 
-    @SuppressLint("SetTextI18n")
     private void observers() {
         orderDetailsViewModel.orderDetailsResponseMLD.observe(this, getOrderDetailsResponse -> {
             if (getOrderDetailsResponse.isStatus()) {
-                orderId = getOrderDetailsResponse.getData().getId();
-                b.tvOrderDetailsId.setText("" + orderId);
-                b.tvOrderDetailsDate.setText(getOrderDetailsResponse.getData().getDate());
-                b.tvOrderDetailsStatus.setText(getOrderDetailsResponse.getData().getStatus());
-                b.tvOrderDetailsCost.setText("" + (int) getOrderDetailsResponse.getData().getCost() + " EGP");
-                b.tvOrderDetailsVat.setText("" + (int) getOrderDetailsResponse.getData().getVat() + " EGP");
-                b.tvOrderDetailsPaymentMethod.setText(getOrderDetailsResponse.getData().getPayment_method());
-                b.tvOrderDetailsTotalCost.setText("" + (int) getOrderDetailsResponse.getData().getTotal() + " EGP");
-                b.tvOrderDetailsAddressName.setText(getOrderDetailsResponse.getData().getAddress().getName());
-                b.tvExpandedCityNameOrderDetails.setText(getOrderDetailsResponse.getData().getAddress().getCity());
-                b.tvExpandedRegionNameOrderDetails.setText(getOrderDetailsResponse.getData().getAddress().getRegion());
-                b.tvExpandedAddressDetailsOrderDetails.setText(getOrderDetailsResponse.getData().getAddress().getDetails());
-
-                int points = (int) getOrderDetailsResponse.getData().getPoints();
-                if (points > 0) {
-                    b.tvOrderDetailsPoints.setText("" + points + " EGP");
-                } else {
-                    b.tvOrderDetailsPoints.setVisibility(View.GONE);
-                    b.textView4PointsOrderDetails.setVisibility(View.GONE);
-                }
-
-                int discount = (int) getOrderDetailsResponse.getData().getDiscount();
-                if (discount > 0) {
-                    b.tvOrderDetailsVoucher.setText("" + discount + " EGP");
-                } else {
-                    b.tvOrderDetailsVoucher.setVisibility(View.GONE);
-                    b.textView5DiscountOrderDetails.setVisibility(View.GONE);
-                }
-
-                orderedProductsAdapter.setOrderedItems(getOrderDetailsResponse.getData().getProducts());
-
+                setOrderDetails(getOrderDetailsResponse);
 
             } else {
                 UiUtils.shortToast(this, getOrderDetailsResponse.getMessage());
@@ -103,10 +74,50 @@ public class OrderDetailsActivity extends AppCompatActivity implements View.OnCl
             if (cancelOrderResponse.isStatus()) {
                 UiUtils.shortToast(this, getString(R.string.order_canceled_successfully));
                 finish();
-            }else {
+            } else {
                 UiUtils.shortToast(this, cancelOrderResponse.getMessage());
             }
         });
+    }
+
+    void setOrderDetails(GetOrderDetailsResponse getOrderDetailsResponse) {
+
+        orderId = getOrderDetailsResponse.getData().getId();
+        b.tvOrderDetailsId.setText("" + orderId);
+        b.tvOrderDetailsDate.setText(getOrderDetailsResponse.getData().getDate());
+        b.tvOrderDetailsStatus.setText(getOrderDetailsResponse.getData().getStatus());
+        b.tvOrderDetailsCost.setText("" + (int) getOrderDetailsResponse.getData().getCost() + " EGP");
+        b.tvOrderDetailsVat.setText("" + (int) getOrderDetailsResponse.getData().getVat() + " EGP");
+        b.tvOrderDetailsPaymentMethod.setText(getOrderDetailsResponse.getData().getPayment_method());
+        b.tvOrderDetailsTotalCost.setText("" + (int) getOrderDetailsResponse.getData().getTotal() + " EGP");
+        b.tvOrderDetailsAddressName.setText(getOrderDetailsResponse.getData().getAddress().getName());
+        b.tvExpandedCityNameOrderDetails.setText(getOrderDetailsResponse.getData().getAddress().getCity());
+        b.tvExpandedRegionNameOrderDetails.setText(getOrderDetailsResponse.getData().getAddress().getRegion());
+        b.tvExpandedAddressDetailsOrderDetails.setText(getOrderDetailsResponse.getData().getAddress().getDetails());
+
+        int points = (int) getOrderDetailsResponse.getData().getPoints();
+        if (points > 0) {
+            b.tvOrderDetailsPoints.setText("" + points + " EGP");
+        } else {
+            b.tvOrderDetailsPoints.setVisibility(View.GONE);
+            b.textView4PointsOrderDetails.setVisibility(View.GONE);
+        }
+
+        int discount = (int) getOrderDetailsResponse.getData().getDiscount();
+        if (discount > 0) {
+            b.tvOrderDetailsVoucher.setText("" + discount + " EGP");
+        } else {
+            b.tvOrderDetailsVoucher.setVisibility(View.GONE);
+            b.textView5DiscountOrderDetails.setVisibility(View.GONE);
+        }
+        orderedProductsAdapter.setOrderedItems(getOrderDetailsResponse.getData().getProducts());
+        if (isCanceledOrder(getOrderDetailsResponse.getData().getStatus())){
+            b.btCancelOrder.setVisibility(View.GONE);
+        }
+        else {
+            b.btCancelOrder.setVisibility(View.VISIBLE);
+        }
+
     }
 
     private void progressbar() {
@@ -123,6 +134,11 @@ public class OrderDetailsActivity extends AppCompatActivity implements View.OnCl
 
     }
 
+    // Cancelled // ملغي
+    // جديد // New
+    boolean isCanceledOrder(String status){
+        return status.equals("Cancelled") || status.equals("ملغي");
+    }
     public boolean isAddressExpanded() {
         return addressExpanded;
     }

@@ -121,7 +121,7 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/et_login_email"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/_40sdp"
+                        android:layout_height="wrap_content"
 
                         android:autofillHints="email"
                         android:background="@drawable/et_stroke"
@@ -155,7 +155,7 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/et_login_password"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/_40sdp"
+                        android:layout_height="wrap_content"
                         android:background="@drawable/et_stroke"
                         android:fontFamily="@font/medium"
                         android:imeOptions="actionDone"

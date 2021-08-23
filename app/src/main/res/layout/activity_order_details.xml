@@ -342,21 +342,24 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginVertical="@dimen/_3sdp"
-                            android:text="@string/expanded_city" />
+                            android:text="@string/expanded_city"
+                            android:textSize="@dimen/_10sdp"/>
 
                         <TextView
                             android:id="@+id/tv_expanded_region_name_orderDetails"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginVertical="@dimen/_3sdp"
-                            android:text="@string/expanded_region" />
+                            android:text="@string/expanded_region"
+                            android:textSize="@dimen/_10sdp"/>
 
                         <TextView
                             android:id="@+id/tv_expanded_address_details_orderDetails"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginVertical="@dimen/_3sdp"
-                            android:text="@string/expanded_details" />
+                            android:text="@string/expanded_details"
+                            android:textSize="@dimen/_10sdp"/>
 
 
                     </LinearLayout>

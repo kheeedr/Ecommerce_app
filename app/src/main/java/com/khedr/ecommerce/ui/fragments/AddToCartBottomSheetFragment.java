@@ -67,7 +67,6 @@ public class AddToCartBottomSheetFragment extends BottomSheetDialogFragment impl
 
         cartViewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory
                 .getInstance(requireActivity().getApplication())).get(CartViewModel.class);
-        Log.d("medo BottomSheetFragment", cartViewModel.toString());
         productViewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory
                 .getInstance(requireActivity().getApplication())).get(ProductDetailsViewModel.class);
 
@@ -77,6 +76,8 @@ public class AddToCartBottomSheetFragment extends BottomSheetDialogFragment impl
         b.actionAddToCart.setOnClickListener(this);
         b.includeItemCart.layoutCartPlus.setOnClickListener(this);
         b.includeItemCart.layoutCartMinus.setOnClickListener(this);
+
+
         setView();
         observers();
         progressbar();

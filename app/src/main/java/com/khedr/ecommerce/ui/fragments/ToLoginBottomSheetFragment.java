@@ -12,8 +12,13 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.FrameLayout;
+
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
+
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.khedr.ecommerce.R;
 import com.khedr.ecommerce.databinding.FragmentToLoginBinding;
@@ -42,6 +47,13 @@ public class ToLoginBottomSheetFragment extends BottomSheetDialogFragment implem
         if (isCancelClosesParent()) {
             dialog.setCanceledOnTouchOutside(false);
         }
+        dialog.setOnShowListener(dialog1 -> {
+            BottomSheetDialog d = (BottomSheetDialog) dialog1;
+            FrameLayout bottomSheet = (FrameLayout) d.findViewById(R.id.design_bottom_sheet);
+            assert bottomSheet != null;
+            BottomSheetBehavior.from(bottomSheet)
+                    .setState(BottomSheetBehavior.STATE_EXPANDED);
+        });
 
         dialog.setContentView(b.getRoot());
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    >
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layout_selectAddress"
@@ -70,21 +70,24 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="@dimen/_3sdp"
-                android:text="@string/expanded_city" />
+                android:text="@string/expanded_city"
+                android:textSize="@dimen/_10sdp"/>
 
             <TextView
                 android:id="@+id/tv_expanded_region_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="@dimen/_3sdp"
-                android:text="@string/expanded_region" />
+                android:text="@string/expanded_region"
+                android:textSize="@dimen/_10sdp"/>
 
             <TextView
                 android:id="@+id/tv_expanded_address_details"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="@dimen/_3sdp"
-                android:text="@string/expanded_details" />
+                android:text="@string/expanded_details"
+                android:textSize="@dimen/_10sdp"/>
 
 
         </LinearLayout>

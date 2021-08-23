@@ -45,14 +45,12 @@ public abstract class UiUtils {
 
         ToLoginBottomSheetFragment fragment = new ToLoginBottomSheetFragment();
         fragment.show(activity.getSupportFragmentManager(), TAG);
-        activity.getSupportFragmentManager().executePendingTransactions();
+//        activity.getSupportFragmentManager().executePendingTransactions();
     }
 
     public static void showLoginFragment(FragmentActivity activity, String TAG) {
-
         ToLoginBottomSheetFragment fragment = new ToLoginBottomSheetFragment();
         fragment.show(activity.getSupportFragmentManager(), TAG);
-        activity.getSupportFragmentManager().executePendingTransactions();
     }
 
     public static void getImageViaUrl(Context context, String url, ImageView imageView, View progressBar) {

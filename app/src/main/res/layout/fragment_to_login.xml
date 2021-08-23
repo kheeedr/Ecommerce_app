@@ -10,7 +10,6 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layout_toLogin_dialog"
-
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -30,14 +29,15 @@
 
         <ImageView
             android:id="@+id/iv_toLogin"
-            android:layout_width="match_parent"
+            android:layout_width="@dimen/_200sdp"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/_50sdp"
             android:layout_marginBottom="@dimen/_10sdp"
             android:adjustViewBounds="true"
             android:scaleType="fitXY"
             android:src="@drawable/ic_login"
-            app:layout_constraintBottom_toTopOf="@+id/layout_toLoginFragment_selectAction" />
+            app:layout_constraintBottom_toTopOf="@+id/layout_toLoginFragment_selectAction"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
 
         <LinearLayout

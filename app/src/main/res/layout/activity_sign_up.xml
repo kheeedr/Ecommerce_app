@@ -92,7 +92,7 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/et_sign_name"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/_40sdp"
+                        android:layout_height="wrap_content"
                         android:background="@drawable/et_stroke"
                         android:fontFamily="@font/medium"
                         android:hint="@string/name"
@@ -119,7 +119,7 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/et_sign_phone"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/_40sdp"
+                        android:layout_height="wrap_content"
                         android:background="@drawable/et_stroke"
                         android:fontFamily="@font/medium"
                         android:hint="@string/phone"
@@ -145,7 +145,7 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/et_sign_email"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/_40sdp"
+                        android:layout_height="wrap_content"
                         android:background="@drawable/et_stroke"
                         android:fontFamily="@font/medium"
                         android:hint="@string/e_mail"
@@ -174,7 +174,7 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/et_sign_password"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/_40sdp"
+                        android:layout_height="wrap_content"
                         android:background="@drawable/et_stroke"
                         android:fontFamily="@font/medium"
                         android:hint="@string/password"
@@ -203,7 +203,7 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/et_sign_repassword"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/_40sdp"
+                        android:layout_height="wrap_content"
                         android:background="@drawable/et_stroke"
                         android:fontFamily="@font/medium"
                         android:hint="@string/re_password"
