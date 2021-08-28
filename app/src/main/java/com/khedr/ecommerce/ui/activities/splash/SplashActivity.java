@@ -39,6 +39,7 @@ public class SplashActivity extends AppCompatActivity implements View.OnClickLis
 
         viewModel.responseBody.observe(this, homePageApiResponse -> {
             if (homePageApiResponse.isStatus()) {
+//                throw new RuntimeException("Test Crash");
                 homeResponse = homePageApiResponse.getData();
                 Collections.reverse(homeResponse.getProducts());
                 startActivity(new Intent(SplashActivity.this, MainPageActivity.class)

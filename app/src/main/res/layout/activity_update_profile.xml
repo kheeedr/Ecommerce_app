@@ -6,7 +6,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="25dp"
+        android:fitsSystemWindows="true"
         tools:context="com.khedr.ecommerce.ui.activities.updateProfile.UpdateProfileActivity">
 
         <TextView
@@ -65,7 +65,8 @@
                     app:layout_constraintBottom_toTopOf="@id/layout_update_name"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0" />
 
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -76,7 +77,6 @@
                     android:layout_marginHorizontal="@dimen/_20sdp"
                     android:layout_marginTop="@dimen/_20sdp"
                     app:hintEnabled="false"
-                    app:layout_constraintBottom_toTopOf="@id/layout_update_phone"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/iv_update_user_image"
@@ -104,7 +104,6 @@
                     android:layout_marginHorizontal="@dimen/_20sdp"
                     android:layout_marginTop="@dimen/_10sdp"
                     app:hintEnabled="false"
-                    app:layout_constraintBottom_toTopOf="@id/layout_update_email"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/layout_update_name"
@@ -131,7 +130,6 @@
                     android:layout_marginHorizontal="@dimen/_20sdp"
                     android:layout_marginTop="@dimen/_10sdp"
                     app:hintEnabled="false"
-                    app:layout_constraintBottom_toTopOf="@id/layout_update_new_password"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/layout_update_phone"
@@ -160,8 +158,8 @@
                     android:layout_marginHorizontal="@dimen/_20sdp"
                     android:layout_marginTop="@dimen/_10sdp"
                     app:endIconMode="password_toggle"
+                    app:errorIconDrawable="@null"
                     app:hintEnabled="false"
-                    app:layout_constraintBottom_toTopOf="@id/layout_update_repassword"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/layout_update_email"
@@ -187,12 +185,15 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/_20sdp"
-                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginVertical="@dimen/_10sdp"
                     app:endIconMode="password_toggle"
+                    app:errorIconDrawable="@null"
                     app:hintEnabled="false"
+                    app:layout_constraintBottom_toTopOf="@+id/layout_update_profile_submit"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/layout_update_new_password"
+                    app:layout_constraintVertical_bias="0.0"
                     app:startIconDrawable="@drawable/ic_lock"
                     app:startIconTint="@color/secondary">
 
@@ -213,12 +214,10 @@
                     android:id="@+id/layout_update_profile_submit"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/_65sdp"
-                    android:layout_margin="@dimen/_20sdp"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginHorizontal="@dimen/_20sdp"
+                    app:layout_constraintBottom_toTopOf="@+id/space2"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/layout_update_repassword"
-                    app:layout_constraintVertical_bias="0.8">
+                    app:layout_constraintStart_toStartOf="parent">
 
                     <Button
                         android:id="@+id/bt_update_profile_submit"
@@ -249,6 +248,12 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <Space
+                    android:id="@+id/space2"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
+                    app:layout_constraintBottom_toBottomOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
 

@@ -46,6 +46,7 @@ public final class RetrofitInstance {
     private final ApiInterface apiInterface;
 
     public RetrofitInstance() {
+
         Retrofit retrofit = new Retrofit
                 .Builder()
                 .baseUrl(BASE_URL)

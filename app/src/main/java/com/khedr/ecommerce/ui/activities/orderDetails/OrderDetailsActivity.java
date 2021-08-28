@@ -90,10 +90,10 @@ public class OrderDetailsActivity extends AppCompatActivity implements View.OnCl
         b.tvOrderDetailsVat.setText("" + (int) getOrderDetailsResponse.getData().getVat() + " EGP");
         b.tvOrderDetailsPaymentMethod.setText(getOrderDetailsResponse.getData().getPayment_method());
         b.tvOrderDetailsTotalCost.setText("" + (int) getOrderDetailsResponse.getData().getTotal() + " EGP");
-        b.tvOrderDetailsAddressName.setText(getOrderDetailsResponse.getData().getAddress().getName());
-        b.tvExpandedCityNameOrderDetails.setText(getOrderDetailsResponse.getData().getAddress().getCity());
-        b.tvExpandedRegionNameOrderDetails.setText(getOrderDetailsResponse.getData().getAddress().getRegion());
-        b.tvExpandedAddressDetailsOrderDetails.setText(getOrderDetailsResponse.getData().getAddress().getDetails());
+        b.tvOrderDetailsAddressName.setText(" "+getOrderDetailsResponse.getData().getAddress().getName());
+        b.tvExpandedCityNameOrderDetails.append(" "+getOrderDetailsResponse.getData().getAddress().getCity());
+        b.tvExpandedRegionNameOrderDetails.append(" "+getOrderDetailsResponse.getData().getAddress().getRegion());
+        b.tvExpandedAddressDetailsOrderDetails.append(" "+getOrderDetailsResponse.getData().getAddress().getDetails());
 
         int points = (int) getOrderDetailsResponse.getData().getPoints();
         if (points > 0) {

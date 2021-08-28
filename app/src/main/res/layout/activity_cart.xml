@@ -11,7 +11,8 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="25dp">
+            android:fitsSystemWindows="true"
+            app:layout_constraintTop_toTopOf="parent">
 
             <TextView
                 android:id="@+id/main_tv_cart"
@@ -139,22 +140,13 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <!--            <ImageView-->
-                <!--                android:id="@+id/iv_cart_back"-->
-                <!--                android:layout_width="@dimen/_200sdp"-->
-                <!--                android:layout_height="@dimen/_200sdp"-->
-                <!--                android:layout_marginTop="@dimen/_50sdp"-->
-                <!--                android:paddingTop="@dimen/_30sdp"-->
-                <!--                android:src="@drawable/ic_cart_back"-->
-                <!--                app:layout_constraintEnd_toEndOf="parent"-->
-                <!--                app:layout_constraintStart_toStartOf="parent"-->
-                <!--                app:layout_constraintTop_toTopOf="parent"-->
-                <!--                android:contentDescription="@string/todo"/>-->
 
                 <ImageView
                     android:id="@+id/iv_cart_bag"
-                    android:layout_width="@dimen/_230sdp"
-                    android:layout_height="@dimen/_230sdp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/_220sdp"
+                    android:adjustViewBounds="true"
+
                     android:contentDescription="@string/todo"
                     android:src="@drawable/empty_car2"
                     app:layout_constraintBottom_toTopOf="@id/layout_cart_to_shop_now"

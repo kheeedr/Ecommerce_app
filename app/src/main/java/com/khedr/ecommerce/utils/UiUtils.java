@@ -74,7 +74,7 @@ public abstract class UiUtils {
                 progressBar.setVisibility(View.INVISIBLE);
                 return false;
             }
-        }).into(imageView);
+        }).timeout(30000).into(imageView);
 
 
     }
@@ -102,7 +102,7 @@ public abstract class UiUtils {
                 }
                 return false;
             }
-        }).into(imageView);
+        }).timeout(30000).into(imageView);
 
 
     }

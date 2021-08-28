@@ -12,7 +12,8 @@
             android:id="@+id/constraintLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="25dp">
+            android:fitsSystemWindows="true"
+            app:layout_constraintTop_toTopOf="parent">
 
             <TextView
                 android:id="@+id/main_tv_categoryProducts"

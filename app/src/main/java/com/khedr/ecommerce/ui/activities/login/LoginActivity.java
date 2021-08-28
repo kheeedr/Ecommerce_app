@@ -41,9 +41,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         manageKeyboardButtonDone();
 
         manageProgressbar();
-
         observers();
-
+//        KeyboardVisibilityEvent.setEventListener(
+//                this,
+//                isOpen -> {
+//                    if (isOpen) {
+//                        b.spcUnderKeyboardLogin.setVisibility(View.VISIBLE);
+//                    } else {
+//                        b.spcUnderKeyboardLogin.setVisibility(View.GONE);
+//                    }
+//                    UiUtils.shortToast(this, "keyboard is Open=" + isOpen);
+//                });
     }
 
 

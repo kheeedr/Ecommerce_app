@@ -6,7 +6,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="25dp"
+        android:fitsSystemWindows="true"
         tools:context=".ui.activities.signUp.SignUpActivity">
 
         <TextView
@@ -219,11 +219,9 @@
                     android:layout_width="0dp"
                     android:layout_height="@dimen/_45sdp"
                     android:layout_marginVertical="@dimen/_20sdp"
-                    app:layout_constraintBottom_toTopOf="@id/layout_under_sign_bt"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/et_sign_repassword_layout"
-                    app:layout_constraintVertical_bias="0.1">
+                    app:layout_constraintTop_toBottomOf="@id/et_sign_repassword_layout">
 
                     <Button
                         android:id="@+id/bt_sign"
@@ -264,6 +262,8 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/layout_sign_bt"
+                    app:layout_constraintVertical_bias="1.0"
                     tools:ignore="UselessLeaf" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>

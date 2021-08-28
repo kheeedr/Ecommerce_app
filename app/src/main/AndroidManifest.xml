@@ -14,15 +14,15 @@
         <activity
             android:name=".ui.activities.orderDetails.OrderDetailsActivity"
             android:screenOrientation="nosensor"
-            android:windowSoftInputMode="adjustPan|stateAlwaysVisible" />
+            android:windowSoftInputMode="stateAlwaysVisible|adjustResize" />
         <activity
             android:name=".ui.activities.addOrder.OrderCompletedActivity"
             android:screenOrientation="nosensor"
-            android:windowSoftInputMode="adjustPan|stateAlwaysVisible"/>
+            android:windowSoftInputMode="adjustPan|stateAlwaysVisible" />
         <activity
             android:name=".ui.activities.Address.AddAddressActivity"
             android:screenOrientation="nosensor"
-            android:windowSoftInputMode="adjustPan|stateAlwaysVisible" />
+            android:windowSoftInputMode="stateAlwaysVisible|adjustResize" />
         <activity
             android:name=".ui.activities.addOrder.AddOrderActivity"
             android:screenOrientation="nosensor"
@@ -33,9 +33,9 @@
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
             android:name=".ui.activities.splash.SplashActivity"
+            android:exported="true"
             android:screenOrientation="nosensor"
-            android:windowSoftInputMode="adjustPan|stateHidden"
-            android:exported="true">
+            android:windowSoftInputMode="adjustPan|stateHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -77,7 +77,7 @@
         <activity
             android:name=".ui.activities.login.LoginActivity"
             android:screenOrientation="nosensor"
-            android:windowSoftInputMode="adjustPan|stateAlwaysVisible" />
+            android:windowSoftInputMode="stateAlwaysVisible|adjustResize" />
         <activity
             android:name=".ui.activities.aboutUs.AboutUsActivity"
             android:screenOrientation="nosensor"
@@ -85,7 +85,7 @@
         <activity
             android:name=".ui.activities.updateProfile.UpdateProfileActivity"
             android:screenOrientation="nosensor"
-            android:windowSoftInputMode="adjustPan|stateAlwaysVisible" />
+            android:windowSoftInputMode="stateAlwaysVisible|adjustResize" />
         <activity
             android:name=".ui.activities.profile.ProfileActivity"
             android:screenOrientation="nosensor"
@@ -93,7 +93,7 @@
         <activity
             android:name=".ui.activities.signUp.SignUpActivity"
             android:screenOrientation="nosensor"
-            android:windowSoftInputMode="adjustPan|stateAlwaysVisible" />
+            android:windowSoftInputMode="stateAlwaysVisible|adjustResize" />
     </application>
 
 </manifest>
