@@ -11,10 +11,10 @@ import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.khedr.ecommerce.R;
-import com.khedr.ecommerce.database.Converters;
+import com.khedr.ecommerce.local.Converters;
 import com.khedr.ecommerce.databinding.ActivityProfileBinding;
-import com.khedr.ecommerce.ui.activities.Address.AddAddressActivity;
-import com.khedr.ecommerce.ui.activities.Address.AddressViewModel;
+import com.khedr.ecommerce.ui.activities.address.AddAddressActivity;
+import com.khedr.ecommerce.ui.activities.address.AddressViewModel;
 import com.khedr.ecommerce.ui.activities.updateProfile.UpdateProfileActivity;
 import com.khedr.ecommerce.ui.adapters.ShowAddressesAdapter;
 import com.khedr.ecommerce.utils.Anim;

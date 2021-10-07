@@ -1,4 +1,4 @@
-package com.khedr.ecommerce.database;
+package com.khedr.ecommerce.local;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -9,7 +9,7 @@ import androidx.room.TypeConverter;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.khedr.ecommerce.database.entities.RecentlyViewedEntity;
+import com.khedr.ecommerce.local.entities.RecentlyViewedEntity;
 import com.khedr.ecommerce.pojo.product.Product;
 
 import java.io.ByteArrayOutputStream;

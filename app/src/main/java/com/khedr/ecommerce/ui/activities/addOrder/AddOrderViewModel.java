@@ -13,7 +13,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.khedr.ecommerce.R;
-import com.khedr.ecommerce.database.AppDatabase;
+import com.khedr.ecommerce.local.AppDatabase;
 import com.khedr.ecommerce.network.RetrofitInstance;
 import com.khedr.ecommerce.pojo.order.AddOrderRequest;
 import com.khedr.ecommerce.pojo.order.AddOrderResponse;

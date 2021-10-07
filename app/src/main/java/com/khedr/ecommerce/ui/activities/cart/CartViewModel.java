@@ -1,14 +1,13 @@
 package com.khedr.ecommerce.ui.activities.cart;
 
 import android.content.Context;
-import android.util.Log;
 
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.khedr.ecommerce.R;
-import com.khedr.ecommerce.database.AppDatabase;
+import com.khedr.ecommerce.local.AppDatabase;
 import com.khedr.ecommerce.network.RetrofitInstance;
 import com.khedr.ecommerce.pojo.product.ProductId;
 import com.khedr.ecommerce.pojo.product.cart.delete.DeleteFromCartResponse;

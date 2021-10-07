@@ -1,10 +1,10 @@
-package com.khedr.ecommerce.database;
+package com.khedr.ecommerce.local;
 
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
 
-import com.khedr.ecommerce.database.entities.RecentlyViewedEntity;
+import com.khedr.ecommerce.local.entities.RecentlyViewedEntity;
 
 import java.util.List;
 

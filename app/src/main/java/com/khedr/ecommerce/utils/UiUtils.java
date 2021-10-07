@@ -23,7 +23,7 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.google.android.material.textfield.TextInputLayout;
 import com.khedr.ecommerce.R;
-import com.khedr.ecommerce.database.Converters;
+import com.khedr.ecommerce.local.Converters;
 import com.khedr.ecommerce.ui.fragments.ToLoginBottomSheetFragment;
 
 import java.util.Locale;
@@ -37,8 +37,8 @@ public abstract class UiUtils {
             toast.cancel();
         }
         toast = Toast.makeText(context, message, Toast.LENGTH_SHORT);
-
         toast.show();
+
     }
 
     public static void showLoginFragment(AppCompatActivity activity, String TAG) {

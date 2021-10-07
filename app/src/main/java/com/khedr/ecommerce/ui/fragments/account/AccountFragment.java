@@ -19,8 +19,8 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.khedr.ecommerce.R;
-import com.khedr.ecommerce.database.AppDatabase;
-import com.khedr.ecommerce.database.Converters;
+import com.khedr.ecommerce.local.AppDatabase;
+import com.khedr.ecommerce.local.Converters;
 import com.khedr.ecommerce.databinding.FragmentAccountBinding;
 import com.khedr.ecommerce.ui.activities.aboutUs.AboutUsActivity;
 import com.khedr.ecommerce.ui.activities.contactUs.ContactUsActivity;

@@ -3,7 +3,7 @@
  * Created by Mohamed Khedr.
  */
 
-package com.khedr.ecommerce.database.entities;
+package com.khedr.ecommerce.local.entities;
 
 import androidx.room.Entity;
 import androidx.room.Ignore;

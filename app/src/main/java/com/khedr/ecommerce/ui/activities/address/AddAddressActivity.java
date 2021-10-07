@@ -3,7 +3,7 @@
  * Created by Mohamed Khedr.
  */
 
-package com.khedr.ecommerce.ui.activities.Address;
+package com.khedr.ecommerce.ui.activities.address;
 
 import android.content.Intent;
 import android.os.Bundle;

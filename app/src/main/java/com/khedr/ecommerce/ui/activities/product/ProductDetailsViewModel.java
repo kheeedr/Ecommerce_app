@@ -11,8 +11,8 @@ import android.util.Log;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.khedr.ecommerce.database.AppDatabase;
-import com.khedr.ecommerce.database.entities.RecentlyViewedEntity;
+import com.khedr.ecommerce.local.AppDatabase;
+import com.khedr.ecommerce.local.entities.RecentlyViewedEntity;
 import com.khedr.ecommerce.pojo.product.Product;
 
 import org.jetbrains.annotations.NotNull;

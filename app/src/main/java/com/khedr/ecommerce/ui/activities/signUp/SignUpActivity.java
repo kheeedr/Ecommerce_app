@@ -21,7 +21,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.khedr.ecommerce.R;
-import com.khedr.ecommerce.database.Converters;
+import com.khedr.ecommerce.local.Converters;
 import com.khedr.ecommerce.databinding.ActivitySignUpBinding;
 import com.khedr.ecommerce.pojo.user.UserDataForRegisterRequest;
 import com.khedr.ecommerce.utils.Anim;

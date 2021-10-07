@@ -1,4 +1,4 @@
-package com.khedr.ecommerce.database;
+package com.khedr.ecommerce.local;
 
 import android.content.Context;
 
@@ -7,7 +7,7 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 
-import com.khedr.ecommerce.database.entities.RecentlyViewedEntity;
+import com.khedr.ecommerce.local.entities.RecentlyViewedEntity;
 
 import java.util.List;
 

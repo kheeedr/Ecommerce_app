@@ -36,14 +36,14 @@
             android:rotation="180"
             android:src="@drawable/ic_blue_right_arrow"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="@dimen/_42sdp"
-            android:orientation="vertical"
             android:fillViewport="true"
+            android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -65,38 +65,38 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-<!--                <TextView-->
-<!--                    android:id="@+id/tv_about_khadrawy"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginTop="@dimen/_20sdp"-->
-<!--                    android:layout_marginEnd="@dimen/_40sdp"-->
-<!--                    android:fontFamily="@font/medium"-->
-<!--                    android:text="@string/khadrawy"-->
-<!--                    android:textColor="@color/secondary"-->
-<!--                    android:textSize="@dimen/_30sdp"-->
-<!--                    app:layout_constraintEnd_toEndOf="parent"-->
-<!--                    app:layout_constraintStart_toStartOf="parent"-->
-<!--                    app:layout_constraintTop_toTopOf="parent" />-->
+                <!--                <TextView-->
+                <!--                    android:id="@+id/tv_about_khadrawy"-->
+                <!--                    android:layout_width="wrap_content"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_marginTop="@dimen/_20sdp"-->
+                <!--                    android:layout_marginEnd="@dimen/_40sdp"-->
+                <!--                    android:fontFamily="@font/medium"-->
+                <!--                    android:text="@string/khadrawy"-->
+                <!--                    android:textColor="@color/secondary"-->
+                <!--                    android:textSize="@dimen/_30sdp"-->
+                <!--                    app:layout_constraintEnd_toEndOf="parent"-->
+                <!--                    app:layout_constraintStart_toStartOf="parent"-->
+                <!--                    app:layout_constraintTop_toTopOf="parent" />-->
 
-<!--                <TextView-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginEnd="@dimen/_40sdp"-->
-<!--                    android:fontFamily="@font/montserrat_semi_bold"-->
-<!--                    android:paddingBottom="@dimen/_3sdp"-->
-<!--                    android:text="@string/market"-->
-<!--                    android:textColor="@color/natural1"-->
-<!--                    android:textSize="@dimen/_12sdp"-->
-<!--                    app:layout_constraintBottom_toBottomOf="@id/tv_about_khadrawy"-->
-<!--                    app:layout_constraintStart_toEndOf="@id/tv_about_khadrawy" />-->
+                <!--                <TextView-->
+                <!--                    android:layout_width="wrap_content"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_marginEnd="@dimen/_40sdp"-->
+                <!--                    android:fontFamily="@font/montserrat_semi_bold"-->
+                <!--                    android:paddingBottom="@dimen/_3sdp"-->
+                <!--                    android:text="@string/market"-->
+                <!--                    android:textColor="@color/natural1"-->
+                <!--                    android:textSize="@dimen/_12sdp"-->
+                <!--                    app:layout_constraintBottom_toBottomOf="@id/tv_about_khadrawy"-->
+                <!--                    app:layout_constraintStart_toEndOf="@id/tv_about_khadrawy" />-->
 
                 <ImageView
                     android:id="@+id/iv_about_man_with_bag"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/_200sdp"
-                    android:layout_marginTop="@dimen/_45sdp"
                     android:layout_marginHorizontal="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_45sdp"
                     android:contentDescription="@string/todo"
                     android:src="@drawable/about_us"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -108,8 +108,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_40sdp"
-                    android:text="@string/about_us_and_our_terms"
                     android:gravity="center"
+                    android:text="@string/about_us_and_our_terms"
                     android:textColor="@color/secondary"
                     android:textSize="@dimen/_20sdp"
 
@@ -121,39 +121,42 @@
                     android:id="@+id/tv_about_lorem_paragraph"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_7sdp"
-                    android:text="@string/lorem_ipsum_text"
                     android:layout_marginHorizontal="@dimen/_15sdp"
-                    android:textAlignment="center"
+                    android:layout_marginTop="@dimen/_7sdp"
                     android:justificationMode="inter_word"
                     android:lineSpacingExtra="@dimen/_2sdp"
+                    android:text="@string/lorem_ipsum_text"
+                    android:textAlignment="center"
                     android:textColor="@color/secondary"
                     android:textSize="@dimen/_11sdp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_about_in_mid"
                     tools:ignore="UnusedAttribute" />
+
                 <ImageView
                     android:layout_width="@dimen/_15sdp"
                     android:layout_height="@dimen/_15sdp"
                     android:layout_marginTop="@dimen/_9sdp"
-                    app:layout_constraintEnd_toStartOf="@id/tv_about_version"
-                    app:layout_constraintTop_toTopOf="@id/tv_about_version"
+                    android:contentDescription="@string/todo"
                     android:src="@drawable/ic_info"
-                    android:contentDescription="@string/todo"/>
+                    app:layout_constraintEnd_toStartOf="@id/tv_about_version"
+                    app:layout_constraintTop_toTopOf="@id/tv_about_version" />
+
                 <TextView
                     android:id="@+id/tv_about_version"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/version"
-                    android:paddingHorizontal="@dimen/_5sdp"
-                    android:textColor="@color/natural1"
-                    android:fontFamily="@font/montserrat_semi_bold"
                     android:layout_marginVertical="@dimen/_15sdp"
+                    android:fontFamily="@font/montserrat_semi_bold"
+                    android:paddingHorizontal="@dimen/_5sdp"
+                    android:text="@string/version"
+                    android:textColor="@color/natural1"
                     android:textSize="@dimen/_20sdp"
-                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_about_lorem_paragraph"/>
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_about_lorem_paragraph" />
+
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_10sdp"

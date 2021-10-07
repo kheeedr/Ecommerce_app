@@ -3,10 +3,9 @@
  * Created by Mohamed Khedr.
  */
 
-package com.khedr.ecommerce.ui.activities.Address;
+package com.khedr.ecommerce.ui.activities.address;
 
 import android.content.Context;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;

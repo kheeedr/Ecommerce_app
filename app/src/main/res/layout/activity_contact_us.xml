@@ -65,7 +65,8 @@
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:contentDescription="@string/todo" />
+                    android:contentDescription="@string/todo"
+                    tools:ignore="RtlSymmetry" />
                 <ImageView
                     android:id="@+id/iv_contact_girl"
                     android:layout_width="@dimen/_250sdp"

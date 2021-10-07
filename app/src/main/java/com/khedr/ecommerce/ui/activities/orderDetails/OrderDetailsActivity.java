@@ -134,9 +134,7 @@ public class OrderDetailsActivity extends AppCompatActivity implements View.OnCl
 
     }
 
-    // Cancelled // ملغي
-    // جديد // New
-    boolean isCanceledOrder(String status){
+    public boolean isCanceledOrder(String status){
         return status.equals("Cancelled") || status.equals("ملغي");
     }
     public boolean isAddressExpanded() {

@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.khedr.ecommerce.R;
-import com.khedr.ecommerce.database.Converters;
+import com.khedr.ecommerce.local.Converters;
 import com.khedr.ecommerce.databinding.FragmentHomeBinding;
 import com.khedr.ecommerce.pojo.homeapi.BannersAndProductsModel;
 import com.khedr.ecommerce.pojo.product.Product;
