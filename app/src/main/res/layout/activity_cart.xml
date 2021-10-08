@@ -6,7 +6,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.khedr.ecommerce.ui.activities.cart.CartActivity">
+        tools:context="com.khedr.ecommerce.presentation.ui.cart.CartActivity">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"

@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="true"
-        tools:context=".ui.activities.order.AddOrderActivity"
+        tools:context=".presentation.ui.order.AddOrderActivity"
         tools:ignore="ContentDescription">
 
         <TextView

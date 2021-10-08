@@ -7,7 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="true"
-        tools:context=".ui.activities.login.LoginActivity">
+        tools:context=".presentation.ui.login.LoginActivity">
 
         <TextView
             android:id="@+id/tv_login_main"
@@ -226,7 +226,7 @@
                     app:layout_constraintStart_toStartOf="@id/layout_login_buttons"
                     app:layout_constraintTop_toTopOf="@id/layout_login_buttons" />
 
-                <Space
+                <View
                     android:id="@+id/space"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_30sdp"

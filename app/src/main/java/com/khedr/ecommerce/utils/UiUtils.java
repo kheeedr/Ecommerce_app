@@ -23,8 +23,8 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.google.android.material.textfield.TextInputLayout;
 import com.khedr.ecommerce.R;
-import com.khedr.ecommerce.local.Converters;
-import com.khedr.ecommerce.ui.fragments.ToLoginBottomSheetFragment;
+import com.khedr.ecommerce.data.local.Converters;
+import com.khedr.ecommerce.presentation.ui.ToLoginBottomSheetFragment;
 
 import java.util.Locale;
 
@@ -55,7 +55,7 @@ public abstract class UiUtils {
 
     public static void getImageViaUrl(Context context, String url, ImageView imageView, View progressBar) {
         progressBar.setVisibility(View.VISIBLE);
-        Anim.animJumpAndFade(context, progressBar);
+        Animations.animJumpAndFade(context, progressBar);
         Glide.with(context).load(url).listener(new RequestListener<Drawable>() {
             @Override
             public boolean onLoadFailed(@Nullable @org.jetbrains.annotations.Nullable GlideException e

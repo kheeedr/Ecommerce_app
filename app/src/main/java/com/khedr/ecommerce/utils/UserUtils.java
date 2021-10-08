@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.khedr.ecommerce.R;
-import com.khedr.ecommerce.pojo.user.UserApiResponse;
+import com.khedr.ecommerce.data.model.user.UserApiResponse;
 
 import java.util.Locale;
 

@@ -6,7 +6,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.khedr.ecommerce.ui.fragments.HomeFragment"
+        tools:context=".presentation.ui.home.HomeFragment"
         tools:ignore="UseCompoundDrawables">
 
         <androidx.core.widget.NestedScrollView

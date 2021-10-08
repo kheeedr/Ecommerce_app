@@ -6,7 +6,11 @@
         <entry key="..\:/Users/YourPc/AndroidStudioProjects/Ecommerce/app/src/main/res/drawable-v24/bt_back_filled.xml" value="0.24638157894736842" />
         <entry key="..\:/Users/YourPc/AndroidStudioProjects/Ecommerce/app/src/main/res/drawable-v24/ic_expand_arrow.xml" value="0.24267100977198697" />
         <entry key="..\:/Users/YourPc/AndroidStudioProjects/Ecommerce/app/src/main/res/drawable-v24/rounded_stroke_white.xml" value="0.24397394136807818" />
+        <entry key="..\:/Users/YourPc/AndroidStudioProjects/Ecommerce/app/src/main/res/drawable/back_splash.xml" value="0.25" />
+        <entry key="..\:/Users/YourPc/AndroidStudioProjects/Ecommerce/app/src/main/res/drawable/bottom_navigation_selector.xml" value="0.18717105263157896" />
+        <entry key="..\:/Users/YourPc/AndroidStudioProjects/Ecommerce/app/src/main/res/drawable/bt_back.xml" value="0.18534201954397395" />
         <entry key="..\:/Users/YourPc/AndroidStudioProjects/Ecommerce/app/src/main/res/drawable/bt_back_filled_disabled.xml" value="0.24397394136807818" />
+        <entry key="..\:/Users/YourPc/AndroidStudioProjects/Ecommerce/app/src/main/res/drawable/ic_alarm.xml" value="0.18534201954397395" />
         <entry key="..\:/Users/YourPc/AndroidStudioProjects/Ecommerce/app/src/main/res/drawable/ic_apple.xml" value="0.17980456026058633" />
         <entry key="..\:/Users/YourPc/AndroidStudioProjects/Ecommerce/app/src/main/res/drawable/ic_arrow_right.xml" value="0.18534201954397395" />
         <entry key="..\:/Users/YourPc/AndroidStudioProjects/Ecommerce/app/src/main/res/drawable/ic_blue_negative.xml" value="0.18534201954397395" />
@@ -28,7 +32,11 @@
         <entry key="..\:/Users/YourPc/AndroidStudioProjects/Ecommerce/app/src/main/res/drawable/ic_xiaomi.xml" value="0.17980456026058633" />
         <entry key="..\:/Users/YourPc/AndroidStudioProjects/Ecommerce/app/src/main/res/drawable/ic_xiaomi_logo.xml" value="0.17980456026058633" />
         <entry key="..\:/Users/YourPc/AndroidStudioProjects/Ecommerce/app/src/main/res/drawable/sheet_back.xml" value="0.16319444444444445" />
-        <entry key="..\:/Users/YourPc/AndroidStudioProjects/Ecommerce/app/src/main/res/drawable/sheet_back_stroked.xml" value="0.24397394136807818" />
+        <entry key="..\:/Users/YourPc/AndroidStudioProjects/Ecommerce/app/src/main/res/drawable/sheet_back_stroked.xml" value="0.18534201954397395" />
+        <entry key="..\:/Users/YourPc/AndroidStudioProjects/Ecommerce/app/src/main/res/drawable/splash_background.xml" value="0.24397394136807818" />
+        <entry key="..\:/Users/YourPc/AndroidStudioProjects/Ecommerce/app/src/main/res/font-ar/medium.xml" value="0.25276872964169383" />
+        <entry key="..\:/Users/YourPc/AndroidStudioProjects/Ecommerce/app/src/main/res/font/medium.xml" value="0.25276872964169383" />
+        <entry key="..\:/Users/YourPc/AndroidStudioProjects/Ecommerce/app/src/main/res/font/regular.xml" value="0.19413680781758957" />
         <entry key="..\:/Users/YourPc/AndroidStudioProjects/Ecommerce/app/src/main/res/layout-v21/activity_profile_.xml" value="0.1763157894736842" />
         <entry key="..\:/Users/YourPc/AndroidStudioProjects/Ecommerce/app/src/main/res/layout-v28/activity_order.xml" value="0.37395833333333334" />
         <entry key="..\:/Users/YourPc/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/activity_about_us.xml" value="0.23387622149837134" />
@@ -40,8 +48,8 @@
         <entry key="..\:/Users/YourPc/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/activity_contact_us.xml" value="0.23387622149837134" />
         <entry key="..\:/Users/YourPc/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/activity_favorites.xml" value="0.1951388888888889" />
         <entry key="..\:/Users/YourPc/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/activity_language.xml" value="0.22" />
-        <entry key="..\:/Users/YourPc/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/activity_login.xml" value="0.18" />
-        <entry key="..\:/Users/YourPc/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/activity_main_page.xml" value="0.16" />
+        <entry key="..\:/Users/YourPc/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/activity_login.xml" value="0.67" />
+        <entry key="..\:/Users/YourPc/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/activity_main_page.xml" value="0.2" />
         <entry key="..\:/Users/YourPc/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/activity_order.xml" value="0.33" />
         <entry key="..\:/Users/YourPc/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/activity_order_completed.xml" value="0.5" />
         <entry key="..\:/Users/YourPc/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/activity_order_details.xml" value="0.25" />
@@ -51,11 +59,13 @@
         <entry key="..\:/Users/YourPc/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/activity_sign_up.xml" value="0.25" />
         <entry key="..\:/Users/YourPc/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/activity_splash.xml" value="0.25" />
         <entry key="..\:/Users/YourPc/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/activity_update_profile.xml" value="0.23387622149837134" />
-        <entry key="..\:/Users/YourPc/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/fragment_account.xml" value="0.23387622149837134" />
+        <entry key="..\:/Users/YourPc/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/fragment_account.xml" value="0.18" />
         <entry key="..\:/Users/YourPc/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/fragment_add_to_cart.xml" value="0.23387622149837134" />
         <entry key="..\:/Users/YourPc/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/fragment_home.xml" value="0.16" />
+        <entry key="..\:/Users/YourPc/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/fragment_notifications.xml" value="0.2361842105263158" />
         <entry key="..\:/Users/YourPc/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/fragment_order_completed.xml" value="0.22" />
         <entry key="..\:/Users/YourPc/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/fragment_orders.xml" value="0.23387622149837134" />
+        <entry key="..\:/Users/YourPc/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/fragment_splash.xml" value="0.2361842105263158" />
         <entry key="..\:/Users/YourPc/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/fragment_to_login.xml" value="0.25" />
         <entry key="..\:/Users/YourPc/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/include_confirmation.xml" value="0.23387622149837134" />
         <entry key="..\:/Users/YourPc/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/include_progress_moto.xml" value="0.22996742671009773" />
@@ -71,6 +81,8 @@
         <entry key="..\:/Users/YourPc/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/item_select_address.xml" value="0.23421052631578948" />
         <entry key="..\:/Users/YourPc/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/item_show_adresses.xml" value="0.2355263157894737" />
         <entry key="..\:/Users/YourPc/AndroidStudioProjects/Ecommerce/app/src/main/res/menu/menu_app_bar.xml" value="0.23387622149837134" />
+        <entry key="..\:/Users/YourPc/AndroidStudioProjects/Ecommerce/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.24397394136807818" />
+        <entry key="..\:/Users/YourPc/AndroidStudioProjects/Ecommerce/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.24397394136807818" />
       </map>
     </option>
   </component>

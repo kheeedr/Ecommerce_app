@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2021.
+  ~ Created by Mohamed Khedr.
+  -->
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/iv_splash_left_back"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/_100sdp"
+            android:layout_marginRight="@dimen/_30sdp"
+            android:contentDescription="@string/todo"
+            android:src="@drawable/back_left"
+            app:layout_constraintBottom_toTopOf="@id/iv_splash_right_back"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="RtlHardcoded" />
+
+        <ImageView
+            android:id="@+id/iv_splash_right_back"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginLeft="@dimen/_80sdp"
+            android:contentDescription="@string/todo"
+            android:src="@drawable/right_back"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_splash_left_back"
+            tools:ignore="RtlHardcoded" />
+
+        <TextView
+            android:id="@+id/tv_splash_khadrawy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_40sdp"
+            android:fontFamily="@font/medium"
+            android:text="@string/khadrawy"
+            android:textColor="@color/secondary"
+            android:textSize="@dimen/_30sdp"
+            app:layout_constraintBottom_toTopOf="@+id/iv_splash_man"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.4" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_40sdp"
+            android:fontFamily="@font/montserrat_semi_bold"
+            android:paddingBottom="@dimen/_3sdp"
+            android:text="@string/market"
+            android:textColor="@color/natural1"
+            android:textSize="@dimen/_12sdp"
+            app:layout_constraintBottom_toBottomOf="@id/tv_splash_khadrawy"
+            app:layout_constraintStart_toEndOf="@id/tv_splash_khadrawy" />
+
+        <ImageView
+            android:id="@+id/iv_splash_man"
+            android:layout_width="@dimen/_230sdp"
+            android:layout_height="@dimen/_230sdp"
+            android:contentDescription="@string/todo"
+            android:src="@drawable/man_with_fruits_bag"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/bt_tryAgain_splash"
+            style="@style/Widget.MaterialComponents.Button"
+            android:layout_width="@dimen/_150sdp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bt_back_filled"
+            android:fontFamily="@font/medium"
+            android:paddingVertical="@dimen/_2sdp"
+            android:text="@string/reconnect"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_15sdp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_splash_man"
+            app:layout_constraintVertical_bias="0.85" />
+
+        <ProgressBar
+            android:id="@+id/progress_splash"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:indeterminate="true"
+            android:indeterminateTint="@color/primary"
+            android:indeterminateTintMode="src_atop"
+            android:translationZ="@dimen/_30sdp"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_splash_man" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

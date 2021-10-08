@@ -7,7 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="true"
-        tools:context="com.khedr.ecommerce.ui.activities.favourites.FavoritesActivity">
+        tools:context="com.khedr.ecommerce.presentation.ui.favourites.FavoritesActivity">
 
         <TextView
             android:id="@+id/main_tv_favorites"

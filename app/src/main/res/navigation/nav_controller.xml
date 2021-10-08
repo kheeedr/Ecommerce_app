@@ -7,26 +7,26 @@
 
     <fragment
         android:id="@+id/home_option"
-        android:name="com.khedr.ecommerce.ui.fragments.HomeFragment"
+        android:name="com.khedr.ecommerce.presentation.ui.home.HomeFragment"
         android:label="fragment_home2"
-        tools:layout="@layout/fragment_home" >
+        tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_home_option_to_order_option"
             app:destination="@id/order_option" />
     </fragment>
     <fragment
         android:id="@+id/notifications_option"
-        android:name="com.khedr.ecommerce.ui.fragments.NotificationsFragment"
+        android:name="com.khedr.ecommerce.presentation.ui.notification.NotificationsFragment"
         android:label="fragment_notifications"
         tools:layout="@layout/fragment_notifications" />
     <fragment
         android:id="@+id/order_option"
-        android:name="com.khedr.ecommerce.ui.fragments.orders.OrdersFragment"
+        android:name="com.khedr.ecommerce.presentation.ui.orders.OrdersFragment"
         android:label="fragment_orders"
         tools:layout="@layout/fragment_orders" />
     <fragment
         android:id="@+id/account_option"
-        android:name="com.khedr.ecommerce.ui.fragments.account.AccountFragment"
+        android:name="com.khedr.ecommerce.presentation.ui.account.AccountFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_account" />
 </navigation>

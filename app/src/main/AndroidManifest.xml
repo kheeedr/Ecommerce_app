@@ -1,97 +1,103 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.khedr.ecommerce">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:name=".BaseApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Ecommerce">
+        android:theme="@style/Theme.Ecommerce"
+        tools:ignore="AllowBackup">
         <activity
-            android:name=".ui.activities.orderDetails.OrderDetailsActivity"
+            android:name=".presentation.ui.orderDetails.OrderDetailsActivity"
             android:screenOrientation="nosensor"
             android:windowSoftInputMode="stateAlwaysVisible|adjustResize" />
         <activity
-            android:name=".ui.activities.addOrder.OrderCompletedActivity"
+            android:name=".presentation.ui.addOrder.OrderCompletedActivity"
             android:screenOrientation="nosensor"
             android:windowSoftInputMode="adjustPan|stateAlwaysVisible" />
         <activity
-            android:name=".ui.activities.address.AddAddressActivity"
+            android:name=".presentation.ui.address.AddAddressActivity"
             android:screenOrientation="nosensor"
             android:windowSoftInputMode="stateAlwaysVisible|adjustResize" />
         <activity
-            android:name=".ui.activities.addOrder.AddOrderActivity"
+            android:name=".presentation.ui.addOrder.AddOrderActivity"
             android:screenOrientation="nosensor"
             android:windowSoftInputMode="adjustPan|stateAlwaysVisible" />
         <activity
-            android:name=".ui.activities.language.LanguageActivity"
+            android:name=".presentation.ui.language.LanguageActivity"
             android:screenOrientation="nosensor"
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
-            android:name=".ui.activities.splash.SplashActivity"
+            android:name=".presentation.ui.splash.SplashActivity"
             android:exported="true"
             android:screenOrientation="nosensor"
             android:windowSoftInputMode="adjustPan|stateHidden">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.activities.search.SearchActivity"
+            android:name=".presentation.ui.search.SearchActivity"
             android:screenOrientation="nosensor"
             android:windowSoftInputMode="adjustPan|stateAlwaysVisible" />
         <activity
-            android:name=".ui.activities.categories.CategoryProductsActivity"
+            android:name=".presentation.ui.categories.CategoryProductsActivity"
             android:screenOrientation="nosensor"
             android:windowSoftInputMode="adjustPan|stateAlwaysVisible" />
         <activity
-            android:name=".ui.activities.favourites.FavoritesActivity"
+            android:name=".presentation.ui.favourites.FavoritesActivity"
             android:screenOrientation="nosensor"
             android:windowSoftInputMode="adjustPan|stateAlwaysVisible" />
         <activity
-            android:name=".ui.activities.cart.CartActivity"
+            android:name=".presentation.ui.cart.CartActivity"
             android:screenOrientation="nosensor"
             android:windowSoftInputMode="adjustPan|stateAlwaysVisible" />
         <activity
-            android:name=".ui.activities.MainPage.MainPageActivity"
+            android:name=".presentation.ui.main_page.MainPageActivity"
+            android:exported="true"
+            android:screenOrientation="nosensor"
+            android:windowSoftInputMode="adjustPan|stateAlwaysVisible">
+
+        </activity>
+        <activity
+            android:name=".presentation.ui.product.ProductDetailsActivity"
             android:screenOrientation="nosensor"
             android:windowSoftInputMode="adjustPan|stateAlwaysVisible" />
         <activity
-            android:name=".ui.activities.product.ProductDetailsActivity"
+            android:name=".presentation.ui.categories.CategoriesActivity"
             android:screenOrientation="nosensor"
             android:windowSoftInputMode="adjustPan|stateAlwaysVisible" />
         <activity
-            android:name=".ui.activities.categories.CategoriesActivity"
+            android:name=".presentation.ui.contact_us.ContactUsActivity"
             android:screenOrientation="nosensor"
             android:windowSoftInputMode="adjustPan|stateAlwaysVisible" />
         <activity
-            android:name=".ui.activities.contactUs.ContactUsActivity"
-            android:screenOrientation="nosensor"
-            android:windowSoftInputMode="adjustPan|stateAlwaysVisible" />
-        <activity
-            android:name=".ui.activities.login.LoginActivity"
+            android:name=".presentation.ui.login.LoginActivity"
             android:screenOrientation="nosensor"
             android:windowSoftInputMode="stateAlwaysVisible|adjustResize" />
         <activity
-            android:name=".ui.activities.aboutUs.AboutUsActivity"
+            android:name=".presentation.ui.aboutUs.AboutUsActivity"
             android:screenOrientation="nosensor"
             android:windowSoftInputMode="adjustPan|stateAlwaysVisible" />
         <activity
-            android:name=".ui.activities.updateProfile.UpdateProfileActivity"
+            android:name=".presentation.ui.updateProfile.UpdateProfileActivity"
             android:screenOrientation="nosensor"
             android:windowSoftInputMode="stateAlwaysVisible|adjustResize" />
         <activity
-            android:name=".ui.activities.profile.ProfileActivity"
+            android:name=".presentation.ui.profile.ProfileActivity"
             android:screenOrientation="nosensor"
             android:windowSoftInputMode="adjustPan|stateAlwaysVisible" />
         <activity
-            android:name=".ui.activities.signUp.SignUpActivity"
+            android:name=".presentation.ui.signup.SignUpActivity"
             android:screenOrientation="nosensor"
             android:windowSoftInputMode="stateAlwaysVisible|adjustResize" />
     </application>

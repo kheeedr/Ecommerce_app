@@ -7,8 +7,7 @@
 
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fitsSystemWindows="true"
-        >
+        android:fitsSystemWindows="true">
 
         <fragment
             android:id="@+id/fragmentContainerView"
@@ -40,13 +39,12 @@
                 android:background="@color/trans"
                 android:outlineAmbientShadowColor="@color/trans"
                 android:outlineSpotShadowColor="@color/trans"
+                android:translationZ="0dp"
                 app:elevation="0dp"
                 app:itemIconTint="@drawable/bottom_navigation_selector"
                 app:itemTextColor="@drawable/bottom_navigation_selector"
                 app:labelVisibilityMode="labeled"
                 app:menu="@menu/menu_app_bar"
-
-                android:translationZ="0dp"
                 tools:ignore="UnusedAttribute" />
         </com.google.android.material.bottomappbar.BottomAppBar>
 
@@ -59,26 +57,10 @@
             android:src="@drawable/ic_cart"
             app:backgroundTint="@color/primary"
             app:layout_anchor="@id/bottomAppBar"
-            app:tint="@color/white" >
+            app:tint="@color/white">
 
         </com.google.android.material.floatingactionbutton.FloatingActionButton>
 
-<!--        <TextView-->
-<!--            android:id="@+id/tv_main_cart_num"-->
-<!--            android:layout_width="@dimen/_10sdp"-->
-<!--            android:layout_height="@dimen/_10sdp"-->
-<!--          -->
-<!--            android:background="@drawable/ic_discount_back"-->
-<!--            android:gravity="center"-->
-<!--            android:rotation="15"-->
-<!--            android:text="11"-->
-<!--            android:textColor="@color/white"-->
-<!--            android:textSize="@dimen/_6sdp"-->
-<!--            android:translationZ="@dimen/_9sdp"-->
-<!--            android:visibility="visible"-->
-<!--            app:layout_anchor="@+id/fab_main_page"-->
-<!--            app:layout_anchorGravity="start|top"-->
-<!--            />-->
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </layout>

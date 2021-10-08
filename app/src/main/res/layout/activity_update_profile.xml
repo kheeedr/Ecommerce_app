@@ -7,7 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="true"
-        tools:context="com.khedr.ecommerce.ui.activities.updateProfile.UpdateProfileActivity">
+        tools:context="com.khedr.ecommerce.presentation.ui.updateProfile.UpdateProfileActivity">
 
         <TextView
             android:id="@+id/tv_update_profile"
@@ -249,7 +249,7 @@
                         app:layout_constraintTop_toTopOf="parent" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <Space
+                <View
                     android:id="@+id/space2"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_40sdp"
