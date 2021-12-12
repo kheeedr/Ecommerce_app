@@ -48,7 +48,7 @@
         <entry key="..\:/Users/YourPc/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/activity_contact_us.xml" value="0.23387622149837134" />
         <entry key="..\:/Users/YourPc/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/activity_favorites.xml" value="0.1951388888888889" />
         <entry key="..\:/Users/YourPc/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/activity_language.xml" value="0.22" />
-        <entry key="..\:/Users/YourPc/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/activity_login.xml" value="0.67" />
+        <entry key="..\:/Users/YourPc/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/activity_login.xml" value="0.2" />
         <entry key="..\:/Users/YourPc/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/activity_main_page.xml" value="0.2" />
         <entry key="..\:/Users/YourPc/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/activity_order.xml" value="0.33" />
         <entry key="..\:/Users/YourPc/AndroidStudioProjects/Ecommerce/app/src/main/res/layout/activity_order_completed.xml" value="0.5" />
@@ -83,6 +83,8 @@
         <entry key="..\:/Users/YourPc/AndroidStudioProjects/Ecommerce/app/src/main/res/menu/menu_app_bar.xml" value="0.23387622149837134" />
         <entry key="..\:/Users/YourPc/AndroidStudioProjects/Ecommerce/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.24397394136807818" />
         <entry key="..\:/Users/YourPc/AndroidStudioProjects/Ecommerce/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.24397394136807818" />
+        <entry key="..\:/my_Project/2/Ecommerce/app/src/main/res/layout/activity_categories.xml" value="0.2361842105263158" />
+        <entry key="..\:/my_Project/2/Ecommerce/app/src/main/res/layout/include_progress_moto.xml" value="0.2361842105263158" />
       </map>
     </option>
   </component>

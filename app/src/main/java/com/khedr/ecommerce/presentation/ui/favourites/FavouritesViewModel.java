@@ -97,9 +97,11 @@ public class FavouritesViewModel extends AndroidViewModel {
                     public void onSuccess(@NotNull GetFavoritesResponse getFavoritesResponse) {
                         favouritesProducts = new ArrayList<>();
                         for (InnerData data : getFavoritesResponse.getData().getData()) {
-                            pending++;
-                            int id = data.getProduct().getId();
-                            getProductDetails(id);
+                            if (data != null) {
+                                pending++;
+                                int id = data.getProduct().getId();
+                                getProductDetails(id);
+                            }
                         }
 
                     }
@@ -125,7 +127,9 @@ public class FavouritesViewModel extends AndroidViewModel {
 
             @Override
             public void onSuccess(@NotNull ProductDetailsResponse productDetailsResponse) {
-                favouritesProducts.add(productDetailsResponse.getData());
+                if (productDetailsResponse.isStatus()) {
+                    favouritesProducts.add(productDetailsResponse.getData());
+                }
                 pending--;
 
                 if (pending == 0) {
@@ -139,11 +143,13 @@ public class FavouritesViewModel extends AndroidViewModel {
                                 Product temp = favouritesProducts.get(j);
                                 favouritesProducts.set(j, favouritesProducts.get(j + 1));
                                 favouritesProducts.set(j + 1, temp);
-
                             }
+
                         }
                     }
                     getFavoriteResponseBody.setValue(favouritesProducts);
+
+
                 }
             }
 
